@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/08/28 08:00:48 by yroussea         ###   ########.fr        #
+#    Updated: 2024/08/28 08:08:02 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,19 +28,7 @@ DEBUGCFLAG = -g -gdwarf-3
 SRCS_DIR = scrs
 OBJS_DIR = obj
 
-SRCS_FILES = 			\
-			main.c			\
-			draw.c			\
-			add_obj.c		\
-			get_alloc.c		\
-			maths/inter.c	\
-			maths/math.c	\
-			ray/ray.c		\
-			ray/all_ray.c	\
-			ray/init_ray.c	\
-			ray/thread.c	\
-			shading/phong.c		\
-			shading/shading.c
+include sources.mk
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = 	$(addprefix $(OBJS_DIR)/, $(subst .c,.o, $(SRCS_FILES)))
