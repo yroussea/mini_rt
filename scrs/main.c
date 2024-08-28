@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:30:03 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 09:16:20 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_all(int **colors, t_light *lights, t_objs *objs, int setting)
 		for (int k = 0; k < HEIGHT; k += 1)
 			free(colors[k]);
 		free(colors);
+		colors = NULL;
 	}
 	while (setting & OBJS && objs)
 	{

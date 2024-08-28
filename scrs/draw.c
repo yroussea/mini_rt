@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:36:24 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:23:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 09:18:59 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	destroy_mlx(t_m_data *data)
 	get_colors(&colors);
 	get_objs(&objs);
 	get_lights(&lights);
-	free_all(colors, lights, objs, ALL);
 	mlx_loop_end(data->mlx);
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_window(data->mlx, data->wind);
 	mlx_destroy_display(data->mlx);
+	free_all(colors, lights, objs, ALL);
 	exit(EXIT_SUCCESS);
 }
 

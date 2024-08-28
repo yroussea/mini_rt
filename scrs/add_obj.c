@@ -94,8 +94,8 @@ void	add_objects_lights(t_objs **objs, t_light **lights)
 		// 		  (t_v4f){-25, 0, 0, 0}, (t_v4f){0, -25, 0, 0});
 		// add_triangle(objs, WHITE,(t_v4f){0, -25, -5, 0},
 		// 		  (t_v4f){25, 0, -5, 0}, (t_v4f){0, 0, 0, 0});
-		// add_triangle(objs, BLUE,(t_v4f){0, 0, 0, 0},
-		// 		  (t_v4f){0, 25, 5, 0}, (t_v4f){-25, 0, 5, 0});
+		// add_triangle(objs, WHITE,(t_v4f){0, 0, 0, 0},
+				  // (t_v4f){0, 25, -55, 0}, (t_v4f){-25, 0, -55, 0});
 		t_objs *tmp = *objs;
 		int		i = 0;
 		while (tmp)

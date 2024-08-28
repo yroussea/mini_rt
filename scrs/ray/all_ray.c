@@ -2,6 +2,7 @@
 #include <ray.h>
 #include <stdlib.h>
 #include <maths.h>
+#include <threading.h>
 #include <limits.h>
 
 void	one_ray(t_ray ray, int x, int y)

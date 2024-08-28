@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:49:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:05:52 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 09:22:52 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define COLOR_CYAN		"\033[1;36m"
 # define COLOR_WHITE	"\033[1;37m"
 
-# define SIZE 1.5
+# define SIZE 2
 # define WIDTH (960*SIZE)
 # define HEIGHT (540*SIZE)
 # define PIXEL (1)

@@ -1,0 +1,254 @@
+[
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/main.c",
+   "-o",
+   "obj/main.o"
+  ],
+  "file": "scrs/main.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/draw.c",
+   "-o",
+   "obj/draw.o"
+  ],
+  "file": "scrs/draw.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/add_obj.c",
+   "-o",
+   "obj/add_obj.o"
+  ],
+  "file": "scrs/add_obj.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/get_alloc.c",
+   "-o",
+   "obj/get_alloc.o"
+  ],
+  "file": "scrs/get_alloc.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/maths/inter.c",
+   "-o",
+   "obj/maths/inter.o"
+  ],
+  "file": "scrs/maths/inter.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/maths/math.c",
+   "-o",
+   "obj/maths/math.o"
+  ],
+  "file": "scrs/maths/math.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/ray/ray.c",
+   "-o",
+   "obj/ray/ray.o"
+  ],
+  "file": "scrs/ray/ray.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/ray/all_ray.c",
+   "-o",
+   "obj/ray/all_ray.o"
+  ],
+  "file": "scrs/ray/all_ray.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/ray/init_ray.c",
+   "-o",
+   "obj/ray/init_ray.o"
+  ],
+  "file": "scrs/ray/init_ray.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/ray/thread.c",
+   "-o",
+   "obj/ray/thread.o"
+  ],
+  "file": "scrs/ray/thread.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/shading/phong.c",
+   "-o",
+   "obj/shading/phong.o"
+  ],
+  "file": "scrs/shading/phong.c"
+ },
+ {
+  "directory": "/tmp/MINIRT",
+  "arguments": [
+   "gcc",
+   "-flto",
+   "-g3",
+   "-fopenmp",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-I",
+   "include",
+   "-I",
+   "macrolibx/includes",
+   "-c",
+   "scrs/shading/shading.c",
+   "-o",
+   "obj/shading/shading.o"
+  ],
+  "file": "scrs/shading/shading.c"
+ }
+]

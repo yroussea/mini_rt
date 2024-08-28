@@ -15,7 +15,11 @@ float	get_oposite(int fov)
 
 void	eye_rays(t_ray *ray, float u, float v)
 {
-	ray->direction = (t_v4f){u, v, 1, 0};
+	float	alpha = M_PI * 0.25;
+	float	u_ = u*cos(alpha) - 1*sin(alpha);
+	float	w_ = 1*cos(alpha) + u*sin(alpha);
+
+	ray->direction = (t_v4f){u_, v, w_, 0};
 	ray->point = ray->center + ray->direction;
 	ray->color = (t_v4f){0,0,0,0};
 }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:11:33 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 08:54:35 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_v4f	lights_shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hi
 }
 
 
+#include <stdio.h>
+extern	int	debug;
 t_v4f	shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit, int depth)
 {
 	t_ray	tmp;
@@ -66,6 +68,7 @@ t_v4f	shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit, int 
 	dist_hit = find_hit(&tmp, all_obj, &obj);
 	if (dist_hit != INT_MAX)
 	{
+		if (debug) {printf("[%d]\n", objs_hit->id);}
 		get_shade(all_obj, light, obj, &tmp, depth + 1);
 		total_light += tmp.color * DISTANCE(dist_hit);
 	}
