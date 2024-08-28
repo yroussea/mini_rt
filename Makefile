@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/08/28 07:25:46 by yroussea         ###   ########.fr        #
+#    Updated: 2024/08/28 08:00:48 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(N
 all: $(NAME)
 
 $(NAME): $(OBJS) | $(OBJS_DIR)
+	git submodule init
+	git submodule update
 	@make -s -C macrolibx
 	$(CC) $(OBJS) -o $(NAME) -L -lft ./macrolibx/libmlx.so -lSDL2 -lm 
 	$(DELET_LINE)
