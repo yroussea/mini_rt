@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 08:54:35 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:37:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_v4f	new_random_ray(t_v4f normal, t_v4f dire)
 #define AMBIANCE_COEF 0.1
 #define DISTANCE(x) ((float)(1/x*x))
 #define EPSILON ((float)1e-2)
+#include <stdio.h>
+extern	int	debug;
 
 t_v4f	lights_shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit)
 {
@@ -43,16 +45,37 @@ t_v4f	lights_shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hi
 		tmp.direction = normalize(light->point - tmp.center);
 		tmp.point = tmp.center + tmp.direction * EPSILON;
 		dist_hit = find_hit(&tmp, all_obj, NULL);
+		if (debug) {printf("[%d->%f]\n", 0, dist_hit);}
 		if (dist_hit > norm(tmp.point - light->point))
 			total_light += light->color * phong(ray, light, tmp, objs_hit) * DISTANCE(dist_hit);
+		if (debug) {
+			printf("point %f %f %f \n",
+		  tmp.point[0],
+		  tmp.point[1],
+		  tmp.point[2]
+		  );
+			printf("avant %f %f %f\n",
+		  ray.direction[0],
+		  ray.direction[1],
+		  ray.direction[2]
+		  );
+			printf("apres %f %f %f \n",
+		  tmp.direction[0],
+		  tmp.direction[1],
+		  tmp.direction[2]
+		  );
+			printf("hit %f %f %f \n",
+		  tmp.direction[0] * dist_hit + tmp.point[0],
+		  tmp.direction[1] * dist_hit + tmp.point[1],
+		  tmp.direction[2] * dist_hit + tmp.point[2]
+		  );
+		}
 		light = light->next;
 	}
 	return (total_light * objs_hit->colors);
 }
 
 
-#include <stdio.h>
-extern	int	debug;
 t_v4f	shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit, int depth)
 {
 	t_ray	tmp;
@@ -68,8 +91,9 @@ t_v4f	shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit, int 
 	dist_hit = find_hit(&tmp, all_obj, &obj);
 	if (dist_hit != INT_MAX)
 	{
-		if (debug) {printf("[%d]\n", objs_hit->id);}
+		(void)depth;
 		get_shade(all_obj, light, obj, &tmp, depth + 1);
+		if (debug) {printf("[%d->%d]\n", depth, obj->id);}
 		total_light += tmp.color * DISTANCE(dist_hit);
 	}
 	return (total_light);

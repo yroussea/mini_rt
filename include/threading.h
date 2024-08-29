@@ -7,7 +7,7 @@
 #  define IS_THREADING 0
 # endif
 
-# define WORKER 64
+# define WORKER 32
 # include <pthread.h>
 
 typedef enum	s_stat
@@ -19,6 +19,7 @@ typedef enum	s_stat
 
 typedef struct s_ray_threading
 {
+	int				id;
 	pthread_mutex_t	*mu;
 	t_stat			*status;
 	int				x;
@@ -26,6 +27,8 @@ typedef struct s_ray_threading
 	pthread_t		tr;
 }		t_ray_th;
 
-t_ray_th	*ray_th(void);
+void		ray_th(void);
+t_ray_th	*get_worker(void);
+void		kill_worker(void);
 
 #endif
