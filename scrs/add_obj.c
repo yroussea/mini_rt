@@ -85,7 +85,7 @@ void	add_objects_lights(t_objs **objs, t_light **lights)
 		add_sphere(objs, (t_v4f){0, 0, 30, 0}, (t_v4f){20, 0, 0, 0}, RED);
 		add_sphere(objs, (t_v4f){30, 0, 0, 0}, (t_v4f){10, 0, 0, 0}, WHITE);
 		add_sphere(objs, (t_v4f){60, 0, 0, 0}, (t_v4f){15, 0, 0, 0}, WHITE);
-		add_sphere(objs, (t_v4f){-150, 0, 0, 0}, (t_v4f){15, 0, 0, 0}, WHITE);
+		add_sphere(objs, (t_v4f){-150, 0, 100, 0}, (t_v4f){15, 0, 0, 0}, WHITE);
 		// add_sphere(objs, (t_v4f){100, 180, 200, 0}, (t_v4f){20, 0, 0, 0}, GREEN);
 		add_plane(objs, (t_v4f){0, 1, 0, 0}, (t_v4f){0, 25, 0, 0}, GREY);
 		// add_triangle(objs, GREEN, (t_v4f){0, 0, 0, 0},

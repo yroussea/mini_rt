@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:36:24 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/29 09:09:37 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/29 11:07:54 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	keyboard_clic(int keycode, void *data)
 	if (keycode == 79)
 		alpha -= M_PI * 0.1;
 	if (keycode == 82)
-		beta += M_PI * 0.1;
-	if (keycode == 81)
 		beta -= M_PI * 0.1;
+	if (keycode == 81)
+		beta += M_PI * 0.1;
 	draw_all_pixel(data, 0);
 	return (1);
 }
