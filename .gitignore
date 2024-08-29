@@ -3,5 +3,6 @@ rt
 /obj
 ./cache
 .json
+compile_commands.json
 .out
 .a
