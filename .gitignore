@@ -1,8 +1,8 @@
-.o
-rt
 /obj
 ./cache
-.json
-compile_commands.json
-.out
-.a
+*.o
+*rt
+*.json
+*compile_commands.json
+*.out
+*.a
