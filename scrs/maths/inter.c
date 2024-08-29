@@ -1,3 +1,4 @@
+#include "object.h"
 #include <rt.h>
 #include <maths.h>
 
@@ -11,13 +12,12 @@ float	closer(float t1, float t2)
 
 float	ray_sphere_intersect(t_ray ray, void *obj)
 {
-	t_sphere	*new = obj;
-	t_sphere	sphere = *new;
+	t_sphere	sphere = *(t_sphere *)obj;
 	t_v4f v = ray.point - sphere.center;
 	float b = dot_product(v * ray.direction);
 	float a = dot_product(ray.direction * ray.direction);
 	float delta;
-	delta = pow(b, 2) - a * ((dot_product(v*v)- sphere.dot_production_rayon));
+	delta = pow(b, 2) - a * ((dot_product(v*v) - sphere.dot_production_rayon));
 	if (delta >= 0)
 	{
 		float t1 = (-b + sqrtf(delta)) / a;
@@ -29,8 +29,7 @@ float	ray_sphere_intersect(t_ray ray, void *obj)
 
 float	ray_plane_intersect(t_ray ray, void *obj)
 {
-	t_plane	*new = obj;
-	t_plane	plane = *new;
+	t_plane	plane = *(t_plane *)obj;
 	float	t;
 	t = dot_product(plane.normal * (plane.point - ray.point))/dot_product(plane.normal * ray.direction);
 	return (t);
@@ -47,8 +46,7 @@ float	test_plane(t_ray ray, t_tri tri)
 
 float	ray_tri_intersect(t_ray ray, void *obj)
 {
-	t_tri	*new = obj;
-	t_tri	tri = *new;
+	t_tri	tri = *(t_tri *)obj;
 	t_v4f e1 = tri.v2 - tri.v1;
 	t_v4f e2 = tri.v3 - tri.v1;
 	float t = test_plane(ray, tri);

@@ -7,7 +7,6 @@
 float	alpha = 0;
 float	beta = 0;
 int		debug = 0;
-void	draw_all_pixel(t_m_data *data, int i);
 #include <stdio.h>
 
 static void	rotation(int keycode, t_m_data *data)

@@ -14,8 +14,8 @@ typedef struct s_ray
 
 typedef struct s_sphere
 {
-	t_v4f	center;
-	t_v4f	rayon;
+	t_v4f		center;
+	float		rayon;
 	float		dot_production_rayon;
 }				t_sphere;
 
@@ -36,15 +36,22 @@ typedef struct s_plane
 
 typedef enum s_objs_type
 {
-	SPHERE = 1u,
-	PLANE = 1u << 1,
-	TRIANGLE = 1u << 2,
+	SPHERE = 1,
+	PLANE = 2,
+	TRIANGLE = 4,
 }			t_objs_type;
+
+typedef enum s_reflexion
+{
+	FLAT = 1,
+	MIROIR = 5,
+}			t_reflexion;
 
 typedef struct s_objs
 {
 	int				id;
 	t_objs_type		type;
+	t_reflexion		reflexion;
 	t_v4f			colors;
 	t_v4f			normal;
 	void			*obj;
@@ -68,6 +75,17 @@ typedef struct s_light
 	t_v4f			color;
 }				t_light;
 
-void	add_objects_lights(t_objs **objs, t_light **lights);
+t_light	*light(t_v4f coo, float intensity, t_light_type type, t_v4f color);
+t_objs	*cylinder(t_v4f coo, t_v4f vector, float height, t_v4f colors);
+
+t_objs	*plane(t_v4f normal, t_v4f point, t_v4f colors);
+
+t_objs	*triangle(t_v4f colors, t_v4f vertex1, t_v4f vertex2, t_v4f vertex3);
+
+t_objs	*sphere(t_v4f center, t_v4f colors);
+
+void	add_objects_id(t_objs *objs);
+t_objs	*add_objects(t_objs *obj);
+t_light	*add_lights(t_light *light);
 
 #endif

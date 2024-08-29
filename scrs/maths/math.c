@@ -6,10 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 13:08:25 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:15:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/30 00:36:42 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "object.h"
 #include <maths.h>
 
 t_v4f cross(t_v4f v1, t_v4f v2)
@@ -73,6 +74,16 @@ float	sign(float x)
 	if (x >= 0)
 		return (1);
 	return (-1);
+}
+
+t_v4f	capped_vector(t_v4f v)
+{
+	return ((t_v4f){
+		min(max(0,v[0]), 1),
+		min(max(0,v[1]), 1),
+		min(max(0,v[2]), 1),
+		min(max(0,v[3]), 1)
+	});
 }
 
 int	vec_to_rgb(t_v4f v)

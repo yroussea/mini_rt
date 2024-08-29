@@ -24,5 +24,6 @@ float	max(float a, float b);
 float	min(float a, float b);
 
 int		vec_to_rgb(t_v4f v);
+t_v4f	capped_vector(t_v4f v);
 
 #endif

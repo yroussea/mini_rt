@@ -1,3 +1,4 @@
+#include "object.h"
 #include <rt.h>
 #include <setup.h>
 #include <stdlib.h>
@@ -39,7 +40,10 @@ void	get_objs(t_objs	**x)
 	if (!x)
 		return ;
 	if (!objs)
-		add_objects_lights(&objs, NULL);
+	{
+		objs = add_objects(NULL);
+		add_objects_id(objs);
+	}
 	*x = objs;
 }
 
@@ -50,7 +54,7 @@ void	get_lights(t_light	**x)
 	if (!x)
 		return ;
 	if (!light)
-		add_objects_lights(NULL, &light);
+		light = add_lights(NULL);
 	*x = light;
 }
 
