@@ -10,13 +10,13 @@
 extern float alpha;
 extern float beta;
 
-float	get_oposite(int fov)
+static float	get_oposite(int fov)
 {
 	const float x = ((float)sqrt(pow(1/cos(fov * M_PI/360),2)-1));
 	return (x);
 }
 
-t_v4f get_rotation(t_v4f point)
+static t_v4f get_rotation(t_v4f point)
 {
 	t_v4f angle = (t_v4f){cos(alpha), sin(alpha), cos(beta), sin(beta)};
 	return ((t_v4f){

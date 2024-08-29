@@ -6,50 +6,13 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 09:50:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:50:30 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <setup.h>
-#include <rt.h>
-#include <stdlib.h>
-
-void	free_all(int **colors, t_light *lights, t_objs *objs, int setting)
-{
-	t_objs	*obj;
-	t_light	*light;
-
-	if (setting & COLOR && colors)
-	{
-		for (int k = 0; k < HEIGHT; k += 1)
-			free(colors[k]);
-		free(colors);
-		colors = NULL;
-	}
-	while (setting & OBJS && objs)
-	{
-		obj = objs;
-		objs = objs->next;
-		free(obj);
-	}
-	while (setting & LIGHT && lights)
-	{
-		light = lights;
-		lights = lights->next;
-		free(light);
-	}
-	exit(setting + 1);
-}
-
-void	verify(int **colors, t_light *light, t_objs *objs, int setting)
-{
-	if (setting & LIGHT && !light)
-		free_all(colors, light, objs, COLOR | OBJS);
-	if (setting & OBJS && !objs)
-		free_all(colors, light, objs, COLOR);
-	if (setting & COLOR && !colors)
-		free_all(colors, light, objs, NOTHING);
-}
+#include <stdio.h>
+#include <threading.h>
+#include <ray.h>
 
 int	main()
 {
@@ -63,7 +26,7 @@ int	main()
 	verify(colors, light, objs, COLOR | OBJS);
 	get_lights(&light);
 	verify(colors, light, objs, COLOR | OBJS | LIGHT);
-	init_mlx();
-	free_all(colors, light, objs, ALL);
+	init_mlx(&genering_image);
+	free_scene_data(colors, light, objs, ALL);
 }
 

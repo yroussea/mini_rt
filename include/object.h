@@ -68,4 +68,6 @@ typedef struct s_light
 	t_v4f			color;
 }				t_light;
 
+void	add_objects_lights(t_objs **objs, t_light **lights);
+
 #endif

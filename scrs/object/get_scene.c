@@ -53,3 +53,40 @@ void	get_lights(t_light	**x)
 		add_objects_lights(NULL, &light);
 	*x = light;
 }
+
+void	free_scene_data(int **colors, t_light *lights, t_objs *objs, int setting)
+{
+	t_objs	*obj;
+	t_light	*light;
+
+	if (setting & COLOR && colors)
+	{
+		for (int k = 0; k < HEIGHT; k += 1)
+			free(colors[k]);
+		free(colors);
+		colors = NULL;
+	}
+	while (setting & OBJS && objs)
+	{
+		obj = objs;
+		objs = objs->next;
+		free(obj);
+	}
+	while (setting & LIGHT && lights)
+	{
+		light = lights;
+		lights = lights->next;
+		free(light);
+	}
+	exit(setting + 1);
+}
+
+void	verify(int **colors, t_light *light, t_objs *objs, int setting)
+{
+	if (setting & LIGHT && !light)
+		free_scene_data(colors, light, objs, COLOR | OBJS);
+	if (setting & OBJS && !objs)
+		free_scene_data(colors, light, objs, COLOR);
+	if (setting & COLOR && !colors)
+		free_scene_data(colors, light, objs, NOTHING);
+}
