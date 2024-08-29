@@ -1,0 +1,207 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ns/call  ns/call  name    
+ 65.58      1.01     1.01 84646470    11.93    11.93  ray_sphere_intersect
+ 13.64      1.22     0.21  4320327    48.61   186.83  free_all
+ 10.39      1.38     0.16 16929294     9.45     9.45  ray_plane_intersect
+ 10.39      1.54     0.16                             main.c.4d6c79e9
+  0.00      1.54     0.00        4     0.00     0.00  draw_all_pixel.constprop.0
+  0.00      1.54     0.00        4     0.00     0.00  get_colors
+  0.00      1.54     0.00        4     0.00     0.00  get_objs
+  0.00      1.54     0.00        2     0.00     0.00  get_lights
+  0.00      1.54     0.00        1     0.00   186.83  destroy_mlx
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.65% of 1.54 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.16    1.38                 main.c.4d6c79e9 [1]
+                0.21    0.60 4320326/4320327     free_all [3]
+                0.49    0.00 41443200/84646470     ray_sphere_intersect [2]
+                0.08    0.00 8288640/16929294     ray_plane_intersect [4]
+                0.00    0.00       1/4           get_colors [8]
+                0.00    0.00       1/4           get_objs [9]
+-----------------------------------------------
+                0.00    0.00      10/84646470     keyboard_clic [5]
+                0.49    0.00 41443200/84646470     main.c.4d6c79e9 [1]
+                0.52    0.00 43203260/84646470     free_all [3]
+[2]     65.6    1.01    0.00 84646470         ray_sphere_intersect [2]
+-----------------------------------------------
+                0.00    0.00       1/4320327     destroy_mlx [6]
+                0.21    0.60 4320326/4320327     main.c.4d6c79e9 [1]
+[3]     52.4    0.21    0.60 4320327         free_all [3]
+                0.52    0.00 43203260/84646470     ray_sphere_intersect [2]
+                0.08    0.00 8640652/16929294     ray_plane_intersect [4]
+-----------------------------------------------
+                0.00    0.00       2/16929294     keyboard_clic [5]
+                0.08    0.00 8288640/16929294     main.c.4d6c79e9 [1]
+                0.08    0.00 8640652/16929294     free_all [3]
+[4]     10.4    0.16    0.00 16929294         ray_plane_intersect [4]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]      0.0    0.00    0.00                 keyboard_clic [5]
+                0.00    0.00       1/1           destroy_mlx [6]
+                0.00    0.00      10/84646470     ray_sphere_intersect [2]
+                0.00    0.00       2/16929294     ray_plane_intersect [4]
+                0.00    0.00       3/4           draw_all_pixel.constprop.0 [7]
+                0.00    0.00       1/4           get_objs [9]
+-----------------------------------------------
+                0.00    0.00       1/1           keyboard_clic [5]
+[6]      0.0    0.00    0.00       1         destroy_mlx [6]
+                0.00    0.00       1/4320327     free_all [3]
+                0.00    0.00       1/4           get_colors [8]
+                0.00    0.00       1/4           get_objs [9]
+                0.00    0.00       1/2           get_lights [10]
+-----------------------------------------------
+                0.00    0.00       1/4           main [22]
+                0.00    0.00       3/4           keyboard_clic [5]
+[7]      0.0    0.00    0.00       4         draw_all_pixel.constprop.0 [7]
+-----------------------------------------------
+                0.00    0.00       1/4           main [22]
+                0.00    0.00       1/4           destroy_mlx [6]
+                0.00    0.00       1/4           main.c.4d6c79e9 [1]
+                0.00    0.00       1/4           draw.c.eee5ad70 [16]
+[8]      0.0    0.00    0.00       4         get_colors [8]
+-----------------------------------------------
+                0.00    0.00       1/4           main [22]
+                0.00    0.00       1/4           destroy_mlx [6]
+                0.00    0.00       1/4           main.c.4d6c79e9 [1]
+                0.00    0.00       1/4           keyboard_clic [5]
+[9]      0.0    0.00    0.00       4         get_objs [9]
+-----------------------------------------------
+                0.00    0.00       1/2           main [22]
+                0.00    0.00       1/2           destroy_mlx [6]
+[10]     0.0    0.00    0.00       2         get_lights [10]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [6] destroy_mlx (draw.c)    [8] get_colors (get_alloc.c) [1] main.c.4d6c79e9
+   [7] draw_all_pixel.constprop.0 (draw.c) [10] get_lights (get_alloc.c) [4] ray_plane_intersect (inter.c)
+   [3] free_all (main.c)       [9] get_objs (get_alloc.c)  [2] ray_sphere_intersect (inter.c)

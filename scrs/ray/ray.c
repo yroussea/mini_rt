@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 07:27:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:49:41 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit)
 {
 	float	distance_min;
 	float	distance;
-	t_objs	*hit;
+	t_objs	*hit = NULL;
 
 	distance_min = INT_MAX;
 	while (objs)
@@ -44,7 +44,7 @@ float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit)
 
 void	get_shade(t_objs *objs, t_light *lights, t_objs *obj_hit, t_ray *ray, int depth)
 {
-	if (depth > 3)
+	if (depth > 2)
 		return ;
 	if (obj_hit)
 	{

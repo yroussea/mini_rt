@@ -6,11 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/28 09:16:20 by yroussea         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/28 08:06:55 by yroussea         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/08/28 09:50:47 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

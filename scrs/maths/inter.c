@@ -20,8 +20,8 @@ float	ray_sphere_intersect(t_ray ray, void *obj)
 	delta = pow(b, 2) - a * ((dot_product(v*v)- sphere.dot_production_rayon));
 	if (delta >= 0)
 	{
-		float t1 = (-b + pow(delta, 0.5)) / a;
-		float t2 = (-b - pow(delta, 0.5))/ a;
+		float t1 = (-b + sqrtf(delta)) / a;
+		float t2 = (-b - sqrtf(delta))/ a;
 		return (closer(t1, t2));
 	}
 	return (-1);

@@ -7,6 +7,8 @@
 #define W_RES (4.f/3)
 #define H_RES 1
 
+extern float alpha;
+
 float	get_oposite(int fov)
 {
 	const float x = ((float)sqrt(pow(1/cos(fov * M_PI/360),2)-1));
@@ -15,7 +17,6 @@ float	get_oposite(int fov)
 
 void	eye_rays(t_ray *ray, float u, float v)
 {
-	float	alpha = M_PI * 0.25;
 	float	u_ = u*cos(alpha) - 1*sin(alpha);
 	float	w_ = 1*cos(alpha) + u*sin(alpha);
 

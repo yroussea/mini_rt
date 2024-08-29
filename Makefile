@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/08/28 08:08:02 by yroussea         ###   ########.fr        #
+#    Updated: 2024/08/28 11:13:13 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 SILENT = @
 
 COMPIL = $(CLANG)
-ALL_FLAG = -Wall -Werror -Wextra
+ALL_FLAG = -Wall -Werror -Wextra -pg -O3
 CC = $(COMPIL) $(ALL_FLAG)
 
 CFLAGS = -flto -g3 -fopenmp

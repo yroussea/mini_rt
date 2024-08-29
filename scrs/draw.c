@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:36:24 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 09:18:59 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:50:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ void	destroy_mlx(t_m_data *data)
 	exit(EXIT_SUCCESS);
 }
 
+#include <math.h>
+float	alpha = 0;
+void	draw_all_pixel(t_m_data *data, int i);
 int	debug = 0;
 #include <stdio.h>
 int	keyboard_clic(int keycode, void *data)
 {
 	t_m_data	*m_data;
 
+	printf("(%d)\n",keycode);
 	m_data = data;
 	if (keycode == 41)
 	{
@@ -55,6 +59,8 @@ int	keyboard_clic(int keycode, void *data)
 		single_ray(x, y);
 		debug = 0;
 	}
+	alpha += M_PI * 0.1;
+	draw_all_pixel(data, 0);
 	return (1);
 }
 
