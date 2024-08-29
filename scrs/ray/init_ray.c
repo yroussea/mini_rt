@@ -8,6 +8,7 @@
 #define H_RES 1
 
 extern float alpha;
+extern float beta;
 
 float	get_oposite(int fov)
 {
@@ -15,12 +16,23 @@ float	get_oposite(int fov)
 	return (x);
 }
 
+t_v4f get_rotation(t_v4f point)
+{
+	t_v4f angle = (t_v4f){cos(alpha), sin(alpha), cos(beta), sin(beta)};
+	return ((t_v4f){
+		point[0]*angle[0] - point[1]*angle[1]*angle[3] + point[2]*angle[1]*angle[2],
+		-point[1]*angle[2] + point[2]*angle[3],
+		-point[0]*angle[1] - point[1]*angle[0]*angle[3] + point[2]*angle[0]*angle[2],
+		0});
+}
+
 void	eye_rays(t_ray *ray, float u, float v)
 {
-	float	u_ = u*cos(alpha) - 1*sin(alpha);
-	float	w_ = 1*cos(alpha) + u*sin(alpha);
-
-	ray->direction = (t_v4f){u_, v, w_, 0};
+	// float	u_ = u*cos(alpha) - 1*sin(alpha);
+	// float	v_ = v;
+	// float	w_ = 1*cos(alpha) + u*sin(alpha);
+	//
+	ray->direction = get_rotation((t_v4f){u, v, 1, 0});
 	ray->point = ray->center + ray->direction;
 	ray->color = (t_v4f){0,0,0,0};
 }

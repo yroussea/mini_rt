@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/08/28 11:13:13 by yroussea         ###   ########.fr        #
+#    Updated: 2024/08/29 09:07:13 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,7 @@ MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(N
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(OBJS_DIR)
-	git submodule init
-	git submodule update
-	@make -s -C macrolibx
+$(NAME): $(OBJS) | $(OBJS_DIR) mlx
 	$(CC) $(OBJS) -o $(NAME) -L -lft ./macrolibx/libmlx.so -lSDL2 -lm 
 	$(DELET_LINE)
 	$(PRINT) $(MSG_READY)
@@ -105,12 +102,17 @@ threading:
 	$(eval ALL_FLAG += "-D THREAD")
 	$(eval CC = $(COMPIL) $(ALL_FLAG))
 
+mlx:
+	git submodule init
+	git submodule update
+	@make -s -C macrolibx
+
 
 cc: fclean --cc $(NAME)
 gcc: fclean --gcc $(NAME)
 dead_code: fclean --dead_code $(NAME)
 
-.PHONY: all clean fclean re cc gcc dead_code threading
+.PHONY: all clean fclean re cc gcc dead_code threading mlx
 .SILENT:
 
 
