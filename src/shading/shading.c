@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:11:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/30 00:44:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:44:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_v4f	shading(t_objs *all_obj, t_light *light, t_ray ray, t_objs *objs_hit, int 
 	tmp.direction = new_random_ray(objs_hit->normal * sign(dot_product(objs_hit->normal * -ray.direction)), -ray.direction);
 	tmp.point = tmp.center + tmp.direction * EPSILON;
 	dist_hit = find_hit(&tmp, all_obj, &obj);
-	if (dist_hit != INT_MAX)
+	if (dist_hit != INFINITY)
 	{
 		(void)depth;
 		get_shade(all_obj, light, obj, &tmp, depth + 1);

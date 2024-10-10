@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/08/29 23:08:12 by yroussea         ###   ########.fr        #
+#    Updated: 2024/10/10 13:20:11 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ COMPIL = $(CLANG)
 ALL_FLAG = -Wall -Werror -Wextra -O3
 CC = $(COMPIL) $(ALL_FLAG)
 
-CFLAGS = -flto -g3 -fopenmp
+CFLAGS = -g3
 CLANG = $(SILENT)clang $(CFLAGS)
 GCC = $(SILENT)gcc $(CFLAGS)
 
@@ -25,7 +25,7 @@ DEAD_CODE = -g -ffunction-sections -Wl,--gc-sections -Wl,--print-gc-sections
 
 DEBUGCFLAG = -g -gdwarf-3
 
-SRCS_DIR = scrs
+SRCS_DIR = src
 OBJS_DIR = obj
 
 include sources.mk
@@ -37,6 +37,9 @@ INCLUDE = -I include -I macrolibx/includes
 
 PROJECT = rt
 NAME = rt
+
+LIBMLX_DIR = macrolibx
+LIBMLX = $(LIBMLX_DIR)/libmlx.so
 
 DELET_LINE = $(SILENT) echo -n "\033[2K";
 RM = $(SILENT) rm -rf
@@ -59,8 +62,8 @@ MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(N
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(OBJS_DIR) mlx
-	$(CC) $(OBJS) -o $(NAME) -L -lft ./macrolibx/libmlx.so -lSDL2 -lm 
+$(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX)
+	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBMLX) -lSDL2 -lm 
 	$(DELET_LINE)
 	$(PRINT) $(MSG_READY)
 
@@ -102,17 +105,19 @@ threading:
 	$(eval ALL_FLAG += "-D THREAD")
 	$(eval CC = $(COMPIL) $(ALL_FLAG))
 
-mlx:
-	git submodule init
-	git submodule update
-	@make -s -C macrolibx
+$(LIBMLX_DIR):
+	@git submodule init
+	@git submodule update
+
+$(LIBMLX): $(LIBMLX_DIR)
+	@make -s -C $(LIBMLX_DIR) -j 
 
 
 cc: fclean --cc $(NAME)
 gcc: fclean --gcc $(NAME)
 dead_code: fclean --dead_code $(NAME)
 
-.PHONY: all clean fclean re cc gcc dead_code threading mlx
+.PHONY: all clean fclean re cc gcc dead_code threading
 .SILENT:
 
 

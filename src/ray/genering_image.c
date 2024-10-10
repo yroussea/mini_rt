@@ -19,7 +19,7 @@ void	one_pixel_ray(t_ray ray, int x, int y)
 		get_lights(&lights);
 	}
 	eye_rays(&ray, get_width((float)x), get_height((float)y));
-	if (find_hit(&ray, objs, &obj_hit) != INT_MAX)
+	if (find_hit(&ray, objs, &obj_hit) != INFINITY)
 		get_shade(objs, lights, obj_hit, &ray, 0);
 	pixel_color = vec_to_rgb(ray.color);
 	for (int j = 0; j < PIXEL; j += 1)
@@ -70,7 +70,7 @@ void	single_ray(int x, int y)
 	}
 	ray.center = (t_v4f){0, 0, -100, 0};
 	eye_rays(&ray, get_width((float)x), get_height((float)y));
-	if (find_hit(&ray, objs, &obj) != INT_MAX)
+	if (find_hit(&ray, objs, &obj) != INFINITY)
 	{
 		printf("\tobject hit:\t[%d] \"%s\"\n\n",
 		 obj->id, t[obj->type >> 1]);

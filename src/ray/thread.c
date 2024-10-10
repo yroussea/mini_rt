@@ -37,7 +37,7 @@ void	one_ray_thread(t_ray ray, int x, int y, t_ray_th *data)
 	}
 	pthread_mutex_unlock(data->mu);
 	eye_rays(&ray, get_width((float)x), get_height((float)y));
-	if (find_hit(&ray, objs, &obj_hit) != INT_MAX)
+	if (find_hit(&ray, objs, &obj_hit) != INFINITY)
 		get_shade(objs, lights, obj_hit, &ray, 0);
 	pixel_color = vec_to_rgb(ray.color);
 	for (int j = 0; j < PIXEL; j += 1)

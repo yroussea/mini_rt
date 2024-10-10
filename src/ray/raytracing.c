@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/30 00:33:42 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:43:38 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 #include <shading.h>
 
 extern	int	debug;
+
 float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit)
 {
 	float	distance_min;
 	float	distance;
 	t_objs	*hit = NULL;
 
-	distance_min = INT_MAX;
+	distance_min = INFINITY;
 	while (objs)
 	{
 		distance = objs->fcnt(*ray, objs->obj);
@@ -54,4 +55,3 @@ void	get_shade(t_objs *objs, t_light *lights, t_objs *obj_hit, t_ray *ray, int d
 		ray->color = shading(objs, lights, *ray, obj_hit, depth);
 	}
 }
-
