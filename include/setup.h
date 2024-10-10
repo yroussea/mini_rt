@@ -16,17 +16,15 @@ typedef enum s_setting
 	NOTHING = 0,
 	COLOR = 1,
 	OBJS = 2,
-	LIGHT = 4,
-	ALL = 7,
+	ALL = 3,
 }			t_setting;
 
 void	init_mlx(void func(t_m_data *));
 
 void	get_colors(int ***color);
 void	get_objs(t_objs	**objs);
-void	get_lights(t_light **lights);
-void	free_scene_data(int **colors, t_light *lights, t_objs *objs, int setting);
-void	verify(int **colors, t_light *light, t_objs *objs, int setting);
+void	free_scene_data(int **colors, t_objs *objs, int setting);
+void	verify(int **colors, t_objs *objs, int setting);
 
 
 void	destroy_mlx(t_m_data *data);

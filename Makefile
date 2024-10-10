@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/10 13:20:11 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/10 19:49:34 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,17 @@ include sources.mk
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = 	$(addprefix $(OBJS_DIR)/, $(subst .c,.o, $(SRCS_FILES)))
 
-INCLUDE = -I include -I macrolibx/includes
 
 PROJECT = rt
 NAME = rt
 
 LIBMLX_DIR = macrolibx
 LIBMLX = $(LIBMLX_DIR)/libmlx.so
+
+LIBFT_DIR = libft
+LIBFT = $(LIBMLX_DIR)/libft.so
+
+INCLUDE = -I include -I $(LIBMLX_DIR)/includes -I $(LIBFT_DIR)/include
 
 DELET_LINE = $(SILENT) echo -n "\033[2K";
 RM = $(SILENT) rm -rf
@@ -62,8 +66,9 @@ MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(N
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX)
-	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBMLX) -lSDL2 -lm 
+$(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX) $(LIBFT)
+	@make -s -C libft
+	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBFT) $(LIBMLX) -lSDL2 -lm 
 	$(DELET_LINE)
 	$(PRINT) $(MSG_READY)
 

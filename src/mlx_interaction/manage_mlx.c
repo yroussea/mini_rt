@@ -2,13 +2,10 @@
 #include <rt.h>
 #include <mlx.h>
 #include <stdlib.h>
-#include <threading.h>
 
-#include <stdio.h>
 void	destroy_mlx(t_m_data *data)
 {
 	static t_objs		*objs = NULL;
-	static t_light		*lights = NULL;
 	static int			**colors = NULL;
 
 	mlx_loop_end(data->mlx);
@@ -17,15 +14,13 @@ void	destroy_mlx(t_m_data *data)
 	mlx_destroy_display(data->mlx);
 	get_colors(&colors);
 	get_objs(&objs);
-	get_lights(&lights);
-	free_scene_data(colors, lights, objs, ALL);
+	free_scene_data(colors, objs, ALL);
 	exit(EXIT_SUCCESS);
 }
 
 void	_loop(t_m_data *data)
 {
 	mlx_on_event(data->mlx, data->wind, MLX_KEYDOWN, keyboard_clic, data);
-	printf("__%i__ (thread:%d)\n", 0, IS_THREADING * WORKER);
 	data->draw_funct(data);
 	mlx_loop(data->mlx);
 }

@@ -1,6 +1,5 @@
 #include <rt.h>
 #include <math.h>
-#include <threading.h>
 #include <setup.h>
 #include <ray.h>
 
@@ -24,9 +23,6 @@ static void	rotation(int keycode, t_m_data *data)
 
 static void	_exit_(t_m_data *data)
 {
-	printf("killing thread\n");
-	kill_worker();
-	printf("killing mlx\n");
 	destroy_mlx(data);
 }
 

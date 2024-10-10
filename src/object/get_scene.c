@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_scene.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/10 20:18:25 by yroussea          #+#    #+#             */
+/*   Updated: 2024/10/10 20:21:15 by yroussea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "object.h"
 #include <rt.h>
 #include <setup.h>
@@ -40,28 +52,13 @@ void	get_objs(t_objs	**x)
 	if (!x)
 		return ;
 	if (!objs)
-	{
 		objs = add_objects(NULL);
-		add_objects_id(objs);
-	}
 	*x = objs;
 }
 
-void	get_lights(t_light	**x)
-{
-	static t_light	*light = NULL;
-
-	if (!x)
-		return ;
-	if (!light)
-		light = add_lights(NULL);
-	*x = light;
-}
-
-void	free_scene_data(int **colors, t_light *lights, t_objs *objs, int setting)
+void	free_scene_data(int **colors, t_objs *objs, int setting)
 {
 	t_objs	*obj;
-	t_light	*light;
 
 	if (setting & COLOR && colors)
 	{
@@ -74,23 +71,16 @@ void	free_scene_data(int **colors, t_light *lights, t_objs *objs, int setting)
 	{
 		obj = objs;
 		objs = objs->next;
+		free(obj->obj);
 		free(obj);
-	}
-	while (setting & LIGHT && lights)
-	{
-		light = lights;
-		lights = lights->next;
-		free(light);
 	}
 	exit(setting + 1);
 }
 
-void	verify(int **colors, t_light *light, t_objs *objs, int setting)
+void	verify(int **colors, t_objs *objs, int setting)
 {
-	if (setting & LIGHT && !light)
-		free_scene_data(colors, light, objs, COLOR | OBJS);
 	if (setting & OBJS && !objs)
-		free_scene_data(colors, light, objs, COLOR);
+		free_scene_data(colors, objs, COLOR);
 	if (setting & COLOR && !colors)
-		free_scene_data(colors, light, objs, NOTHING);
+		free_scene_data(colors, objs, NOTHING);
 }
