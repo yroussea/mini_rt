@@ -1,4 +1,5 @@
 **/obj/
+.direnv/
 .cache/
 *.o
 /rt
