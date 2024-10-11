@@ -1,7 +1,7 @@
-obj/
+**/obj/
 .cache/
 *.o
-*rt
+/rt
 *.json
 *compile_commands.json
 *.out
