@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/10 19:49:34 by yroussea         ###   ########.fr        #
+#    Updated: 2024/10/11 18:24:10 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBMLX_DIR = macrolibx
 LIBMLX = $(LIBMLX_DIR)/libmlx.so
 
 LIBFT_DIR = libft
-LIBFT = $(LIBMLX_DIR)/libft.so
+LIBFT = $(LIBFT_DIR)/build/output/libft.so
 
 INCLUDE = -I include -I $(LIBMLX_DIR)/includes -I $(LIBFT_DIR)/include
 
@@ -67,7 +67,6 @@ MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(N
 all: $(NAME)
 
 $(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX) $(LIBFT)
-	@make -s -C libft
 	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBFT) $(LIBMLX) -lSDL2 -lm 
 	$(DELET_LINE)
 	$(PRINT) $(MSG_READY)

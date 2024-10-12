@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inter.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/12 21:34:18 by yroussea          #+#    #+#             */
+/*   Updated: 2024/10/12 21:34:24 by yroussea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <object.h>
 #include <maths.h>
 
-float	closer(float t1, float t2)
+static float	closer(float t1, float t2)
 {
 	if (t2 < 0 || (t2 > t1 && t1 > 0))
 		return (t1);

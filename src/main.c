@@ -6,27 +6,42 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/10 20:27:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/12 23:33:47 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft/print.h"
+#include "mlx.h"
+#include "object.h"
 #include <parsing.h>
-#include <ray.h>
 #include <stdlib.h>
+#include <mlx_manage.h>
+void	clear_objs(void)
+{
+	t_objs	*objs;
+	t_objs	*tmp;
+
+	get_objs(&objs);
+	while (objs)
+	{
+		tmp = objs->next;
+		free(objs->obj);
+		free(objs);
+		objs = tmp;
+	}
+}
 
 int	main(int ac, char **av)
 {
-	int			**colors = NULL;
-	t_objs		*objs = NULL;
+	t_mdata	mdata;
 
 	if (!ac)
 		return (1);
 	parsing(av[1]);
-	get_colors(&colors);
-	verify(colors, objs, COLOR);
-	get_objs(&objs);
-	verify(colors, objs, COLOR | OBJS);
-	init_mlx(&genering_image);
-	free_scene_data(colors, objs, ALL);
+
+	mm_init(&mdata, clear_objs, NULL, (t_loop_param){NULL, NULL});
+	mm_add_event(&mdata, (t_event){MLX_KEYUP, ESCAPE, mm_kill});
+	mm_loop(&mdata);
+	mm_kill(&mdata);
 }
 

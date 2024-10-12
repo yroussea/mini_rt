@@ -16,7 +16,7 @@ t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors)
 	new->type = SPHERE;
 	new->obj = sph;
 	new->colors = colors;
-	new->fcnt = ray_sphere_intersect;
+	new->intersection = ray_sphere_intersect;
 	return (new);
 }
 
@@ -43,11 +43,11 @@ t_objs	*plane(t_vec3d normal, t_vec3d point, t_vec3d colors)
 	new->type = PLANE;
 	new->obj = plane;
 	new->colors = colors;
-	new->fcnt = ray_plane_intersect;
+	new->intersection = ray_plane_intersect;
 	return (new);
 }
 
-t_objs *light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
+t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
 {
 	t_objs	*new;
 	t_light	*light;
@@ -58,8 +58,25 @@ t_objs *light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
 		light->point = coo;
 	light->intensity = intensity;
 	new = malloc(sizeof(t_objs));
+	new->obj = light;
 	new->colors = color;
 	new->type = type;
+	return (new);
+}
+
+t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov)
+{
+	t_objs		*new;
+	t_camera	*cam;
+
+	cam = malloc(sizeof(t_camera));
+	cam->fov = fov;
+	cam->view_vector = view_vector;
+	cam->point = coo;
+	cam->pixelisation = 1;
+	new = malloc(sizeof(t_objs));
+	new->obj = cam;
+	new->type = CAMERA;
 	return (new);
 }
 

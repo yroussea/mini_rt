@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:49:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/08/28 10:57:52 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:16:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 # define HEIGHT (540*SIZE)
 # define PIXEL (1)
 
-# define VEC0 (t_v4f){0,0,0,0}
-# define RED (t_v4f){1,0,0,0}
-# define BLUE (t_v4f){0,0,1,0}
-# define GREEN (t_v4f){0,1,0,0}
-# define GREY (t_v4f){0.2,0.2,0.2,0}
-# define BLACK (t_v4f){0,0,0,0}
-# define WHITE (t_v4f){1,1,1,0}
+# define VEC0 (t_vec3d){0,0,0}
+# define RED (t_vec3d){1,0,0}
+# define BLUE (t_vec3d){0,0,1}
+# define GREEN (t_vec3d){0,1,0}
+# define GREY (t_vec3d){0.2,0.2,0.2}
+# define BLACK (t_vec3d){0,0,0}
+# define WHITE (t_vec3d){1,1,1}
 
 #endif

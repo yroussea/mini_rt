@@ -1,15 +1,15 @@
 MATHS_FILE = inter math
-MLX_FILE = manage_mlx on_clic
+MLX_FILE = destroy draw event loop setup
 OBJECT_FILE = add_obj get_scene
-RAY_FILE = genering_image init_ray raytracing thread
-SHADING_FILE = shading phong
+RAY_FILE = 
+SHADING_FILE = 
 PARSING_FILE = parsing
 
 
 
 MATHS_DIR = maths
 MATHS_PATH = $(addprefix $(MATHS_DIR)/, $(MATHS_FILE))
-MLX_DIR = mlx_interaction
+MLX_DIR = mlx_inter
 MLX_PATH = $(addprefix $(MLX_DIR)/, $(MLX_FILE))
 OBJECT_DIR = object
 OBJECT_PATH = $(addprefix $(OBJECT_DIR)/, $(OBJECT_FILE))

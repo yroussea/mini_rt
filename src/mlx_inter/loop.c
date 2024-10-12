@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 13:08:25 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 21:33:05 by yroussea         ###   ########.fr       */
+/*   Created: 2024/10/12 20:32:07 by yroussea          #+#    #+#             */
+/*   Updated: 2024/10/12 22:08:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <maths.h>
+#include "mlx.h"
+#include <mlx_manage.h>
 
-float	sign(float x)
+void	mm_loop(void *var)
 {
-	if (x >= 0)
-		return (1);
-	return (-1);
+	t_mdata	*mdata;
+
+	mdata = var;
+	mm_event(mdata);
+	if (mdata->loop_fnct)
+		mdata->loop_fnct(mdata);
+	mlx_loop(mdata->mlx);
 }
