@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 23:49:35 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/12 00:34:03 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/12 19:40:43 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SCRIPT = tmux-dispatch.sh
 
 all:
 	@bash $(SCRIPT)
+
+update:
+	@git submodule update --init --recursive
 
 clean:
 	@RULE=clean bash $(SCRIPT)
