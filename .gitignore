@@ -1,9 +1,12 @@
 **/obj/
 .direnv/
 .cache/
-*.o
 /rt
-*.json
-*compile_commands.json
+/miniRT
+
+*.o
 *.out
 *.a
+*.so
+
+compile_commands.json

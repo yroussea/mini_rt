@@ -5,35 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/10 23:49:35 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/12 00:34:03 by kiroussa         ###   ########.fr        #
+#    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
+#    Updated: 2024/10/12 02:19:54 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DEPS = LIBFT MACROLIBX TOCARDUI
+NAME = parser
 
-LIBFT_DIR = libft
-LIBFT_TARGET = $(LIBFT_DIR)/build/output/libft.so
-MACROLIBX_DIR = MacroLibX
-MACROLIBX_TARGET = $(MACROLIBX_DIR)/libmlx.so
-TOCARDUI_DIR = tocard-ui
-TOCARDUI_TARGET = $(TOCARDUI_DIR)/build/libtocard.so
+SRC = error/rt_parse_err.c \
+	  error/rt_parse_err_file.c \
+	  error/rt_parse_err_print.c \
+	  error/rt_parse_err_str.c \
+	  error/rt_parse_errd.c \
+	  error/rt_parse_errs.c \
+	  error/rt_parse_ok.c \
+	  rt_parser.c
 
-SCRIPT = tmux-dispatch.sh
-
-all:
-	@bash $(SCRIPT)
-
-clean:
-	@RULE=clean bash $(SCRIPT)
-
-fclean:
-	@RULE=fclean bash $(SCRIPT)
-
-re:
-	@RULE=re bash $(SCRIPT)
-
-print_%:
-	@echo $($*)
-
-.PHONY: all clean fclean re print_%
+include ../submodule.mk

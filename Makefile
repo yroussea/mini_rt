@@ -6,118 +6,110 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/10 13:20:11 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/12 04:31:14 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+### Project variables ###
 
-SILENT = @
+include config.mk
 
-COMPIL = $(CLANG)
-ALL_FLAG = -Wall -Werror -Wextra -O3
-CC = $(COMPIL) $(ALL_FLAG)
+NAME = $(PROJECT_NAME)
+PWD := $(shell pwd)
 
-CFLAGS = -g3
-CLANG = $(SILENT)clang $(CFLAGS)
-GCC = $(SILENT)gcc $(CFLAGS)
 
-DEAD_CODE = -g -ffunction-sections -Wl,--gc-sections -Wl,--print-gc-sections
 
-DEBUGCFLAG = -g -gdwarf-3
+### Submodules ###
 
-SRCS_DIR = src
-OBJS_DIR = obj
+SUBMODULES_DIR = $(PWD)/submodules
 
-include sources.mk
+SUBMODULES = parser
+# ifeq ($(DEVELOPMENT_MODE), 1)
+# SUBMODULES += dev-reload
+# endif
 
-SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
-OBJS = 	$(addprefix $(OBJS_DIR)/, $(subst .c,.o, $(SRCS_FILES)))
+# Collect the output files (submodules/<proj>/lib<proj>.rt.so)
+SUBMODULES_OUTPUT =
+_ := $(foreach sub,$(SUBMODULES),$(eval SUBMODULES_OUTPUT += $(SUBMODULES_DIR)/$(sub)/lib$(sub)$(LIB_SUFFIX)))
+EXTRA_LDFLAGS := $(SUBMODULES_OUTPUT)
 
-INCLUDE = -I include -I macrolibx/includes
+MAIN_SUBMODULE = cli
+SUBMODULES += $(MAIN_SUBMODULE)
+MAIN_SUBMODULE_OUTPUT := $(SUBMODULES_DIR)/$(MAIN_SUBMODULE)/$(MAIN_SUBMODULE)$(EXEC_SUFFIX)
 
-PROJECT = rt
-NAME = rt
+MKDEPS :=
+_ := $(foreach sub,$(SUBMODULES),$(eval MKDEPS += $(shell $(MAKE) CACHE_DIR="$(PWD)/$(CACHE_DIR)" -C $(SUBMODULES_DIR)/$(sub) print_MKDEPS)))
 
-LIBMLX_DIR = macrolibx
-LIBMLX = $(LIBMLX_DIR)/libmlx.so
+EXTRA_CFLAGS := $(SUBMODULES:%=-I$(SUBMODULES_DIR)/%/include)
 
-DELET_LINE = $(SILENT) echo -n "\033[2K";
-RM = $(SILENT) rm -rf
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_RED=\033[0;31m
-COLOUR_BLUE=\033[0;34m
-COLOUR_YELLOW=\033[0;33m
-NO_COLOR    = \033[m
+### Library dependencies (`third-party` directory) ###
 
-bold := $(shell tput bold)
-notbold := $(shell tput sgr0)
+DEPS_DIR = $(PWD)/third-party
+DEPS := $(shell $(MAKE) -C $(DEPS_DIR) print_DEPS)
+DEPS_TARGETS :=
+_ := $(foreach dep,$(DEPS),$(eval DEPS_TARGETS += $(DEPS_DIR)/$(shell $(MAKE) -C $(DEPS_DIR) print_$(dep)_TARGET)))
+DEPS_DIRS :=
+_ := $(foreach dep,$(DEPS),$(eval DEPS_DIRS += $(DEPS_DIR)/$(shell $(MAKE) -C $(DEPS_DIR) print_$(dep)_DIR)))
 
-PRINT = $(SILENT) printf "\r%b"
+EXTRA_CFLAGS += $(DEPS_DIRS:%=-I%/include) $(DEPS_DIRS:%=-I%/includes)
+EXTRA_LDFLAGS += $(DEPS_TARGETS)
 
-MSG_CLEANING = "$(COLOUR_RED)$(bold)🧹cleaning $(notbold)$(COLOUR_YELLOW)$(PROJECT)$(NO_COLOR)";
-MSG_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOUR_YELLOW)cleaned $(NO_COLOR)\n";
-MSG_COMPILING = "$(COLOUR_YELLOW)$(bold)[💧 Compiling 💧]$(notbold)$(COLOUR_YELLOW) $(^)$(NO_COLOR)";
-MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(NO_COLOR)\n";
+
+### Make Rules ###
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX)
-	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBMLX) -lSDL2 -lm 
-	$(DELET_LINE)
-	$(PRINT) $(MSG_READY)
+-include $(MKDEPS)
 
-$(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@mkdir -p $(@D)
-	$(DELET_LINE)
-	$(PRINT) $(MSG_COMPILING)
-	$(CC) $(INCLUDE)  -c $^ -o $@
+# invalidation mechanism
+$(PWD)/$(CACHE_DIR)/%:
+	@if [ $(findstring .c, $<) ]; then \
+		rm -rf $@; \
+	fi
 
-$(OBJS_DIR):
-	$(SILENT)mkdir -p $@
+$(NAME): $(MAIN_SUBMODULE_OUTPUT)
+	@echo "[*] Copying $(MAIN_SUBMODULE_OUTPUT) to $(NAME)"
+	@ln -fs $(MAIN_SUBMODULE_OUTPUT) $(NAME)
 
-clean:
-	$(PRINT) $(MSG_CLEANING)
-	$(RM) $(OBJS_DIR)
-	$(DELET_LINE)
-	$(PRINT) $(MSG_CLEANED)
+$(SUBMODULES_OUTPUT): | $(DEPS_DIR)
+	@$(MAKE) -C $(dir $@) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
 
-fclean: clean
-	$(RM) $(NAME)
+$(MAIN_SUBMODULE_OUTPUT): $(SUBMODULES_OUTPUT)
+	@echo "[*] Making $(MAIN_SUBMODULE)"
+	@$(MAKE) -C $(SUBMODULES_DIR)/$(MAIN_SUBMODULE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" EXTRA_LDFLAGS="$(EXTRA_LDFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
+
+$(DEPS_TARGETS):
+
+$(DEPS_DIR): $(DEPS_TARGETS)
+	@echo "[*] Making dependencies..." && sleep 1
+	@$(MAKE) -C $(DEPS_DIR) all
+	@touch $(DEPS_DIR)
+
+deps:
+	@$(MAKE) -C $(DEPS_DIR) $(DEPS:%=print_%_DIR)
+
+_clean:
+	@:
+
+clean: _clean
+	@$(MAKE) -C $(DEPS_DIR) clean
+	@for i in $(SUBMODULES); do \
+		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" clean; \
+	done
+
+fclean: _clean
+	$(MAKE) -C $(DEPS_DIR) fclean
+	@for i in $(SUBMODULES); do \
+		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" fclean; \
+	done
+	@echo "[!] Removing $(CACHE_DIR)"
+	@rm -rf $(CACHE_DIR)
+	@rm -rf $(NAME)
 
 re: fclean all
 
---cc:
-	$(eval COMPIL = $(CLANG))
-	$(eval ALL_FLAG += $(DEBUGCFLAG))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
+print_%:
+	@echo $($*)
 
---gcc:
-	$(eval COMPIL = $(GCC))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
-
---dead_code:
-	$(eval ALL_FLAG += $(DEAD_CODE))
-	$(eval COMPIL = $(GCC))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
-
-threading:
-	$(eval ALL_FLAG += "-D THREAD")
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
-
-$(LIBMLX_DIR):
-	@git submodule init
-	@git submodule update
-
-$(LIBMLX): $(LIBMLX_DIR)
-	@make -s -C $(LIBMLX_DIR) -j 
-
-
-cc: fclean --cc $(NAME)
-gcc: fclean --gcc $(NAME)
-dead_code: fclean --dead_code $(NAME)
-
-.PHONY: all clean fclean re cc gcc dead_code threading
-.SILENT:
-
-
+.PHONY: all deps _clean clean fclean re print_% 

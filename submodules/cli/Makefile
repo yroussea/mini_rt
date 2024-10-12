@@ -5,35 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/10 23:49:35 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/12 00:34:03 by kiroussa         ###   ########.fr        #
+#    Created: 2024/10/12 01:52:36 by kiroussa          #+#    #+#              #
+#    Updated: 2024/10/12 03:41:44 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DEPS = LIBFT MACROLIBX TOCARDUI
+SRC = main.c
+IS_EXEC = 1
 
-LIBFT_DIR = libft
-LIBFT_TARGET = $(LIBFT_DIR)/build/output/libft.so
-MACROLIBX_DIR = MacroLibX
-MACROLIBX_TARGET = $(MACROLIBX_DIR)/libmlx.so
-TOCARDUI_DIR = tocard-ui
-TOCARDUI_TARGET = $(TOCARDUI_DIR)/build/libtocard.so
-
-SCRIPT = tmux-dispatch.sh
-
-all:
-	@bash $(SCRIPT)
-
-clean:
-	@RULE=clean bash $(SCRIPT)
-
-fclean:
-	@RULE=fclean bash $(SCRIPT)
-
-re:
-	@RULE=re bash $(SCRIPT)
-
-print_%:
-	@echo $($*)
-
-.PHONY: all clean fclean re print_%
+include ../submodule.mk

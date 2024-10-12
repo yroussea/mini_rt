@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 RULE="${RULE:-all}"
+DEPS=($(make -s print_DEPS | sed 's/ /\n/g' | xargs -I{} make -s print_{}_DIR))
 MAKE="${MAKE:-make -j MLX_DIR=\"../MacroLibX\"}"
-DEPS=(libft MacroLibX tocard-ui)
 SESSION_NAME="minirt-deps"
 
 tmux new-session -d -s $SESSION_NAME
