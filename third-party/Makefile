@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 23:49:35 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/12 19:40:43 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/13 20:59:19 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ DEPS = LIBFT MACROLIBX TOCARDUI
 
 LIBFT_DIR = libft
 LIBFT_TARGET = $(LIBFT_DIR)/build/output/libft.so
+LIBFT_BRANCH = main
 MACROLIBX_DIR = MacroLibX
 MACROLIBX_TARGET = $(MACROLIBX_DIR)/libmlx.so
+MACROLIBX_BRANCH = master
 TOCARDUI_DIR = tocard-ui
 TOCARDUI_TARGET = $(TOCARDUI_DIR)/build/libtocard.so
+TOCARDUI_BRANCH = main
 
 SCRIPT = tmux-dispatch.sh
 
@@ -26,6 +29,9 @@ all:
 
 update:
 	@git submodule update --init --recursive
+	@cd $(LIBFT_DIR); git pull origin $(LIBFT_BRANCH); cd ../
+	@cd $(MACROLIBX_DIR); git pull origin $(MACROLIBX_BRANCH); cd ../
+	@cd $(TOCARDUI_DIR); git pull origin $(TOCARDUI_BRANCH); cd ../
 
 clean:
 	@RULE=clean bash $(SCRIPT)
