@@ -4,9 +4,15 @@
 # include <object.h>
 # include <mlx_manage.h>
 
-void	ray_launching(t_objs *obj, void one_ray(t_objs *, t_ray , int , int ),
+void	ray_launching(t_mdata *mdata, void one_ray(t_objs *, t_ray , int),
 	ushort w_size, ushort h_size);
-void	lauch_one_ray(t_objs *objs, t_ray ray, int x, int y);
+void	lauch_one_ray(t_objs *objs, t_ray ray, int x);
 void	gen_image(t_mdata *m_data);
+
+float	get_height(float y);
+float	get_width(float x, char fov);
+void	eye_rays(t_ray *ray, float u, float v);
+
+float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit);
 
 #endif

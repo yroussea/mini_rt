@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:46:25 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 14:03:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:56:41 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void	mm_getmdata(t_mdata **var)
 	else
 		*var = mdata;
 }
-
-typedef struct s_test
-{  
-	int			*colors[HEIGHT][WIDTH];
-}				t_test;
 
 void	mm_init(
 	t_mdata *mdata,
@@ -50,9 +45,9 @@ void	mm_init(
 		img = mlx_new_image(mlx, WIDTH, HEIGHT);
 		if (img)
 		{
-			*mdata = (t_mdata){.mlx=mlx, .wind=wind, .img=img,
-				.destroy_fnct=destoy_fnct, .pixelisation = 1,
-				.loop_fnct=loop_fnct, .param_fnct=param_fnct};
+			*mdata = (t_mdata){.mlx = mlx, .wind = wind, .img = img,
+				.destroy_fnct = destoy_fnct, .pixelisation = 1,
+				.loop_fnct = loop_fnct, .param_fnct = param_fnct};
 			mm_getmdata(&mdata);
 			return ;
 		}

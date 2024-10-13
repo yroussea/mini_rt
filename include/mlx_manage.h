@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:57:03 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 13:49:16 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:35:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@
 # define HEIGHT 540
 # define NB_EVENT 10
 
+typedef struct s_mdata t_mdata;
+
 typedef enum e_keycode
 {
+	A_KEY = 4,
 	ESCAPE = 41,
 }			t_keycode;
 
 typedef struct s_loop_param
 {
-	void	(*all_ray)(t_objs *, void f(t_objs *, t_ray, int, int), ushort, ushort);
-	void	(*one_ray)(t_objs *, t_ray , int , int );
+	void	(*all_ray)(t_mdata *, void f(t_objs *, t_ray, int), ushort, ushort);
+	void	(*one_ray)(t_objs *, t_ray , int);
 }			t_loop_param;
 
 typedef struct s_event
@@ -45,7 +48,7 @@ typedef struct s_mdata
 	void			*wind;
 	void			*img;
 	void			(*destroy_fnct)(void);
-	void			(*loop_fnct)(struct s_mdata *data);
+	void			(*loop_fnct)(t_mdata *data);
 	t_loop_param	param_fnct;
 	uint			pixelisation;
 	t_vec3d			colors[WIDTH];

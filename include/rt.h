@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 09:49:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/11 18:16:56 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:28:39 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 # define COLOR_MAGENTA	"\033[1;35m"
 # define COLOR_CYAN		"\033[1;36m"
 # define COLOR_WHITE	"\033[1;37m"
-
-# define SIZE 2
-# define WIDTH (960*SIZE)
-# define HEIGHT (540*SIZE)
-# define PIXEL (1)
 
 # define VEC0 (t_vec3d){0,0,0}
 # define RED (t_vec3d){1,0,0}

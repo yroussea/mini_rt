@@ -1,7 +1,7 @@
 MATHS_FILE = math
 MLX_FILE = destroy draw event loop setup
 OBJECT_FILE = add_obj get_scene intersection
-RAY_FILE = gen_image
+RAY_FILE = gen_image init_ray raytracing
 SHADING_FILE = 
 PARSING_FILE = parsing
 

@@ -52,7 +52,7 @@ t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
 	t_objs	*new;
 	t_light	*light;
 
-	assert (type == AMBIANCE_LIGHT || type == POINT_LIGHT);
+	assert (type & LIGHT_MASK); //
 	light = malloc(sizeof(t_light));
 	if (type == POINT_LIGHT)
 		light->point = coo;
@@ -71,6 +71,7 @@ t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov)
 
 	cam = malloc(sizeof(t_camera));
 	cam->fov = fov;
+	assert (fov > 0 && fov < 180);
 	cam->view_vector = view_vector;
 	cam->point = coo;
 	cam->pixelisation = 1;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:34:18 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 21:34:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:57:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ float	ray_sphere_intersect(t_ray ray, void *obj)
 	float	a;
 	float	delta;
 
-	v = ft_vec3d_sub(ray.point,(*(t_sphere *)obj).center);
+	v = ft_vec3d_sub(ray.point, (*(t_sphere *)obj).center);
 	b = ft_vec3d_dot(v, ray.direction);
 	a = ft_vec3d_dot(ray.direction, ray.direction);
 	delta = pow(b, 2) - a * \
 		((ft_vec3d_dot(v, v) - (*(t_sphere *)obj).dot_production_rayon));
 	if (delta >= 0)
-		return (closer((-b + sqrtf(delta)) / a, (-b - sqrtf(delta))/ a));
+		return (closer((-b + sqrtf(delta)) / a, (-b - sqrtf(delta)) / a));
 	return (-1);
 }
 
@@ -42,6 +42,6 @@ float	ray_plane_intersect(t_ray ray, void *obj)
 	t_plane	plane;
 
 	plane = *(t_plane *)obj;
-	return  (ft_vec3d_dot(plane.normal,  ft_vec3d_sub(plane.point,ray.point)) \
+	return  (ft_vec3d_dot(plane.normal, ft_vec3d_sub(plane.point, ray.point)) \
 				/ ft_vec3d_dot(plane.normal, ray.direction));
 }

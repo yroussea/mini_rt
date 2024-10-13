@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:06:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 13:57:17 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:55:58 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,27 @@ void	mm_draw_pixel(uint x, t_vec3d colors)
 
 void	mm_draw_ligne(uint y)
 {
-	static t_mdata	*mdata = NULL;
-	int				color;
+	static t_mdata	*data = NULL;
+	int				col;
 	uint			x;
 	uint			k;
 	uint			j;
 
-	if (!mdata)
-		mm_getmdata(&mdata);
+	if (!data)
+		mm_getmdata(&data);
 	x = 0;
 	while (x < WIDTH)
 	{
 		j = 0;
-		color = vec_to_rgb(mdata->colors[x]);
-		while (j < mdata->pixelisation)
+		col = vec_to_rgb(data->colors[x]);
+		while (j < data->pixelisation && x + j < WIDTH)
 		{
 			k = 0;
-			while (k < mdata->pixelisation)
-				mlx_set_image_pixel(mdata->mlx, mdata->img, x + j, \
-					y *mdata->pixelisation + k++, color);
+			while (k < data->pixelisation && k + y < HEIGHT)
+				mlx_set_image_pixel(data->mlx, data->img, x + j, y + k++, col);
 			j++;
 		}
-		x += mdata->pixelisation;
+		x += data->pixelisation;
 	}
 }
 

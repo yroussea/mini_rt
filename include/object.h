@@ -43,11 +43,13 @@ typedef struct s_camera
 
 typedef enum s_objs_type
 {
-	SPHERE,
-	PLANE,
-	AMBIANCE_LIGHT,
-	POINT_LIGHT,
-	CAMERA,
+	LIGHT_MASK = 8,
+	OBJS_MASK = 16,
+	CAMERA = 1,
+	AMBIANCE_LIGHT = 9,
+	POINT_LIGHT = 10,
+	SPHERE = 17,
+	PLANE = 18,
 }			t_objs_type;
 
 
