@@ -2,7 +2,6 @@ MATHS_FILE = math
 MLX_FILE = destroy draw event loop setup
 OBJECT_FILE = add_obj get_scene intersection
 RAY_FILE = gen_image init_ray raytracing
-SHADING_FILE = 
 PARSING_FILE = parsing
 
 
@@ -15,11 +14,9 @@ OBJECT_DIR = object
 OBJECT_PATH = $(addprefix $(OBJECT_DIR)/, $(OBJECT_FILE))
 RAY_DIR = ray
 RAY_PATH = $(addprefix $(RAY_DIR)/, $(RAY_FILE))
-SHADING_DIR = shading
-SHADING_PATH = $(addprefix $(SHADING_DIR)/, $(SHADING_FILE))
 PARSING_DIR = parsing
 PARSING_PATH = $(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
 
-ALL_SCRS_FILES = main $(MATHS_PATH) $(MLX_PATH) $(OBJECT_PATH) $(RAY_PATH) $(SHADING_PATH) $(PARSING_PATH)
+ALL_SCRS_FILES = main $(MATHS_PATH) $(MLX_PATH) $(OBJECT_PATH) $(RAY_PATH) $(PARSING_PATH)
 SRCS_FILES = $(addsuffix .c, $(ALL_SCRS_FILES))
 

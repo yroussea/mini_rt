@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 15:58:58 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:24:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,4 @@ float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit)
 		*objs_hit = hit;
 	return (distance_min);
 }
-//
-// void	get_shade(t_objs *objs, t_light *lights, t_objs *obj_hit, t_ray *ray, int depth)
-// {
-// 	if (depth > 4)
-// 		return ;
-// 	if (obj_hit)
-// 	{
-// 		if (obj_hit->type & SPHERE)
-// 			obj_hit->normal = normalize(ray->hit_point - (*(t_sphere *)obj_hit->obj).center);
-// 		ray->color = shading(objs, lights, *ray, obj_hit, depth);
-// 	}
-// }
+
