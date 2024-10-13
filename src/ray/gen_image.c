@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:59:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 16:31:19 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:46:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 // #include "mlx.h"
 // #include "object.h"
 // #include <sys/types.h>
+#include "ft/math/vector.h"
 #include "object.h"
 #include <ray.h>
 #include <mlx_manage.h>
@@ -28,13 +29,10 @@ void	lauch_one_ray(t_objs *objs, t_ray ray, int x)
 	(void)ray;
 	(void)x;
 	(void)objs;
-	//find hit
-	//	get_shade
 	objs_hit = NULL;
 	if (find_hit(&ray, objs, &objs_hit) != INFINITY)
-		mm_draw_pixel(x, objs_hit->colors);
-	else
-		mm_draw_pixel(x, (t_vec3d){0, 0, 1});
+		get_shading(objs, objs_hit, &ray);
+	mm_draw_pixel(x, ray.color);
 }
 
 void	ray_launching(t_mdata *mdata, void one_ray(t_objs *, t_ray, int),
@@ -57,6 +55,7 @@ void	ray_launching(t_mdata *mdata, void one_ray(t_objs *, t_ray, int),
 		while (x < w_size)
 		{
 			eye_rays(&ray, get_width((float)x, cam->fov), get_height((float)y));
+			ray.color = (t_vec3d){0, 0, 0};
 			one_ray(all_objs->next, ray, x / mdata->pixelisation);
 			x += mdata->pixelisation;
 		}

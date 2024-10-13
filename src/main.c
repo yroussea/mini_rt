@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 15:31:26 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:22:50 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void	clear_objs(void)
 		objs = tmp;
 	}
 }
-void	pixelisation(void *var)
+void	pixelisation_big(void *var)
 {
-	((t_mdata *)var)->pixelisation += 1;
+	((t_mdata *)var)->pixelisation = next_size(WIDTH, HEIGHT, ((t_mdata *)var)->pixelisation, 1);
+}
+void	pixelisation_small(void *var)
+{
+	((t_mdata *)var)->pixelisation = next_size(WIDTH, HEIGHT, ((t_mdata *)var)->pixelisation, 0);
+}
+void	pixelisation_reset(void *var)
+{
+	((t_mdata *)var)->pixelisation = 1;
 }
 
 int	main(int ac, char **av)
@@ -47,7 +55,9 @@ int	main(int ac, char **av)
 
 	mm_init(&mdata, clear_objs, gen_image, (t_loop_param){ray_launching, lauch_one_ray});
 	mm_add_event(&mdata, (t_event){MLX_KEYUP, ESCAPE, mm_kill});
-	mm_add_event(&mdata, (t_event){MLX_KEYUP, A_KEY, pixelisation});
+	mm_add_event(&mdata, (t_event){MLX_KEYUP, PLUS_KEY, pixelisation_big});
+	mm_add_event(&mdata, (t_event){MLX_KEYUP, MINUS_KEY, pixelisation_small});
+	mm_add_event(&mdata, (t_event){MLX_KEYUP, LEFT_ENTER_KEY, pixelisation_reset});
 	mm_loop(&mdata);
 	mm_kill(&mdata);
 }

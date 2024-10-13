@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:57:03 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 15:35:14 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:22:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_mdata t_mdata;
 typedef enum e_keycode
 {
 	A_KEY = 4,
+	B_KEY = 5,
+	MINUS_KEY = 86,
+	PLUS_KEY = 87,
+	LEFT_ENTER_KEY = 88,
 	ESCAPE = 41,
 }			t_keycode;
 
@@ -66,14 +70,13 @@ void	mm_loop(void *var);
 void	mm_draw_pixel(uint x, t_vec3d colors);
 void	mm_draw_ligne(uint y);
 void	mm_draw_image(t_mdata *mdata);
+void	mm_kill(void *var);
+int		next_size(int width, int height, int actual, bool bigger);
 
 /*
  * BACK STAGE
 */
 void	mm_event(t_mdata *mdata);
 void	mm_getmdata(t_mdata **var);
-void	mm_kill(void *var);
-
-
 
 #endif

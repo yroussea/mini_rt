@@ -1,6 +1,6 @@
-MATHS_FILE = math
+MATHS_FILE = math pixelisation_size
 MLX_FILE = destroy draw event loop setup
-OBJECT_FILE = add_obj get_scene intersection
+OBJECT_FILE = add_obj get_scene plane sphere
 RAY_FILE = gen_image init_ray raytracing
 PARSING_FILE = parsing
 

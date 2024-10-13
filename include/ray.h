@@ -14,5 +14,6 @@ float	get_width(float x, char fov);
 void	eye_rays(t_ray *ray, float u, float v);
 
 float	find_hit(t_ray *ray, t_objs *objs, t_objs **objs_hit);
+void	get_shading(t_objs *objs, t_objs *obj_hit, t_ray *ray);
 
 #endif

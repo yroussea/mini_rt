@@ -60,17 +60,20 @@ typedef struct s_objs
 	t_vec3d			colors; //a diff
 	int				id;
 	float			(*intersection)(t_ray ray, void *obj);
+	t_vec3d			(*get_normal)(t_ray ray, void *obj);
 	struct s_objs	*next;
-
 }				t_objs;
 
+t_vec3d	get_sphere_normal(t_ray ray, void *obj);
+t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors);
 float	ray_sphere_intersect(t_ray ray, void *obj);
+
+t_vec3d	get_plane_normal(t_ray ray, void *obj);
+t_objs	*plane(t_vec3d normal, t_vec3d point, t_vec3d colors);
 float	ray_plane_intersect(t_ray ray, void *obj);
 
 t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color);
 t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, t_vec3d colors);
-t_objs	*plane(t_vec3d normal, t_vec3d point, t_vec3d colors);
-t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors);
 t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov);
 
 t_objs	*add_objects(t_objs *obj);
