@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/13 04:13:17 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/13 18:57:37 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB_SUFFIX = .rt.so
 EXEC_SUFFIX = .out
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4
+CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4 -fPIC
 DFLAGS = -MT $@ -MMD -MP -MF $(MKDEPS_DIR)/$*.tmp.d
 LDFLAGS = -lm -lSDL2
 
