@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:06:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 22:47:23 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:57:17 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	mm_draw_ligne(uint y)
 		{
 			k = 0;
 			while (k < mdata->pixelisation)
-				mlx_set_image_pixel(mdata->mlx, mdata->img, x + j, y + k++, color);
+				mlx_set_image_pixel(mdata->mlx, mdata->img, x + j, \
+					y *mdata->pixelisation + k++, color);
 			j++;
 		}
 		x += mdata->pixelisation;

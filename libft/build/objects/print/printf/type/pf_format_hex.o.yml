@@ -1,0 +1,190 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 27, 
+                   Column: 9 }
+Function:        pf_format_hex
+Args:
+  - Callee:          ft_strdup
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_hex
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 29, 
+                   Column: 9 }
+Function:        pf_format_hex
+Args:
+  - Callee:          ft_ulltoa_base
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_hex
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_format_hex
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 24, 
+                   Column: 8 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 25, 
+                   Column: 6 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 26, 
+                   Column: 16 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 27, 
+                   Column: 9 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 29, 
+                   Column: 24 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 30, 
+                   Column: 10 }
+Function:        pf_format_hex
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/type/pf_format_hex.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_format_hex
+Args:
+  - NumInstructions: '54'
+  - String:          ' instructions in function'
+...

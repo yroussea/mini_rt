@@ -1,0 +1,31 @@
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/math/ft_abs.c', Line: 17, Column: 0 }
+Function:        ft_abs
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_abs
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/math/ft_abs.c', Line: 17, Column: 0 }
+Function:        ft_abs
+Args:
+  - NumInstructions: '11'
+  - String:          ' instructions in function'
+...

@@ -1,0 +1,284 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 23, 
+                   Column: 56 }
+Function:        pf_format_string0
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 25, 
+                   Column: 9 }
+Function:        pf_format_string0
+Args:
+  - Callee:          ft_substr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 26, 
+                   Column: 13 }
+Function:        pf_format_string0
+Args:
+  - Callee:          ft_strdup
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 27, 
+                   Column: 3 }
+Function:        pf_format_string0
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 30, 
+                   Column: 13 }
+Function:        pf_format_string0
+Args:
+  - Callee:          ft_strdup
+  - String:          ' will not be inlined into '
+  - Caller:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 36, 
+                   Column: 10 }
+Function:        pf_format_string
+Args:
+  - Callee:          pf_format_string0
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_format_string
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', 
+                       Line: 35, Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_format_string0
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 22, 
+                   Column: 7 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 23, 
+                   Column: 6 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 23, 
+                   Column: 38 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 25, 
+                   Column: 19 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 30, 
+                   Column: 23 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 31, 
+                   Column: 10 }
+Function:        pf_format_string0
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_format_string0
+Args:
+  - NumInstructions: '40'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 35, 
+                   Column: 0 }
+Function:        pf_format_string
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_string
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_string
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_string
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_string
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/type/pf_format_string.c', Line: 35, 
+                   Column: 0 }
+Function:        pf_format_string
+Args:
+  - NumInstructions: '34'
+  - String:          ' instructions in function'
+...

@@ -1,0 +1,44 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/string/query/ft_ulllen.c', Line: 17, Column: 10 }
+Function:        ft_ulllen
+Args:
+  - Callee:          ft_ulllen_base
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ulllen
+    DebugLoc:        { File: 'src/string/query/ft_ulllen.c', Line: 16, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/string/query/ft_ulllen.c', Line: 16, Column: 0 }
+Function:        ft_ulllen
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_ulllen
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/string/query/ft_ulllen.c', Line: 16, Column: 0 }
+Function:        ft_ulllen
+Args:
+  - NumInstructions: '10'
+  - String:          ' instructions in function'
+...

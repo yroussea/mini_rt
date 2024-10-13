@@ -1,0 +1,40 @@
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_mult.c', Line: 16, Column: 0 }
+Function:        ft_mat3d_mult
+Args:
+  - String:          'FastISel didn''t lower all arguments: '
+  - Prototype:       'void (%struct.s_mat3d*, %struct.s_mat3d*, %struct.s_mat3d*)*'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_mult.c', Line: 16, Column: 0 }
+Function:        ft_mat3d_mult
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_mat3d_mult
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '88'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_mult.c', Line: 16, Column: 0 }
+Function:        ft_mat3d_mult
+Args:
+  - NumInstructions: '88'
+  - String:          ' instructions in function'
+...

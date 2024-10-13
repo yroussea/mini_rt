@@ -1,0 +1,192 @@
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 33, Column: 9 }
+Function:        ft_lstadd_front
+Args:
+  - Callee:          ft_lst_insert
+    DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 16, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_lstadd_front
+    DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 32, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 16, Column: 0 }
+Function:        ft_lst_insert
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 20, Column: 3 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 21, Column: 7 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 22, Column: 12 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 23, Column: 10 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 25, Column: 9 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 26, Column: 9 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 27, Column: 14 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 29, Column: 1 }
+Function:        ft_lst_insert
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 16, Column: 0 }
+Function:        ft_lst_insert
+Args:
+  - NumInstructions: '35'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 32, Column: 0 }
+Function:        ft_lstadd_front
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_lstadd_front
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 32, Column: 0 }
+Function:        ft_lstadd_front
+Args:
+  - NumInstructions: '11'
+  - String:          ' instructions in function'
+...

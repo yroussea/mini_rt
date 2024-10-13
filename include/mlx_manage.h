@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:57:03 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 23:29:28 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:49:16 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef enum e_keycode
 
 typedef struct s_loop_param
 {
-	void	(*all_ray)(t_objs *obj, void f(t_objs *, t_ray, int, int));
-	void	(*one_ray)(t_objs *obj, t_ray ray, int x, int y);
+	void	(*all_ray)(t_objs *, void f(t_objs *, t_ray, int, int), ushort, ushort);
+	void	(*one_ray)(t_objs *, t_ray , int , int );
 }			t_loop_param;
 
 typedef struct s_event

@@ -1,0 +1,43 @@
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/wchar/internal/ft_wchar_oob.c', Line: 16, 
+                   Column: 0 }
+Function:        ft_wchar_oob
+Args:
+  - String:          'FastISel didn''t lower all arguments: '
+  - Prototype:       'i32 (i32, i8)*'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_wchar_oob.c', Line: 16, 
+                   Column: 0 }
+Function:        ft_wchar_oob
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_wchar_oob
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '17'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_wchar_oob.c', Line: 16, 
+                   Column: 0 }
+Function:        ft_wchar_oob
+Args:
+  - NumInstructions: '17'
+  - String:          ' instructions in function'
+...

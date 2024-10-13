@@ -1,0 +1,227 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 20, Column: 11 }
+Function:        ft_realloc
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 23, Column: 3 }
+Function:        ft_realloc
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 24, Column: 11 }
+Function:        ft_realloc
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 26, Column: 12 }
+Function:        ft_realloc
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 29, Column: 3 }
+Function:        ft_realloc
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 32, Column: 2 }
+Function:        ft_realloc
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 33, Column: 2 }
+Function:        ft_realloc
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          ft_realloc
+    DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+Function:        ft_realloc
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 20, Column: 21 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 21, Column: 7 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 21, Column: 20 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 23, Column: 8 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 26, Column: 22 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 29, Column: 8 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 32, Column: 12 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 35, Column: 1 }
+Function:        ft_realloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/mem/ft_realloc.c', Line: 16, Column: 0 }
+Function:        ft_realloc
+Args:
+  - NumInstructions: '46'
+  - String:          ' instructions in function'
+...

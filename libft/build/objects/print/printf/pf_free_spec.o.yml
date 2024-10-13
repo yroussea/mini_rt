@@ -1,0 +1,155 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 23, Column: 9 }
+Function:        pf_new_spec
+Args:
+  - Callee:          pf_parse_spec
+  - String:          ' will not be inlined into '
+  - Caller:          pf_new_spec
+    DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 20, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 25, Column: 13 }
+Function:        pf_new_spec
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_new_spec
+    DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 20, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 31, Column: 2 }
+Function:        pf_free_spec
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_free_spec
+    DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 30, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 32, Column: 2 }
+Function:        pf_free_spec
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_free_spec
+    DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 30, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 33, Column: 2 }
+Function:        pf_free_spec
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_free_spec
+    DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 30, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 20, Column: 0 }
+Function:        pf_new_spec
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_new_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 25, Column: 23 }
+Function:        pf_new_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 26, Column: 10 }
+Function:        pf_new_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 20, Column: 0 }
+Function:        pf_new_spec
+Args:
+  - NumInstructions: '25'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 30, Column: 0 }
+Function:        pf_free_spec
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_free_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '15'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_free_spec.c', Line: 30, Column: 0 }
+Function:        pf_free_spec
+Args:
+  - NumInstructions: '15'
+  - String:          ' instructions in function'
+...

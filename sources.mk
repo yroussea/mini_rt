@@ -1,7 +1,7 @@
-MATHS_FILE = inter math
+MATHS_FILE = math
 MLX_FILE = destroy draw event loop setup
-OBJECT_FILE = add_obj get_scene
-RAY_FILE = 
+OBJECT_FILE = add_obj get_scene intersection
+RAY_FILE = gen_image
 SHADING_FILE = 
 PARSING_FILE = parsing
 

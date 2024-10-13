@@ -1,0 +1,150 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 22, 
+                   Column: 8 }
+Function:        ft_vdprintf
+Args:
+  - Callee:          ft_vasprintf
+  - String:          ' will not be inlined into '
+  - Caller:          ft_vdprintf
+    DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 24, 
+                   Column: 10 }
+Function:        ft_vdprintf
+Args:
+  - Callee:          write
+  - String:          ' will not be inlined into '
+  - Caller:          ft_vdprintf
+    DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 26, 
+                   Column: 3 }
+Function:        ft_vdprintf
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          ft_vdprintf
+    DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 17, 
+                   Column: 0 }
+Function:        ft_vdprintf
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '14'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 23, 
+                   Column: 17 }
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 24, 
+                   Column: 16 }
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 25, 
+                   Column: 6 }
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 26, 
+                   Column: 8 }
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 27, 
+                   Column: 10 }
+Function:        ft_vdprintf
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/wrapper/ft_vdprintf.c', Line: 17, 
+                   Column: 0 }
+Function:        ft_vdprintf
+Args:
+  - NumInstructions: '28'
+  - String:          ' instructions in function'
+...

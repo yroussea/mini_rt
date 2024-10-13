@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:46:25 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 22:51:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:03:08 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	mm_init(
 		if (img)
 		{
 			*mdata = (t_mdata){.mlx=mlx, .wind=wind, .img=img,
-				.destroy_fnct=destoy_fnct,
+				.destroy_fnct=destoy_fnct, .pixelisation = 1,
 				.loop_fnct=loop_fnct, .param_fnct=param_fnct};
 			mm_getmdata(&mdata);
 			return ;

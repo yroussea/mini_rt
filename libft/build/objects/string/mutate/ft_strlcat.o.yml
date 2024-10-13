@@ -1,0 +1,154 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 21, Column: 13 }
+Function:        ft_strlcat
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          ft_strlcat
+    DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 16, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 23, Column: 18 }
+Function:        ft_strlcat
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          ft_strlcat
+    DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 16, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 24, Column: 21 }
+Function:        ft_strlcat
+Args:
+  - Callee:          ft_strlcpy
+  - String:          ' will not be inlined into '
+  - Caller:          ft_strlcat
+    DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 16, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 16, Column: 0 }
+Function:        ft_strlcat
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 19, Column: 16 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 20, Column: 3 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 21, Column: 23 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 23, Column: 11 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 24, Column: 10 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 25, Column: 1 }
+Function:        ft_strlcat
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/string/mutate/ft_strlcat.c', Line: 16, Column: 0 }
+Function:        ft_strlcat
+Args:
+  - NumInstructions: '43'
+  - String:          ' instructions in function'
+...

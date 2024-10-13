@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:35:38 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 23:29:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:10:23 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	keyup_hook(int key, void *var)
 			mdata->event[x].f(var);
 			return (1);
 		}
-
+		x++;
 	}
 	return (0);
 }

@@ -1,0 +1,644 @@
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 37, 
+                   Column: 10 }
+Function:        ft_bittab_c
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_c
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 34, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 42, 
+                   Column: 10 }
+Function:        ft_bittab_d
+Args:
+  - Callee:          ft_bittab_c
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 34, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_d
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 41, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 48, 
+                   Column: 11 }
+Function:        ft_bittab_e
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_e
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 50, 
+                   Column: 11 }
+Function:        ft_bittab_e
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_e
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 51, 
+                   Column: 10 }
+Function:        ft_bittab_e
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_e
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 52, 
+                   Column: 6 }
+Function:        ft_bittab_e
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_e
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 60, 
+                   Column: 11 }
+Function:        ft_bittab_f
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_f
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 62, 
+                   Column: 11 }
+Function:        ft_bittab_f
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_f
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 63, 
+                   Column: 10 }
+Function:        ft_bittab_f
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_f
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 64, 
+                   Column: 6 }
+Function:        ft_bittab_f
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_f
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 65, 
+                   Column: 6 }
+Function:        ft_bittab_f
+Args:
+  - Callee:          ft_bittab_range
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_bittab_f
+    DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                   Column: 0 }
+Function:        ft_bittab_range
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bittab_range
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 27, 
+                   Column: 17 }
+Function:        ft_bittab_range
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 29, 
+                   Column: 14 }
+Function:        ft_bittab_range
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 30, 
+                   Column: 10 }
+Function:        ft_bittab_range
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 23, 
+                   Column: 0 }
+Function:        ft_bittab_range
+Args:
+  - NumInstructions: '17'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 34, 
+                   Column: 0 }
+Function:        ft_bittab_c
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bittab_c
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 36, 
+                   Column: 3 }
+Function:        ft_bittab_c
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 37, 
+                   Column: 10 }
+Function:        ft_bittab_c
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 38, 
+                   Column: 1 }
+Function:        ft_bittab_c
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 34, 
+                   Column: 0 }
+Function:        ft_bittab_c
+Args:
+  - NumInstructions: '17'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 41, 
+                   Column: 0 }
+Function:        ft_bittab_d
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bittab_d
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 41, 
+                   Column: 0 }
+Function:        ft_bittab_d
+Args:
+  - NumInstructions: '10'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                   Column: 0 }
+Function:        ft_bittab_e
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 48, 
+                   Column: 11 }
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 49, 
+                   Column: 8 }
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 50, 
+                   Column: 11 }
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 51, 
+                   Column: 10 }
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 53, 
+                   Column: 1 }
+Function:        ft_bittab_e
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 46, 
+                   Column: 0 }
+Function:        ft_bittab_e
+Args:
+  - NumInstructions: '35'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                   Column: 0 }
+Function:        ft_bittab_f
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 58, 
+                   Column: 3 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 59, 
+                   Column: 8 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 60, 
+                   Column: 11 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 61, 
+                   Column: 8 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 62, 
+                   Column: 11 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 63, 
+                   Column: 10 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '21'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 66, 
+                   Column: 1 }
+Function:        ft_bittab_f
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/wchar/internal/ft_bittab_ranges.c', Line: 56, 
+                   Column: 0 }
+Function:        ft_bittab_f
+Args:
+  - NumInstructions: '47'
+  - String:          ' instructions in function'
+...

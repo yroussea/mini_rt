@@ -1,0 +1,244 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 20, Column: 23 }
+Function:        ft_map_node_new
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_map_node_new
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 33, Column: 6 }
+Function:        ft_map_put
+Args:
+  - Callee:          ft_map_contains
+  - String:          ' will not be inlined into '
+  - Caller:          ft_map_put
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 34, Column: 3 }
+Function:        ft_map_put
+Args:
+  - Callee:          ft_map_remove
+  - String:          ' will not be inlined into '
+  - Caller:          ft_map_put
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 39, Column: 2 }
+Function:        ft_map_put
+Args:
+  - Callee:          ft_lst_tadd
+  - String:          ' will not be inlined into '
+  - Caller:          ft_map_put
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 35, Column: 9 }
+Function:        ft_map_put
+Args:
+  - Callee:          ft_map_node_new
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_map_put
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, Column: 0 }
+Function:        ft_map_put
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 34, Column: 17 }
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 35, Column: 25 }
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 37, Column: 3 }
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 38, Column: 12 }
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '19'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 41, Column: 1 }
+Function:        ft_map_put
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 29, Column: 0 }
+Function:        ft_map_put
+Args:
+  - NumInstructions: '48'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 17, Column: 0 }
+Function:        ft_map_node_new
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_map_node_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 22, Column: 3 }
+Function:        ft_map_node_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 23, Column: 14 }
+Function:        ft_map_node_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 26, Column: 1 }
+Function:        ft_map_node_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/hashmap/ft_map_put.c', Line: 17, Column: 0 }
+Function:        ft_map_node_new
+Args:
+  - NumInstructions: '25'
+  - String:          ' instructions in function'
+...

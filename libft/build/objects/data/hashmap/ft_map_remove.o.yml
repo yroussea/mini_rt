@@ -1,0 +1,152 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 32, 
+                   Column: 4 }
+Function:        ft_map_remove
+Args:
+  - Callee:          ft_lst_remove
+  - String:          ' will not be inlined into '
+  - Caller:          ft_map_remove
+    DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 17, 
+                   Column: 0 }
+Function:        ft_map_remove
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '21'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 25, 
+                   Column: 11 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 26, 
+                   Column: 2 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 26, 
+                   Column: 2 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 28, 
+                   Column: 7 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 30, 
+                   Column: 16 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '14'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 36, 
+                   Column: 10 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 38, 
+                   Column: 1 }
+Function:        ft_map_remove
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/hashmap/ft_map_remove.c', Line: 17, 
+                   Column: 0 }
+Function:        ft_map_remove
+Args:
+  - NumInstructions: '56'
+  - String:          ' instructions in function'
+...

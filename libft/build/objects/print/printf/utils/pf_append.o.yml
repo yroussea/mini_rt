@@ -1,0 +1,134 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 22, 
+                   Column: 11 }
+Function:        pf_append
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_append
+    DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 23, 
+                   Column: 3 }
+Function:        pf_append
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          pf_append
+    DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 27, 
+                   Column: 12 }
+Function:        pf_append
+Args:
+  - Callee:          pf_strnjoin
+  - String:          ' will not be inlined into '
+  - Caller:          pf_append
+    DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 28, 
+                   Column: 3 }
+Function:        pf_append
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_append
+    DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_append
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_append
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 22, 
+                   Column: 21 }
+Function:        pf_append
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 27, 
+                   Column: 25 }
+Function:        pf_append
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 31, 
+                   Column: 1 }
+Function:        pf_append
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/utils/pf_append.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_append
+Args:
+  - NumInstructions: '37'
+  - String:          ' instructions in function'
+...

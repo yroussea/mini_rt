@@ -1,0 +1,85 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 21, Column: 9 }
+Function:        ft_lst_new
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_lst_new
+    DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 18, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 18, Column: 0 }
+Function:        ft_lst_new
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_lst_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 23, Column: 3 }
+Function:        ft_lst_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 24, Column: 18 }
+Function:        ft_lst_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 27, Column: 1 }
+Function:        ft_lst_new
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 18, Column: 0 }
+Function:        ft_lst_new
+Args:
+  - NumInstructions: '23'
+  - String:          ' instructions in function'
+...

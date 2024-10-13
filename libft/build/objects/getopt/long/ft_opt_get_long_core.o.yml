@@ -1,0 +1,47 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long_core.c', Line: 207, 
+                   Column: 10 }
+Function:        ft_opt_get_long_core
+Args:
+  - Callee:          ft_opt_get_posix
+  - String:          ' will not be inlined into '
+  - Caller:          ft_opt_get_long_core
+    DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long_core.c', 
+                       Line: 204, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long_core.c', Line: 204, 
+                   Column: 0 }
+Function:        ft_opt_get_long_core
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_opt_get_long_core
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long_core.c', Line: 204, 
+                   Column: 0 }
+Function:        ft_opt_get_long_core
+Args:
+  - NumInstructions: '13'
+  - String:          ' instructions in function'
+...

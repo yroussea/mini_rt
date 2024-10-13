@@ -1,0 +1,221 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 23, Column: 11 }
+Function:        ft_calloc
+Args:
+  - Callee:          malloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_calloc
+    DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 18, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 29, Column: 19 }
+Function:        ft_calloc
+Args:
+  - Callee:          malloc
+  - String:          ' will not be inlined into '
+  - Caller:          ft_calloc
+    DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 18, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 31, Column: 3 }
+Function:        ft_calloc
+Args:
+  - Callee:          ft_bzero
+  - String:          ' will not be inlined into '
+  - Caller:          ft_calloc
+    DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 18, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 18, Column: 0 }
+Function:        ft_calloc
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 22, Column: 27 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 23, Column: 11 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 24, Column: 21 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 24, Column: 44 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 25, Column: 3 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 26, Column: 9 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 28, Column: 3 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 29, Column: 34 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 31, Column: 12 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 32, Column: 10 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 33, Column: 1 }
+Function:        ft_calloc
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/mem/ft_calloc.c', Line: 18, Column: 0 }
+Function:        ft_calloc
+Args:
+  - NumInstructions: '40'
+  - String:          ' instructions in function'
+...

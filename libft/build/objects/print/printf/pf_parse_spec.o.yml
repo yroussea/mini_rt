@@ -1,0 +1,1407 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 44, 
+                   Column: 25 }
+Function:        pf_spec_length
+Args:
+  - Callee:          ft_strchr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_spec_length
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 49, 
+                   Column: 10 }
+Function:        pf_spec_length
+Args:
+  - Callee:          ft_isdigit
+  - String:          ' will not be inlined into '
+  - Caller:          pf_spec_length
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 58, 
+                   Column: 11 }
+Function:        pf_spec_length
+Args:
+  - Callee:          ft_isdigit
+  - String:          ' will not be inlined into '
+  - Caller:          pf_spec_length
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 61, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - Callee:          ft_strchr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_spec_length
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 22, 
+                   Column: 22 }
+Function:        pf_fill_flags
+Args:
+  - Callee:          ft_strchr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_fill_flags
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 77, 
+                   Column: 10 }
+Function:        pf_parse_int
+Args:
+  - Callee:          ft_atoi
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_int
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 78, 
+                   Column: 10 }
+Function:        pf_parse_int
+Args:
+  - Callee:          ft_isdigit
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_int
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 103, 
+                   Column: 35 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 103, 
+                   Column: 17 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          ft_substr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 104, 
+                   Column: 9 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 88, 
+                   Column: 20 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          pf_fill_flags
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 89, 
+                   Column: 8 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          pf_parse_int
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 97, 
+                   Column: 9 }
+Function:        pf_fill_spec
+Args:
+  - Callee:          pf_parse_int
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 113, 
+                   Column: 9 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 117, 
+                   Column: 14 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          ft_substr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 119, 
+                   Column: 7 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          ft_strchr
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 121, 
+                   Column: 3 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          pf_free_spec
+  - String:          ' will not be inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 116, 
+                   Column: 8 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          pf_spec_length
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 118, 
+                   Column: 2 }
+Function:        pf_parse_spec
+Args:
+  - Callee:          pf_fill_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_parse_spec
+    DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                   Column: 0 }
+Function:        pf_parse_spec
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 115, 
+                   Column: 3 }
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 116, 
+                   Column: 23 }
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '19'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 121, 
+                   Column: 16 }
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 124, 
+                   Column: 10 }
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 125, 
+                   Column: 1 }
+Function:        pf_parse_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 109, 
+                   Column: 0 }
+Function:        pf_parse_spec
+Args:
+  - NumInstructions: '42'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                   Column: 0 }
+Function:        pf_spec_length
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 44, 
+                   Column: 9 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 44, 
+                   Column: 45 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 45, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 46, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 47, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 49, 
+                   Column: 3 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 49, 
+                   Column: 21 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 50, 
+                   Column: 7 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 51, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 52, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 53, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 55, 
+                   Column: 7 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 56, 
+                   Column: 7 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 58, 
+                   Column: 4 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 58, 
+                   Column: 22 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 59, 
+                   Column: 8 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 60, 
+                   Column: 2 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 61, 
+                   Column: 31 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 62, 
+                   Column: 6 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 64, 
+                   Column: 3 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 65, 
+                   Column: 10 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 66, 
+                   Column: 1 }
+Function:        pf_spec_length
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 40, 
+                   Column: 0 }
+Function:        pf_spec_length
+Args:
+  - NumInstructions: '105'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                   Column: 0 }
+Function:        pf_fill_spec
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '26'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 92, 
+                   Column: 3 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 95, 
+                   Column: 7 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 97, 
+                   Column: 22 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 99, 
+                   Column: 4 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 100, 
+                   Column: 2 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 102, 
+                   Column: 3 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 103, 
+                   Column: 27 }
+Function:        pf_fill_spec
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '24'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 85, 
+                   Column: 0 }
+Function:        pf_fill_spec
+Args:
+  - NumInstructions: '77'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_fill_flags
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 22, 
+                   Column: 9 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 22, 
+                   Column: 42 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 24, 
+                   Column: 7 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 25, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 26, 
+                   Column: 12 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 27, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 28, 
+                   Column: 12 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 29, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 30, 
+                   Column: 12 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 31, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 32, 
+                   Column: 12 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 33, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 34, 
+                   Column: 4 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 36, 
+                   Column: 10 }
+Function:        pf_fill_flags
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_fill_flags
+Args:
+  - NumInstructions: '93'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                   Column: 0 }
+Function:        pf_parse_int
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 72, 
+                   Column: 10 }
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 77, 
+                   Column: 18 }
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 78, 
+                   Column: 22 }
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 79, 
+                   Column: 7 }
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 81, 
+                   Column: 10 }
+Function:        pf_parse_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/pf_parse_spec.c', Line: 69, 
+                   Column: 0 }
+Function:        pf_parse_int
+Args:
+  - NumInstructions: '57'
+  - String:          ' instructions in function'
+...

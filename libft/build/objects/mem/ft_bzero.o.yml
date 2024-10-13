@@ -1,0 +1,43 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/mem/ft_bzero.c', Line: 27, Column: 2 }
+Function:        ft_bzero
+Args:
+  - Callee:          ft_memset
+  - String:          ' will not be inlined into '
+  - Caller:          ft_bzero
+    DebugLoc:        { File: 'src/mem/ft_bzero.c', Line: 26, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/mem/ft_bzero.c', Line: 26, Column: 0 }
+Function:        ft_bzero
+Args:
+  - NumStackBytes:   '24'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_bzero
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/mem/ft_bzero.c', Line: 26, Column: 0 }
+Function:        ft_bzero
+Args:
+  - NumInstructions: '12'
+  - String:          ' instructions in function'
+...

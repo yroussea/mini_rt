@@ -1,0 +1,106 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 20, 
+                   Column: 17 }
+Function:        pf_str_create
+Args:
+  - Callee:          ft_calloc
+  - String:          ' will not be inlined into '
+  - Caller:          pf_str_create
+    DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 23, 
+                   Column: 2 }
+Function:        pf_str_create
+Args:
+  - Callee:          pf_str_init
+  - String:          ' will not be inlined into '
+  - Caller:          pf_str_create
+    DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_str_create
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_str_create
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 22, 
+                   Column: 3 }
+Function:        pf_str_create
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 23, 
+                   Column: 14 }
+Function:        pf_str_create
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 25, 
+                   Column: 1 }
+Function:        pf_str_create
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/str/pf_str_create.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_str_create
+Args:
+  - NumInstructions: '23'
+  - String:          ' instructions in function'
+...

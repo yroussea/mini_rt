@@ -1,0 +1,413 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 27, 
+                   Column: 4 }
+Function:        ft_permute_args
+Args:
+  - Callee:          ft_opt_permute
+  - String:          ' will not be inlined into '
+  - Caller:          ft_permute_args
+    DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 18, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 59, 
+                   Column: 8 }
+Function:        ft_opt_get_long
+Args:
+  - Callee:          ft_opt_get_long_core
+  - String:          ' will not be inlined into '
+  - Caller:          ft_opt_get_long
+    DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 36, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 60, 
+                   Column: 2 }
+Function:        ft_opt_get_long
+Args:
+  - Callee:          ft_permute_args
+    DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 18, 
+                       Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          ft_opt_get_long
+    DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 36, 
+                       Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 36, 
+                   Column: 0 }
+Function:        ft_opt_get_long
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 42, 
+                   Column: 38 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 43, 
+                   Column: 3 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 44, 
+                   Column: 12 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 45, 
+                   Column: 35 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 47, 
+                   Column: 7 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 50, 
+                   Column: 8 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 50, 
+                   Column: 28 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 51, 
+                   Column: 5 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 52, 
+                   Column: 8 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 52, 
+                   Column: 35 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 53, 
+                   Column: 5 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 54, 
+                   Column: 5 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 56, 
+                   Column: 19 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 58, 
+                   Column: 12 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '16'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 62, 
+                   Column: 1 }
+Function:        ft_opt_get_long
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 36, 
+                   Column: 0 }
+Function:        ft_opt_get_long
+Args:
+  - NumInstructions: '89'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 18, 
+                   Column: 0 }
+Function:        ft_permute_args
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '14'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 24, 
+                   Column: 5 }
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 25, 
+                   Column: 10 }
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 27, 
+                   Column: 19 }
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 30, 
+                   Column: 19 }
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 32, 
+                   Column: 1 }
+Function:        ft_permute_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/getopt/long/ft_opt_get_long.c', Line: 18, 
+                   Column: 0 }
+Function:        ft_permute_args
+Args:
+  - NumInstructions: '36'
+  - String:          ' instructions in function'
+...

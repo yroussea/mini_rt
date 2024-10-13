@@ -1,0 +1,370 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 21, Column: 8 }
+Function:        pf_precision_mutator_str
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_str
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 24, Column: 9 }
+Function:        pf_precision_mutator_str
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_str
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 25, Column: 3 }
+Function:        pf_precision_mutator_str
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_str
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 26, Column: 3 }
+Function:        pf_precision_mutator_str
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_str
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 17, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 41, Column: 8 }
+Function:        pf_precision_mutator_int
+Args:
+  - Callee:          ft_strlen
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_int
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 33, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 44, Column: 9 }
+Function:        pf_precision_mutator_int
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_int
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 33, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 45, Column: 3 }
+Function:        pf_precision_mutator_int
+Args:
+  - Callee:          ft_memset
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_int
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 33, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 46, Column: 3 }
+Function:        pf_precision_mutator_int
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_int
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 33, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 49, Column: 3 }
+Function:        pf_precision_mutator_int
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_precision_mutator_int
+    DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                       Line: 33, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 17, Column: 0 }
+Function:        pf_precision_mutator_str
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_precision_mutator_str
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 22, Column: 31 }
+Function:        pf_precision_mutator_str
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 24, Column: 19 }
+Function:        pf_precision_mutator_str
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '14'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 29, Column: 10 }
+Function:        pf_precision_mutator_str
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 30, Column: 1 }
+Function:        pf_precision_mutator_str
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 17, Column: 0 }
+Function:        pf_precision_mutator_str
+Args:
+  - NumInstructions: '35'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 33, Column: 0 }
+Function:        pf_precision_mutator_int
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 40, Column: 28 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 40, Column: 43 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 44, Column: 19 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '30'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 48, Column: 13 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 49, Column: 8 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 52, Column: 10 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 53, Column: 1 }
+Function:        pf_precision_mutator_int
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/flag/pf_precision_mutator.c', 
+                   Line: 33, Column: 0 }
+Function:        pf_precision_mutator_int
+Args:
+  - NumInstructions: '79'
+  - String:          ' instructions in function'
+...

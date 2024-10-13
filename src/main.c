@@ -6,13 +6,14 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:48:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/12 23:33:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:00:29 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft/print.h"
 #include "mlx.h"
 #include "object.h"
+#include "ray.h"
 #include <parsing.h>
 #include <stdlib.h>
 #include <mlx_manage.h>
@@ -39,7 +40,7 @@ int	main(int ac, char **av)
 		return (1);
 	parsing(av[1]);
 
-	mm_init(&mdata, clear_objs, NULL, (t_loop_param){NULL, NULL});
+	mm_init(&mdata, clear_objs, gen_image, (t_loop_param){ray_launching, lauch_one_ray});
 	mm_add_event(&mdata, (t_event){MLX_KEYUP, ESCAPE, mm_kill});
 	mm_loop(&mdata);
 	mm_kill(&mdata);

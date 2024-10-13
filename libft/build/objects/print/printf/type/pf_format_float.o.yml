@@ -1,0 +1,315 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 35, 
+                   Column: 8 }
+Function:        ft_ftoa
+Args:
+  - Callee:          ft_lltoa
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 36, 
+                   Column: 8 }
+Function:        ft_ftoa
+Args:
+  - Callee:          ft_strjoins
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 42, 
+                   Column: 18 }
+Function:        ft_ftoa
+Args:
+  - Callee:          ft_abs
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 42, 
+                   Column: 9 }
+Function:        ft_ftoa
+Args:
+  - Callee:          ft_lltoa
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 43, 
+                   Column: 9 }
+Function:        ft_ftoa
+Args:
+  - Callee:          ft_strjoins
+  - String:          ' will not be inlined into '
+  - Caller:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 58, 
+                   Column: 8 }
+Function:        pf_format_float
+Args:
+  - Callee:          ft_ftoa
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 30, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          pf_format_float
+    DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', 
+                       Line: 51, Column: 0 }
+  - String:          ' because it should never be inlined '
+  - String:          '(cost=never)'
+  - String:          ': '
+  - Reason:          no alwaysinline attribute
+...
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 58, 
+                   Column: 8 }
+Function:        pf_format_float
+Args:
+  - String:          FastISel missed call
+...
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 58, 
+                   Column: 16 }
+Function:        pf_format_float
+Args:
+  - String:          FastISel missed
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 51, 
+                   Column: 0 }
+Function:        pf_format_float
+Args:
+  - NumStackBytes:   '88'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '14'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 57, 
+                   Column: 3 }
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 58, 
+                   Column: 16 }
+Function:        pf_format_float
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 51, 
+                   Column: 0 }
+Function:        pf_format_float
+Args:
+  - NumInstructions: '48'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 30, 
+                   Column: 0 }
+Function:        ft_ftoa
+Args:
+  - String:          'FastISel didn''t lower all arguments: '
+  - Prototype:       'i8* (x86_fp80, i32)*'
+...
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 37, 
+                   Column: 6 }
+Function:        ft_ftoa
+Args:
+  - String:          FastISel missed
+...
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 44, 
+                   Column: 7 }
+Function:        ft_ftoa
+Args:
+  - String:          FastISel missed
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 30, 
+                   Column: 0 }
+Function:        ft_ftoa
+Args:
+  - NumStackBytes:   '88'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_ftoa
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '28'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 39, 
+                   Column: 9 }
+Function:        ft_ftoa
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 41, 
+                   Column: 9 }
+Function:        ft_ftoa
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '31'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 47, 
+                   Column: 10 }
+Function:        ft_ftoa
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/type/pf_format_float.c', Line: 30, 
+                   Column: 0 }
+Function:        ft_ftoa
+Args:
+  - NumInstructions: '66'
+  - String:          ' instructions in function'
+...

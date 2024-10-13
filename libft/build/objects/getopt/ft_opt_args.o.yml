@@ -1,0 +1,40 @@
+--- !Missed
+Pass:            sdagisel
+Name:            FastISelFailure
+DebugLoc:        { File: 'src/getopt/ft_opt_args.c', Line: 17, Column: 0 }
+Function:        ft_opt_args
+Args:
+  - String:          'FastISel didn''t lower all arguments: '
+  - Prototype:       'void (%struct.s_opt_args*, i32, i8**, i32, i8*)*'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/getopt/ft_opt_args.c', Line: 17, Column: 0 }
+Function:        ft_opt_args
+Args:
+  - NumStackBytes:   '8'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        ft_opt_args
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '34'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/getopt/ft_opt_args.c', Line: 17, Column: 0 }
+Function:        ft_opt_args
+Args:
+  - NumInstructions: '34'
+  - String:          ' instructions in function'
+...

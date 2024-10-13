@@ -1,0 +1,251 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 25, 
+                   Column: 8 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 27, 
+                   Column: 8 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 28, 
+                   Column: 8 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          ft_strnew
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 29, 
+                   Column: 2 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 30, 
+                   Column: 2 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          ft_memcpy
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 32, 
+                   Column: 3 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 34, 
+                   Column: 3 }
+Function:        pf_strnjoin
+Args:
+  - Callee:          free
+  - String:          ' will not be inlined into '
+  - Caller:          pf_strnjoin
+    DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                       Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_strnjoin
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '19'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 25, 
+                   Column: 18 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 26, 
+                   Column: 7 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 27, 
+                   Column: 18 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 28, 
+                   Column: 18 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '15'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 32, 
+                   Column: 8 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 33, 
+                   Column: 6 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 34, 
+                   Column: 8 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 35, 
+                   Column: 10 }
+Function:        pf_strnjoin
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ''
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'src/print/printf/utils/pf_strnjoin.c', Line: 17, 
+                   Column: 0 }
+Function:        pf_strnjoin
+Args:
+  - NumInstructions: '52'
+  - String:          ' instructions in function'
+...

@@ -1,69 +1,59 @@
 #include "ft/math/vector.h"
 #include "mlx.h"
 #include "object.h"
-#include "rt.h"
 #include <ray.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <mlx_manage.h>
+#include <sys/types.h>
 // #include <rt.h>
 // #include <maths.h>
 
 
-void	lauch_one_ray(t_ray ray, int x, int y)
+void	lauch_one_ray(t_objs *objs, t_ray ray, int x, int y)
 {
 	(void)ray;
 	(void)x;
 	(void)y;
+	(void)objs;
+	//transphorming ray
+	//find hit
+	//	get_shade
+	mm_draw_pixel(x, (t_vec3d){0,1,0});
 }
 
-// void	set_pixel(int x, int y, int size)
-// {
-// static int **colors -> remplire les couleur
-// }
-
-void	ray_launching(t_objs *obj, void one_ray(t_ray ray, int x, int y))
+void	ray_launching(t_objs *obj, void one_ray(t_objs *, t_ray , int , int ),
+	ushort w_size, ushort h_size)
 {
-	t_camera	*cam;
-	t_ray		ray;
-	int			x;
-	int			y;
+	t_ray	ray;
+	ushort	x;
+	ushort	y;
 
-	cam = obj->obj;
-	ray.center = cam->point;
+	ray.center = ((t_camera *)obj->obj)->point;
 	y = 0;
-	while (y < HEIGHT)
+	while (y < h_size)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < w_size)
 		{
-			one_ray(ray, x, y);
-			x += cam->pixelisation;
-		}
-		y += cam->pixelisation;
-	}
-}
-
-void	gen_image(t_m_data *m_data)
-{
-	static int	**colors = NULL;
-	int			x;
-	int			y;
-
-	if (!colors)
-		get_colors(&colors);
-	m_data->lauch_all_ray(get_cam(), m_data->lauch_one_ray);
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			mlx_set_image_pixel(m_data->mlx, m_data->img, x, y, colors[y][x]);
+			one_ray(obj, ray, x, y);
 			x++;
 		}
+		mm_draw_ligne(y);
 		y++;
 	}
-	mlx_put_image_to_window(m_data->mlx, m_data->wind, m_data->img, 0, 0);
+}
+
+void	gen_image(t_mdata *m_data)
+{
+	static t_objs	*all_objs = NULL;
+
+	printf("%s\n", __func__);
+	if (!all_objs)
+		get_objs(&all_objs);
+	m_data->param_fnct.all_ray(all_objs, m_data->param_fnct.one_ray,
+		WIDTH / m_data->pixelisation, HEIGHT / m_data->pixelisation);
+	mm_draw_image(m_data);
 }
 
 
