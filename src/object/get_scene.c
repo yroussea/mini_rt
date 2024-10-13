@@ -6,12 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:18:25 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 15:57:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:27:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include <rt.h>
 #include <stdlib.h>
 
 void	get_objs(t_objs	**x)

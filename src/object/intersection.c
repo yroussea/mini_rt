@@ -6,12 +6,13 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:34:18 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 15:57:49 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:29:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <object.h>
 #include <maths.h>
+#include <math.h>
 
 static float	closer(float t1, float t2)
 {

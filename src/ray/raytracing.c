@@ -6,11 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:12:26 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 16:24:14 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:29:58 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <maths.h>
+#include <math.h>
 #include <stdlib.h>
 
 #include <stdio.h>

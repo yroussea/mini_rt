@@ -1,8 +1,8 @@
 #include <object.h>
 #include <maths.h>
-#include <rt.h>
 #include <stdlib.h>
 
+#include <assert.h> // autoriser ?
 t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors)
 {
 	t_objs		*new;

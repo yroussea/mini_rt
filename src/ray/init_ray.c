@@ -1,4 +1,3 @@
-#include <rt.h>
 #include <mlx_manage.h>
 #include <object.h>
 #include <math.h>

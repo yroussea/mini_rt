@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:59:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 16:00:29 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:31:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 // #include "mlx.h"
 // #include "object.h"
 // #include <sys/types.h>
-// #include <rt.h>
 #include "object.h"
 #include <ray.h>
 #include <mlx_manage.h>
-#include <maths.h>
+#include <math.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
 void	lauch_one_ray(t_objs *objs, t_ray ray, int x)
 {
+	t_objs	*objs_hit;
 	(void)ray;
 	(void)x;
 	(void)objs;
 	//find hit
 	//	get_shade
-	if (find_hit(&ray, objs, NULL) != INFINITY)
-		mm_draw_pixel(x, (t_vec3d){0, 0, 1});
+	objs_hit = NULL;
+	if (find_hit(&ray, objs, &objs_hit) != INFINITY)
+		mm_draw_pixel(x, objs_hit->colors);
 	else
-		mm_draw_pixel(x, (t_vec3d){0, 1, 0});
+		mm_draw_pixel(x, (t_vec3d){0, 0, 1});
 }
 
 void	ray_launching(t_mdata *mdata, void one_ray(t_objs *, t_ray, int),
