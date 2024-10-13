@@ -1,22 +1,27 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    config.mk                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/13 00:18:54 by kiroussa         ###   ########.fr        #
+#    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
+#    Updated: 2024/10/13 04:13:17 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = error/rt_parse_err.c \
-	  error/rt_parse_err_file.c \
-	  error/rt_parse_err_print.c \
-	  error/rt_parse_err_str.c \
-	  error/rt_parse_errd.c \
-	  error/rt_parse_errs.c \
-	  error/rt_parse_ok.c \
-	  rt_parser.c
+PROJECT_NAME = miniRT
+PROJECT_VERSION = 2.0.1-dev
 
-include ../submodule.mk
+LIB_SUFFIX = .rt.so
+EXEC_SUFFIX = .out
+
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4
+DFLAGS = -MT $@ -MMD -MP -MF $(MKDEPS_DIR)/$*.tmp.d
+LDFLAGS = -lm -lSDL2
+
+MAKE = make --debug=none --no-print-directory
+CACHE_DIR ?= .cache
+
+DEVELOPMENT_MODE ?= 1

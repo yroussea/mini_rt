@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rt_debug.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:27:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/13 02:45:20 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/13 03:29:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/mem.h>
-#include <rt/app.h>
+#define __RT_LOG_INTERNAL__
 #include <rt/log.h>
-#include <rt/cli.h>
-#include <unistd.h>
 
-int	main(int argc, char **argv)
+void	rt_debug(t_rt *rt, const char *fmt, ...)
 {
-	t_rt	rt;
-	int		ret;
+	va_list	args;
 
-	if (rt_init(&rt, argc, argv))
-		return (1);
-	ret = rt_cli_parse(&rt, argc, argv);
-	if (ret > 0)
-		return (ret - 1);
-	if (rt.flags.output)
-	{
-		rt_info(&rt, "rendering to %s", rt.flags.output);
-		rt.flags.mode = RT_MODE_RENDER_ONCE;
-	}
-	rt_destroy(&rt);
-	return (0);
+	va_start(args, fmt);
+	rt_vlog(rt, RT_LOG_DEBUG, fmt, args);
+	va_end(args);
 }

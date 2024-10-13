@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rt_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:27:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/13 01:03:45 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/13 04:14:12 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/app.h>
-#include <rt/log.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <rt/features.h>
 
-int	main(int argc, char **argv)
-{
-	t_rt	rt;
-	int		ret;
-
-	if (rt_init(&rt, argc, argv))
-		return (1);
-	ret = rt_cli_parse(&rt, argc, argv);
-	if (ret > 0)
-		return (ret - 1);
-	if (rt.flags.output)
-	{
-		rt_info(&rt, "rendering to %s", rt.flags.output);
-		rt.flags.mode = RT_MODE_RENDER_ONCE;
-	}
-	rt_destroy(&rt);
+int	rt_init(
+	t_rt *rt,
+	__attribute__((unused)) int argc,
+	__attribute__((unused)) char **argv
+) {
+	ft_memset(rt, 0, sizeof(t_rt));
+	rt->executable = argv[0];
+	rt->name = RT_DEFAULT_NAME;
 	return (0);
 }

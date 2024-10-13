@@ -6,12 +6,12 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:53:08 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/12 04:30:34 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/13 00:19:15 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifndef SRC
-_ := $(error SRC is not defined)
+SRC :=
 endif
 
 PWD := $(shell pwd)
@@ -28,7 +28,7 @@ PROJ_CACHE_DIR := $(PWD)/$(CACHE_DIR)
 INDEPENDENT_CACHE_DIR = 1
 endif
 
-include ../../config.mk
+include ../../config/config.mk
 
 ifdef EXTRA_CFLAGS
 CFLAGS += $(EXTRA_CFLAGS)

@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:27:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/13 04:13:30 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/mem.h>
-#include <rt/app.h>
-#include <rt/log.h>
+#include <ft/print.h>
 #include <rt/cli.h>
-#include <unistd.h>
 
-int	main(int argc, char **argv)
+void	rt_cli_opt_version(t_rt *rt)
 {
-	t_rt	rt;
-	int		ret;
-
-	if (rt_init(&rt, argc, argv))
-		return (1);
-	ret = rt_cli_parse(&rt, argc, argv);
-	if (ret > 0)
-		return (ret - 1);
-	if (rt.flags.output)
-	{
-		rt_info(&rt, "rendering to %s", rt.flags.output);
-		rt.flags.mode = RT_MODE_RENDER_ONCE;
-	}
-	rt_destroy(&rt);
-	return (0);
+	ft_dprintf(STDERR_FILENO, "%s: %s\n", rt->name, RT_VERSION);
 }

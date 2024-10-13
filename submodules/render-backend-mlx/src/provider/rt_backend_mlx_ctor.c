@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rt_backend_mlx_ctor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:27:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/13 01:01:11 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/13 01:03:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/mem.h>
-#include <rt/app.h>
-#include <rt/log.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <ft/string.h>
+#include <rt/render/backend.h>
 
-int	main(int argc, char **argv)
+t_rt_render_backend	*rt_backend_mlx_provider(t_rt *rt);
+
+__attribute__((constructor))
+static void	rt_backend_mlx_ctor(void)
 {
-	t_rt	rt;
-	int		ret;
+	size_t	i;
 
-	if (rt_init(&rt, argc, argv))
-		return (1);
-	ret = rt_cli_parse(&rt, argc, argv);
-	if (ret > 0)
-		return (ret - 1);
-	if (rt.flags.output)
+	i = 0;
+	while (g_backend_providers[i].name)
 	{
-		rt_info(&rt, "rendering to %s", rt.flags.output);
-		rt.flags.mode = RT_MODE_RENDER_ONCE;
+		if (!ft_strcmp(g_backend_providers[i].name, "mlx"))
+			return ;
+		i++;
 	}
-	rt_destroy(&rt);
-	return (0);
+	g_backend_providers[i].name = "mlx";
+	g_backend_providers[i].fn = rt_backend_mlx_provider;
 }
