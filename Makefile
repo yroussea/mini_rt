@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/14 21:02:52 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/15 00:28:52 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ NO_BACKEND_OUTPUT := $(shell echo $(SUBMODULES_OUTPUT) | sed 's/ /\n/g' | grep -
 ifeq ($(DEVELOPMENT_MODE), 1)
 EXTRA_LDFLAGS := $(NO_BACKEND_OUTPUT)
 EXTRA_CFLAGS += '-DRT_DEVRELOAD_SUBMODULES_PATH="\"$(SUBMODULES_DIR)\""'
-BACKENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep backend- | sed 's/\n/ /g')
-FRONTENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep frontend- | sed 's/\n/ /g')
+BACKENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep backend- | tac | sed 's/\n/ /g')
+FRONTENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep frontend- | tac | sed 's/\n/ /g')
 EXTRA_CFLAGS += '-DRT_DEVRELOAD_BACKENDS=\"$(BACKENDS)\"'
 EXTRA_CFLAGS += '-DRT_DEVRELOAD_FRONTENDS=\"$(FRONTENDS)\"'
 else

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 19:42:39 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:34:23 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,20 @@ static bool	rt_screen_main_render(t_toc_screen *self, t_toc_vec2i mouse)
 static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 				int last)
 {
+	t_rt_frontend		*frontend;
+
 	(void) screen;
+	printf("rt screen: key %d action %d last %d\n", key, action, last);
+	frontend = (t_rt_frontend *)screen->data;
 	if (action && !last && key == SDL_SCANCODE_R
 		&& screen->window->keymap[SDL_SCANCODE_LALT])
 	{
+		printf("rt screen: reloading backend\n");
+		frontend->rt->backend->destroy(frontend->rt->backend);
+		frontend->rt->backend = rt_backend_provider_find("dummy")->fn(
+			frontend->rt, rt_backend_provider_find("dummy")->name, frontend->width, frontend->height);
+		frontend->rt->backend->init(frontend->rt->backend);
+		printf("rt screen: backend reloaded\n");
 	}
 	return (true);
 }

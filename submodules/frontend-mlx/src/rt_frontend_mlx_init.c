@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:53:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/15 00:18:22 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:26:35 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	rt_frontend_mlx_init(t_rt_frontend *self)
 {
 	t_rt_frontend_mlx	*data;
 
-	return (0);
 	data = ft_calloc(1, sizeof(t_rt_frontend_mlx));
 	if (!data)
 		return (1);
