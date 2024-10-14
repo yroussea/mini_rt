@@ -6,12 +6,12 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/14 06:15:37 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/14 08:59:52 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT_NAME = miniRT
-PROJECT_VERSION = 2.0.1-dev
+PROJECT_NAME = rt
+PROJECT_VERSION = 2.0.2-dev
 PROJECT_URL = https://github.com/27network/rt
 COMP_MODE = $(PROJECT_NAME)
 

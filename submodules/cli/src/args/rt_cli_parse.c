@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 06:18:06 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 09:17:00 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	rt_cli_parse_frontend(t_rt *rt, char *frontend)
 	char	frontend_list[2048];
 	bool	found;
 
+	ft_memset(frontend_list, 0, sizeof(frontend_list));
 	found = rt_cli_provide_frontends(frontend_list, sizeof(frontend_list),
 			frontend);
 	if (found)
@@ -47,6 +48,7 @@ static int	rt_cli_parse_backend(t_rt *rt, char *backend)
 	char	backend_list[2048];
 	bool	found;
 
+	ft_memset(backend_list, 0, sizeof(backend_list));
 	found = rt_cli_provide_backends(backend_list, sizeof(backend_list),
 			backend);
 	if (found)
