@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
+/*   rt_frontend_mlx_destroy.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:20:56 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 05:27:42 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 07:55:52 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/print.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <rt/render/frontend/macrolibx.h>
 
-void	rt_cli_opt_version(t_rt *rt)
+void	rt_frontend_mlx_destroy(t_rt_frontend *self)
 {
-	ft_dprintf(STDERR_FILENO, "%s version %s, built on %s %s\n", rt->name,
-		RT_VERSION, __DATE__, __TIME__);
-	ft_dprintf(STDERR_FILENO, "%s\n", RT_URL);
+	t_rt_frontend_mlx	*data;
+
+	data = (t_rt_frontend_mlx *)self->data;
+	if (!data)
+		return ;
+	if (data->engine)
+		toc_engine_destroy(data->engine);
+	free(data);
+	self->data = NULL;
 }

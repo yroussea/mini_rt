@@ -22,11 +22,10 @@
         devShell = (pkgs.mkShell.override { inherit stdenv; }) {
           buildInputs = with pkgs; [
             SDL2
-            readline
-            vulkan-headers
+          #   vulkan-headers
             vulkan-loader
-            vulkan-tools
-            vulkan-validation-layers
+          #   vulkan-tools
+          #   vulkan-validation-layers
           ];
 
           LD_LIBRARY_PATH="${pkgs.vulkan-loader}/lib";

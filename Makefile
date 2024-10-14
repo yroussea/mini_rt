@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/13 04:12:59 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/14 06:15:48 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,22 +16,27 @@ include config/config.mk
 
 NAME = $(PROJECT_NAME)
 PWD := $(shell pwd)
-COMP_MODE = miniRT
+EXTRA_CFLAGS += -DRT_VERSION='"\"$(PROJECT_VERSION)\""'
+EXTRA_CFLAGS += -DRT_URL='"\"$(PROJECT_URL)\""'
+
 
 
 ### Features header ###
 
 FEATURES_H = $(PWD)/config/features.h
-_ := $(shell ln -sf $(PWD)/config/features_$(COMP_MODE).h $(FEATURES_H))
+_ := $(shell ln -fs $(PWD)/config/features_$(COMP_MODE).h $(FEATURES_H))
+
+
 
 ### Submodules ###
 
 SUBMODULES_DIR = $(PWD)/submodules
 
 # available submodules
-SUBMODULES = parser raytracer render-backend-mlx shared ui
+SUBMODULES = backend-dummy backend-raytracer frontend-mlx parser-rt shared ui
 ifeq ($(DEVELOPMENT_MODE), 1)
-DEV_RELOAD = devreload
+SUBMODULES := devreload $(SUBMODULES)
+EXTRA_CFLAGS += '-DRT_DEBUG(fmt, ...) = ft_printf(\"[%s:%d] \" fmt, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)'
 endif
 
 # Collect the output files (submodules/<proj>/lib<proj>.rt.so)
@@ -47,8 +52,9 @@ MAIN_SUBMODULE_OUTPUT := $(SUBMODULES_DIR)/$(MAIN_SUBMODULE)/$(MAIN_SUBMODULE)$(
 MKDEPS :=
 _ := $(foreach sub,$(SUBMODULES),$(eval MKDEPS += $(shell $(MAKE) CACHE_DIR="$(PWD)/$(CACHE_DIR)" -C $(SUBMODULES_DIR)/$(sub) print_MKDEPS)))
 
-EXTRA_CFLAGS := $(SUBMODULES:%=-I$(SUBMODULES_DIR)/%/include)
-EXTRA_CFLAGS += -DRT_VERSION="$(PROJECT_VERSION)"
+# expose every header file to other submodules
+EXTRA_CFLAGS += $(SUBMODULES:%=-I$(SUBMODULES_DIR)/%/include)
+
 
 
 ### Library dependencies (`third-party` directory) ###
@@ -60,8 +66,10 @@ _ := $(foreach dep,$(DEPS),$(eval DEPS_TARGETS += $(DEPS_DIR)/$(shell $(MAKE) -C
 DEPS_DIRS :=
 _ := $(foreach dep,$(DEPS),$(eval DEPS_DIRS += $(DEPS_DIR)/$(shell $(MAKE) -C $(DEPS_DIR) print_$(dep)_DIR)))
 
+# expose every header file to submodules
 EXTRA_CFLAGS += $(DEPS_DIRS:%=-I%/include) $(DEPS_DIRS:%=-I%/includes)
 EXTRA_LDFLAGS += $(DEPS_TARGETS)
+
 
 
 ### Make Rules ###
@@ -80,7 +88,7 @@ $(NAME): $(MAIN_SUBMODULE_OUTPUT)
 	@echo "[*] Copying $(MAIN_SUBMODULE_OUTPUT) to $(NAME)"
 	@ln -fs $(MAIN_SUBMODULE_OUTPUT) $(NAME)
 
-$(SUBMODULES_OUTPUT): | $(DEPS_DIR)
+$(SUBMODULES_OUTPUT): $(FEATURES_H) | $(DEPS_DIR)
 	@$(MAKE) -C $(dir $@) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
 
 $(MAIN_SUBMODULE_OUTPUT): $(SUBMODULES_OUTPUT)
@@ -94,25 +102,26 @@ $(DEPS_DIR): $(DEPS_TARGETS)
 	@touch $(DEPS_DIR)
 
 oclean:
-	@for i in $(SUBMODULES); do \
-		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" clean; \
-	done
+	@echo "[!] Removing $(CACHE_DIR)"
+	@rm -rf $(CACHE_DIR)
 
 clean: oclean
 	@$(MAKE) -C $(DEPS_DIR) clean
 
-fclean:
+fclean: oclean
 	@for i in $(SUBMODULES); do \
 		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" fclean; \
 	done
-	$(MAKE) -C $(DEPS_DIR) fclean
-	@echo "[!] Removing $(CACHE_DIR)"
-	@rm -rf $(CACHE_DIR)
+	@echo "[!] Removing $(NAME)"
 	@rm -rf $(NAME)
+	$(MAKE) -C $(DEPS_DIR) fclean
 
 re: fclean all
+
+remake: oclean
+	@$(MAKE) all -j
 
 print_%:
 	@echo $($*)
 
-.PHONY: all deps _clean clean fclean re print_% 
+.PHONY: all deps _clean oclean clean fclean re remake print_% 

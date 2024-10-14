@@ -6,11 +6,10 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:19:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:52:15 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 06:36:13 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/colors.h>
 #include <ft/print.h>
 #define __RT_LOG_INTERNAL__
 #include <rt/log.h>
@@ -23,10 +22,10 @@
 static const char	*rt_log_colors(enum e_rt_log_level level)
 {
 	static const char	*colors[] = {
-	[RT_LOG_TRACE] = GRAY,
+	[RT_LOG_TRACE] = DARK_GRAY,
 	[RT_LOG_DEBUG] = CYAN,
 	[RT_LOG_INFO] = RESET,
-	[RT_LOG_WARNING] = YELLOW,
+	[RT_LOG_WARN] = YELLOW,
 	[RT_LOG_ERROR] = RED,
 	};
 
@@ -40,7 +39,7 @@ void	rt_vlog(t_rt *rt, enum e_rt_log_level level, const char *fmt,
 {
 	char	*msg;
 
-	if (rt->flags.verbosity >= level + 2)
+	if (RT_LOG_DEFAULT - (int)rt->flags.verbosity > (int)level)
 		return ;
 	msg = ft_vformat(fmt, args);
 	if (!msg)

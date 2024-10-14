@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
+/*   rt_frontend_providers.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:20:56 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 06:31:17 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 06:31:27 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/print.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <rt/render/frontend.h>
 
-void	rt_cli_opt_version(t_rt *rt)
+t_rt_frontend_provider	*rt_frontend_providers(void)
 {
-	ft_dprintf(STDERR_FILENO, "%s version %s, built on %s %s\n", rt->name,
-		RT_VERSION, __DATE__, __TIME__);
-	ft_dprintf(STDERR_FILENO, "%s\n", RT_URL);
+	static t_rt_frontend_provider	frontend_providers
+	[RT_FRONTEND_PROVIDERS_MAX]
+		= {0};
+
+	return (frontend_providers);
 }

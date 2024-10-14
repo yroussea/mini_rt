@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:20:56 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 07:10:00 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 07:11:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/print.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#ifndef COLOR_H
+# define COLOR_H
+# undef COLOR_H
+# ifndef __RT_COLOR_H__
+#  define __RT_COLOR_H__
 
-void	rt_cli_opt_version(t_rt *rt)
+#  include <stdint.h>
+
+// Note: As we are on x86, no need to check for endianness
+// See: https://stackoverflow.com/a/64390149
+typedef union u_color
 {
-	ft_dprintf(STDERR_FILENO, "%s version %s, built on %s %s\n", rt->name,
-		RT_VERSION, __DATE__, __TIME__);
-	ft_dprintf(STDERR_FILENO, "%s\n", RT_URL);
-}
+	uint32_t	rgba;
+	struct
+	{
+		uint8_t	r;
+		uint8_t	g;
+		uint8_t	b;
+		uint8_t	a;
+	};
+}	t_color;
+
+# endif // __RT_COLOR_H__
+#endif // COLOR_H

@@ -6,35 +6,81 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:53:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 06:18:06 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft/mem.h>
 #include <ft/opt.h>
+#include <ft/string.h>
 #include <rt/cli.h>
 #include <rt/log.h>
-# include <stdio.h>
+#include <rt/render/backend.h>
+#include <rt/render/frontend.h>
 
-#define CLI_PASS			0
-#define CLI_EXIT_SUCCESS	1
-#define CLI_EXIT_FAILURE	2
+int		rt_cli_parse_file_target(t_rt *rt, t_opt_globals *globals,
+			t_opt_args *args);
+
+bool	rt_cli_provide_backends(char *string, size_t size, const char *match);
+bool	rt_cli_provide_frontends(char *string, size_t size, const char *match);
+
+static int	rt_cli_parse_frontend(t_rt *rt, char *frontend)
+{
+	char	frontend_list[2048];
+	bool	found;
+
+	found = rt_cli_provide_frontends(frontend_list, sizeof(frontend_list),
+			frontend);
+	if (found)
+	{
+		rt_debug(rt, "cli: setting 'frontend' to %s\n", frontend);
+		rt->flags.frontend = frontend;
+		return (CLI_PASS);
+	}
+	rt_error(rt, "invalid frontend: %s\nvalid frontends are: %s\n",
+		frontend, frontend_list);
+	return (CLI_EXIT_FAILURE);
+}
+
+static int	rt_cli_parse_backend(t_rt *rt, char *backend)
+{
+	char	backend_list[2048];
+	bool	found;
+
+	found = rt_cli_provide_backends(backend_list, sizeof(backend_list),
+			backend);
+	if (found)
+	{
+		rt_debug(rt, "cli: setting 'backend' to %s\n", backend);
+		rt->flags.backend = backend;
+		return (CLI_PASS);
+	}
+	rt_error(rt, "invalid backend: %s\nvalid backends are: %s\n",
+		backend, backend_list);
+	return (CLI_EXIT_FAILURE);
+}
 
 static int	rt_cli_parse_opt(t_rt *rt, t_opt_globals *globals, int opt)
 {
 	if (opt == 'V')
 		rt->flags.verbosity++;
-	else if (opt == 'r')
-	{
-		printf("rt_cli_parse_opt: r '%s'\n", globals->optarg);
-	}
+	else if (opt == 'b')
+		return (rt_cli_parse_backend(rt, globals->optarg));
+	else if (opt == 'f')
+		return (rt_cli_parse_frontend(rt, globals->optarg));
 	else if (opt == 'o')
 	{
-		printf("rt_cli_parse_opt: o '%s'\n", globals->optarg);
+		rt->flags.mode = RT_MODE_RENDER_ONCE;
 		rt->flags.output = globals->optarg;
 	}
-	else
+	else if (opt == '?')
 	{
-		rt_error(rt, "invalid option '%c'\n", opt);
+		if (ft_strchr(CLI_ARG_OPTS, globals->optopt))
+			rt_error(rt, "-%c: option requires an argument\n",
+				globals->optopt);
+		else
+			rt_error(rt, "-%c: invalid option\n", globals->optopt);
+		rt_cli_opt_help(rt);
 		return (CLI_EXIT_FAILURE);
 	}
 	return (CLI_PASS);
@@ -73,6 +119,7 @@ int	rt_cli_parse(t_rt *rt, int argc, char **argv)
 {
 	t_opt_globals	globals;
 	t_opt_args		args;
+	int				ret;
 
 	if (argc == 1)
 	{
@@ -86,5 +133,8 @@ int	rt_cli_parse(t_rt *rt, int argc, char **argv)
 	args = ft_opt_args(argc, argv, OPT_BASH_LIKE, CLI_VALID_OPTS);
 	globals = ft_opt_globals();
 	globals.opterr = 0;
-	return (rt_cli_parse_flags(rt, &globals, &args));
+	ret = rt_cli_parse_flags(rt, &globals, &args);
+	if (ret == CLI_PASS)
+		return (rt_cli_parse_file_target(rt, &globals, &args));
+	return (ret);
 }

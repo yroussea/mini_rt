@@ -1,15 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_render_providers.c                              :+:      :+:    :+:   */
+/*   rt_frontend_mlx_handoff.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:05:21 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 04:05:39 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 05:28:40 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 07:29:42 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/render/backend.h>
+#include <rt/render/frontend/macrolibx.h>
 
-t_rt_backend_provider	g_backend_providers[RT_BACKEND_PROVIDERS_MAX];
+void	rt_frontend_mlx_handoff(t_rt_frontend *self, t_rt_frontend *prev)
+{
+	t_rt_frontend_mlx	*data;
+
+	data = (t_rt_frontend_mlx *)self->data;
+	if (!data)
+		return ;
+	(void)prev;
+}

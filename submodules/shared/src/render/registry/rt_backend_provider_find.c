@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
+/*   rt_backend_provider_find.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:20:56 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 06:30:06 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 06:42:42 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/print.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <ft/string.h>
+#include <rt/render/backend.h>
 
-void	rt_cli_opt_version(t_rt *rt)
+t_rt_backend_provider	*rt_backend_provider_find(const char *name)
 {
-	ft_dprintf(STDERR_FILENO, "%s version %s, built on %s %s\n", rt->name,
-		RT_VERSION, __DATE__, __TIME__);
-	ft_dprintf(STDERR_FILENO, "%s\n", RT_URL);
+	t_rt_backend_provider	*provider;
+	size_t					i;
+
+	i = 0;
+	while (i < RT_BACKEND_PROVIDERS_MAX)
+	{
+		provider = rt_backend_providers() + i;
+		if (ft_strcmp(provider->name, name) == 0)
+			return (provider);
+		i++;
+	}
+	return (NULL);
 }

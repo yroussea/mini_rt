@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_cli_opt_version.c                               :+:      :+:    :+:   */
+/*   rt_backend_dummy_ctor.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 04:11:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:20:56 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/14 03:15:02 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/14 07:12:36 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/print.h>
-#include <rt/cli.h>
-#include <unistd.h>
+#include <rt/render/backend.h>
 
-void	rt_cli_opt_version(t_rt *rt)
+t_rt_backend	*rt_backend_dummy_provider(t_rt *rt, size_t width,
+					size_t height);
+
+__attribute__((constructor))
+void	rt_backend_dummy_ctor(void)
 {
-	ft_dprintf(STDERR_FILENO, "%s version %s, built on %s %s\n", rt->name,
-		RT_VERSION, __DATE__, __TIME__);
-	ft_dprintf(STDERR_FILENO, "%s\n", RT_URL);
+	rt_backend_provider_register((t_rt_backend_provider){
+		.name = "dummy",
+		.fn = rt_backend_dummy_provider
+	});
 }

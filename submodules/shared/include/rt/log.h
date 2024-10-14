@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:34:20 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:49:54 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 06:36:21 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@
 # ifndef __RT_LOG_H__
 #  define __RT_LOG_H__
 
+#  include <ft/colors.h>
+#  include <ft/string.h>
+#  include <ft/print.h>
 #  include <rt/app.h>
 #  include <stdarg.h>
 
-#  define RT_LOG_DEFAULT RT_LOG_INFO
+#  define RT_LOG_DEFAULT RT_LOG_WARN
 
 enum e_rt_log_level
 {
 	RT_LOG_TRACE = 0,
 	RT_LOG_DEBUG,
 	RT_LOG_INFO,
-	RT_LOG_WARNING,
+	RT_LOG_WARN,
 	RT_LOG_ERROR,
 	_RT_LOG_SIZE,
 };
@@ -94,7 +97,7 @@ void	rt_info(t_rt *rt, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_warning(t_rt *rt, const char *fmt, ...)
+void	rt_warn(t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 /**
@@ -107,15 +110,13 @@ void	rt_warning(t_rt *rt, const char *fmt, ...)
 void	rt_error(t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
-/**
- * Prints a fatal log message to the console.
- *
- * @param rt The rt application.
- * @param fmt The format string.
- * @param ... The arguments.
- */
-void	rt_fatal(t_rt *rt, const char *fmt, ...)
-		__attribute__((format(printf, 2, 3)));
+#  ifndef RT_DEBUG
+#   define RT_DEBUG rt_eat_stdarg
+
+// dummy function to eat the stdarg
+void	rt_eat_stdarg(const char *fmt, ...);
+
+#  endif
 
 # endif // __RT_LOG_H__
 #endif // LOG_H

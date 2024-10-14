@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:40:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:30:20 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 05:44:14 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ enum e_rt_mode
 typedef struct s_rt_flags
 {
 	enum e_rt_mode	mode;
-	const char		*filepath;
-	const char		*output;
 	size_t			verbosity;
+
+	const char		*filepath;
+
+	const char		*output;
+
+	const char		*frontend;
+	const char		*backend;
 }	t_rt_flags;
 
 # endif // __RT_FLAGS_H__

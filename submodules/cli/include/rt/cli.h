@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:52:39 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 04:11:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 05:46:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,19 @@
 
 #  include <rt/app.h>
 #  include <rt/features.h>
+#  include <stdbool.h>
 
 #  if FEAT_CLI_FLAGS
-#   define CLI_VALID_OPTS "hvVr:o:"
+#   define CLI_VALID_OPTS "hvVb:f:o:"
+#   define CLI_ARG_OPTS "bfo"
 #  else
 #   define CLI_VALID_OPTS "hvV"
+#   define CLI_ARG_OPTS ""
 #  endif
+
+#  define CLI_PASS			0
+#  define CLI_EXIT_SUCCESS	1
+#  define CLI_EXIT_FAILURE	2
 
 int		rt_cli_parse(t_rt *rt, int argc, char **argv);
 void	rt_cli_opt_help(t_rt *rt);

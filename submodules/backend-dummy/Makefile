@@ -5,26 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/14 06:50:31 by kiroussa         ###   ########.fr        #
+#    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
+#    Updated: 2024/10/14 07:14:44 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	log/rt_debug.c \
-		log/rt_eat_stdarg.c \
-		log/rt_error.c \
-		log/rt_info.c \
-		log/rt_log.c \
-		log/rt_trace.c \
-		log/rt_vlog.c \
-		log/rt_warn.c \
-		render/registry/rt_backend_provider_find.c \
-		render/registry/rt_backend_provider_register.c \
-		render/registry/rt_backend_providers.c \
-		render/registry/rt_frontend_provider_find.c \
-		render/registry/rt_frontend_provider_register.c \
-		render/registry/rt_frontend_providers.c \
-		rt_destroy.c \
-		rt_init.c
+SRC = provider/rt_backend_dummy_ctor.c \
+	  provider/rt_backend_dummy_provider.c \
+	  rt_backend_dummy_destroy.c \
+	  rt_backend_dummy_init.c \
+	  rt_backend_dummy_render.c
 
 include ../submodule.mk

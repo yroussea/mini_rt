@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:52:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 04:14:37 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 05:47:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 #include <ft/string.h>
 #include <rt/cli.h>
 #include <rt/render/backend.h>
+#include <rt/render/frontend.h>
 #include <unistd.h>
 
 #if FEAT_CLI_FLAGS
-# define CLI_USAGE "Usage: %s [-hvV] [-r <render_mode>] [-o <output_file>]\n\
- [--] [<input_file.rt>]\n\
+# define CLI_USAGE "Usage: %s [-hvV] [-b <backend>] [-f <frontend>] \
+[-o <output_file>] [--] [<input_file.rt>]\n\
 \n\
 \t-h                Display this help message.\n\
 \t-v                Display the version of the program.\n\
-\t-V                Increase the verbosity of the program. Can be used multiple \
-\t                  times (max 2).\n\
-\t-r <render_mode>  Set the render backend. Valid modes are:\n\
+\t-V                Increase the verbosity of the program,\n\
+\t                  can be used multiple times (max 3).\n\
+\t-b <backend>      Set the render backend. Valid modes are:\n\
+\t                  %s\n\
+\t-f <frontend>     Set the frontend. Valid modes are:\n\
 \t                  %s\n\
 \t-o <output_file>  Set the output file. If set, the program will run in\n\
 \t                  headless direct rendering mode, will render the scene to\n\
@@ -39,13 +42,12 @@ If an input file is specified, the program will run in direct rendering mode,\n\
 and will render the scene in an editor window.\n\
 "
 #else
-# define CLI_USAGE "Usage: %s [-h] [-v] [-V]\n\
-[--] <input_file.rt>\n\
+# define CLI_USAGE "Usage: %s [-h] [-v] [-V] [--] <input_file.rt>\n\
 \n\
 \t-h                Display this help message.\n\
 \t-v                Display the version of the program.\n\
-\t-V                Increase the verbosity of the program. Can be used multiple \
-\t                  times (max 2).\n\
+\t-V                Increase the verbosity of the program,\n\
+\t                  can be used multiple times (max 3).\n\
 \t--                Stop parsing flags.\n\
 \n\
 When an input file is specified, the program will run in direct rendering mode,\n\
@@ -53,20 +55,56 @@ and will render the scene in an editor window.\n\
 "
 #endif // FEAT_CLI_FLAGS
 
-void	rt_cli_opt_help(t_rt *rt)
+bool	rt_cli_provide_backends(char *string, size_t size, const char *match)
 {
-	char					render_modes[2048];
+	t_rt_backend_provider	*g_backend_providers;
 	size_t					i;
+	bool					found;
 
 	i = 0;
-	ft_memset(render_modes, 0, sizeof(render_modes));
+	found = false;
+	g_backend_providers = rt_backend_providers();
 	while (g_backend_providers[i].name)
 	{
-		ft_strlcat(render_modes, g_backend_providers[i].name,
-			sizeof(render_modes));
+		if (match && !ft_strcmp(g_backend_providers[i].name, match))
+			found = true;
+		ft_strlcat(string, g_backend_providers[i].name, size);
 		if (g_backend_providers[i + 1].name)
-			ft_strlcat(render_modes, ", ", sizeof(render_modes));
+			ft_strlcat(string, ", ", size);
 		i++;
 	}
-	ft_dprintf(STDERR_FILENO, CLI_USAGE, rt->executable, render_modes);
+	return (found);
+}
+
+bool	rt_cli_provide_frontends(char *string, size_t size, const char *match)
+{
+	t_rt_frontend_provider	*g_frontend_providers;
+	size_t					i;
+	bool					found;
+
+	i = 0;
+	found = false;
+	g_frontend_providers = rt_frontend_providers();
+	while (g_frontend_providers[i].name)
+	{
+		if (match && !ft_strcmp(g_frontend_providers[i].name, match))
+			found = true;
+		ft_strlcat(string, g_frontend_providers[i].name, size);
+		if (g_frontend_providers[i + 1].name)
+			ft_strlcat(string, ", ", size);
+		i++;
+	}
+	return (found);
+}
+
+void	rt_cli_opt_help(t_rt *rt)
+{
+	char	backends[2048];
+	char	frontends[2048];
+
+	ft_memset(backends, 0, sizeof(backends));
+	ft_memset(frontends, 0, sizeof(frontends));
+	rt_cli_provide_backends(backends, sizeof(backends), NULL);
+	rt_cli_provide_frontends(frontends, sizeof(frontends), NULL);
+	ft_dprintf(STDERR_FILENO, CLI_USAGE, rt->executable, backends, frontends);
 }

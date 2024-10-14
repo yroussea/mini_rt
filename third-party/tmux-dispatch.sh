@@ -20,7 +20,7 @@ for dep in "${DEPS[@]}"; do
     fi
 	COUNT=$((COUNT+1))
 
-	tmux send-keys "clear; echo \">>> $dep\"; $MAKE --no-print-directory -C $dep $RULE; sleep 2; exit" 'C-m'
+	tmux send-keys "clear; echo \">>> $dep\"; $MAKE --no-print-directory -C $dep $RULE; sleep 1; exit" 'C-m'
 done
 
 tmux -2 attach-session -t $SESSION_NAME
