@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:53:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:44:37 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 08:23:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	rt_frontend_mlx_init(t_rt_frontend *self)
 			self->width, self->height);
 	if (!data->main_window)
 		return (1);
+	toc_window_set_screen(data->main_window, rt_screen_main(), self);
 	toc_engine_await(data->engine);
 	return (0);
 }
