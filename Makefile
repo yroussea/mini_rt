@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/14 08:58:46 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/14 21:02:52 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,24 @@ SUBMODULES = backend-raytracer backend-dummy frontend-mlx parser-rt shared ui
 ifeq ($(DEVELOPMENT_MODE), 1)
 SUBMODULES := devreload $(SUBMODULES)
 EXTRA_CFLAGS += '-DRT_DEBUG(fmt, ...) = ft_printf(\"[%s:%d] \" fmt, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)'
+EXTRA_CFLAGS += '-DRT_DEVMODE=1'
 endif
 
 # Collect the output files (submodules/<proj>/lib<proj>.rt.so)
 SUBMODULES_OUTPUT =
 _ := $(foreach sub,$(SUBMODULES),$(eval SUBMODULES_OUTPUT += $(SUBMODULES_DIR)/$(sub)/lib$(sub)$(LIB_SUFFIX)))
+NO_BACKEND_OUTPUT := $(shell echo $(SUBMODULES_OUTPUT) | sed 's/ /\n/g' | grep -v libbackend- | grep -v libfrontend- | sed 's/\n/ /g')
 
+ifeq ($(DEVELOPMENT_MODE), 1)
+EXTRA_LDFLAGS := $(NO_BACKEND_OUTPUT)
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_SUBMODULES_PATH="\"$(SUBMODULES_DIR)\""'
+BACKENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep backend- | sed 's/\n/ /g')
+FRONTENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep frontend- | sed 's/\n/ /g')
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_BACKENDS=\"$(BACKENDS)\"'
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_FRONTENDS=\"$(FRONTENDS)\"'
+else
 EXTRA_LDFLAGS := $(SUBMODULES_OUTPUT)
+endif
 
 MAIN_SUBMODULE = cli
 SUBMODULES += $(MAIN_SUBMODULE)

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 08:22:36 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:45:25 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #include <rt/color.h>
 #include <rt/render/backend.h>
 
+#define BRIGHT_PURPLE 0xFFab4cef
+#define DARK_RED 0xFFF44336
+
 int	rt_backend_dummy_init(t_rt_backend *self)
 {
-	static const t_color	dummy_default = {.rgba = 0xFFab4cef};
+	static const t_color	dummy_default = {.rgba = BRIGHT_PURPLE};
 	t_color					*buffer;
 	size_t					x;
 	size_t					y;

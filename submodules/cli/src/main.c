@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:31:29 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:35:48 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	rt_init_backend(t_rt *rt)
 			rt->flags.backend);
 		return (1);
 	}
-	rt->backend = provider->fn(rt, rt->width, rt->height);
+	rt->backend = provider->fn(rt, provider->name, rt->width, rt->height);
 	if (rt->backend != NULL && !rt->backend->init)
 	{
 		rt_error(rt, "backend provider '%s' does not have an init function\n",
@@ -70,7 +70,7 @@ static int	rt_init_frontend(t_rt *rt)
 			rt->flags.frontend);
 		return (1);
 	}
-	rt->frontend = provider->fn(rt, rt->width, rt->height);
+	rt->frontend = provider->fn(rt, provider->name, rt->width, rt->height);
 	if (rt->frontend != NULL && !rt->frontend->init)
 	{
 		rt_error(rt, "frontend provider '%s' does not have an init function\n",

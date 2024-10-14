@@ -6,15 +6,15 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:02:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:30:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:37:36 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/render/frontend/macrolibx.h>
 
-t_rt_frontend	*rt_frontend_mlx_provider(t_rt *rt, size_t width,
-					size_t height)
+t_rt_frontend	*rt_frontend_mlx_provider(t_rt *rt, const char *name,
+					size_t width, size_t height)
 {
 	static t_rt_frontend	frontend = {0};
 
@@ -22,7 +22,7 @@ t_rt_frontend	*rt_frontend_mlx_provider(t_rt *rt, size_t width,
 	frontend.rt = rt;
 	frontend.flags = FRONTEND_SUPPORT_UI | FRONTEND_SUPPORT_KEYBOARD
 		| FRONTEND_SUPPORT_MOUSE;
-	frontend.name = "mlx";
+	frontend.name = name;
 	frontend.width = width;
 	frontend.height = height;
 	frontend.init = rt_frontend_mlx_init;

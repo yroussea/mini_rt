@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 23:44:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:19:31 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:36:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_rt_frontend
 typedef struct s_rt_frontend_provider
 {
 	const char		*name;
-	t_rt_frontend	*(*fn)(t_rt *rt, size_t width, size_t height);
+	t_rt_frontend	*(*fn)(t_rt *rt, const char *name,
+			size_t width, size_t height);
 }	t_rt_frontend_provider;
 
 t_rt_frontend_provider	*rt_frontend_providers(void);
