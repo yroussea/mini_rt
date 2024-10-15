@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:12:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 01:05:49 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 01:40:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // Allows rt to be used as a standalone application. This would open a
 // main menu screen and allow the user to select a file to open.
-#  define FEAT_APPLICATION 1
+#  define FEAT_APPLICATION 0
 
 // Allows the user to pass flags to the CLI to change the behavior of the
 // application.

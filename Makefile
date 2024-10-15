@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/15 00:28:52 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 01:39:59 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,11 +95,11 @@ $(PWD)/$(CACHE_DIR)/%:
 		rm -rf $@; \
 	fi
 
-$(NAME): $(MAIN_SUBMODULE_OUTPUT)
+$(NAME): $(FEATURES_H) $(MAIN_SUBMODULE_OUTPUT)
 	@echo "[*] Copying $(MAIN_SUBMODULE_OUTPUT) to $(NAME)"
 	@ln -fs $(MAIN_SUBMODULE_OUTPUT) $(NAME)
 
-$(SUBMODULES_OUTPUT): $(FEATURES_H) | $(DEPS_DIR)
+$(SUBMODULES_OUTPUT): | $(DEPS_DIR)
 	@$(MAKE) -C $(dir $@) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
 
 $(MAIN_SUBMODULE_OUTPUT): $(SUBMODULES_OUTPUT)
