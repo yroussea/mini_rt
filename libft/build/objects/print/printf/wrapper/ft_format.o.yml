@@ -1,18 +1,4 @@
 --- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/print/printf/wrapper/ft_format.c', Line: 22, 
-                   Column: 8 }
-Function:        ft_format
-Args:
-  - Callee:          ft_vformat
-  - String:          ' will not be inlined into '
-  - Caller:          ft_format
-    DebugLoc:        { File: 'src/print/printf/wrapper/ft_format.c', Line: 17, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
 Pass:            sdagisel
 Name:            FastISelFailure
 DebugLoc:        { File: 'src/print/printf/wrapper/ft_format.c', Line: 17, 
@@ -38,7 +24,7 @@ DebugLoc:        { File: 'src/print/printf/wrapper/ft_format.c', Line: 17,
                    Column: 0 }
 Function:        ft_format
 Args:
-  - NumStackBytes:   '408'
+  - NumStackBytes:   '232'
   - String:          ' stack bytes in function'
 ...
 --- !Analysis
@@ -51,7 +37,7 @@ Args:
   - String:          "\n"
   - String:          ''
   - String:          ': '
-  - INST_:           '19'
+  - INST_:           '5'
   - String:          "\n"
 ...
 --- !Analysis
@@ -64,7 +50,7 @@ Args:
   - String:          "\n"
   - String:          ''
   - String:          ': '
-  - INST_:           '16'
+  - INST_:           '8'
   - String:          "\n"
 ...
 --- !Analysis
@@ -77,7 +63,7 @@ Args:
   - String:          "\n"
   - String:          ''
   - String:          ': '
-  - INST_:           '26'
+  - INST_:           '20'
   - String:          "\n"
 ...
 --- !Analysis
@@ -87,6 +73,6 @@ DebugLoc:        { File: 'src/print/printf/wrapper/ft_format.c', Line: 17,
                    Column: 0 }
 Function:        ft_format
 Args:
-  - NumInstructions: '61'
+  - NumInstructions: '33'
   - String:          ' instructions in function'
 ...

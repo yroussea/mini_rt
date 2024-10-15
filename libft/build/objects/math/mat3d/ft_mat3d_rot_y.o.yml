@@ -1,17 +1,4 @@
 --- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_rot_y.c', Line: 20, Column: 11 }
-Function:        ft_mat3d_rot_y
-Args:
-  - Callee:          ft_mat3d_identity
-  - String:          ' will not be inlined into '
-  - Caller:          ft_mat3d_rot_y
-    DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_rot_y.c', Line: 17, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
 Pass:            sdagisel
 Name:            FastISelFailure
 DebugLoc:        { File: 'src/math/mat3d/ft_mat3d_rot_y.c', Line: 17, Column: 0 }

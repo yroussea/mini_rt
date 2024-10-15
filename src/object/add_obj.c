@@ -4,22 +4,14 @@
 
 #include <assert.h> // autoriser ?
 #include <stdio.h>
-t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, t_vec3d colors)
-{
-	printf("cylinder on is way, dont try it (will destroy your code)\n");
-	(void)coo;
-	(void)vector;
-	(void)height;
-	(void)colors;
-	return (NULL);
-}
+
 
 t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
 {
 	t_objs	*new;
 	t_light	*light;
 
-	assert (type & LIGHT_MASK); //
+	assert (type & LIGHT_MASK);
 	light = malloc(sizeof(t_light));
 	if (type == POINT_LIGHT)
 		light->point = coo;

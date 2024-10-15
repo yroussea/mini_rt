@@ -4,28 +4,9 @@
 #include <math.h>
 #include <stdlib.h>
 
-t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors)
+float	closer(float t1, float t2)
 {
-	t_objs		*new;
-	t_sphere	*sph;
-
-	sph = malloc(sizeof(t_sphere));
-	sph->rayon = rayon;
-	sph->dot_production_rayon = rayon * rayon;
-	sph->center = center;
-	new = malloc(sizeof(t_objs));
-	new->type = SPHERE;
-	new->obj = sph;
-	new->colors = colors;
-	new->get_normal = get_sphere_normal;
-	new->intersection = ray_sphere_intersect;
-	return (new);
-}
-
-
-static float	closer(float t1, float t2)
-{
-	if (t2 < 0 || (t2 > t1 && t1 > 0))
+	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
 		return (t1);
 	return (t2);
 }
@@ -52,3 +33,20 @@ t_vec3d	get_sphere_normal(t_ray ray, void *obj)
 	return (ft_vec3d_norm(ft_vec3d_sub(ray.hit_point, (*(t_sphere *)obj).center)));
 }
 
+t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors)
+{
+	t_objs		*new;
+	t_sphere	*sph;
+
+	sph = malloc(sizeof(t_sphere));
+	sph->rayon = rayon;
+	sph->dot_production_rayon = rayon * rayon;
+	sph->center = center;
+	new = malloc(sizeof(t_objs));
+	new->type = SPHERE;
+	new->obj = sph;
+	new->colors = colors;
+	new->get_normal = get_sphere_normal;
+	new->intersection = ray_sphere_intersect;
+	return (new);
+}

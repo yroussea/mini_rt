@@ -1,3 +1,4 @@
+#include "ft/math/vector.h"
 #include <mlx_manage.h>
 #include <object.h>
 #include <math.h>
@@ -13,6 +14,7 @@ void	eye_rays(t_ray *ray, float u, float v)
 	ray->direction = /* get_rotation */(t_vec3d){u, v, 1};
 	ray->point = ft_vec3d_add(ray->center, ray->direction);
 	ray->color = (t_vec3d){0, 0, 0};
+	ray->sq_len = ft_vec3d_dot(ray->direction, ray->direction);
 }
 
 float	get_width(float x, char fov)

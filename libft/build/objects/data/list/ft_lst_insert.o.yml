@@ -1,21 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NeverInline
-DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 33, Column: 9 }
-Function:        ft_lstadd_front
-Args:
-  - Callee:          ft_lst_insert
-    DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' not inlined into '
-  - Caller:          ft_lstadd_front
-    DebugLoc:        { File: 'src/data/list/ft_lst_insert.c', Line: 32, 
-                       Column: 0 }
-  - String:          ' because it should never be inlined '
-  - String:          '(cost=never)'
-  - String:          ': '
-  - Reason:          no alwaysinline attribute
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize

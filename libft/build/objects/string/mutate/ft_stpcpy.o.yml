@@ -1,29 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/string/mutate/ft_stpcpy.c', Line: 17, Column: 2 }
-Function:        ft_stpcpy
-Args:
-  - Callee:          ft_strcpy
-  - String:          ' will not be inlined into '
-  - Caller:          ft_stpcpy
-    DebugLoc:        { File: 'src/string/mutate/ft_stpcpy.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/string/mutate/ft_stpcpy.c', Line: 18, Column: 17 }
-Function:        ft_stpcpy
-Args:
-  - Callee:          ft_strlen
-  - String:          ' will not be inlined into '
-  - Caller:          ft_stpcpy
-    DebugLoc:        { File: 'src/string/mutate/ft_stpcpy.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize

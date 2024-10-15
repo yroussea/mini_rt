@@ -1,30 +1,4 @@
 --- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_norm.c', Line: 19, Column: 8 }
-Function:        ft_vec3d_norm
-Args:
-  - Callee:          ft_vec3d_len
-  - String:          ' will not be inlined into '
-  - Caller:          ft_vec3d_norm
-    DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_norm.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_norm.c', Line: 22, Column: 10 }
-Function:        ft_vec3d_norm
-Args:
-  - Callee:          ft_vec3d_div
-  - String:          ' will not be inlined into '
-  - Caller:          ft_vec3d_norm
-    DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_norm.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
 Pass:            sdagisel
 Name:            FastISelFailure
 DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_norm.c', Line: 16, Column: 0 }

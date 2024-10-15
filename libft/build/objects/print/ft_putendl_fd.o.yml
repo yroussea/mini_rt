@@ -1,27 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/print/ft_putendl_fd.c', Line: 23, Column: 8 }
-Function:        ft_putendl_fd
-Args:
-  - Callee:          ft_putstr_fd
-  - String:          ' will not be inlined into '
-  - Caller:          ft_putendl_fd
-    DebugLoc:        { File: 'src/print/ft_putendl_fd.c', Line: 16, Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/print/ft_putendl_fd.c', Line: 24, Column: 6 }
-Function:        ft_putendl_fd
-Args:
-  - Callee:          ft_putchar_fd
-  - String:          ' will not be inlined into '
-  - Caller:          ft_putendl_fd
-    DebugLoc:        { File: 'src/print/ft_putendl_fd.c', Line: 16, Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize

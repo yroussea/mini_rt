@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:59:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/13 20:46:14 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:54:00 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@
 void	lauch_one_ray(t_objs *objs, t_ray ray, int x)
 {
 	t_objs	*objs_hit;
-	(void)ray;
-	(void)x;
-	(void)objs;
+
 	objs_hit = NULL;
 	if (find_hit(&ray, objs, &objs_hit) != INFINITY)
 		get_shading(objs, objs_hit, &ray);

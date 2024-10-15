@@ -1,16 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/mem/arena/ft_arena_alloc.c', Line: 25, Column: 2 }
-Function:        ft_arena_alloc
-Args:
-  - Callee:          ft_bzero
-  - String:          ' will not be inlined into '
-  - Caller:          ft_arena_alloc
-    DebugLoc:        { File: 'src/mem/arena/ft_arena_alloc.c', Line: 17, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize

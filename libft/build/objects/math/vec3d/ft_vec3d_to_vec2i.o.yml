@@ -1,18 +1,4 @@
 --- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_to_vec2i.c', Line: 17, 
-                   Column: 10 }
-Function:        ft_vec3d_to_vec2i
-Args:
-  - Callee:          ft_vec2i
-  - String:          ' will not be inlined into '
-  - Caller:          ft_vec3d_to_vec2i
-    DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_to_vec2i.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
 Pass:            sdagisel
 Name:            FastISelFailure
 DebugLoc:        { File: 'src/math/vec3d/ft_vec3d_to_vec2i.c', Line: 16, 

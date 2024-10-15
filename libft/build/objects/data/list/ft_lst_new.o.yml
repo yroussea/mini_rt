@@ -1,15 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 21, Column: 9 }
-Function:        ft_lst_new
-Args:
-  - Callee:          ft_calloc
-  - String:          ' will not be inlined into '
-  - Caller:          ft_lst_new
-    DebugLoc:        { File: 'src/data/list/ft_lst_new.c', Line: 18, Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize

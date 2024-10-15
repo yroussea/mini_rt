@@ -1,17 +1,4 @@
 --- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/string/create/ft_ctostr.c', Line: 19, Column: 8 }
-Function:        ft_ctostr
-Args:
-  - Callee:          ft_strnew
-  - String:          ' will not be inlined into '
-  - Caller:          ft_ctostr
-    DebugLoc:        { File: 'src/string/create/ft_ctostr.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
---- !Missed
 Pass:            sdagisel
 Name:            FastISelFailure
 DebugLoc:        { File: 'src/string/create/ft_ctostr.c', Line: 16, Column: 0 }

@@ -1,17 +1,3 @@
---- !Missed
-Pass:            inline
-Name:            NoDefinition
-DebugLoc:        { File: 'src/string/create/ft_strdup_range.c', Line: 22, 
-                   Column: 8 }
-Function:        ft_strdup_range
-Args:
-  - Callee:          ft_strnew
-  - String:          ' will not be inlined into '
-  - Caller:          ft_strdup_range
-    DebugLoc:        { File: 'src/string/create/ft_strdup_range.c', Line: 16, 
-                       Column: 0 }
-  - String:          ' because its definition is unavailable'
-...
 --- !Analysis
 Pass:            prologepilog
 Name:            StackSize
