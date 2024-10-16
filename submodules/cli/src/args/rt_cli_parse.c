@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 09:17:00 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 03:50:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ static int	rt_cli_parse_flags(t_rt *rt, t_opt_globals *globals,
 		i = ft_opt_get(globals, args);
 		if (i == -1)
 			break ;
+		rt_trace(rt, "cli: parsing flag %c\n", i);
 		if (i == HELP_OPT || i == 'h')
 			rt_cli_opt_help(rt);
 		else if (i == 'v')

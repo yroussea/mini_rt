@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:40:37 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/15 00:16:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 04:00:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void	rt_devrl_destroy(t_rt_frontend *frontend)
 	if (!header)
 		return ;
 	rt = frontend->rt;
-	rt_trace(rt, "destroying devrl backend %s\n", header->name);
+	rt_trace(rt, "devrl: destroying backend %s\n", header->name);
 	header->destroy(frontend);
 	if (header->handle)
-		dlclose(header->handle);
+		RT_DLCLOSE(header->handle);
 	free(header);
 	rt->frontend = NULL;
-	rt_trace(rt, "devrl frontend destroyed\n");
+	rt_trace(rt, "devrl: frontend destroyed\n");
 }
 
 t_rt_frontend	*rt_devrl_frontend_setup(t_rt_frontend *frontend,
@@ -38,10 +38,16 @@ t_rt_frontend	*rt_devrl_frontend_setup(t_rt_frontend *frontend,
 {
 	frontend->init = rt_devrl_find_symbol(header->handle, "init",
 			"rt_frontend_", header->name);
+	rt_trace(frontend->rt, "devrl: frontend %s init: %p\n", header->name,
+		frontend->init);
 	frontend->handoff = rt_devrl_find_symbol(header->handle, "handoff",
 			"rt_frontend_", header->name);
+	rt_trace(frontend->rt, "devrl: frontend %s handoff: %p\n", header->name,
+		frontend->handoff);
 	header->destroy = rt_devrl_find_symbol(header->handle, "destroy",
 			"rt_frontend_", header->name);
+	rt_trace(frontend->rt, "devrl: frontend %s destroy: %p\n", header->name,
+		header->destroy);
 	frontend->destroy = rt_devrl_destroy;
 	return (frontend);
 }

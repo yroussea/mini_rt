@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:20:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 23:11:55 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 04:02:27 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,22 @@
 # ifndef __RT_DEVRELOAD_H__
 #  define __RT_DEVRELOAD_H__
 
-#  include <dlfcn.h>
 #  include <rt/log.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/frontend.h>
+
+#  if RT_DEVRELOAD_USE_DLFCN
+#   include <rt/devreload/dlfcn.h>
+#   define RT_DLOPEN ft_dlopen
+#   define RT_DLCLOSE ft_dlclose
+#   define RT_DLSYM ft_dlsym
+#   define RTLD_LAZY 0
+#  else
+#   include <dlfcn.h>
+#   define RT_DLOPEN dlopen
+#   define RT_DLCLOSE dlclose
+#   define RT_DLSYM dlsym
+#  endif
 
 typedef void	(*t_devrl_load_fn)(const char *path, const char *name);
 

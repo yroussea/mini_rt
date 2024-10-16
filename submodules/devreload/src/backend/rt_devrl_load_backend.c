@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:25:19 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 23:52:50 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 03:53:50 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_rt_backend	*rt_devrl_backend_provider(t_rt *rt, const char *name,
 			+ sizeof(t_rt_backend));
 	if (!ptr)
 		return (NULL);
-	ptr->handle = dlopen(_devrl_path, RTLD_LAZY);
+	ptr->handle = RT_DLOPEN(_devrl_path, RTLD_LAZY);
 	if (!ptr->handle)
 	{
 		RT_DEBUG("dlopen error: %m\n");

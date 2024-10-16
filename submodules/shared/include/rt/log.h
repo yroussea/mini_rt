@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:34:20 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 06:36:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 03:38:59 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ void	rt_warn(t_rt *rt, const char *fmt, ...)
  */
 void	rt_error(t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
+
+#  ifndef RT_DEBUG_PREFIX
+#   define RT_DEBUG_PREFIX ""
+#  endif // RT_DEBUG_PREFIX
 
 #  ifndef RT_DEBUG
 #   define RT_DEBUG rt_eat_stdarg

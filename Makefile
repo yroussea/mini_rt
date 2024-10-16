@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/16 01:39:59 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 03:50:54 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,9 +87,10 @@ EXTRA_LDFLAGS += $(DEPS_TARGETS)
 
 all: $(NAME)
 
+# include the .d files from submodules to check if they should be remade
 -include $(MKDEPS)
 
-# invalidation mechanism
+# invalidation mechanism, delete a .o file if its corresponding .c file has been modified
 $(PWD)/$(CACHE_DIR)/%:
 	@if [ $(findstring .c, $<) ]; then \
 		rm -rf $@; \
@@ -131,6 +132,15 @@ re: fclean all
 
 remake: oclean
 	@$(MAKE) all -j
+
+valgrind: $(NAME)
+	@echo "[*] Running valgrind..."
+ifeq ($(USE_VALGRIND_LOGFILE), 1)
+	@valgrind $(VALGRIND_FLAGS) --log-file=valgrind.log ./$(NAME) $(VG_ARGS) || true
+	@echo "[*] Valgrind log available in valgrind.log"
+else
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(VG_ARGS) || true
+endif
 
 print_%:
 	@echo $($*)

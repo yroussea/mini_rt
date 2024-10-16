@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/14 19:50:16 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 03:35:11 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4 -fPIC
 DFLAGS = -MT $@ -MMD -MP -MF $(MKDEPS_DIR)/$*.tmp.d
 LDFLAGS = -lm -lSDL2
 
-MAKE = make --debug=none --no-print-directory -j$(shell nproc)
+MAKE = make --debug=none --no-print-directory
+MAKE += -j$(shell nproc)
 CACHE_DIR ?= .cache
 
 DEVELOPMENT_MODE ?= 1
+USE_VALGRIND_LOGFILE ?= 1
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=no --suppressions=third-party/MacroLibX/valgrind.supp
