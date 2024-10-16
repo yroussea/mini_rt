@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 05:12:16 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 06:19:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:37:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rt_resize(t_rt *rt, size_t width, size_t height)
 		rt_warn(rt, "frontend does not support resizing\n");
 		return ;
 	}
-	rt_trace(rt, "resizing from %d*%d to %d*%d",
+	rt_trace(rt, "resizing from %d*%d to %d*%d\n",
 		(int)rt->width, (int)rt->height, (int)width, (int)height);
 	rt->width = ft_max(width, 300);
 	rt->height = ft_max(height, 180);
