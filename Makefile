@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/16 03:50:54 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 04:10:26 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SUBMODULES_DIR = $(PWD)/submodules
 SUBMODULES = backend-raytracer backend-dummy frontend-mlx parser-rt shared ui
 ifeq ($(DEVELOPMENT_MODE), 1)
 SUBMODULES := devreload $(SUBMODULES)
-EXTRA_CFLAGS += '-DRT_DEBUG(fmt, ...) = ft_printf(\"[%s:%d] \" fmt, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)'
+EXTRA_CFLAGS += '-DRT_DEBUG(fmt, ...) = ft_printf(\"%s[%s:%d] \" fmt, RT_DEBUG_PREFIX, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)'
 EXTRA_CFLAGS += '-DRT_DEVMODE=1'
 endif
 
