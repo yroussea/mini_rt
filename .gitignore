@@ -10,5 +10,5 @@
 *.so
 
 compile_commands.json
-/valgrind.log
+/valgrind.log*
 vgcore.*
