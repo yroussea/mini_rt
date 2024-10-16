@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/16 04:08:54 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 04:18:49 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC	=	backend/rt_devrl_backend_setup.c \
 
 include ../submodule.mk
 
+DEVRELOAD_USE_DLFCN = 0
+
 CFLAGS += -DDLFCN_VERBOSE=1
 CFLAGS += '-DRT_DEBUG_PREFIX="[devrl] "'
-CFLAGS += -DRT_DEVRELOAD_USE_DLFCN=0
+CFLAGS += -DRT_DEVRELOAD_USE_DLFCN=$(DEVRELOAD_USE_DLFCN)
