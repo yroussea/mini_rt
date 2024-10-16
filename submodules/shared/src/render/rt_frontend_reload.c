@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_frontend_mlx_handoff.c                          :+:      :+:    :+:   */
+/*   rt_frontend_reload.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 05:28:40 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:52:34 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/16 05:11:57 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/16 05:22:52 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/render/frontend/macrolibx.h>
+#include <rt/render/frontend.h>
 
-void	rt_frontend_mlx_handoff(t_rt_frontend *self)
+void	rt_frontend_reload(t_rt *rt)
 {
-	const t_rt_frontend_mlx	*frontend = (t_rt_frontend_mlx *)self->data;
-
-	toc_engine_await(frontend->engine);
+	rt_frontend_switch(rt, rt->frontend->name);
 }

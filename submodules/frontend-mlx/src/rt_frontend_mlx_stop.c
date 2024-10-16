@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_frontend_mlx_handoff.c                          :+:      :+:    :+:   */
+/*   rt_frontend_mlx_stop.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 05:28:40 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:52:34 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/16 05:49:42 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/16 06:16:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <rt/log.h>
 #include <rt/render/frontend/macrolibx.h>
 
-void	rt_frontend_mlx_handoff(t_rt_frontend *self)
+void	rt_frontend_mlx_stop(t_rt_frontend *self)
 {
 	const t_rt_frontend_mlx	*frontend = (t_rt_frontend_mlx *)self->data;
+	const t_toc_list		*windows = frontend->engine->windows;
 
-	toc_engine_await(frontend->engine);
+	while (windows)
+	{
+		toc_window_close(windows->data);
+		windows = windows->next;
+	}
 }

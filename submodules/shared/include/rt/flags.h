@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:40:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:44:14 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 05:55:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define __RT_FLAGS_H__
 
 #  include <stddef.h>
+#  include <stdbool.h>
 
 enum e_rt_mode
 {

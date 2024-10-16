@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 23:44:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 21:36:10 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 06:19:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@
 #  define FRONTEND_SUPPORT_UI		0x1
 #  define FRONTEND_SUPPORT_KEYBOARD	0x2
 #  define FRONTEND_SUPPORT_MOUSE	0x4
+#  define FRONTEND_SUPPORT_RESIZE	0x8
 
+// Note: when adding functions to this struct, don't forget to
+// update the `rt_devreload_frontend_setup` function and all
+// the providers.
 typedef struct s_rt_frontend
 {
 	const char	*name;
@@ -33,9 +37,9 @@ typedef struct s_rt_frontend
 	size_t		height;
 
 	int			(*init)(struct s_rt_frontend *self);
+	void		(*handoff)(struct s_rt_frontend *self);
+	void		(*stop)(struct s_rt_frontend *self);
 	void		(*destroy)(struct s_rt_frontend *self);
-	void		(*handoff)(struct s_rt_frontend *self,
-			struct s_rt_frontend *prev);
 
 	void		*data;
 }	t_rt_frontend;
@@ -48,10 +52,12 @@ typedef struct s_rt_frontend_provider
 }	t_rt_frontend_provider;
 
 t_rt_frontend_provider	*rt_frontend_providers(void);
-t_rt_frontend_provider	*rt_frontend_provider_find(const char *name);
-
 void					rt_frontend_provider_register(
 							t_rt_frontend_provider provider);
+t_rt_frontend_provider	*rt_frontend_provider_find(const char *name);
+
+void					rt_frontend_reload(t_rt *rt);
+void					rt_frontend_switch(t_rt *rt, const char *name);
 
 # endif // __RT_RENDER_FRONTEND_H__
 #endif // FRONTEND_H

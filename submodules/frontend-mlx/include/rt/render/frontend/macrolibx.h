@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 04:08:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 21:36:35 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 05:52:04 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct s_rt_frontend_mlx
 }	t_rt_frontend_mlx;
 
 int					rt_frontend_mlx_init(t_rt_frontend *self);
+void				rt_frontend_mlx_handoff(t_rt_frontend *self);
+void				rt_frontend_mlx_stop(t_rt_frontend *self);
 void				rt_frontend_mlx_destroy(t_rt_frontend *self);
-void				rt_frontend_mlx_handoff(t_rt_frontend *self,
-						t_rt_frontend *prev);
 
 t_rt_frontend		*rt_frontend_mlx_provider(t_rt *rt, const char *name,
 						size_t width, size_t height);

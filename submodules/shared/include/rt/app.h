@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:36:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:14:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 06:02:26 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,18 @@ typedef struct s_rt_app
 
 	size_t			width;
 	size_t			height;
+
 	t_rt_frontend	*frontend;
+	const char		*queued_frontend;
+
 	t_rt_backend	*backend;
 }	t_rt;
 
 int		rt_init(t_rt *rt, int argc, char **argv, char **envp);
 void	rt_destroy(t_rt *rt);
+void	rt_exit(t_rt *rt, int exit_code);
+
+void	rt_resize(t_rt *rt, size_t width, size_t height);
 
 # endif // __RT_APP_H__
 #endif // APP_H

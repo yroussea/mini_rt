@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:40:37 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 04:00:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 06:06:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ t_rt_frontend	*rt_devrl_frontend_setup(t_rt_frontend *frontend,
 			"rt_frontend_", header->name);
 	rt_trace(frontend->rt, "devrl: frontend %s handoff: %p\n", header->name,
 		frontend->handoff);
+	frontend->stop = rt_devrl_find_symbol(header->handle, "stop",
+			"rt_frontend_", header->name);
+	rt_trace(frontend->rt, "devrl: frontend %s stop: %p\n", header->name,
+		frontend->stop);
 	header->destroy = rt_devrl_find_symbol(header->handle, "destroy",
 			"rt_frontend_", header->name);
 	rt_trace(frontend->rt, "devrl: frontend %s destroy: %p\n", header->name,

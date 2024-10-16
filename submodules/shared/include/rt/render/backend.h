@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:57:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 21:20:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 05:27:50 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 #  define RT_BACKEND_PROVIDERS_MAX 10
 
+// Note: when adding functions to this struct, don't forget to
+// update the `rt_devreload_backend_setup` function and all
+// the providers.
 typedef struct s_rt_backend
 {
 	t_rt		*rt;
@@ -45,10 +48,12 @@ typedef struct s_rt_backend_provider
 }	t_rt_backend_provider;
 
 t_rt_backend_provider	*rt_backend_providers(void);
-t_rt_backend_provider	*rt_backend_provider_find(const char *name);
-
 void					rt_backend_provider_register(
 							t_rt_backend_provider provider);
+t_rt_backend_provider	*rt_backend_provider_find(const char *name);
+
+void					rt_backend_reload(t_rt *rt);
+void					rt_backend_switch(t_rt *rt, const char *name);
 
 # endif // __RT_RENDER_BACKEND_H__
 #endif // BACKEND_H

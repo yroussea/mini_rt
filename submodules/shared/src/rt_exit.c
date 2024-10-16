@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_frontend_mlx_handoff.c                          :+:      :+:    :+:   */
+/*   rt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 05:28:40 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:52:34 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/16 05:12:38 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/16 05:53:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/render/frontend/macrolibx.h>
+#include <rt/app.h>
+#include <rt/log.h>
+#include <stdlib.h>
 
-void	rt_frontend_mlx_handoff(t_rt_frontend *self)
+void	rt_exit(t_rt *rt, int status)
 {
-	const t_rt_frontend_mlx	*frontend = (t_rt_frontend_mlx *)self->data;
-
-	toc_engine_await(frontend->engine);
+	rt_error(rt, "exiting with status %d", status);
+	rt_destroy(rt);
+	exit(status);
 }

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:02:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 21:37:36 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 05:49:33 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_rt_frontend	*rt_frontend_mlx_provider(t_rt *rt, const char *name,
 	frontend.width = width;
 	frontend.height = height;
 	frontend.init = rt_frontend_mlx_init;
-	frontend.destroy = rt_frontend_mlx_destroy;
 	frontend.handoff = rt_frontend_mlx_handoff;
+	frontend.stop = rt_frontend_mlx_stop;
+	frontend.destroy = rt_frontend_mlx_destroy;
 	return (&frontend);
 }
