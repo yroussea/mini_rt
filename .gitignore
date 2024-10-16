@@ -12,3 +12,4 @@
 compile_commands.json
 /valgrind.log*
 vgcore.*
+.build_daemon*

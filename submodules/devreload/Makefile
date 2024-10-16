@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/16 04:18:49 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 06:50:03 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC	=	backend/rt_devrl_backend_setup.c \
 		frontend/rt_devrl_frontend_setup.c \
 	  	frontend/rt_devrl_load_frontend.c \
 	  	rt_devrl_ctor.c \
-		rt_devrl_dtor.c
+		rt_devrl_dtor.c \
+		rt_devrl_recompile.c
 
 include ../submodule.mk
 

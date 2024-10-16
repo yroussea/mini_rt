@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/16 04:10:26 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 07:07:43 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,21 @@ EXTRA_LDFLAGS += $(DEPS_TARGETS)
 
 
 
+### Build daemon config ###
+
+DAEMON_SCRIPT = build_daemon.sh
+DAEMON_TARGET_FILE := $(PWD)/.build_daemon.payload
+DAEMON_RETURN_FILE := $(PWD)/.build_daemon.ret
+DAEMON_KILL_FILE := $(PWD)/.build_daemon.kill
+DAEMON_ALIVE_FILE := $(PWD)/.build_daemon.alive
+DAEMON_ACK_FILE := $(PWD)/.build_daemon.ack
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_PAYLOAD_FILE="\"$(DAEMON_TARGET_FILE)\""'
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_RETURN_FILE="\"$(DAEMON_RETURN_FILE)\""'
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_FILE="\"$(DAEMON_ALIVE_FILE)\""'
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_ACK_FILE="\"$(DAEMON_ACK_FILE)\""'
+
+
+
 ### Make Rules ###
 
 all: $(NAME)
@@ -133,6 +148,15 @@ re: fclean all
 remake: oclean
 	@$(MAKE) all -j
 
+kill_daemon:
+	@echo "[*] Killing daemon..."
+	@echo "KILL" > $(DAEMON_KILL_FILE)
+	@sleep 1
+
+daemon: kill_daemon
+	@echo "[*] Starting daemon..."
+	@bash ./$(DAEMON_SCRIPT) $(DAEMON_TARGET_FILE) $(DAEMON_RETURN_FILE) $(DAEMON_KILL_FILE) $(DAEMON_ALIVE_FILE) $(DAEMON_ACK_FILE) &
+
 valgrind: $(NAME)
 	@echo "[*] Running valgrind..."
 ifeq ($(USE_VALGRIND_LOGFILE), 1)
@@ -145,4 +169,4 @@ endif
 print_%:
 	@echo $($*)
 
-.PHONY: all deps _clean oclean clean fclean re remake print_% 
+.PHONY: all deps _clean oclean clean fclean re remake kill_daemon daemon valgrind print_% 
