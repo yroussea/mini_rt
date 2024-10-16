@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:53:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:51:13 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:26:55 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	rt_frontend_mlx_init(t_rt_frontend *self)
 {
 	t_rt_frontend_mlx	*data;
 
+	self->flags = FRONTEND_SUPPORT_UI | FRONTEND_SUPPORT_KEYBOARD
+		| FRONTEND_SUPPORT_MOUSE | FRONTEND_SUPPORT_RESIZE;
 	data = ft_calloc(1, sizeof(t_rt_frontend_mlx));
 	if (!data)
 		return (1);

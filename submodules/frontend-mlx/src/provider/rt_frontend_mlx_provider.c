@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:02:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:49:33 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:26:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_rt_frontend	*rt_frontend_mlx_provider(t_rt *rt, const char *name,
 
 	ft_memset(&frontend, 0, sizeof(t_rt_frontend));
 	frontend.rt = rt;
-	frontend.flags = FRONTEND_SUPPORT_UI | FRONTEND_SUPPORT_KEYBOARD
-		| FRONTEND_SUPPORT_MOUSE;
 	frontend.name = name;
 	frontend.width = width;
 	frontend.height = height;

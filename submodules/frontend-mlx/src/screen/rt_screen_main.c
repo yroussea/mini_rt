@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 06:18:11 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:22:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 	ctrl = screen->window->keymap[SDL_SCANCODE_LCTRL];
 	if (ctrl && key == SDL_SCANCODE_R)
 		rt_backend_reload(frontend->rt);
-	// if (ctrl && key == SDL_SCANCODE_I)
-	// 	rt_resize(frontend->rt, screen->width - 40, screen->height - 40);
-	// if (ctrl && key == SDL_SCANCODE_O)
-	// 	rt_resize(frontend->rt, screen->width + 40, screen->height + 40);
+	if (ctrl && key == SDL_SCANCODE_I)
+		rt_resize(frontend->rt, screen->width - 80, screen->height - 80);
+	if (ctrl && key == SDL_SCANCODE_O)
+		rt_resize(frontend->rt, screen->width + 80, screen->height + 80);
 	return (true);
 }
 
