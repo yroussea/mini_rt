@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 21:33:53 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:36:20 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # ifndef __RT_RENDER_BACKEND_RAYTRACER_H__
 #  define __RT_RENDER_BACKEND_RAYTRACER_H__
 
+#  include <rt/color.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/backend/raytracer/ray.h>
 
 typedef struct s_rt_backend_raytracer
 {
+	t_color	*buffer;
 }	t_rt_backend_raytracer;
 
 int				rt_backend_raytracer_init(t_rt_backend *self);

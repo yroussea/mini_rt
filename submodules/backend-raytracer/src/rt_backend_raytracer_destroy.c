@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:55:29 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 08:45:33 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:40:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	rt_backend_raytracer_destroy(t_rt_backend *backend)
 	data = (t_rt_backend_raytracer *)backend->data;
 	if (data)
 	{
+		if (data->buffer)
+			free(data->buffer);
 		free(data);
 		backend->data = NULL;
 	}
