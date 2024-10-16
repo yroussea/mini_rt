@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/16 06:09:07 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/16 18:30:20 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,6 @@ MAKE = make --debug=none --no-print-directory
 MAKE += -j$(shell nproc)
 CACHE_DIR ?= .cache
 
-DEVELOPMENT_MODE ?= 1
+DEVELOPMENT_MODE ?= 0
 USE_VALGRIND_LOGFILE ?= 0
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes -s --track-fds=no --suppressions=third-party/MacroLibX/valgrind.supp
