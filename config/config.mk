@@ -27,6 +27,6 @@ MAKE = make --debug=none --no-print-directory
 MAKE += -j$(shell nproc)
 CACHE_DIR ?= .cache
 
-DEVELOPMENT_MODE ?= 0
+DEVELOPMENT_MODE ?= 1
 USE_VALGRIND_LOGFILE ?= 0
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes -s --track-fds=no --suppressions=third-party/MacroLibX/valgrind.supp -q

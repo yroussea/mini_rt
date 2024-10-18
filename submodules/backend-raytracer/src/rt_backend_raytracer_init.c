@@ -24,5 +24,7 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
+	// ft_memset(data->buffer, 0xFF00FF00, self->width * self->height);
+	// ft_memsets(data->buffer, 0xFF00FF00, sizeof(t_color), self->width * self->height);
 	return (0);
 }
