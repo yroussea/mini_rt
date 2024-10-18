@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:52:39 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:55:18 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:27:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  include <stdbool.h>
 
 #  if FEAT_CLI_FLAGS
-#   define CLI_VALID_OPTS "hvVb:f:o:"
+#   define CLI_VALID_OPTS "hvVpb:f:o:"
 #   define CLI_ARG_OPTS "bfo"
 #  else
 #   define CLI_VALID_OPTS "hvV"

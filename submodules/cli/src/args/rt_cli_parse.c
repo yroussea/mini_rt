@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:55:10 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:26:11 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static int	rt_cli_parse_opt(t_rt *rt, t_opt_globals *globals, int opt)
 		return (rt_cli_parse_backend(rt, globals->optarg));
 	else if (opt == 'f')
 		return (rt_cli_parse_frontend(rt, globals->optarg));
+	else if (opt == 'p')
+		rt->flags.mode = RT_MODE_PARSER_TEST;
 	else if (opt == 'o')
 	{
 		rt->flags.mode = RT_MODE_RENDER_ONCE;

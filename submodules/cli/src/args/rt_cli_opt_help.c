@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:52:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:47:05 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:25:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@
 #include <unistd.h>
 
 #if FEAT_CLI_FLAGS
-# define CLI_USAGE "Usage: %s [-hvV] [-b <backend>] [-f <frontend>] \
-[-o <output_file>] [--] [<input_file.rt>]\n\
+# define CLI_USAGE "Usage: %s [-hvV] [-p] [-b <backend>] [-f <frontend>] \
+[-o <output_file>] [<input_file.rt>]\n\
 \n\
 \t-h                Display this help message.\n\
 \t-v                Display the version of the program.\n\
 \t-V                Increase the verbosity of the program,\n\
 \t                  can be used multiple times (max 3).\n\
+\t-p                Run the program in parser-test mode,\n\
+\t                  this is used for debugging.\n\
 \t-b <backend>      Set the render backend. Valid modes are:\n\
 \t                  %s\n\
 \t-f <frontend>     Set the frontend. Valid modes are:\n\
@@ -33,7 +35,6 @@
 \t-o <output_file>  Set the output file. If set, the program will run in\n\
 \t                  headless direct rendering mode, will render the scene to\n\
 \t                  the output file and exit.\n\
-\t--                Stop parsing flags.\n\
 \n\
 When no input file is specified, the program will run in application mode,\n\
 which will bring up the main application menu.\n\
@@ -42,13 +43,12 @@ If an input file is specified, the program will run in direct rendering mode,\n\
 and will render the scene in an editor window.\n\
 "
 #else
-# define CLI_USAGE "Usage: %s [-h] [-v] [-V] [--] <input_file.rt>\n\
+# define CLI_USAGE "Usage: %s [-h] [-v] [-V] <input_file.rt>\n\
 \n\
 \t-h                Display this help message.\n\
 \t-v                Display the version of the program.\n\
 \t-V                Increase the verbosity of the program,\n\
 \t                  can be used multiple times (max 3).\n\
-\t--                Stop parsing flags.\n\
 \n\
 When an input file is specified, the program will run in direct rendering mode,\n\
 and will render the scene in an editor window.\n\

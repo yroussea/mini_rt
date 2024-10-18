@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:54:24 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:26:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	main(int argc, const char **argv, const char **envp)
 		{
 			ret = rt_parse_wrap(&rt);
 			if (ret != 0)
+				return (ret);
+			if (rt.flags.mode == RT_MODE_PARSER_TEST)
 				return (ret);
 			rt_dump_state(&rt);
 			ret = rt_backend_init(&rt);
