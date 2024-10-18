@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/18 20:47:34 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/18 21:06:00 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,29 @@
 #define COEF_SPECULAR 0.5
 #define COEF_EXPOS_SPECULAR 5
 
-static float	phong_shading(t_ray ray, t_light *light, t_ray tmp, t_vec3d normal)
+static float	phong_shading(t_ray ray, t_light *light,
+					t_ray tmp, t_vec3d normal)
 {
 	t_vec3d	l;
 	t_vec3d	h;
 
 	l = ft_vec3d_norm(ft_vec3d_sub(light->point, tmp.center));
 	h = ft_vec3d_norm(ft_vec3d_sub(tmp.direction, ray.direction));
-	return (COEF_DIFFUSE * light->intensity * ft_fmax(0, ft_vec3d_dot(normal, l))\
-		+ COEF_SPECULAR * light->intensity * powf(ft_fmax(0, \
-		ft_vec3d_dot(normal, h)), COEF_EXPOS_SPECULAR));
+	return (COEF_DIFFUSE * light->intensity * ft_fmax(0,
+			ft_vec3d_dot(normal, l)) + COEF_SPECULAR * light->intensity
+		* powf(ft_fmax(0, ft_vec3d_dot(normal, h)), COEF_EXPOS_SPECULAR));
 }
 
+__always_inline
 static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 {
-	t_color	color;
+	const t_color	color = {
+		.r = 255 * ft_fmin(ft_fmax(0, light.x * obj_color.x), 1);
+		.g = 255 * ft_fmin(ft_fmax(0, light.y * obj_color.y), 1);
+		.b = 255 * ft_fmin(ft_fmax(0, light.z * obj_color.z), 1);
+		.a = 255,
+	};
 
-	color.r = 255 * ft_fmin(ft_fmax(0, light.x * obj_color.x), 1);
-	color.g = 255 * ft_fmin(ft_fmax(0, light.y * obj_color.y), 1);
-	color.b = 255 * ft_fmin(ft_fmax(0, light.z * obj_color.z), 1);
-	color.a = 255;
 	return (color);
 }
 
@@ -71,7 +74,8 @@ t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)
 	return (vec_to_color(color, obj_hit->colors));
 }
 
-void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit, t_ray *ray)
+void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
+			t_ray *ray)
 {
 	(void)objs;
 	ray->color = vec_to_color((t_vec3d){1,1,1}, obj_hit->colors);

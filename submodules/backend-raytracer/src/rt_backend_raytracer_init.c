@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 18:58:49 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/18 21:01:45 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
-	// ft_memset(data->buffer, 255, self->width * self->height * sizeof(t_color));
-	ft_memsets(data->buffer, 0xFFFFFFFF, self->width * self->height, sizeof(t_color));
+	ft_memsets(data->buffer, 0xFFFFFFFF, self->width * self->height,
+		sizeof(t_color));
 	return (0);
 }

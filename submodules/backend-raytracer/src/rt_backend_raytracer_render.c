@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 20:52:04 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/18 21:03:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@ t_color	rt_backend_raytracer_one_ray(t_ray ray, t_objs *all_objs)
 }
 
 //pixelisation!!
-t_objs	*tmp()
+t_objs	*tmp(void)
 {
-	return (plane((t_vec3d){0.5, 1, 0}, (t_vec3d){0, -20, 0}, (t_vec3d){0.2, 0.2, 0.2}));
+	return (plane((t_vec3d){0.5, 1, 0}, (t_vec3d){0, -20, 0},
+		(t_vec3d){0.2, 0.2, 0.2}));
 }
+
+#define FOV 90
 
 t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 {
 	const t_rt_backend_raytracer	*raytracer
 		= (t_rt_backend_raytracer *)backend->data;
-	size_t	y;
-	size_t	x;
-	t_ray	ray;
-	t_objs	*objs = NULL;
+	size_t							y;
+	size_t							x;
+	t_ray							ray;
+	t_objs							*objs;
 
 	y = 0;
 	objs = tmp();
@@ -48,7 +51,7 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 		x = 0;
 		while (x < backend->width)
 		{
-			eye_rays(&ray, get_width(backend, x, /*fov*/ 90), get_height(backend, y));
+			eye_rays(&ray, get_width(backend, x, FOV), get_height(backend, y));
 			raytracer->buffer[y * backend->width + x] = \
 				rt_backend_raytracer_one_ray(ray, objs);
 			x++;
