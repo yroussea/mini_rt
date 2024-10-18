@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 16:36:20 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 20:07:05 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #  include <rt/color.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/backend/raytracer/ray.h>
+#  include <rt/render/backend/raytracer/objs.h>
+
+#  define EPSILON 1e-2
 
 typedef struct s_rt_backend_raytracer
 {
@@ -31,6 +34,9 @@ t_color			*rt_backend_raytracer_render(t_rt_backend *self);
 
 t_rt_backend	*rt_backend_raytracer_provider(t_rt *rt, const char *name,
 					size_t width, size_t height);
+
+void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit, t_ray *ray);
+float	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs, t_objs **hit);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_H__
 #endif // RAYTRACER_H
