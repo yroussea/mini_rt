@@ -6,14 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:26:06 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:31:12 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:50:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define __RT_LOG_INTERNAL__
 #include <rt/log.h>
 
-void	rt_trace(t_rt *rt, const char *fmt, ...)
+void	rt_trace(const t_rt *rt, const char *fmt, ...)
 {
 	va_list	args;
 

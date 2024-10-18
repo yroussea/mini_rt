@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 03:50:28 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:55:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static int	rt_cli_parse_flags(t_rt *rt, t_opt_globals *globals,
 	return (ret);
 }
 
-int	rt_cli_parse(t_rt *rt, int argc, char **argv)
+int	rt_cli_parse(t_rt *rt, int argc, const char **argv)
 {
 	t_opt_globals	globals;
 	t_opt_args		args;
@@ -133,7 +133,7 @@ int	rt_cli_parse(t_rt *rt, int argc, char **argv)
 		}
 		return (CLI_EXIT_SUCCESS);
 	}
-	args = ft_opt_args(argc, argv, OPT_BASH_LIKE, CLI_VALID_OPTS);
+	args = ft_opt_args(argc, (char **)argv, OPT_BASH_LIKE, CLI_VALID_OPTS);
 	globals = ft_opt_globals();
 	globals.opterr = 0;
 	ret = rt_cli_parse_flags(rt, &globals, &args);

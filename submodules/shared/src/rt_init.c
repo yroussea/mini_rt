@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:03:45 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 07:14:31 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:53:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #define RT_DEFAULT_WIDTH	1280
 #define RT_DEFAULT_HEIGHT	720
 
-static const char	*rt_getenv(const char *name, char **envp)
+static const char	*rt_getenv(const char *name, const char **envp)
 {
 	size_t	i;
 	size_t	len;
@@ -39,7 +39,7 @@ static const char	*rt_getenv(const char *name, char **envp)
 	return (NULL);
 }
 
-static int	rt_flags_init(t_rt *rt, char **envp)
+static int	rt_flags_init(t_rt *rt, const char **envp)
 {
 	const char	*env = rt_getenv("RT_VERBOSITY", envp);
 
@@ -64,8 +64,8 @@ static int	rt_flags_init(t_rt *rt, char **envp)
 int	rt_init(
 	t_rt *rt,
 	__attribute__((unused)) int argc,
-	__attribute__((unused)) char **argv,
-	char **envp
+	__attribute__((unused)) const char **argv,
+	const char **envp
 ) {
 	ft_memset(rt, 0, sizeof(t_rt));
 	rt->executable = argv[0];

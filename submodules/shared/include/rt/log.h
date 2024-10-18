@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:34:20 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 03:38:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:49:52 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ enum e_rt_log_level
  * @param fmt The format string.
  * @param args The arguments.
  */
-void	rt_vlog(t_rt *rt, enum e_rt_log_level level, const char *fmt,
+void	rt_vlog(const t_rt *rt, enum e_rt_log_level level, const char *fmt,
 			va_list args);
 
 #  endif // __RT_LOG_INTERNAL__
@@ -57,7 +57,7 @@ void	rt_vlog(t_rt *rt, enum e_rt_log_level level, const char *fmt,
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_log(t_rt *rt, enum e_rt_log_level level, const char *fmt, ...)
+void	rt_log(const t_rt *rt, enum e_rt_log_level level, const char *fmt, ...)
 		__attribute__((format(printf, 3, 4)));
 
 /**
@@ -67,7 +67,7 @@ void	rt_log(t_rt *rt, enum e_rt_log_level level, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_trace(t_rt *rt, const char *fmt, ...)
+void	rt_trace(const t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 /**
@@ -77,7 +77,7 @@ void	rt_trace(t_rt *rt, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_debug(t_rt *rt, const char *fmt, ...)
+void	rt_debug(const t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 /**
@@ -87,7 +87,7 @@ void	rt_debug(t_rt *rt, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_info(t_rt *rt, const char *fmt, ...)
+void	rt_info(const t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 /**
@@ -97,7 +97,7 @@ void	rt_info(t_rt *rt, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_warn(t_rt *rt, const char *fmt, ...)
+void	rt_warn(const t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 /**
@@ -107,7 +107,7 @@ void	rt_warn(t_rt *rt, const char *fmt, ...)
  * @param fmt The format string.
  * @param ... The arguments.
  */
-void	rt_error(t_rt *rt, const char *fmt, ...)
+void	rt_error(const t_rt *rt, const char *fmt, ...)
 		__attribute__((format(printf, 2, 3)));
 
 #  ifndef RT_DEBUG_PREFIX

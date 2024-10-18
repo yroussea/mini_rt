@@ -6,14 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:26:00 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/13 03:29:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:50:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define __RT_LOG_INTERNAL__
 #include <rt/log.h>
 
-void	rt_log(t_rt *rt, enum e_rt_log_level level, const char *fmt, ...)
+void	rt_log(const t_rt *rt, enum e_rt_log_level level, const char *fmt, ...)
 {
 	va_list	args;
 

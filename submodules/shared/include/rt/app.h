@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:36:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 06:02:26 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:54:00 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_rt_app
 	t_rt_backend	*backend;
 }	t_rt;
 
-int		rt_init(t_rt *rt, int argc, char **argv, char **envp);
+int		rt_init(t_rt *rt, int argc, const char **argv, const char **envp);
 void	rt_destroy(t_rt *rt);
 void	rt_exit(t_rt *rt, int exit_code);
 

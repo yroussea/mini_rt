@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser.c                                        :+:      :+:    :+:   */
+/*   rt_parse_is_err.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 13:39:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/12 03:42:25 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/18 01:58:46 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/18 01:58:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/parser.h>
-#include <stdio.h>
+#include <rt/parser/error.h>
 
-void	rt_test(void)
+bool	rt_parse_is_err(t_rt_parse_error err)
 {
-	printf("test\n");
+	return (!rt_parse_is_ok(err));
 }

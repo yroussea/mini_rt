@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:12:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 01:40:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:02:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 #  define FEAT_APPLICATION 0
 
 // Allows the user to pass flags to the CLI to change the behavior of the
-// application.
+// program.
 #  define FEAT_CLI_FLAGS 1
+
+// Allows .cub files to be parsed, because why not.
+#  define FEAT_CUB_PARSER 0
 
 # endif // __RT_FEATURES_H__
 #endif // FEATURES_RT_H

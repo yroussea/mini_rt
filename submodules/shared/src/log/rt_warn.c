@@ -6,14 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:45:41 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 04:59:51 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:50:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define __RT_LOG_INTERNAL__
 #include <rt/log.h>
 
-void	rt_warn(t_rt *rt, const char *fmt, ...)
+void	rt_warn(const t_rt *rt, const char *fmt, ...)
 {
 	va_list	args;
 

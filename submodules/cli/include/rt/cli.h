@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:52:39 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 05:46:37 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:55:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #  define CLI_EXIT_SUCCESS	1
 #  define CLI_EXIT_FAILURE	2
 
-int		rt_cli_parse(t_rt *rt, int argc, char **argv);
+int		rt_cli_parse(t_rt *rt, int argc, const char **argv);
 void	rt_cli_opt_help(t_rt *rt);
 void	rt_cli_opt_version(t_rt *rt);
 

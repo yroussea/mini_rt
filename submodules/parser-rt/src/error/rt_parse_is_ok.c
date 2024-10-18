@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_debug.c                                         :+:      :+:    :+:   */
+/*   rt_parse_is_ok.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 02:45:20 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:50:01 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/10/18 01:58:35 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/10/18 01:58:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define __RT_LOG_INTERNAL__
-#include <rt/log.h>
+#include <rt/parser/error.h>
 
-void	rt_debug(const t_rt *rt, const char *fmt, ...)
+bool	rt_parse_is_ok(t_rt_parse_error err)
 {
-	va_list	args;
-
-	va_start(args, fmt);
-	rt_vlog(rt, RT_LOG_DEBUG, fmt, args);
-	va_end(args);
+	return (err.type == PARSE_ERR_OK);
 }

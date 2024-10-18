@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:19:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/14 06:36:13 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:50:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static const char	*rt_log_colors(enum e_rt_log_level level)
 	return (colors[level]);
 }
 
-void	rt_vlog(t_rt *rt, enum e_rt_log_level level, const char *fmt,
+void	rt_vlog(const t_rt *rt, enum e_rt_log_level level, const char *fmt,
 		va_list args)
 {
 	char	*msg;
