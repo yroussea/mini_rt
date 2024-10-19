@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/19 12:00:18 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 12:08:17 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 		while (x < backend->width)
 		{
 			eye_rays(&ray, get_width(backend, x, FOV), get_height(backend, y));
-			raytracer->buffer[y * backend->width + x] = \
-				rt_backend_raytracer_one_ray(ray, objs);
+			// raytracer->buffer[y * backend->width + x] = \
+			// 	rt_backend_raytracer_one_ray(ray, objs);
+			raytracer->buffer[y * backend->width + x] = (t_color){.b=255,.r=0,.g=0,.a=255};
 			x++;
 		}
 		y++;
