@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 10:10:26 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:14:30 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ __always_inline
 static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 {
 	const t_color	color = {
-		.r = 255 * ft_fmin(ft_fmax(0, light.x * obj_color.x), 1),
-		.g = 255 * ft_fmin(ft_fmax(0, light.y * obj_color.y), 1),
-		.b = 255 * ft_fmin(ft_fmax(0, light.z * obj_color.z), 1),
 		.a = 255,
+		.r = 255 * ft_fmin(ft_fmax(0, light.z * obj_color.z), 1),
+		.g = 255 * ft_fmin(ft_fmax(0, light.y * obj_color.y), 1),
+		.b = 255 * ft_fmin(ft_fmax(0, light.x * obj_color.x), 1),
 	};
 
 	return (color);
