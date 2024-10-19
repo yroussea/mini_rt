@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 11:55:36 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/20 00:03:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static float	closer(float t1, float t2)
+float	closer(float t1, float t2)
 {
 	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
 		return (t1);

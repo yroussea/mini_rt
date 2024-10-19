@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 17:54:10 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/20 00:03:13 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static bool	valid_cyl_inter(float t, t_ray ray, t_cylinder *cy, float *t_plane)
 	}
 	return (1);
 }
+
+float	closer(float t1, float t2);
 
 static float	passing_through(t_ray ray, t_cylinder *cy)
 {
