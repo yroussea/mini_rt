@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 02:28:33 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 02:37:26 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <ft/math/vector.h>
 #include <math.h>
 
-float	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs,
+double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs,
 			t_objs **hit)
 {
-	float	distance_min;
-	float	distance;
+	double	distance_min;
+	double	distance;
 
 	distance_min = INFINITY;
 	while (objs)

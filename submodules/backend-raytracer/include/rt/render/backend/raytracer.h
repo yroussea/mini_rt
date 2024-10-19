@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/19 02:33:43 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 02:38:24 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ t_color			*rt_backend_raytracer_render(t_rt_backend *self);
 t_rt_backend	*rt_backend_raytracer_provider(t_rt *rt, const char *name,
 					size_t width, size_t height);
 
-void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit, t_ray *ray);
-float	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs, t_objs **hit);
+void			rt_backend_raytracer_get_shading(t_objs *objs,
+					t_objs *obj_hit, t_ray *ray);
+double			rt_backend_raytracer_find_obj_hit(t_ray *ray,
+					t_objs *objs, t_objs **hit);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_H__
 #endif // RAYTRACER_H
