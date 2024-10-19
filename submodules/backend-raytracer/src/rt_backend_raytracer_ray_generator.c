@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 10:01:46 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 12:03:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 #include <math.h>
 
 //a normre + ajouter camera dependent var + renomer fonction
-static float	get_oposite(char fov)
-{
-	float x = atan(fov / 2.);
-	return (x);
-}
-
 void	eye_rays(t_ray *ray, float u, float v/*, t_camera (rotation et pos)*/)
 {
 	ray->direction = /* get_rotation */(t_vec3d){u, v, 1};
@@ -29,7 +23,7 @@ void	eye_rays(t_ray *ray, float u, float v/*, t_camera (rotation et pos)*/)
 
 float	get_width(t_rt_backend *backend, float x, char fov)
 {
-	return (-get_oposite(fov) + (2 * get_oposite(fov)) * (x) / backend->width);
+	return (-get_oposite(fov) + (2 * atan(fov / 2.)) * (x) / backend->width);
 }
 
 float	get_height(t_rt_backend *backend, float y)

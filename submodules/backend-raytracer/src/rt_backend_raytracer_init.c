@@ -6,14 +6,15 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 21:01:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:55:51 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/render/backend/raytracer.h>
 
-static void	*ft_memsets(void *s, uint64_t c, size_t n, uint8_t size)
+//go libft, je m en sert meme plus
+void	*ft_memsets(void *s, uint64_t c, size_t n, uint8_t size)
 {
 	uint8_t	*ptr;
 	uint8_t	value[4];
@@ -43,7 +44,5 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
-	ft_memsets(data->buffer, 0xFFFFFFFF, self->width * self->height,
-		sizeof(t_color));
 	return (0);
 }

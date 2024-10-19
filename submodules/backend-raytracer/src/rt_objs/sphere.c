@@ -6,11 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 09:51:43 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:55:36 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/math.h>
+#include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
 #include <math.h>
@@ -44,14 +45,14 @@ t_vec3d	get_sphere_normal(t_ray ray, void *obj)
 	return (v3d_norm(v3d_sub(ray.hit_point, (*(t_sphere *)obj).center)));
 }
 
-t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors)
+t_objs	*sphere(t_vec3d center, float diameter, t_vec3d colors)
 {
 	t_objs		*new;
 	t_sphere	*sph;
 
 	sph = malloc(sizeof(t_sphere));
-	sph->rayon = rayon;
-	sph->dot_production_rayon = rayon * rayon;
+	sph->rayon = diameter / 2;
+	sph->dot_production_rayon = sph->rayon * sph->rayon;
 	sph->center = center;
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;

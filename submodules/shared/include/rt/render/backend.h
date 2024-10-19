@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:57:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 05:27:50 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:59:13 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_rt_backend
 
 	size_t		width;
 	size_t		height;
+	uint8_t		pixel_size;
 
 	int			(*init)(struct s_rt_backend *self);
 	void		(*destroy)(struct s_rt_backend *self);

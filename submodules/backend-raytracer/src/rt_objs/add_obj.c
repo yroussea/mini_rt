@@ -6,11 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 09:59:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:41:47 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/math.h>
+#include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
 
