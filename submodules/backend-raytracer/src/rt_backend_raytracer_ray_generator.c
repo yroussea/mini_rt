@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 12:06:20 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:43:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	eye_rays(t_ray *ray, float u, float v/*, t_camera (rotation et pos)*/)
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 0};
 }
 
-float	get_width(t_rt_backend *backend, float x, char fov)
+float	get_width(t_rt_backend *backend, float x, float fov)
 {
 	return (-atan(fov / 2.) + (2 * atan(fov / 2.)) * (x) / backend->width);
 }

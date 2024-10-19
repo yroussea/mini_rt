@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 11:32:39 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:54:10 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-//compliquer a trouver un nom coherant dans la libft, mais sa me sere pls fois
-//pour l instant je met en static pour chaque
-static float	closer(float t1, float t2)
-{
-	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
-		return (t1);
-	return (t2);
-}
-
-//a mettre dans libft/math?
-static bool	quad(t_vec3d param, float *x1, float *x2)
-{
-	float	delta;
-
-	delta = powf(param.y, 2) - 4 * param.x * param.z;
-	if (delta < 0)
-		return (0);
-	delta = sqrtf(delta);
-	*x1 = (-param.y + delta) / (2 * param.x);
-	*x2 = (-param.y - delta) / (2 * param.x);
-	return (1);
-}
-
-static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, float *t1, float *t2)
+static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *t1, double *t2)
 {
 	t_vec3d		param;
 	t_vec3d		x;
@@ -54,7 +31,7 @@ static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, float *t1, float *t2)
 	param.x = var[3] - powf(var[4], 2);
 	param.y = 2 * (var[2] - var[4] * var[1]);
 	param.z = var[0] - powf(var[1], 2) - cy->sq_radius;
-	if (!quad(param, t1, t2))
+	if (!v3d_quadr(param, t1, t2))
 		return (0);
 	if (*t1 < EPSILON && *t2 < EPSILON)
 		return (0);
@@ -98,8 +75,8 @@ static float	passing_through(t_ray ray, t_cylinder *cy)
 float	cyl_inter(t_ray ray, void *obj)
 {
 	t_cylinder	*cy;
-	float		t1;
-	float		t2;
+	double		t1;
+	double		t2;
 	float		t_plane;
 
 	cy = obj;
@@ -112,10 +89,12 @@ float	cyl_inter(t_ray ray, void *obj)
 	if (t1 < 0 && t2 < 0)
 		return (passing_through(ray, cy));
 	if (t1 < 0)
-		return (closer(t2, t_plane));
+		t1 = t_plane;
 	if (t2 < 0)
-		return (closer(t1, t_plane));
-	return (closer(t1, t2));
+		t2 = t_plane;
+	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
+		return (t1);
+	return (t2);
 }
 
 t_vec3d	get_cyl_normal(t_ray ray, void *obj)
