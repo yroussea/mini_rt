@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 20:07:05 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 02:33:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # ifndef __RT_RENDER_BACKEND_RAYTRACER_H__
 #  define __RT_RENDER_BACKEND_RAYTRACER_H__
 
-#  include <rt/color.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/backend/raytracer/ray.h>
 #  include <rt/render/backend/raytracer/objs.h>
