@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/18 20:52:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:00:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #  include <ft/math/vector.h>
 #  include <rt/color.h>
+#  include <rt/render/backend/raytracer/ray.h>
 
 typedef struct s_plane
 {
@@ -74,8 +75,16 @@ typedef struct s_objs
 	struct s_objs	*next;
 }				t_objs;
 
+//les objs seront pas a faire spown dans le backend !! temporaire uniquement
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_vec3d colors);
 float	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point);
+t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, float diam, t_vec3d colors);
+t_objs	*sphere(t_vec3d center, float rayon, t_vec3d colors);
+t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color);
+t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov);
+t_objs	*add_objects(t_objs *new);
+
+
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_OBJS_H__
 #endif // OBJS_H

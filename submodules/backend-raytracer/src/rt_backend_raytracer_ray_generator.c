@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 02:28:33 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:01:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ float	get_width(t_rt_backend *backend, float x, char fov)
 
 float	get_height(t_rt_backend *backend, float y)
 {
-	return (-1 + 2 * (backend->width - 1 - y) / backend->height);
+	return (-1 + 2 * (backend->height - 1 - y) / backend->height);
 }

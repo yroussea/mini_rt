@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 02:29:02 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:10:26 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define COEF_SPECULAR 0.5
 #define COEF_EXPOS_SPECULAR 5
 
+__always_inline
 static float	phong_shading(t_ray ray, t_light *light,
 					t_ray tmp, t_vec3d normal)
 {
@@ -46,7 +47,8 @@ static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 	return (color);
 }
 
-t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)
+__always_inline
+static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)
 {
 	t_ray	tmp;
 	t_vec3d	color;
@@ -77,8 +79,6 @@ t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)
 void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
 			t_ray *ray)
 {
-	(void)objs;
-	ray->color = vec_to_color((t_vec3d){1,1,1}, obj_hit->colors);
-	// ray->color = shading(objs, ray, obj_hit, \
-					// obj_hit->get_normal(*ray, obj_hit->obj));
+	ray->color = shading(objs, ray, obj_hit, \
+					obj_hit->get_normal(*ray, obj_hit->obj));
 }

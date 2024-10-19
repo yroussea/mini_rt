@@ -6,10 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 21:03:37 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:10:24 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/render/backend/raytracer/objs.h"
 #include <rt/render/backend/raytracer.h>
 #include <math.h>
 
@@ -23,15 +24,27 @@ t_color	rt_backend_raytracer_one_ray(t_ray ray, t_objs *all_objs)
 	return (ray.color);
 }
 
-//pixelisation!!
+//parsing
 t_objs	*tmp(void)
 {
-	return (plane((t_vec3d){0.5, 1, 0}, (t_vec3d){0, -20, 0},
-		(t_vec3d){0.2, 0.2, 0.2}));
+
+	add_objects(plane((t_vec3d){0, 1, 0}, (t_vec3d){0, -50, 0}, (t_vec3d){0.2, 0.2, 0.2}));
+	add_objects(sphere((t_vec3d){40, 0, 0}, 25, (t_vec3d){1, 0, 0}));
+	add_objects(cylinder((t_vec3d){0, 0, -20}, (t_vec3d){0, 1, 1}, 25, 25, (t_vec3d){0, 1, 0}));
+
+	add_objects(light((t_vec3d){0}, 0.1, AMBIANCE_LIGHT,(t_vec3d){1, 1, 1}));
+
+	add_objects(camera((t_vec3d){0, 0, -100}, (t_vec3d){0, 0, 1}, 179));
+	add_objects(light((t_vec3d){10, 100, 0}, 1, POINT_LIGHT, (t_vec3d){1, 1, 1}));
+	add_objects(light((t_vec3d){0, 100, 0}, 1, POINT_LIGHT, (t_vec3d){1, 1, 1}));
+	add_objects(light((t_vec3d){-10, 100, 0}, 1, POINT_LIGHT, (t_vec3d){1, 1, 1}));
+
+	return (add_objects(NULL));
 }
 
 #define FOV 90
 
+//pixelisation!!
 t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 {
 	const t_rt_backend_raytracer	*raytracer
@@ -43,7 +56,6 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 
 	y = 0;
 	objs = tmp();
-	objs->next = NULL;
 	// ray.center = first cam
 	ray.center = (t_vec3d){0, 0, -100};
 	while (y < backend->height)
