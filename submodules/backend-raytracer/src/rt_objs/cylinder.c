@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/21 02:21:12 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:45:34 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_vec3d	get_cyl_normal(t_ray ray, void *obj)
 	if (m <= EPSILON)
 		return (v3d_sub((t_vec3d){0, 0, 0}, cy->axis));
 	a = v3d_add(cy->center, v3d_mult(cy->axis, m));
+	//doit deprendre si interieur ou exterieur
 	return (v3d_norm(v3d_sub(ray.hit_point, a)));
 }
 

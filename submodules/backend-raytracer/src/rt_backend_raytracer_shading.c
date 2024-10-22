@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/21 16:53:00 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:33:43 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
 {
 	ray->color = shading(objs, ray, obj_hit, \
 					obj_hit->get_normal(*ray, obj_hit->obj));
+	// ray->color = vec_to_color(obj_hit->colors, (t_vec3d){1,1,1});
 }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/21 16:52:59 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:40:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ static bool	val_cone_inter(float t, t_ray ray, t_cone *cone)
 	t_vec3d	x;
 	float	dot;
 
+	if (t < EPSILON)
+		return (INFINITY);
 	hit = v3d_add(ray.point, v3d_mult(ray.direction, t));
 	x = v3d_sub(hit, cone->center);
 	dot = v3d_dot(v3d_norm(x), cone->axis);
-	// printf("%f\n", dot);
 	if (dot < 0)
 		return (0);
 	if (v3d_len(v3d_sub(hit, cone->center)) > cone->max_dist)
@@ -68,16 +69,15 @@ static float	plane_bottom_cone(t_ray ray, t_cone *cone)
 	bottom = v3d_add(cone->center, v3d_mult(cone->axis, cone->height));
 	plane = plane_intersect(ray, cone->axis, bottom);
 	if (plane < 0)
-		return (-1);
+		return (INFINITY);
 	hit = v3d_add(ray.point, v3d_mult(ray.direction, plane));
 	if (v3d_len(v3d_sub(bottom, hit)) > cone->height * tan(cone->theta))
-		return (-1);
+		return (INFINITY);
 	return (plane);
 }
 
 float	cone_inter(t_ray ray, void *obj)
 {
-	//marche pas tous court??
 	t_cone	*cone;
 	double	t1;
 	double	t2;
@@ -86,17 +86,12 @@ float	cone_inter(t_ray ray, void *obj)
 	if (!infinite_cone_inter(ray, cone, &t1, &t2))
 		return (plane_bottom_cone(ray, cone));
 	if (!val_cone_inter(t1, ray, cone))
-		t1 = -1;
+		t1 = INFINITY;
 	if (!val_cone_inter(t2, ray, cone))
-		t2 = -1;
-	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
-		t1 = plane_bottom_cone(ray, cone);
-	else
-		t2 = plane_bottom_cone(ray, cone);
-	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
-		t2 = t1;
-	return (t2);
+		t2 = INFINITY;
+	return (ft_fmin(t1, ft_fmin(t2, plane_bottom_cone(ray, cone))));
 }
+
 
 t_vec3d	get_cone_normal(t_ray ray, void *obj)
 {
@@ -106,11 +101,15 @@ t_vec3d	get_cone_normal(t_ray ray, void *obj)
 	t_vec3d		a;
 	t_vec3d		v;
 
+
 	cone = obj;
+	if (v3d_dot(v3d_norm(v3d_sub(ray.hit_point, cone->center)), cone->axis) < 0)
+		return (v3d_mult(cone->axis, -ft_fsign(v3d_dot(ray.direction, cone->axis))));
 	m = v3d_len(v3d_sub(ray.hit_point, cone->center)) / cone->cos;
 	a = v3d_add(cone->center, v3d_mult(cone->axis, m));
 	v = v3d_norm(v3d_sub(ray.hit_point, a));
-	return (v);
+	//doit deprendre si interieur ou exterieur	t_vec3d	hit;
+	return (v3d_mult(v, -ft_fsign(v3d_dot(ray.direction, v))));
 }
 
 t_objs	*cone(t_vec3d coo, t_vec3d vector, float height, float theta, t_vec3d colors)
