@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/19 09:54:11 by yroussea         ###   ########.fr        #
+#    Updated: 2024/10/21 01:38:52 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  rt_objs/plane.c \
 	  rt_objs/sphere.c \
 	  rt_objs/cylinder.c \
+	  rt_objs/cone.c \
 	  rt_objs/add_obj.c
 
 include ../submodule.mk

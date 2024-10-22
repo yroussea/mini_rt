@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 11:45:16 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/21 01:41:02 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ typedef struct s_cylinder
 	t_vec3d		top_center;
 	float		sq_radius;
 }				t_cylinder;
+
+typedef struct s_cone
+{
+	t_vec3d		center;
+	t_vec3d		axis;
+	float		height;
+	float		theta;
+	float		max_dist;
+	float		cos;
+}				t_cone;
 
 typedef struct s_light
 {
@@ -82,6 +92,7 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, float diam, t_vec3d 
 t_objs	*sphere(t_vec3d center, float diameter, t_vec3d colors);
 t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color);
 t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov);
+t_objs	*cone(t_vec3d coo, t_vec3d vector, float height, float theta, t_vec3d colors);
 t_objs	*add_objects(t_objs *new);
 
 

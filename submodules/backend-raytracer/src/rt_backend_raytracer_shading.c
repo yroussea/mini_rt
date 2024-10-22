@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 15:14:30 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:53:00 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 
 	return (color);
 }
+
+#include <stdio.h>
 
 __always_inline
 static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)

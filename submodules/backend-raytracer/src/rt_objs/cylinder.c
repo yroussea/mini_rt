@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/20 00:03:13 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/21 02:21:12 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ float	cyl_inter(t_ray ray, void *obj)
 	double		t2;
 	float		t_plane;
 
+	t_plane = -1;
 	cy = obj;
 	if (!infinite_cyl_inter(ray, obj, &t1, &t2))
 		return (passing_through(ray, cy));
