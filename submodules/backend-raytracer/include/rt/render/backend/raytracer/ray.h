@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:51:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/19 16:40:18 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/25 00:55:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_ray
 	t_color	color;
 }	t_ray;
 
-void	eye_rays(t_ray *ray, float u, float v);
-float	get_width(t_rt_backend *backend, float x, float fov);
+void	eye_rays(t_ray *ray, float u, float v, float fov);
+float	get_width(t_rt_backend *backend, float x);
 float	get_height(t_rt_backend *backend, float y);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_RAY_H__
