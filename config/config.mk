@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/18 17:27:32 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/26 02:13:52 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,13 @@ LIB_SUFFIX = .rt.so
 EXEC_SUFFIX = .out
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4 -fPIC
+CFLAGS = -Wall -Wextra -g -gdwarf-4 -fPIC -fno-plt -fno-stack-protector
+# CFLAGS += -Werror
 DFLAGS = -MT $@ -MMD -MP -MF $(MKDEPS_DIR)/$*.tmp.d
-LDFLAGS = -lm -lSDL2
+LDFLAGS = -lm -lSDL2 -fPIC -fno-plt
+
+NASM = nasm
+NASMFLAGS = -f elf64
 
 MAKE = make --debug=none --no-print-directory
 MAKE += -j$(shell nproc)

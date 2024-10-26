@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/26 02:05:29 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 02:38:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
 
-t_vec3d	get_plane_normal(t_ray ray, void *obj)
+static t_vec3d	get_plane_normal(t_ray ray, void *obj)
 {
 	const t_plane	*plane = (t_plane *)obj;
 

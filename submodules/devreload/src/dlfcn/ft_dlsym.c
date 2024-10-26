@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:46:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 03:43:48 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:57:38 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void	*ft_dlsym(void *handle, const char *symbol)
 		return (NULL);
 	if ((sym->st_info & 0xf) == STT_GNU_IFUNC)
 		return (NULL);
+	RT_DEBUG("symbol %s found at %p\n", symbol, handle + sym->st_value);
 	return (handle + sym->st_value);
 }

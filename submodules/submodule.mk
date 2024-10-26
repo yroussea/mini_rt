@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:53:08 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/14 03:25:42 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/26 01:57:50 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,8 +61,8 @@ OBJ_DIR = $(PROJ_CACHE_DIR)/obj
 MKDEPS_DIR = $(PROJ_CACHE_DIR)/makedeps
 SELF_DEP = $(MKDEPS_DIR)/_module.d
 
-OBJ 	:= $(SRC:%.c=%.o)
-MKDEPS	:= $(SRC:%.c=%.d)
+OBJ 	:= $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(SRC)))
+MKDEPS	:= $(patsubst %.c,%.d,$(patsubst %.s,,$(SRC)))
 SRC 	:= $(addprefix $(SRC_DIR)/,$(SRC))
 OBJ 	:= $(addprefix $(OBJ_DIR)/,$(OBJ))
 MKDEPS	:= $(addprefix $(MKDEPS_DIR)/,$(MKDEPS))
@@ -81,6 +81,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $(MKDEPS_DIR)/$*)
 	@echo "<$(NAME)> Compiling $<"
 	@$(CC) $(CFLAGS) $(DFLAGS) -c $(PWD)/$< -o $@
+	@echo "$(PWD)/$<:" >> $(MKDEPS_DIR)/$*.tmp.d
+	@# dumb fixes, see https://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
+	@mv -f $(MKDEPS_DIR)/$*.tmp.d $(MKDEPS_DIR)/$*.d
+	@touch $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
+	@mkdir -p $(dir $@)
+	@echo "<$(NAME)> Assembling $<"
+	@$(NASM) $(NASMFLAGS) -o $@ $<
 	@echo "$(PWD)/$<:" >> $(MKDEPS_DIR)/$*.tmp.d
 	@# dumb fixes, see https://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
 	@mv -f $(MKDEPS_DIR)/$*.tmp.d $(MKDEPS_DIR)/$*.d

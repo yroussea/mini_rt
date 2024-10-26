@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 03:38:54 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:39:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:26:58 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int	rt_backend_init(t_rt *rt)
 			rt->flags.backend);
 		return (1);
 	}
+	rt_trace(rt, "initializing backend\n");
 	if (rt->backend == NULL || rt->backend->init(rt->backend))
 	{
 		rt_error(rt, "failed to initialize backend\n");
 		return (1);
 	}
+	rt_trace(rt, "successfully initialized backend\n");
 	rt->queued_frontend = rt->flags.frontend;
 	return (0);
 }
