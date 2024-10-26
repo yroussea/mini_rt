@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/19 11:41:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:40:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
 
-t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
+t_vec3d	get_colors_light(t_ray ray, void *obj)
+{
+	const	t_objs	*light = (t_objs *)obj;
+
+	(void)ray;
+	return (light->material.colors);
+}
+
+#include <stdio.h>
+t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color)
 {
 	t_objs	*new;
 	t_light	*light;
@@ -26,12 +35,13 @@ t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color)
 	light->intensity = intensity;
 	new = malloc(sizeof(t_objs));
 	new->obj = light;
-	new->colors = color;
+	new->material = (t_material){COLOR, color};
+	new->get_colors = get_colors_light;
 	new->type = type;
 	return (new);
 }
 
-t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov)
+t_objs	*camera(t_vec3d coo, t_vec3d view_vector, double fov)
 {
 	t_objs		*new;
 	t_camera	*cam;

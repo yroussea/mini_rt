@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/21 01:41:02 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:13:43 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,49 +25,51 @@ typedef struct s_plane
 	t_vec3d	obj;
 	t_vec3d	point;
 	t_vec3d	normal;
+	t_vec3d	vec_udir;
+	t_vec3d	vec_vdir;
 }				t_plane;
 
 typedef struct s_cylinder
 {
 	t_vec3d		center;
 	t_vec3d		axis;
-	float		diameter;
-	float		height;
+	double		diameter;
+	double		height;
 	t_vec3d		top_center;
-	float		sq_radius;
+	double		sq_radius;
 }				t_cylinder;
 
 typedef struct s_cone
 {
 	t_vec3d		center;
 	t_vec3d		axis;
-	float		height;
-	float		theta;
-	float		max_dist;
-	float		cos;
+	double		height;
+	double		theta;
+	double		max_dist;
+	double		cos;
 }				t_cone;
 
 typedef struct s_light
 {
 	t_vec3d			point;
-	float			intensity;
+	double			intensity;
 }				t_light;
 
 typedef struct s_sphere
 {
 	t_vec3d		center;
-	float		rayon; //verif rayon ou diametre
-	float		dot_production_rayon;
+	double		rayon; //verif rayon ou diametre
+	double		dot_production_rayon;
 }				t_sphere;
 
 typedef struct s_camera
 {
 	t_vec3d	point;
 	t_vec3d	view_vector;
-	float	fov;
+	double	fov;
 }				t_camera;
 
-typedef enum s_objs_type
+typedef enum e_objs_type
 {
 	CAMERA = 1,
 	AMBIANCE_LIGHT = 2,
@@ -75,24 +77,38 @@ typedef enum s_objs_type
 	OBJS = 4,
 }			t_objs_type;
 
+typedef enum e_material_type
+{
+	COLOR,
+	CHECKERBOARD,
+	BUMP_MAP,
+}			t_material_type;
+
+typedef struct s_material
+{
+	t_material_type	type;
+	t_vec3d			colors;
+}			t_material;
+
 typedef struct s_objs
 {
 	void			*obj;
 	t_objs_type		type;
-	t_vec3d			colors; //separation?? materiaux/type/reflexion type t_vec3d pour utiliser operaion plus libre
-	float			(*intersection)(t_ray ray, void *obj);
+	t_material		material;
+	double			(*intersection)(t_ray ray, void *obj);
 	t_vec3d			(*get_normal)(t_ray ray, void *obj);
+	t_vec3d			(*get_colors)(t_ray ray, void *obj);
 	struct s_objs	*next;
 }				t_objs;
 
 //les objs seront pas a faire spown dans le backend !! temporaire uniquement
-t_objs	*plane(t_vec3d normal, t_vec3d point, t_vec3d colors);
-float	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point);
-t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, float diam, t_vec3d colors);
-t_objs	*sphere(t_vec3d center, float diameter, t_vec3d colors);
-t_objs	*light(t_vec3d coo, float intensity, t_objs_type type, t_vec3d color);
-t_objs	*camera(t_vec3d coo, t_vec3d view_vector, float fov);
-t_objs	*cone(t_vec3d coo, t_vec3d vector, float height, float theta, t_vec3d colors);
+t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m);
+double	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point);
+t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors);
+t_objs	*sphere(t_vec3d center, double diameter, t_material m);
+t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color);
+t_objs	*camera(t_vec3d coo, t_vec3d view_vector, double fov);
+t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors);
 t_objs	*add_objects(t_objs *new);
 
 

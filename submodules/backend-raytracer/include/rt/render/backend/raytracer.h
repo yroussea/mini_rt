@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/21 01:41:03 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 02:04:27 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void			rt_backend_raytracer_get_shading(t_objs *objs,
 					t_objs *obj_hit, t_ray *ray);
 double			rt_backend_raytracer_find_obj_hit(t_ray *ray,
 					t_objs *objs, t_objs **hit);
+//utils
+#  include <ft/math/matrix.h>
+double			ft_fmod(double x, double y);
+t_mat3d			m3d(t_vec3d col1, t_vec3d col2, t_vec3d col3);
+t_vec3d			m3d_solv(t_mat3d a, t_vec3d b);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_H__
 #endif // RAYTRACER_H

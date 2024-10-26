@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 00:27:43 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:39:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 	return (color);
 }
 
-#include <stdio.h>
-
 __always_inline
 static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal)
 {
-	t_ray	tmp;
-	t_vec3d	color;
-	t_light	*light;
+	t_ray			tmp;
+	t_light			*light;
+	t_vec3d			color;
+	const t_vec3d	color_obj = obj_hit->get_colors(*ray, obj_hit);
 
 	tmp.center = ray->hit_point;
 	color = (t_vec3d){0, 0, 0};
@@ -63,7 +62,7 @@ static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal
 		light = objs->obj;
 		if (objs->type == AMBIANCE_LIGHT)
 		{
-			color = v3d_add(color, v3d_mult(objs->colors, light->intensity));
+			color = v3d_add(color, v3d_mult(objs->get_colors(*ray, objs), light->intensity));
 			objs = objs->next;
 			continue ;
 		}
@@ -71,11 +70,13 @@ static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal
 		tmp.point = v3d_add(tmp.center, v3d_mult(tmp.direction, EPSILON));
 		if (rt_backend_raytracer_find_obj_hit(&tmp, objs, NULL) > \
 			v3d_len(v3d_sub(tmp.point, light->point)))
-			color = v3d_add(color, v3d_mult(objs->colors, \
+		{
+			color = v3d_add(color, v3d_mult(objs->get_colors(*ray, objs), \
 						phong_shading(*ray, light, tmp, normal)));
+		}
 		objs = objs->next;
 	}
-	return (vec_to_color(color, obj_hit->colors));
+	return (vec_to_color(color, color_obj));
 }
 
 void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
@@ -83,5 +84,5 @@ void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
 {
 	ray->color = shading(objs, ray, obj_hit, \
 					obj_hit->get_normal(*ray, obj_hit->obj));
-	// ray->color = vec_to_color(obj_hit->colors, (t_vec3d){1,1,1});
+	// ray->color = vec_to_color(obj_hit->material.colors, (t_vec3d){1,1,1});
 }

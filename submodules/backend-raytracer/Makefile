@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/21 01:38:52 by yroussea         ###   ########.fr        #
+#    Updated: 2024/10/26 02:02:30 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  rt_backend_raytracer_ray_generator.c \
 	  rt_backend_raytracer_find_obj_hit.c \
 	  rt_backend_raytracer_shading.c \
+	  utils/fmod.c	\
+	  utils/solv_m3d.c	\
 	  rt_objs/plane.c \
 	  rt_objs/sphere.c \
 	  rt_objs/cylinder.c \

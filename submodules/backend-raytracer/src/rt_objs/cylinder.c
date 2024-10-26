@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/22 13:45:34 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:40:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *t1, double *t2
 {
 	t_vec3d		param;
 	t_vec3d		x;
-	float		var[5];
+	double		var[5];
 
 	x = v3d_sub(ray.point, cy->center);
 	var[0] = v3d_dot(x, x);
@@ -38,9 +38,9 @@ static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *t1, double *t2
 	return (1);
 }
 
-static bool	valid_cyl_inter(float t, t_ray ray, t_cylinder *cy, float *t_plane)
+static bool	valid_cyl_inter(double t, t_ray ray, t_cylinder *cy, double *t_plane)
 {
-	float		m;
+	double		m;
 	t_vec3d		hit;
 
 	hit = v3d_add(ray.point, v3d_mult(ray.direction, t));
@@ -58,11 +58,11 @@ static bool	valid_cyl_inter(float t, t_ray ray, t_cylinder *cy, float *t_plane)
 	return (1);
 }
 
-float	closer(float t1, float t2);
+double	closer(double t1, double t2);
 
-static float	passing_through(t_ray ray, t_cylinder *cy)
+static double	passing_through(t_ray ray, t_cylinder *cy)
 {
-	float		t_plane_bottom;
+	double		t_plane_bottom;
 	t_vec3d		hit;
 
 	t_plane_bottom = plane_intersect(ray, cy->axis, cy->center);
@@ -74,12 +74,12 @@ static float	passing_through(t_ray ray, t_cylinder *cy)
 	return (closer(t_plane_bottom, plane_intersect(ray, cy->axis, cy->top_center)));
 }
 
-float	cyl_inter(t_ray ray, void *obj)
+double	cyl_inter(t_ray ray, void *obj)
 {
 	t_cylinder	*cy;
 	double		t1;
 	double		t2;
-	float		t_plane;
+	double		t_plane;
 
 	t_plane = -1;
 	cy = obj;
@@ -104,7 +104,7 @@ t_vec3d	get_cyl_normal(t_ray ray, void *obj)
 {
 	t_cylinder	*cy;
 	t_vec3d		a;
-	float		m;
+	double		m;
 
 	cy = obj;
 	m = v3d_dot(v3d_sub(ray.hit_point, cy->center), cy->axis);
@@ -117,7 +117,15 @@ t_vec3d	get_cyl_normal(t_ray ray, void *obj)
 	return (v3d_norm(v3d_sub(ray.hit_point, a)));
 }
 
-t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, float diam, t_vec3d colors)
+t_vec3d	get_colors_cyl(t_ray ray, void *obj)
+{
+	const t_objs	*cyl = (t_objs *)obj;
+
+	(void)ray;
+	return (cyl->material.colors);
+}
+
+t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors)
 {
 	t_objs		*new;
 	t_cylinder	*cy;
@@ -132,7 +140,7 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, float height, float diam, t_vec3d 
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
 	new->obj = cy;
-	new->colors = colors;
+	new->material = (t_material){COLOR, colors};
 	new->get_normal = get_cyl_normal;
 	new->intersection = cyl_inter;
 	return (new);

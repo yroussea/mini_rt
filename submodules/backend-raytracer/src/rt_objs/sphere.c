@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/20 00:03:05 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:57:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 #include <stdlib.h>
 #include <math.h>
 
-float	closer(float t1, float t2)
+double	closer(double t1, double t2)
 {
 	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
 		return (t1);
 	return (t2);
 }
 
-float	ray_sphere_intersect(t_ray ray, void *obj)
+double	ray_sphere_intersect(t_ray ray, void *obj)
 {
 	t_vec3d	v;
-	float	b;
-	float	a;
-	float	delta;
+	double	b;
+	double	a;
+	double	delta;
 
 	v = v3d_sub(ray.point, (*(t_sphere *)obj).center);
 	b = v3d_dot(v, ray.direction);
@@ -44,8 +44,19 @@ t_vec3d	get_sphere_normal(t_ray ray, void *obj)
 {
 	return (v3d_norm(v3d_sub(ray.hit_point, (*(t_sphere *)obj).center)));
 }
+t_vec3d	get_colors_sphere(t_ray ray, void *obj)
+{
+	const t_objs	*sphere = (t_objs *)obj;
+	const t_vec3d	x = ray.hit_point;
 
-t_objs	*sphere(t_vec3d center, float diameter, t_vec3d colors)
+	if (sphere->material.type == COLOR)
+		return (sphere->material.colors);
+	double a = fabs(floor(x.x)) + fabs(floor(x.y)) + fabs(floor(x.z));
+	if ((int)a % 2)
+		return ((t_vec3d){0, 0, 0});
+	return (sphere->material.colors);
+}
+t_objs	*sphere(t_vec3d center, double diameter, t_material material)
 {
 	t_objs		*new;
 	t_sphere	*sph;
@@ -57,7 +68,8 @@ t_objs	*sphere(t_vec3d center, float diameter, t_vec3d colors)
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
 	new->obj = sph;
-	new->colors = colors;
+	new->material = material;
+	new->get_colors = get_colors_sphere;
 	new->get_normal = get_sphere_normal;
 	new->intersection = ray_sphere_intersect;
 	return (new);
