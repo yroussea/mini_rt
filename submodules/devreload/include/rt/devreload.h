@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:20:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 06:58:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/26 23:52:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ size_t			rt_devrl_build_hidden_string(const char *path, const char *name,
 void			*rt_devrl_find_symbol(void *handle, const char *symbol_name,
 					const char *prefix, const char *name);
 
-void			rt_devrl_recompile(t_rt *rt);
+void			rt_devrl_check_reload(t_rt *rt);
 
 # endif // __RT_DEVRELOAD_H__
 #endif // DEVRELOAD_H

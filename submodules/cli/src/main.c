@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:26:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:49:13 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,12 @@ static int	rt_parse_wrap(const t_rt *rt)
 
 static void	rt_dump_state(const t_rt *rt)
 {
-	rt_trace(rt, "%s: launching rt in mode %d\n", __func__,
-		rt->flags.mode);
-	rt_trace(rt, "%s: input file is '%s'\n", __func__,
-		rt->flags.filepath);
+	rt_debug(rt, "launching rt in mode %d\n", rt->flags.mode);
+	rt_debug(rt, "input file is '%s'\n", rt->flags.filepath);
 	if (rt->flags.mode == RT_MODE_RENDER_ONCE)
-		rt_trace(rt, "%s: output file is '%s'\n", __func__,
-			rt->flags.output);
-	rt_trace(rt, "%s: frontend is '%s'\n", __func__,
-		rt->flags.frontend);
-	rt_trace(rt, "%s: backend is '%s'\n", __func__,
-		rt->flags.backend);
+		rt_debug(rt, "output file is '%s'\n", rt->flags.output);
+	rt_debug(rt, "frontend is '%s'\n", rt->flags.frontend);
+	rt_debug(rt, "backend is '%s'\n", rt->flags.backend);
 }
 
 static int	rt_frontend_loop(const t_rt *rt)

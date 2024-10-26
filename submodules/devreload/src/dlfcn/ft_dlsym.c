@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:46:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/26 01:57:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:48:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #define STT_GNU_IFUNC 10
 #define DYNSYM_SECT ".dynsym"
 #define DYNSTR_SECT ".dynstr"
+#define PLTGOT_SECT ".plt.got"
 
 static t_elf64_shdr	*find_dlsym_header_offset(t_elf64_shdr *shdr,
 		uint16_t nb_shdr, const char *shstrtab)
@@ -82,6 +83,31 @@ static t_elf64_sym	*find_symbol(t_elf64_ehdr *header, t_elf64_shdr *shdr,
 	return (shdr_to_simbol(header, sym_hdr, sym_string_hdr, symbol));
 }
 
+// static void	find_and_dump_got(t_elf64_ehdr *header, t_elf64_shdr *shdr,
+// 						const char *shstrtab)
+// {
+// 	int64_t			nb_shdr;
+// 	t_elf64_shdr	*got_hdr;
+// 	void	*got_start = header + got_hdr->sh_offset;
+//
+// 	nb_shdr = header->e_shnum;
+// 	got_hdr = NULL;
+// 	while (nb_shdr--)
+// 	{
+// 		if (!ft_strcmp(shstrtab + shdr->sh_name, PLTGOT_SECT))
+// 		{
+// 			got_hdr = shdr;
+// 			break ;
+// 		}
+// 		shdr++;
+// 	}
+// 	if (!got_hdr)
+// 		return ;
+// 	// RT_DEBUG("got_hdr: %p\n", got_hdr);
+// 	// RT_DEBUG("got offset: %p\n", got_hdr->sh_offset);
+// 	// RT_DEBUG("got start: %p\n", got_start);
+// }
+
 void	*ft_dlsym(void *handle, const char *symbol)
 {
 	t_elf64_ehdr	*elf_header;
@@ -95,7 +121,7 @@ void	*ft_dlsym(void *handle, const char *symbol)
 	shdr = (t_elf64_shdr *)(handle + elf_header->e_shoff);
 	shstrtab_hdr = &shdr[elf_header->e_shstrndx];
 	shstrtab = (char *)(handle + shstrtab_hdr->sh_offset);
-	sym = find_symbol(handle, shdr, shstrtab, symbol);
+	sym = find_symbol(elf_header, shdr, shstrtab, symbol);
 	if (!sym)
 		return (NULL);
 	if ((sym->st_info & 0xf) == STT_GNU_IFUNC)

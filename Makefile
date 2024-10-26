@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/18 17:28:16 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/27 00:23:11 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,16 +85,11 @@ EXTRA_LDFLAGS += $(DEPS_TARGETS)
 
 ### Build daemon config ###
 
-DAEMON_SCRIPT = build_daemon.sh
-DAEMON_TARGET_FILE := $(PWD)/.build_daemon.payload
-DAEMON_RETURN_FILE := $(PWD)/.build_daemon.ret
-DAEMON_KILL_FILE := $(PWD)/.build_daemon.kill
-DAEMON_ALIVE_FILE := $(PWD)/.build_daemon.alive
-DAEMON_ACK_FILE := $(PWD)/.build_daemon.ack
-EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_PAYLOAD_FILE="\"$(DAEMON_TARGET_FILE)\""'
-EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_RETURN_FILE="\"$(DAEMON_RETURN_FILE)\""'
-EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_FILE="\"$(DAEMON_ALIVE_FILE)\""'
-EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_ACK_FILE="\"$(DAEMON_ACK_FILE)\""'
+DAEMON_NAME = rebuild-daemon
+DAEMON_SCRIPT = $(DAEMON_NAME).sh
+DAEMON_TARGET_FILE := $(PWD)/.$(DAEMON_NAME).done
+DAEMON_ALIVE_FILE := $(PWD)/.$(DAEMON_NAME).alive
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_WATCH_FILE="\"$(DAEMON_TARGET_FILE)\""'
 
 
 
@@ -107,7 +102,8 @@ all: $(NAME)
 
 # invalidation mechanism, delete a .o file if its corresponding .c file has been modified
 $(PWD)/$(CACHE_DIR)/%:
-	@if [ $(findstring .c, $<) ]; then \
+	@#echo "[*] Invalidating $@"
+	@if [ $(findstring .c, $<) ] || [ $(findstring .s, $<) ]; then \
 		rm -rf $@; \
 	fi
 
@@ -120,6 +116,7 @@ $(SUBMODULES_OUTPUT): | $(DEPS_DIR)
 
 $(MAIN_SUBMODULE_OUTPUT): $(SUBMODULES_OUTPUT)
 	@$(MAKE) -C $(SUBMODULES_DIR)/$(MAIN_SUBMODULE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" EXTRA_LDFLAGS="$(EXTRA_LDFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
+	@touch $(MAIN_SUBMODULE_OUTPUT)
 
 $(DEPS_TARGETS):
 
@@ -148,14 +145,14 @@ re: fclean all
 remake: oclean
 	@$(MAKE) all -j
 
-kill_daemon:
+daemon-stop:
 	@echo "[*] Killing daemon..."
-	@echo "KILL" > $(DAEMON_KILL_FILE)
+	@rm -rf $(DAEMON_ALIVE_FILE)
 	@sleep 1
 
-daemon: kill_daemon
+daemon: daemon-stop 
 	@echo "[*] Starting daemon..."
-	@bash ./$(DAEMON_SCRIPT) $(DAEMON_TARGET_FILE) $(DAEMON_RETURN_FILE) $(DAEMON_KILL_FILE) $(DAEMON_ALIVE_FILE) $(DAEMON_ACK_FILE) &
+	@bash ./$(DAEMON_SCRIPT) $(DAEMON_TARGET_FILE) $(DAEMON_ALIVE_FILE)
 
 valgrind: $(NAME)
 ifeq ($(USE_VALGRIND_LOGFILE), 1)
@@ -165,7 +162,24 @@ else
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(VG_ARGS) || true
 endif
 
+help:
+	@printf "Usage: make [target] [VG_ARGS=\"...\"]\n"
+	@printf "\n"
+	@printf "Targets:\n"
+	@printf "    all:\t\tBuild the project (default)\n"
+	@printf "    clean:\t\tClean the project\n"
+	@printf "    fclean:\t\tClean the project, its submodules, and its dependencies\n"
+	@printf "    re:\t\t\tfclean + all\n"
+	@printf "    remake:\t\tClean the project and its submodules, then build it (not including dependencies)\n"
+	@printf "    daemon:\t\tStart the rebuild daemon\n"
+	@printf "    daemon-stop:\tStop the rebuild daemon\n"
+	@printf "    valgrind:\t\tRun the project with valgrind\n"
+	@printf "      VG_ARGS: \t\t- arguments to pass to valgrind\n\n"
+	@printf "      > Example:\n"
+	@printf "      make valgrind VG_ARGS=\"-b dummy ./scenes/valid/minimal.rt\"\n\n"
+	@printf "    help:\t\tDisplay this help message\n"
+
 print_%:
 	@echo $($*)
 
-.PHONY: all deps _clean oclean clean fclean re remake kill_daemon daemon valgrind print_% 
+.PHONY: all deps _clean oclean clean fclean re remake daemon-stop daemon valgrind help print_% 

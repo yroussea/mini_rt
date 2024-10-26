@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/16 05:22:29 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/26 23:26:13 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC =	log/rt_debug.c \
 		rt_destroy.c \
 		rt_exit.c \
 		rt_init.c \
+		rt_noop.c \
 		rt_resize.c
 
 include ../submodule.mk

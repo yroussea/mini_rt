@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:53:08 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/26 01:57:50 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/10/26 21:18:04 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ MKDEPS_DIR = $(PROJ_CACHE_DIR)/makedeps
 SELF_DEP = $(MKDEPS_DIR)/_module.d
 
 OBJ 	:= $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(SRC)))
-MKDEPS	:= $(patsubst %.c,%.d,$(patsubst %.s,,$(SRC)))
+MKDEPS	:= $(patsubst %.c,%.d,$(patsubst %.s,%.d,$(SRC)))
 SRC 	:= $(addprefix $(SRC_DIR)/,$(SRC))
 OBJ 	:= $(addprefix $(OBJ_DIR)/,$(OBJ))
 MKDEPS	:= $(addprefix $(MKDEPS_DIR)/,$(MKDEPS))
@@ -84,16 +84,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "$(PWD)/$<:" >> $(MKDEPS_DIR)/$*.tmp.d
 	@# dumb fixes, see https://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
 	@mv -f $(MKDEPS_DIR)/$*.tmp.d $(MKDEPS_DIR)/$*.d
-	@touch $@
+	@touch $(MKDEPS_DIR)/$*.d
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
 	@mkdir -p $(dir $@)
 	@echo "<$(NAME)> Assembling $<"
 	@$(NASM) $(NASMFLAGS) -o $@ $<
+	@echo "$@: $(PWD)/$<" >> $(MKDEPS_DIR)/$*.tmp.d
 	@echo "$(PWD)/$<:" >> $(MKDEPS_DIR)/$*.tmp.d
 	@# dumb fixes, see https://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
 	@mv -f $(MKDEPS_DIR)/$*.tmp.d $(MKDEPS_DIR)/$*.d
-	@touch $@
+	@touch $(MKDEPS_DIR)/$*.d
+
 
 $(SELF_DEP):
 	@mkdir -p $(dir $(SELF_DEP))

@@ -6,11 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 18:22:40 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:47:35 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
+#include <rt/devreload.h>
 #include <rt/render/backend.h>
 #include <rt/render/frontend/macrolibx.h>
 #include <rt/log.h>
@@ -18,6 +19,7 @@
 #include <tocard/draw.h>
 #include <SDL2/SDL_scancode.h>
 
+//FIXME: uninitialized value in tocard-ui `t_toc_window#keymap`
 static void	rt_screen_main_init(t_toc_screen *self)
 {
 	ft_memset(self->window->keymap, 0, sizeof(self->window->keymap));
@@ -32,6 +34,8 @@ static bool	rt_screen_main_render(t_toc_screen *self,
 	size_t				y;
 
 	frontend = (t_rt_frontend *)self->data;
+	if (RT_DEVMODE)
+		rt_devrl_check_reload(frontend->rt);
 	buffer = frontend->rt->backend->render(frontend->rt->backend);
 	y = 0;
 	while (y < frontend->height)
@@ -58,8 +62,6 @@ static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 		return (true);
 	frontend = (t_rt_frontend *)screen->data;
 	ctrl = screen->window->keymap[SDL_SCANCODE_LCTRL];
-	if (ctrl && key == SDL_SCANCODE_R)
-		rt_backend_reload(frontend->rt);
 	if (ctrl && key == SDL_SCANCODE_I)
 		rt_resize(frontend->rt, screen->width - 80, screen->height - 80);
 	if (ctrl && key == SDL_SCANCODE_O)
