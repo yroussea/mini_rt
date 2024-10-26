@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:57:19 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:23:58 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,16 @@ t_vec3d	get_sphere_normal(t_ray ray, void *obj)
 t_vec3d	get_colors_sphere(t_ray ray, void *obj)
 {
 	const t_objs	*sphere = (t_objs *)obj;
-	const t_vec3d	x = ray.hit_point;
+	const t_sphere	*s_sphere = (t_sphere *)sphere->obj;
+	const t_vec3d	x = v3d_sub(ray.hit_point, s_sphere->center);
 
 	if (sphere->material.type == COLOR)
 		return (sphere->material.colors);
-	double a = fabs(floor(x.x)) + fabs(floor(x.y)) + fabs(floor(x.z));
-	if ((int)a % 2)
+	const double phi = ft_fsign(x.z) * acos(x.x / sqrt(x.x * x.x + x.z * x.z));
+	const double theta = acos(x.y / s_sphere->rayon);
+	double a = theta / M_PI * 15;
+	double b = phi / M_PI * 15;
+	if (abs((int)a) % 2 ^ abs((int)b) % 2)
 		return ((t_vec3d){0, 0, 0});
 	return (sphere->material.colors);
 }

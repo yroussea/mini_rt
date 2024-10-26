@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:39:46 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:27:23 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_color	shading(t_objs *objs, t_ray *ray, t_objs *obj_hit, t_vec3d normal
 		if (rt_backend_raytracer_find_obj_hit(&tmp, objs, NULL) > \
 			v3d_len(v3d_sub(tmp.point, light->point)))
 		{
-			color = v3d_add(color, v3d_mult(objs->get_colors(*ray, objs), \
+			color = v3d_add(color, v3d_mult(objs->get_colors(tmp, objs), \
 						phong_shading(*ray, light, tmp, normal)));
 		}
 		objs = objs->next;

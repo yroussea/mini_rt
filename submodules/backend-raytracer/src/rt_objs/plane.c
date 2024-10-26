@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/26 02:38:34 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:21:41 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,20 @@ double	ray_plane_intersect(t_ray ray, void *obj)
 	return (plane_intersect(ray, plane->normal, plane->point));
 }
 
+#define SIZE_CHECKER 5
 t_vec3d	get_colors_plane(t_ray ray, void *obj)
 {
 	const t_objs	*plane = (t_objs *)obj;
 	const t_plane	*p_plane = (t_plane *)plane->obj;
 	const t_vec3d	hit = ray.hit_point;
 
+	(void)ray;
 	if (plane->material.type == COLOR)
 		return (plane->material.colors);
-	const t_mat3d		mat = m3d(p_plane->normal, p_plane->vec_udir, p_plane->vec_vdir);
-	const t_vec3d	x = m3d_solv(mat, hit);
-	if ((int)(fabs(floor(x.x)) + fabs(floor(x.y)) + fabs(floor(x.z))) % 2)
+	const t_mat3d	mat = m3d(p_plane->vec_vdir, p_plane->vec_udir, p_plane->normal);
+	const t_vec3d	x = m3d_solv(mat, v3d_sub(hit, p_plane->point));
+	const double	a = fabs(floor(x.x / SIZE_CHECKER)) + fabs(floor(x.y  / SIZE_CHECKER));
+	if ((int)a % 2)
 		return ((t_vec3d){0, 0, 0});
 	return (plane->material.colors);
 }

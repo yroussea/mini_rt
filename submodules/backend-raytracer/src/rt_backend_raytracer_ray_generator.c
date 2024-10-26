@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:42:56 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:51:09 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 
 double	get_width(t_rt_backend *backend, double x)
 {
-	return (-1 + (2 * 1 * (x) / backend->width));
+	const double	resolution = (float)backend->width / backend->height;
+
+	return (-resolution + (2 * resolution * (x) / backend->width));
 }
 
 double	get_height(t_rt_backend *backend, double y)
