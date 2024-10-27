@@ -12,6 +12,8 @@ fi
 
 shopt -s globstar
 
+SCRIPT_NAME=$($MAKE -s print_DAEMON_SCRIPT)
+
 # if the command is not found
 if ! command -v inotifywait &> /dev/null; then
 	# check for nix-shell
@@ -34,7 +36,7 @@ if ! command -v inotifywait &> /dev/null; then
 	if [ $? -eq 0 ]; then
 		echo "@ nix-shell succeeded, re-running script"
 		export __DAEMON_RERUN=1
-		nix-shell -p inotify-tools --run "bash ./rebuild_daemon.sh $COMMUNICATE_PIPE $ALIVE_FILE"
+		nix-shell -p inotify-tools --run "bash $SCRIPT_NAME $COMMUNICATE_PIPE $ALIVE_FILE"
 		exit $?
 	else
 		echo "! nix-shell failed, exiting"
