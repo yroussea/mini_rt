@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:22:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/10 22:47:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:49:36 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,24 @@ enum e_rt_primitive
 };
 
 /**
+ * @brief A function pointer to a primitive parser.
+ *
+ * @param parser The parser to use.
+ * @param slice The string slice to parse.
+ * @param memory The memory to write to.
+ * @param size The size of the memory to write to.
+ */
+typedef void	(*t_rt_primitive_parser_func)(t_rt_parser *parser,
+					const char *slice, void *memory, size_t *size);
+
+/**
  * @brief A structure defining a pure primitive parser.
  */
 typedef struct s_rt_primitive_parser
 {
 	enum e_rt_primitive				type;
 	struct s_rt_primitive_parser	*next;
+
 }	t_rt_primitive_parser;
 
 # endif // __RT_PARSER_PRIMITIVE_H__

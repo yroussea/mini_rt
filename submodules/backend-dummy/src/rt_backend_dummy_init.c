@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 02:22:53 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 15:49:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	rt_backend_dummy_init(t_rt_backend *self)
 {
-	static const t_color	dummy_default = {.rgba = BRIGHT_PURPLE};
+	static const t_color	dummy_default = {.rgba = DARK_RED};
 	t_color					*buffer;
 	size_t					x;
 	size_t					y;

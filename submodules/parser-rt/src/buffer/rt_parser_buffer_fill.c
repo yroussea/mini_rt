@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 14:54:09 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:39:24 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 10:53:02 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,24 @@
 
 #define FILE_EXTENSION ".rt"
 
+static size_t	rt_parser_buffer_count_lines(const char *buffer)
+{
+	size_t	nlines;
+	size_t	i;
+
+	nlines = 0;
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+			nlines++;
+		i++;
+	}
+	return (nlines);
+}
+
 static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
-					size_t len)
+					size_t len, size_t *nlines)
 {
 	RESULT	res;
 	ssize_t	nread;
@@ -46,6 +62,7 @@ static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
 	if (!RES_OK(res))
 		return (res);
 	buffer[offset] = '\0';
+	*nlines = rt_parser_buffer_count_lines(buffer);
 	return (res);
 }
 
@@ -65,7 +82,7 @@ static RESULT	rt_parser_check_filename(const char *filepath)
 
 __attribute__((nonnull(1, 3)))
 static RESULT	rt_parser_buffer_alloc_fd(const char *filepath, int fd,
-					char **buffer)
+					char **buffer, size_t *nlines)
 {
 	RESULT	res;
 	size_t	len;
@@ -91,10 +108,11 @@ static RESULT	rt_parser_buffer_alloc_fd(const char *filepath, int fd,
 	if (*buffer == NULL)
 		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate file buffer"));
 	close(fd);
-	return (rt_parser_buffer_fill_fd(filepath, *buffer, len));
+	return (rt_parser_buffer_fill_fd(filepath, *buffer, len, nlines));
 }
 
-RESULT	rt_parser_buffer_fill(const char *filepath, char **buffer)
+RESULT	rt_parser_buffer_fill(const char *filepath, char **buffer,
+			size_t *nlines)
 {
 	RESULT	res;
 	int		fd;
@@ -114,5 +132,5 @@ RESULT	rt_parser_buffer_fill(const char *filepath, char **buffer)
 	if (fd == -1)
 		return (ERRS(PARSE_ERR_FILE_READ, "'%s' cannot be opened: %s",
 				filepath, strerror(errno)));
-	return (rt_parser_buffer_alloc_fd(filepath, fd, buffer));
+	return (rt_parser_buffer_alloc_fd(filepath, fd, buffer, nlines));
 }

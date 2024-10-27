@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:13:09 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:39:36 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:44:57 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,13 @@ static bool	rt_parser_buffer_is_invalid(const char *buffer)
 RESULT	rt_parser_buffer_sanitize(t_rt_parser *parser)
 {
 	size_t	i;
-	RESULT	res;
-	char	*buffer;
 
-	rt_parser_buffer_preproc(parser);
 	i = 0;
-	res = OK();
-	if (parser->nlines == 0)
-		return (ERRS(PARSE_ERR_FILE_READ, "'%s' is empty", parser->filepath));
-	buffer = parser->buffer;
-	while (!buffer[0])
-		buffer++;
-	while (i < parser->nlines && RES_OK(res))
+	while (i < parser->nlines)
 	{
-		while (!buffer[0])
-			buffer++;
-		rt_trace(parser->rt, "buffer line: '%s'\n", buffer);
-		if (rt_parser_buffer_is_invalid(buffer))
-			res = rt_parser_buffer_invalid_line(parser, buffer);
-		buffer += ft_strlen(buffer);
+		if (rt_parser_buffer_is_invalid(parser->buffer[i]))
+			return (rt_parser_buffer_invalid_line(parser, parser->buffer[i]));
 		i++;
 	}
-	return (res);
+	return (OK());
 }

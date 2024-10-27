@@ -6,13 +6,21 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 16:20:46 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:55:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/string.h>
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
+
+static RESULT	rt_err_expand(RESULT res, const char *filepath)
+{
+	if (res.type != PARSE_ERR_FILE)
+		return (res);
+	res.file_context.filename = filepath;
+	return (res);
+}
 
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 {
@@ -21,14 +29,13 @@ RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 	__attribute__((cleanup(ft_strdel))) char *buffer = NULL;
 	if (parser == NULL)
 		return (ERR(PARSE_ERR_NULL));
-	parser->filepath = filepath;
-	res = rt_parser_buffer_fill(filepath, &buffer);
+	res = rt_parser_buffer_fill(filepath, &buffer, &parser->nlines);
+	if (RES_OK(res))
+		res = rt_parser_buffer_preproc(parser, buffer);
+	if (RES_OK(res))
+		res = rt_parser_buffer_sanitize(parser);
 	if (!RES_OK(res))
-		return (res);
-	parser->buffer = buffer;
-	res = rt_parser_buffer_sanitize(parser);
-	if (!RES_OK(res))
-		return (res);
+		return (rt_err_expand(res, filepath));
 	return (res);
 	// return (rt_parser_buffer_loop(parser, buffer, lines));
 }
