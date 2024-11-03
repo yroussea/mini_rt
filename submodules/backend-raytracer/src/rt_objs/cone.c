@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:40:29 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:20:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static double	plane_bottom_cone(t_ray ray, t_cone *cone)
 	t_vec3d	bottom;
 
 	bottom = v3d_add(cone->center, v3d_mult(cone->axis, cone->height));
-	plane = plane_intersect(ray, cone->axis, bottom);
+	plane = rt_backend_raytracer_planar_intersect(ray, cone->axis, bottom);
 	if (plane < 0)
 		return (INFINITY);
 	hit = v3d_add(ray.point, v3d_mult(ray.direction, plane));
@@ -126,6 +126,8 @@ t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d c
 
 	cone = malloc(sizeof(t_cone));
 	cone->axis = v3d_norm(vector);
+	cone->vec_udir = v3d_norm(v3d(-cone->axis.y, cone->axis.x, 0));
+	cone->vec_vdir = v3d_norm(v3d_cross(cone->axis, cone->vec_udir));
 	cone->height = height;
 	cone->theta = theta / 180 * M_PI;
 	cone->center = coo;

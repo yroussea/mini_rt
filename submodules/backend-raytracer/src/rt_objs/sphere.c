@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/26 18:23:58 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:45:51 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,13 @@ t_vec3d	get_colors_sphere(t_ray ray, void *obj)
 	const t_objs	*sphere = (t_objs *)obj;
 	const t_sphere	*s_sphere = (t_sphere *)sphere->obj;
 	const t_vec3d	x = v3d_sub(ray.hit_point, s_sphere->center);
+	const t_vec3d	all_colors[2] = {sphere->material.colors, (t_vec3d){0, 0, 0}};
 
 	if (sphere->material.type == COLOR)
-		return (sphere->material.colors);
+		return (*all_colors);
 	const double phi = ft_fsign(x.z) * acos(x.x / sqrt(x.x * x.x + x.z * x.z));
 	const double theta = acos(x.y / s_sphere->rayon);
-	double a = theta / M_PI * 15;
-	double b = phi / M_PI * 15;
-	if (abs((int)a) % 2 ^ abs((int)b) % 2)
-		return ((t_vec3d){0, 0, 0});
-	return (sphere->material.colors);
+	return (all_colors[rt_backend_raytracer_checkerboard(theta * 50, phi * 50)]);
 }
 t_objs	*sphere(t_vec3d center, double diameter, t_material material)
 {

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:40:28 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/03 19:19:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *t1, double *t2)
+static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *tmp, double *closer)
 {
 	t_vec3d		param;
 	t_vec3d		x;
@@ -31,73 +31,78 @@ static bool	infinite_cyl_inter(t_ray ray, t_cylinder *cy, double *t1, double *t2
 	param.x = var[3] - powf(var[4], 2);
 	param.y = 2 * (var[2] - var[4] * var[1]);
 	param.z = var[0] - powf(var[1], 2) - cy->sq_radius;
-	if (!v3d_quadr(param, t1, t2))
+	if (!v3d_quadr(param, tmp, closer))
 		return (0);
-	if (*t1 < EPSILON && *t2 < EPSILON)
+	if (*tmp < EPSILON && *closer < EPSILON)
 		return (0);
 	return (1);
 }
 
-static bool	valid_cyl_inter(double t, t_ray ray, t_cylinder *cy, double *t_plane)
+static bool	valid_cyl_inter(double t, t_ray ray, t_cylinder *cy)
 {
 	double		m;
 	t_vec3d		hit;
 
 	hit = v3d_add(ray.point, v3d_mult(ray.direction, t));
 	m = v3d_dot(v3d_sub(hit, cy->center), cy->axis);
-	if (m < EPSILON)
-	{
-		*t_plane = plane_intersect(ray, cy->axis, cy->center);
+	if (m < 0)
 		return (0);
-	}
-	if (m > cy->height - EPSILON)
-	{
-		*t_plane = plane_intersect(ray, cy->axis, cy->top_center);
+	if (m > cy->height - 0)
 		return (0);
-	}
 	return (1);
 }
 
-double	closer(double t1, double t2);
-
-static double	passing_through(t_ray ray, t_cylinder *cy)
+static bool	valid_plane_inter(t_ray ray, t_cylinder *cy, double t, t_vec3d center)
 {
-	double		t_plane_bottom;
 	t_vec3d		hit;
 
-	t_plane_bottom = plane_intersect(ray, cy->axis, cy->center);
-	if (t_plane_bottom < 0)
-		return (-1);
-	hit = v3d_add(ray.point, v3d_mult(ray.direction, t_plane_bottom));
-	if (v3d_len(v3d_sub(hit, cy->center)) > cy->diameter / 2)
-		return (-1);
-	return (closer(t_plane_bottom, plane_intersect(ray, cy->axis, cy->top_center)));
+	if (t < 0 || t == INFINITY)
+		return (0);
+	hit = v3d_add(ray.point, v3d_mult(ray.direction, t));
+	if (v3d_len(v3d_sub(hit, center)) > cy->diameter / 2)
+		return (0);
+	return (1);
 }
 
-double	cyl_inter(t_ray ray, void *obj)
+bool	set_at_min(double a, double b, double *res)
 {
-	t_cylinder	*cy;
-	double		t1;
-	double		t2;
-	double		t_plane;
+	if (a < b)
+	{
+		*res = a;
+		return (0);
+	}
+	*res = b;
+	return (1);
+}
 
-	t_plane = -1;
-	cy = obj;
-	if (!infinite_cyl_inter(ray, obj, &t1, &t2))
-		return (passing_through(ray, cy));
-	if (!valid_cyl_inter(t1, ray, cy, &t_plane))
-		t1 = -1;
-	if (!valid_cyl_inter(t2, ray, cy, &t_plane))
-		t2 = -1;
-	if (t1 < 0 && t2 < 0)
-		return (passing_through(ray, cy));
-	if (t1 < 0)
-		t1 = t_plane;
-	if (t2 < 0)
-		t2 = t_plane;
-	if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
-		return (t1);
-	return (t2);
+double	cylinder_inter(t_ray ray, void *obj)
+{
+	t_cylinder	*cy = (t_cylinder *)obj;
+	double				tmp = INFINITY;
+	double				closer = INFINITY;
+
+	cy->surface_type = RONDED;
+	if (infinite_cyl_inter(ray, cy, &tmp, &closer))
+	{
+		if (!valid_cyl_inter(tmp, ray, cy))
+			tmp = INFINITY;
+		if (!valid_cyl_inter(closer, ray, cy))
+			closer = INFINITY;
+		closer = ft_fmin(closer, tmp);
+	}
+	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->center);
+	if (valid_plane_inter(ray, cy, tmp, cy->center))
+	{
+		if (set_at_min(closer, tmp, &closer))
+			cy->surface_type = PLANE;
+	}
+	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->top_center);
+	if (valid_plane_inter(ray, cy, tmp, cy->top_center))
+	{
+		if (set_at_min(closer, tmp, &closer))
+			cy->surface_type = SECOND_PLANE;
+	}
+	return (closer);
 }
 
 t_vec3d	get_cyl_normal(t_ray ray, void *obj)
@@ -107,23 +112,67 @@ t_vec3d	get_cyl_normal(t_ray ray, void *obj)
 	double		m;
 
 	cy = obj;
+	if (cy->surface_type != RONDED)
+		return (v3d_mult(cy->axis, -ft_fsign(v3d_dot(ray.direction, cy->axis))));
 	m = v3d_dot(v3d_sub(ray.hit_point, cy->center), cy->axis);
-	if (m >= cy->height - EPSILON)
-		return (cy->axis);
-	if (m <= EPSILON)
-		return (v3d_sub((t_vec3d){0, 0, 0}, cy->axis));
 	a = v3d_add(cy->center, v3d_mult(cy->axis, m));
-	//doit deprendre si interieur ou exterieur
 	return (v3d_norm(v3d_sub(ray.hit_point, a)));
 }
 
+// #define RT_RONDED_CYLINDER_LINK_CHECKERBOARD
+#ifdef RT_RONDED_CYLINDER_LINK_CHECKERBOARD
 t_vec3d	get_colors_cyl(t_ray ray, void *obj)
 {
-	const t_objs	*cyl = (t_objs *)obj;
+	const t_objs		*cy = (t_objs *)obj;
+	const t_cylinder	*c_cy = (t_cylinder *)cy->obj;
+	const t_vec3d		all_colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
 
-	(void)ray;
-	return (cyl->material.colors);
+	if (cy->material.type == COLOR)
+		return (*all_colors);
+
+	const double u = v3d_dot(v3d_sub(ray.hit_point, c_cy->center), c_cy->axis);
+	const t_vec3d a = v3d_add(c_cy->center, v3d_mult(c_cy->axis, u));
+
+	const t_vec3d sol = m3d_solv(
+		m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(ray.hit_point, a));
+	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
 }
+#else
+t_vec3d	get_colors_cyl(t_ray ray, void *obj)
+{
+	const t_objs		*cy = (t_objs *)obj;
+	const t_cylinder	*c_cy = (t_cylinder *)cy->obj;
+	const t_vec3d		all_colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
+	t_vec3d				hit;
+
+	if (c_cy->surface_type != RONDED)
+	{
+		if (c_cy->surface_type == PLANE)
+			hit = v3d_sub(ray.hit_point, c_cy->center);
+		else
+			hit = v3d_sub(ray.hit_point, c_cy->top_center);
+		return (rt_backend_raytracer_planar_color(
+			hit, m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis),
+			cy->material.colors, cy->material.type
+		));
+	}
+	if (cy->material.type == COLOR)
+		return (*all_colors);
+
+	const double u = v3d_dot(v3d_sub(ray.hit_point, c_cy->center), c_cy->axis);
+	const t_vec3d a = v3d_add(c_cy->center, v3d_mult(c_cy->axis, u));
+
+	const t_vec3d sol = m3d_solv(
+		m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(ray.hit_point, a));
+	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
+}
+#endif
+
+
 
 t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors)
 {
@@ -133,15 +182,19 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3
 	cy = malloc(sizeof(t_cylinder));
 	cy->diameter = diam;
 	cy->axis = v3d_norm(vector);
+	cy->vec_udir = v3d_norm(v3d(-cy->axis.y, cy->axis.x, 0));
+	cy->vec_vdir = v3d_norm(v3d_cross(cy->axis, cy->vec_udir));
+
 	cy->sq_radius = powf(diam / 2, 2);
 	cy->height = height;
 	cy->center = coo;
-	cy->top_center = v3d_add(coo, v3d_mult(vector, height));
+	cy->top_center = v3d_add(coo, v3d_mult(cy->axis, height));
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
 	new->obj = cy;
-	new->material = (t_material){COLOR, colors};
+	new->material = (t_material){CHECKERBOARD, colors};
 	new->get_normal = get_cyl_normal;
-	new->intersection = cyl_inter;
+	new->intersection = cylinder_inter;
+	new->get_colors = get_colors_cyl;
 	return (new);
 }

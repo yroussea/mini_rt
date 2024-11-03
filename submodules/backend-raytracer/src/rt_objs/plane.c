@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/26 18:21:41 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:16:09 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
 
-static t_vec3d	get_plane_normal(t_ray ray, void *obj)
+t_vec3d	get_plane_normal(t_ray ray, void *obj)
 {
 	const t_plane	*plane = (t_plane *)obj;
 
@@ -33,27 +33,22 @@ double	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point)
 
 double	ray_plane_intersect(t_ray ray, void *obj)
 {
-	const t_plane	*plane = (t_plane *)obj;
+	const t_plane	*p = (t_plane *)obj;
 
-	return (plane_intersect(ray, plane->normal, plane->point));
+	return (rt_backend_raytracer_planar_intersect(ray, p->normal, p->point));
 }
 
-#define SIZE_CHECKER 5
 t_vec3d	get_colors_plane(t_ray ray, void *obj)
 {
 	const t_objs	*plane = (t_objs *)obj;
 	const t_plane	*p_plane = (t_plane *)plane->obj;
-	const t_vec3d	hit = ray.hit_point;
 
-	(void)ray;
-	if (plane->material.type == COLOR)
-		return (plane->material.colors);
-	const t_mat3d	mat = m3d(p_plane->vec_vdir, p_plane->vec_udir, p_plane->normal);
-	const t_vec3d	x = m3d_solv(mat, v3d_sub(hit, p_plane->point));
-	const double	a = fabs(floor(x.x / SIZE_CHECKER)) + fabs(floor(x.y  / SIZE_CHECKER));
-	if ((int)a % 2)
-		return ((t_vec3d){0, 0, 0});
-	return (plane->material.colors);
+	return (rt_backend_raytracer_planar_color(
+		v3d_sub(ray.hit_point, p_plane->point),
+		m3d(p_plane->vec_vdir, p_plane->vec_udir, p_plane->normal),
+		plane->material.colors,
+		plane->material.type
+	));
 }
 
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
