@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/27 12:45:52 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/03 04:33:51 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  error/rt_parse_is_err.c \
 	  error/rt_parse_is_ok.c \
 	  error/rt_parse_ok.c \
+	  error/rt_parse_okd.c \
 	  line/rt_parser_line_process.c \
+	  primitive/rt_parser_prim_coords.c \
+	  primitive/rt_parser_strprim.c \
 	  rt_parser_destroy.c \
 	  rt_parser_init.c \
 	  rt_parser_parse.c

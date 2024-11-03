@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 02:10:30 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/03 04:18:27 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ bool				rt_parse_is_ok(t_rt_parse_error err);
 bool				rt_parse_is_err(t_rt_parse_error err);
 
 t_rt_parse_error	rt_parse_ok(void);
+t_rt_parse_error	rt_parse_okd(void *data);
 t_rt_parse_error	rt_parse_err(enum e_rt_parse_error type);
 t_rt_parse_error	rt_parse_errd(enum e_rt_parse_error type, void *data);
 t_rt_parse_error	rt_parse_errs(enum e_rt_parse_error type,
@@ -101,19 +102,25 @@ void				rt_parse_err_print(t_rt_parser *parser,
 #  ifndef __ERROR_SPEC__
 #   define __ERROR_SPEC__
 
+// This defines a "result" type, as well as common function related to it.
+
+//  errspec:base
 #   define RESULT	t_rt_parse_error
 #   define RES_OK	rt_parse_is_ok
 #   define RES_ERR	rt_parse_is_err
 
 #   define OK		rt_parse_ok
+#   define OKD		rt_parse_okd
 #   define ERR		rt_parse_err
 #   define ERRD		rt_parse_errd
 #   define ERRS		rt_parse_errs
+//  errspec:ext-ignore
 #   define ERR_FILE	rt_parse_err_file
 
 #   define ERROR_TYPE	t_rt_parse_error_type
 #   define ERROR_STR	rt_parse_err_str
 #   define ERROR_PRINT	rt_parse_err_print
+//  errspec:end
 
 #  endif
 

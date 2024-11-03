@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 12:47:15 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/02 09:28:03 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@
 
 typedef struct s_rt_parser
 {
-	const t_rt	*rt;
-	t_list		*result;
-	char		**buffer;
-	size_t		nlines;
-	t_list		*type_parsers;
+	const t_rt				*rt;
+	t_list					*result;
+	char					**buffer;
+	size_t					nlines;
+	// t_list					*type_parsers;
+	t_rt_primitive_parser	*primitive_parsers;
 }	t_rt_parser;
 
 RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt);
 void	rt_parser_destroy(t_rt_parser *parser);
+
+void	rt_parser_prim_add(t_rt_parser *parser, t_rt_primitive_parser *parser);
 
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath);
 
