@@ -6,13 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:18:28 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/03 20:51:12 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:07:49 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft/mem.h>
-#include <ft/string.h>
-#include <rt/parser/error.h>
+#include <rt/parser/primitive/strtod.h>
 
 t_rt_parser_file_context	rt_strtod_ctx_char(size_t i, const char *err,
 								const char *fix)
@@ -28,12 +26,46 @@ t_rt_parser_file_context	rt_strtod_ctx_char(size_t i, const char *err,
 	return (ctx);
 }
 
-static RESULT	rt_strtod_expand(RESULT res, size_t len)
+static RESULT	rt_strtod_expand(RESULT res, size_t len, double *result,
+					double parts[2])
 {
 	if (RES_OK(res))
 		return (res);
 	else if (res.type == PARSE_ERR_FILE)
 		res.file_context.column += len;
+	return (res);
+}
+
+// num: read the number
+// midcheck: check if we're at the middle '.' or at the end
+// frac: if we're at the '.', read the fractional part
+// final: check if we're at a valid end
+// expand: error expansion + result handling
+RESULT	rt_strtod(const char **str, double *result, const char *end)
+{
+	double	parts[2];
+	bool	filled[2];
+	bool	neg;
+	RESULT	res;
+	char	*orig;
+
+	ft_memset(parts, 0, sizeof(parts));
+	ft_memset(filled, 0, sizeof(filled));
+	orig = *str;
+	*str += ft_strspn(*str, " ");
+	neg = (**str == '-');
+	if (neg || **str == '+')
+		(*str)++;
+	res = rt_strtoc_num(str, &parts[0], &filled[0]);
+	if (RES_OK(res))
+		res = rt_strtod_midcheck(*str, end);
+	if (RES_OK(res) && **str == '.')
+		res = rt_strtod_frac(str, &parts[1], &filled[1], end);
+	if (RES_OK(res))
+		res = rt_strtod_final(str, filled, end);
+	res = rt_strtod_expand(res, *str - orig, result, parts);
+	if (neg && RES_OK(res))
+		*result = -(*result);
 	return (res);
 }
 
@@ -58,30 +90,3 @@ static RESULT	rt_strtod_expand(RESULT res, size_t len)
 // -1.0AAAAf
 // -1.0fAAAA
 // -1A0f
-RESULT	rt_strtod(const char *str, double *result, const char *end)
-{
-	double	parts[2];
-	bool	filled[2];
-	bool	neg;
-	RESULT	res;
-	char	*orig;
-
-	ft_memset(parts, 0, sizeof(parts));
-	ft_memset(filled, 0, sizeof(filled));
-	orig = str;
-	str += ft_strspn(str, " ");
-	neg = (*str == '-');
-	if (neg || *str == '+')
-		str++;
-	res = rt_strtoc_num(&str, &parts[0], &filled[0]);
-	if (RES_OK(res))
-		res = rt_strtod_midcheck(str, end);
-	if (RES_OK(res) && str[0] == '.')
-		res = rt_strtod_frac(&str, &parts[1], &filled[1], end);
-	if (RES_OK(res))
-		res = rt_strtod_final(str, filled, end);
-	res = rt_strtod_expand(res, str - orig, result, parts);
-	if (neg && RES_OK(res))
-		*result = -(*result);
-	return (res);
-}
