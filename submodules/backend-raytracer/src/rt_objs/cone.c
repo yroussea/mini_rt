@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 16:30:43 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:54:42 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,17 @@ t_vec3d	get_colors_cone(t_ray ray, void *obj)
 		return (*all_colors);
 
 	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
+	// printf("%lf\n", u);
 	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
-	
+
 	const t_vec3d sol = m3d_solv(
 		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
 	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
 
-	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
+	// const double	len_v = v3d_len(v3d_sub(a, ray.hit_point)) - tanf(c_cone->theta) * u;
+	// const double	len_v = 0;
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u - 0, phi / M_PI * 100.)]);
 }
 #else
 t_vec3d	get_colors_cone(t_ray ray, void *obj)

@@ -6,11 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:20:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/03 13:41:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:51:08 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define CHECKER_SIZE 25
+#define CHECKER_SIZE 20
 #include <math.h>
 #include <stdbool.h>
 

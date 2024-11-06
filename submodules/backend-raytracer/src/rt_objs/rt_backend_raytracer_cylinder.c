@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   rt_backend_raytracer_cylinder.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 17:04:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:34:44 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ t_vec3d	rt_backend_raytracer_colors_cylinder(
 	if (cy->material.type == COLOR)
 		return (*all_colors);
 	u = v3d_dot(v3d_sub(ray.hit_point, c_cy->center), c_cy->axis);
-	sol = m3d_solv(
-		m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(ray.hit_point, \
-			v3d_add(c_cy->center, v3d_mult(c_cy->axis, u))));
-	return (all_colors[rt_backend_raytracer_checkerboard(u, ft_fsign(sol.y) * \
-		acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y))/ M_PI * 100)]);
+
+	const t_vec3d	a = v3d_add(c_cy->center, v3d_mult(c_cy->axis, u));
+	sol = m3d_solv(m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(ray.hit_point, a));
+	const double	phy = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+
+	const double	len_v = v3d_len(v3d_sub(a, ray.hit_point));
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u - len_v + c_cy->diameter / 2, phy / M_PI * 100)]);
 }
 #else
 t_vec3d	rt_backend_raytracer_colors_cylinder(t_ray ray, void *obj)
