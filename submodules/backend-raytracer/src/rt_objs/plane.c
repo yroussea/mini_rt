@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/03 16:16:09 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:38:20 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
 
 	plane = malloc(sizeof(t_plane));
 	plane->normal = v3d_norm(normal);
-	plane->vec_udir = v3d_norm(v3d(-plane->normal.y, plane->normal.x, 0));
+	plane->vec_udir = v3d_norm(v3d(plane->normal.y + plane->normal.z, -plane->normal.x, -plane->normal.x));
 	plane->vec_vdir = v3d_norm(v3d_cross(plane->normal, plane->vec_udir));
 	plane->point = point;
 	new = malloc(sizeof(t_objs));

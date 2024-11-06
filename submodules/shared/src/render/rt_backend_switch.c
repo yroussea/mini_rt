@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 05:05:19 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 18:37:04 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:01:59 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	rt_backend_switch(t_rt *rt, const char *name)
 		rt_error(rt, "failed to create backend\n");
 	else if (rt->backend->init)
 		rt->backend->init(rt->backend);
+	rt_trace(rt, "switch complete\n");
 }

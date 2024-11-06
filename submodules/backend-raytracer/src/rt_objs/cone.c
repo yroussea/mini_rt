@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 17:54:42 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:37:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,26 @@ double	cone_inter(t_ray ray, void *obj)
 	t_cone	*cone;
 	double	t1;
 	double	t2;
+	double	closer;
 
+	closer = INFINITY;
 	cone = obj;
-	if (!infinite_cone_inter(ray, cone, &t1, &t2))
-		return (plane_bottom_cone(ray, cone));
-	if (!val_cone_inter(t1, ray, cone))
-		t1 = INFINITY;
-	if (!val_cone_inter(t2, ray, cone))
-		t2 = INFINITY;
-	// return (ft_fmin(t1, ft_fmin(t2, INFINITY)));
-	return (ft_fmin(t1, ft_fmin(t2, plane_bottom_cone(ray, cone))));
+	cone->surface_type = RONDED;
+	if (infinite_cone_inter(ray, cone, &t1, &t2))
+	{
+		if (!val_cone_inter(t1, ray, cone))
+			t1 = INFINITY;
+		if (!val_cone_inter(t2, ray, cone))
+			t2 = INFINITY;
+		closer = ft_fmin(t2, t1);
+	}
+	t1 = plane_bottom_cone(ray, cone);
+	if (t1 < closer)
+	{
+		closer = t1;
+		cone->surface_type = PLANE;
+	}
+	return (closer);
 }
 
 
@@ -103,7 +113,7 @@ t_vec3d	get_cone_normal(t_ray ray, void *obj)
 
 
 	cone = obj;
-	if (v3d_dot(v3d_norm(v3d_sub(ray.hit_point, cone->center)), cone->axis) < 0)
+	if (cone->surface_type != RONDED)
 		return (v3d_mult(cone->axis, -ft_fsign(v3d_dot(ray.direction, cone->axis))));
 	m = v3d_len(v3d_sub(ray.hit_point, cone->center)) / cone->cos;
 	a = v3d_add(cone->center, v3d_mult(cone->axis, m));
@@ -111,8 +121,8 @@ t_vec3d	get_cone_normal(t_ray ray, void *obj)
 	return (v3d_mult(v, -ft_fsign(v3d_dot(ray.direction, v))));
 }
 
-#define RT_RONDED_CONE_LINK_CHECKERBOARD
-#ifdef RT_RONDED_CONE_LINK_CHECKERBOARD
+#define RT_RONDED_CONE_LINK_CHECKERBOARD 1 
+#if RT_RONDED_CONE_LINK_CHECKERBOARD
 t_vec3d	get_colors_cone(t_ray ray, void *obj)
 {
 	const t_objs	*cone = (t_objs *)obj;
@@ -123,30 +133,36 @@ t_vec3d	get_colors_cone(t_ray ray, void *obj)
 		return (*all_colors);
 
 	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
-	// printf("%lf\n", u);
 	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
 
 	const t_vec3d sol = m3d_solv(
 		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
 	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
 
-	// const double	len_v = v3d_len(v3d_sub(a, ray.hit_point)) - tanf(c_cone->theta) * u;
+	const double	len_v = v3d_len(v3d_sub(a, ray.hit_point)) - tanf(c_cone->theta) * u;
 	// const double	len_v = 0;
 
-	return (all_colors[rt_backend_raytracer_checkerboard(u - 0, phi / M_PI * 100.)]);
+	return (all_colors[rt_backend_raytracer_checkerboard(u - len_v, phi / M_PI * 100.)]);
 }
 #else
 t_vec3d	get_colors_cone(t_ray ray, void *obj)
 {
-	///to do: need to diff type of hit during cone_inter (PLANE RONDED)
-	///if plane rt_backend_raytracer_planar_color()
 
 	const t_objs	*cone = (t_objs *)obj;
 	const t_cone	*c_cone = (t_cone *)cone->obj;
 	const t_vec3d	all_colors[2] = {cone->material.colors, (t_vec3d){0, 0, 0}};
+	t_vec3d			hit;
 
 	if (cone->material.type == COLOR)
 		return (*all_colors);
+	if (c_cone->surface_type != RONDED)
+	{
+		hit = v3d_sub(ray.hit_point, v3d_add(c_cone->center, v3d_mult(c_cone->axis, c_cone->height)));
+		return (rt_backend_raytracer_planar_color(
+			hit, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
+			cone->material.colors, cone->material.type
+		));
+	}
 
 	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
 	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));

@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/27 00:23:11 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/06 21:47:41 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,6 +161,10 @@ ifeq ($(USE_VALGRIND_LOGFILE), 1)
 else
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(VG_ARGS) || true
 endif
+
+callgrind: $(NAME)
+	valgrind --tool=callgrind ./$(NAME) $(VG_ARGS) || true
+	@echo "[*] Callgrind log available in callgrind.log"
 
 help:
 	@printf "Usage: make [target] [VG_ARGS=\"...\"]\n"

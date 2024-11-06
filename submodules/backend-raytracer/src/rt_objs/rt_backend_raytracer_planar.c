@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:51:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/03 14:22:04 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:19:13 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ double	rt_backend_raytracer_planar_intersect(t_ray ray, t_vec3d n, t_vec3d a)
 	return (numerator / v3d_dot(n, ray.direction));
 }
 
-//relative_hit = v3d_sub(ray.hit_point, a)
 t_vec3d	rt_backend_raytracer_planar_color(
 	t_vec3d relative_hit, t_mat3d vectors, t_vec3d color, t_material_type type)
 {

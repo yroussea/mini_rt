@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/03 16:45:51 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 21:52:08 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ double	ray_sphere_intersect(t_ray ray, void *obj)
 	v = v3d_sub(ray.point, (*(t_sphere *)obj).center);
 	b = v3d_dot(v, ray.direction);
 	a = v3d_dot(ray.direction, ray.direction);
-	delta = pow(b, 2) - a * \
+	delta = (b * b) - a * \
 		((v3d_dot(v, v) - (*(t_sphere *)obj).dot_production_rayon));
 	if (delta >= 0)
 		return (closer((-b + sqrtf(delta)) / a, (-b - sqrtf(delta)) / a));

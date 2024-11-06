@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 17:34:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:16:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_vec3d	rt_backend_raytracer_cylinder_normal(
 	return (v3d_norm(v3d_sub(ray.hit_point, a)));
 }
 
-#define RT_RONDED_CYLINDER_LINK_CHECKERBOARD
-#ifdef RT_RONDED_CYLINDER_LINK_CHECKERBOARD
+#define RT_RONDED_CYLINDER_LINK_CHECKERBOARD 1
+#if RT_RONDED_CYLINDER_LINK_CHECKERBOARD
 t_vec3d	rt_backend_raytracer_colors_cylinder(
 	const t_ray ray, void *obj)
 {
@@ -115,7 +115,7 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
 	new->obj = cy;
-	new->material = (t_material){CHECKERBOARD, colors};
+	new->material = (t_material){COLOR, colors};
 	rt_backend_raytracer_cylinder(new);
 	return (new);
 }

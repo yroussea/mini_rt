@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/26 02:04:27 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 20:40:02 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 
 typedef struct s_rt_backend_raytracer
 {
-	t_color	*buffer;
+	t_color		*buffer;
+	uint64_t	ticker;
 }	t_rt_backend_raytracer;
 
 int				rt_backend_raytracer_init(t_rt_backend *self);
