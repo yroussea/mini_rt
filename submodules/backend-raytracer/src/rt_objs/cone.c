@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/03 16:20:28 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:30:43 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,49 @@ t_vec3d	get_cone_normal(t_ray ray, void *obj)
 	return (v3d_mult(v, -ft_fsign(v3d_dot(ray.direction, v))));
 }
 
+#define RT_RONDED_CONE_LINK_CHECKERBOARD
+#ifdef RT_RONDED_CONE_LINK_CHECKERBOARD
 t_vec3d	get_colors_cone(t_ray ray, void *obj)
 {
-	const	t_objs	*cone = (t_objs *)obj;
+	const t_objs	*cone = (t_objs *)obj;
+	const t_cone	*c_cone = (t_cone *)cone->obj;
+	const t_vec3d	all_colors[2] = {cone->material.colors, (t_vec3d){0, 0, 0}};
 
-	(void)ray;
-	return (cone->material.colors);
+	if (cone->material.type == COLOR)
+		return (*all_colors);
+
+	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
+	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
+	
+	const t_vec3d sol = m3d_solv(
+		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
+	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
 }
+#else
+t_vec3d	get_colors_cone(t_ray ray, void *obj)
+{
+	///to do: need to diff type of hit during cone_inter (PLANE RONDED)
+	///if plane rt_backend_raytracer_planar_color()
+
+	const t_objs	*cone = (t_objs *)obj;
+	const t_cone	*c_cone = (t_cone *)cone->obj;
+	const t_vec3d	all_colors[2] = {cone->material.colors, (t_vec3d){0, 0, 0}};
+
+	if (cone->material.type == COLOR)
+		return (*all_colors);
+
+	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
+	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
+	
+	const t_vec3d sol = m3d_solv(
+		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
+	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+
+	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
+}
+#endif
 
 t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors)
 {
@@ -136,7 +172,7 @@ t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d c
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
 	new->obj = cone;
-	new->material = (t_material){COLOR, colors};
+	new->material = (t_material){CHECKERBOARD, colors};
 	new->get_normal = get_cone_normal;
 	new->get_colors = get_colors_cone;
 	new->intersection = cone_inter;
