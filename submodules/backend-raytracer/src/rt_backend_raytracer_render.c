@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/06 22:37:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:30:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 		y++;
 	}
 	rt_trace(backend->rt, "banger FINI %d\n", (int)raytracer->ticker);
+
 	return (raytracer->buffer);
 }

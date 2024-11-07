@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 21:52:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:06:06 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ double	closer(double t1, double t2)
 	return (t2);
 }
 
-double	ray_sphere_intersect(t_ray ray, void *obj)
+double	ray_sphere_intersect(t_ray *ray, void *obj)
 {
 	t_vec3d	v;
 	double	b;
 	double	a;
 	double	delta;
 
-	v = v3d_sub(ray.point, (*(t_sphere *)obj).center);
-	b = v3d_dot(v, ray.direction);
-	a = v3d_dot(ray.direction, ray.direction);
+	v = v3d_sub(&ray->point, &(((t_sphere *)obj)->center));
+	b = v3d_dot(&v, &ray->direction);
+	a = v3d_dot(&ray->direction, &ray->direction);
 	delta = (b * b) - a * \
-		((v3d_dot(v, v) - (*(t_sphere *)obj).dot_production_rayon));
+		((v3d_len(&v) - (*(t_sphere *)obj).dot_production_rayon));
 	if (delta >= 0)
 		return (closer((-b + sqrtf(delta)) / a, (-b - sqrtf(delta)) / a));
 	return (-1);
@@ -42,13 +42,13 @@ double	ray_sphere_intersect(t_ray ray, void *obj)
 
 t_vec3d	get_sphere_normal(t_ray ray, void *obj)
 {
-	return (v3d_norm(v3d_sub(ray.hit_point, (*(t_sphere *)obj).center)));
+	return (v3d_normsub(&ray.hit_point, &(((t_sphere *)obj)->center)));
 }
 t_vec3d	get_colors_sphere(t_ray ray, void *obj)
 {
 	const t_objs	*sphere = (t_objs *)obj;
 	const t_sphere	*s_sphere = (t_sphere *)sphere->obj;
-	const t_vec3d	x = v3d_sub(ray.hit_point, s_sphere->center);
+	const t_vec3d	x = v3d_sub(&ray.hit_point, &(s_sphere->center));
 	const t_vec3d	all_colors[2] = {sphere->material.colors, (t_vec3d){0, 0, 0}};
 
 	if (sphere->material.type == COLOR)

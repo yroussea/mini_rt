@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 20:38:20 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:16:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@
 t_vec3d	get_plane_normal(t_ray ray, void *obj)
 {
 	const t_plane	*plane = (t_plane *)obj;
+	const double	dot = v3d_dot(&ray.direction, &plane->normal);
 
-	return (v3d_mult(plane->normal,
-			-ft_fsign(v3d_dot(ray.direction, plane->normal))));
+	return (v3d_mult(&plane->normal, -ft_fsign(dot)));
 }
 
-double	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point)
+double	plane_intersect(t_ray *ray, t_vec3d normal, t_vec3d point)
 {
-	return (v3d_dot(normal, v3d_sub(point, ray.point))
-		/ v3d_dot(normal, ray.direction));
+	const t_vec3d	relative_point = v3d_sub(&point, &ray->point);
+
+	return (v3d_dot(&normal, &relative_point) / v3d_dot(&normal, &ray->direction));
 }
 
-double	ray_plane_intersect(t_ray ray, void *obj)
+double	ray_plane_intersect(t_ray *ray, void *obj)
 {
 	const t_plane	*p = (t_plane *)obj;
 
@@ -44,7 +45,7 @@ t_vec3d	get_colors_plane(t_ray ray, void *obj)
 	const t_plane	*p_plane = (t_plane *)plane->obj;
 
 	return (rt_backend_raytracer_planar_color(
-		v3d_sub(ray.hit_point, p_plane->point),
+		v3d_sub(&ray.hit_point, &p_plane->point),
 		m3d(p_plane->vec_vdir, p_plane->vec_udir, p_plane->normal),
 		plane->material.colors,
 		plane->material.type
@@ -53,13 +54,15 @@ t_vec3d	get_colors_plane(t_ray ray, void *obj)
 
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
 {
-	t_objs		*new;
-	t_plane		*plane;
+	t_objs			*new;
+	t_plane			*plane;
+	const t_vec3d	udir = v3d(normal.y + normal.z, -normal.x, -normal.x);
+	const t_vec3d	vdir = v3d_cross(&normal, &udir);
 
 	plane = malloc(sizeof(t_plane));
-	plane->normal = v3d_norm(normal);
-	plane->vec_udir = v3d_norm(v3d(plane->normal.y + plane->normal.z, -plane->normal.x, -plane->normal.x));
-	plane->vec_vdir = v3d_norm(v3d_cross(plane->normal, plane->vec_udir));
+	plane->normal = v3d_norm(&normal);
+	plane->vec_udir = v3d_norm(&udir);
+	plane->vec_vdir = v3d_norm(&vdir);
 	plane->point = point;
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;

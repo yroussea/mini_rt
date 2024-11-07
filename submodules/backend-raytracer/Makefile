@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/06 21:46:15 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/07 00:33:22 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,5 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  rt_objs/rt_backend_raytracer_cylinder_intersection.c \
 	  rt_objs/rt_backend_raytracer_cylinder.c \
 	  rt_objs/add_obj.c
-
-EXTRA_CFLAGS += -g
 
 include ../submodule.mk

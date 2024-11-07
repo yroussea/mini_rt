@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 16:48:48 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 23:23:11 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_objs
 	void				*obj;
 	t_objs_type			type;
 	t_material			material;
-	double				(*intersection)(t_ray ray, void *obj);
+	double				(*intersection)(t_ray *ray, void *obj);
 	t_vec3d				(*get_normal)(t_ray ray, void *obj);
 	t_vec3d				(*get_colors)(t_ray ray, void *obj);
 	struct s_objs		*next;
@@ -119,7 +119,7 @@ typedef struct s_objs
 
 //les objs seront pas a faire spown dans le backend !! temporaire uniquement
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m);
-double	plane_intersect(t_ray ray, t_vec3d normal, t_vec3d point);
+double	plane_intersect(t_ray *ray, t_vec3d normal, t_vec3d point);
 t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors);
 t_objs	*sphere(t_vec3d center, double diameter, t_material m);
 t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color);
@@ -131,10 +131,10 @@ t_objs	*add_objects(t_objs *new);
 bool	rt_backend_raytracer_checkerboard(double a, double b);
 t_vec3d	rt_backend_raytracer_planar_color(
 	t_vec3d relative_hit, t_mat3d vectors, t_vec3d color, t_material_type type);
-double	rt_backend_raytracer_planar_intersect(t_ray ray, t_vec3d n, t_vec3d a);
+double	rt_backend_raytracer_planar_intersect(t_ray *ray, t_vec3d n, t_vec3d a);
 
 double	rt_backend_raytracer_cylinder_intersection(
-	t_ray ray, void *obj);
+	t_ray *ray, void *obj);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:51:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 20:19:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:19:09 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include <ft/math/matrix.h>
 #include <rt/render/backend/raytracer.h>
 
-double	rt_backend_raytracer_planar_intersect(t_ray ray, t_vec3d n, t_vec3d a)
+double	rt_backend_raytracer_planar_intersect(t_ray *ray, t_vec3d n, t_vec3d a)
 {
-	const double	numerator = v3d_dot(n, v3d_sub(a, ray.point));
+	const t_vec3d	new_point = v3d_sub(&a, &ray->point);
+	const double	numerator = v3d_dot(&n, &new_point);
 
-	return (numerator / v3d_dot(n, ray.direction));
+	return (numerator / v3d_dot(&n, &ray->direction));
 }
 
 t_vec3d	rt_backend_raytracer_planar_color(

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 18:57:57 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:49:35 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	const	double k = u * fov / 2;
 	(void)k;
 	ray->direction = /* get_rotation */(t_vec3d){sin(k), v, cos(k)};
-	ray->point = v3d_add(ray->center, ray->direction);
+	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
-	ray->direction = v3d_norm(ray->direction);
+	ray->direction = v3d_norm(&ray->direction);
 }
 #else
 void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation et pos)*/)
 {
 	(void)fov;
 	ray->direction = /* get_rotation */(t_vec3d){u, v, 1};
-	ray->point = v3d_add(ray->center, ray->direction);
+	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
-	ray->direction = v3d_norm(ray->direction);
+	ray->direction = v3d_norm(&ray->direction);
 }
 #endif
 

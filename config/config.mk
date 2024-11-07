@@ -6,12 +6,12 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/06 22:20:26 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/07 00:55:07 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_NAME = rt
-PROJECT_VERSION = 2.0.2-dev
+PROJECT_VERSION = 2.1.0-dev
 PROJECT_URL = https://github.com/27network/rt
 COMP_MODE = $(PROJECT_NAME)
 

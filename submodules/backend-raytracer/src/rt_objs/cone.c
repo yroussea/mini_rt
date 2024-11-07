@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 22:37:46 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:18:03 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,30 @@
 #include <stdlib.h>
 #include <math.h>
 
-static bool	infinite_cone_inter(t_ray ray, t_cone *cone, double *t1, double *t2)
+static bool	infinite_cone_inter(t_ray *ray, t_cone *cone, double *t1, double *t2)
 {
 	double			var[5];
-	const double		sq_cos = powf(cone->cos, 2);
-	const t_vec3d	x = v3d_sub(ray.point, cone->center);
+	const double	sq_cos = cone->cos * cone->cos;
+	const t_vec3d	x = v3d_sub(&ray->point, &cone->center);
 	t_vec3d			param;
 
-	var[0] = v3d_dot(ray.direction, cone->axis);
-	var[1] = v3d_dot(x, cone->axis);
-	var[2] = v3d_dot(ray.direction, v3d_mult(x, sq_cos));
-	var[3] = v3d_dot(x, cone->axis);
-	var[4] = v3d_dot(x, v3d_mult(x, sq_cos));
-	param.x = powf(var[0], 2) - sq_cos;
+	var[0] = v3d_dot(&ray->direction, &cone->axis);
+	var[1] = v3d_dot(&x, &cone->axis);
+	param = v3d_mult(&x, sq_cos);
+	var[2] = v3d_dot(&ray->direction, &param);
+	var[3] = v3d_dot(&x, &cone->axis);
+	var[4] = v3d_dot(&x, &param);
+	param.x = var[0] * var[0] - sq_cos;
 	param.y = 2 * (var[0] * var[1] - var[2]);
-	param.z = powf(var[3], 2) - var[4];
-	if (!v3d_quadr(param, t1, t2))
+	param.z = var[3] * var[3] - var[4];
+	if (!v3d_quadr(&param, t1, t2))
 		return (0);
 	if (*t1 < 0 && *t2 < 0)
 		return (0);
 	return (1);
 }
 
-static bool	val_cone_inter(double t, t_ray ray, t_cone *cone)
+static bool	val_cone_inter(double t, t_ray *ray, t_cone *cone)
 {
 	//marche que pour theta < 90°
 	t_vec3d	hit;
@@ -49,33 +50,33 @@ static bool	val_cone_inter(double t, t_ray ray, t_cone *cone)
 
 	if (t < 0)
 		return (0);
-	hit = v3d_add(ray.point, v3d_mult(ray.direction, t));
-	x = v3d_sub(hit, cone->center);
-	dot = v3d_dot(v3d_norm(x), cone->axis);
+	hit = v3d_addmult(&ray->point, &ray->direction, t);
+	x = v3d_normsub(&hit, &cone->center);
+	dot = v3d_dot(&x, &cone->axis);
 	if (dot < 0)
 		return (0);
-	if (v3d_len(v3d_sub(hit, cone->center)) > cone->max_dist)
+	if (v3d_lensub(&hit, &cone->center) > cone->max_dist)
 		return (0);
 	return (1);
 }
 
-static double	plane_bottom_cone(t_ray ray, t_cone *cone)
+static double	plane_bottom_cone(t_ray *ray, t_cone *cone)
 {
 	t_vec3d	hit;
 	double	plane;
 	t_vec3d	bottom;
 
-	bottom = v3d_add(cone->center, v3d_mult(cone->axis, cone->height));
+	bottom = v3d_addmult(&cone->center, &cone->axis, cone->height);
 	plane = rt_backend_raytracer_planar_intersect(ray, cone->axis, bottom);
 	if (plane < 0)
 		return (INFINITY);
-	hit = v3d_add(ray.point, v3d_mult(ray.direction, plane));
-	if (v3d_len(v3d_sub(bottom, hit)) > cone->height * tan(cone->theta))
+	hit = v3d_addmult(&ray->point, &ray->direction, plane);
+	if (v3d_lensub(&bottom, &hit) > cone->height * tan(cone->theta)) //FIXME: cache tan()
 		return (INFINITY);
 	return (plane);
 }
 
-double	cone_inter(t_ray ray, void *obj)
+double	cone_inter(t_ray *ray, void *obj)
 {
 	t_cone	*cone;
 	double	t1;
@@ -105,20 +106,18 @@ double	cone_inter(t_ray ray, void *obj)
 
 t_vec3d	get_cone_normal(t_ray ray, void *obj)
 {
-	//marche pas si plan
 	t_cone		*cone;
 	double		m;
 	t_vec3d		a;
 	t_vec3d		v;
 
-
 	cone = obj;
 	if (cone->surface_type != RONDED)
-		return (v3d_mult(cone->axis, -ft_fsign(v3d_dot(ray.direction, cone->axis))));
-	m = v3d_len(v3d_sub(ray.hit_point, cone->center)) / cone->cos;
-	a = v3d_add(cone->center, v3d_mult(cone->axis, m));
-	v = v3d_norm(v3d_sub(ray.hit_point, a));
-	return (v3d_mult(v, -ft_fsign(v3d_dot(ray.direction, v))));
+		return (v3d_mult(&cone->axis, -ft_fsign(v3d_dot(&ray.direction, &cone->axis))));
+	m = v3d_lensub(&ray.hit_point, &cone->center) / cone->cos;
+	a = v3d_addmult(&cone->center, &cone->axis, m);
+	v = v3d_normsub(&ray.hit_point, &a);
+	return (v3d_mult(&v, -ft_fsign(v3d_dot(&ray.direction, &v))));
 }
 
 #define RT_RONDED_CONE_LINK_CHECKERBOARD 1 
@@ -131,17 +130,12 @@ t_vec3d	get_colors_cone(t_ray ray, void *obj)
 
 	if (cone->material.type == COLOR)
 		return (*all_colors);
-
-	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
-	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
-
+	const double u = v3d_lensub(&ray.hit_point, &c_cone->center) / c_cone->cos;
+	const t_vec3d a = v3d_addmult(&c_cone->center, &c_cone->axis, u);
 	const t_vec3d sol = m3d_solv(
-		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
+		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(&ray.hit_point, &a));
 	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
-
-	const double	len_v = v3d_len(v3d_sub(a, ray.hit_point)) - tanf(c_cone->theta) * u;
-	// const double	len_v = 0;
-
+	const double	len_v = v3d_lensub(&a, &ray.hit_point) - tan(c_cone->theta) * u; // FIXME: cache tan()
 	return (all_colors[rt_backend_raytracer_checkerboard(u - len_v, phi / M_PI * 100.)]);
 }
 #else
@@ -157,37 +151,38 @@ t_vec3d	get_colors_cone(t_ray ray, void *obj)
 		return (*all_colors);
 	if (c_cone->surface_type != RONDED)
 	{
-		hit = v3d_sub(ray.hit_point, v3d_add(c_cone->center, v3d_mult(c_cone->axis, c_cone->height)));
+		hit = v3d_addmult(&c_cone->center, c_cone->axis, c_cone->height);
+		hit = v3d_sub(&ray.hit_point, &hit));
 		return (rt_backend_raytracer_planar_color(
 			hit, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
 			cone->material.colors, cone->material.type
 		));
 	}
-
-	const double u = v3d_len(v3d_sub(ray.hit_point, c_cone->center)) / c_cone->cos;
-	const t_vec3d a = v3d_add(c_cone->center, v3d_mult(c_cone->axis, u));
-	
+	const double u = v3d_lensub(ray.hit_point, c_cone->center) / c_cone->cos;
+	const t_vec3d a = v3d_addmult(&c_cone->center, c_cone->axis, u);
 	const t_vec3d sol = m3d_solv(
-		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(ray.hit_point, a));
+		m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis), v3d_sub(&ray.hit_point, &a));
 	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
-
 	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
 }
 #endif
 
 t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors)
 {
-	t_objs		*new;
-	t_cone		*cone;
+	t_objs			*new;
+	t_cone			*cone;
+	const t_vec3d	udir = v3d(vector.y + vector.z, -vector.x, -vector.x);
+	const t_vec3d	vdir = v3d_cross(&vector, &udir);
 
 	cone = malloc(sizeof(t_cone));
-	cone->axis = v3d_norm(vector);
-	cone->vec_udir = v3d_norm(v3d(-cone->axis.y, cone->axis.x, 0));
-	cone->vec_vdir = v3d_norm(v3d_cross(cone->axis, cone->vec_udir));
+	cone->axis = v3d_norm(&vector);
+	cone->vec_udir = v3d_norm(&udir);
+	cone->vec_vdir = v3d_norm(&vdir);
 	cone->height = height;
 	cone->theta = theta / 180 * M_PI;
 	cone->center = coo;
 	cone->cos = cos(cone->theta);
+	//to do add tan
 	cone->max_dist = height / cone->cos;
 	new = malloc(sizeof(t_objs));
 	new->type = OBJS;
