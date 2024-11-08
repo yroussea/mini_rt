@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_backend_raytracer_ctor.c                        :+:      :+:    :+:   */
+/*   rt_free_aligned.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 03:15:02 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/07 00:39:46 by yroussea         ###   ########.fr       */
+/*   Created: 2024/11/08 16:42:50 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/08 16:42:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/log.h>
-#include <rt/render/backend/raytracer.h>
+#include <ft/mem.h>
 
-__attribute__((constructor))
-void	rt_backend_raytracer_ctor(void)
+void	rt_free_aligned(void *ptr)
 {
-	RT_DEBUG("WHAT THE FUCK\n");
-	rt_backend_provider_register((t_rt_backend_provider){
-		.name = "raytracer",
-		.fn = rt_backend_raytracer_provider
-	});
+	size_t	*size_ptr;
+
+	if (!ptr)
+		return ;
+	size_ptr = (size_t *)(ptr - sizeof(size_t));
+	ptr -= sizeof(size_t) + *size_ptr;
+	free(ptr);
 }

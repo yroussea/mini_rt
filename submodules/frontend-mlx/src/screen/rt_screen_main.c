@@ -6,18 +6,30 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 00:47:35 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:15:20 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RT_DEVMODE
+# define RT_DEVMODE 0
+#endif // RT_DEVMODE
+
 #include <ft/mem.h>
-#include <rt/devreload.h>
+#if RT_DEVMODE
+# include <rt/devreload.h>
+#endif // RT_DEVMODE
 #include <rt/render/backend.h>
 #include <rt/render/frontend/macrolibx.h>
 #include <rt/log.h>
 #include <tocard/screen.h>
 #include <tocard/draw.h>
 #include <SDL2/SDL_scancode.h>
+
+#if !RT_DEVMODE
+
+void	rt_devrl_check_reload(void *a);
+
+#endif // !RT_DEVMODE
 
 //FIXME: uninitialized value in tocard-ui `t_toc_window#keymap`
 static void	rt_screen_main_init(t_toc_screen *self)

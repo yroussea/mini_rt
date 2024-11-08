@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/27 00:23:11 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/07 00:59:12 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,13 +154,17 @@ daemon: daemon-stop
 	@echo "[*] Starting daemon..."
 	@bash ./$(DAEMON_SCRIPT) $(DAEMON_TARGET_FILE) $(DAEMON_ALIVE_FILE)
 
-valgrind: $(NAME)
+valgrind:
 ifeq ($(USE_VALGRIND_LOGFILE), 1)
 	valgrind $(VALGRIND_FLAGS) --log-file=valgrind.log ./$(NAME) $(VG_ARGS) || true
 	@echo "[*] Valgrind log available in valgrind.log"
 else
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(VG_ARGS) || true
 endif
+
+callgrind:
+	valgrind --tool=callgrind ./$(NAME) $(VG_ARGS) || true
+	@echo "[*] Callgrind log available in callgrind.log"
 
 help:
 	@printf "Usage: make [target] [VG_ARGS=\"...\"]\n"

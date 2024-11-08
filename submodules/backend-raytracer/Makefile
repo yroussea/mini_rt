@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/26 02:02:30 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/08 17:47:12 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,17 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  rt_backend_raytracer_find_obj_hit.c \
 	  rt_backend_raytracer_shading.c \
 	  utils/fmod.c	\
+	  utils/rt_free_aligned.c	\
+	  utils/rt_malloc_aligned.c	\
 	  utils/solv_m3d.c	\
-	  rt_objs/plane.c \
-	  rt_objs/sphere.c \
-	  rt_objs/cylinder.c \
-	  rt_objs/cone.c \
+	  rt_objs/rt_backend_raytracer_checkerboard.c \
+	  rt_objs/rt_backend_raytracer_sphere.c \
+	  rt_objs/rt_backend_raytracer_planar.c \
+	  rt_objs/rt_backend_raytracer_plane.c \
+	  rt_objs/rt_backend_raytracer_cone_intersection.c \
+	  rt_objs/rt_backend_raytracer_cone.c \
+	  rt_objs/rt_backend_raytracer_cylinder_intersection.c \
+	  rt_objs/rt_backend_raytracer_cylinder.c \
 	  rt_objs/add_obj.c
 
 include ../submodule.mk

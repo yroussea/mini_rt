@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:51:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/25 23:41:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:52:02 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 
 typedef struct s_ray
 {
-	t_vec3d	point;
-	t_vec3d	center;
-	t_vec3d	direction;
-	t_vec3d	hit_point;
-	t_color	color;
-}	t_ray;
+	t_vec3d				point;
+	t_vec3d				center;
+	t_vec3d				direction;
+	t_vec3d				hit_point;
+	t_color				color;
+}	t_ray
+__attribute__((aligned(32)));
 
 void	eye_rays(t_ray *ray, double u, double v, double fov);
 double	get_width(t_rt_backend *backend, double x);
