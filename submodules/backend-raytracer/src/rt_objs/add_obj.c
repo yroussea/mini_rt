@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 23:40:28 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:28:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 
 t_vec3d	get_colors_light(t_ray ray, void *obj)
 {
-	const	t_objs	*light = (t_objs *)obj;
+	const t_objs	*light = (t_objs *)obj;
 
 	(void)ray;
 	return (light->material.colors);
 }
 
-#include <stdio.h>
 t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color)
 {
 	t_objs	*new;

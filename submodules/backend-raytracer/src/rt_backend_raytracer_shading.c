@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 23:56:06 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:35:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <ft/math.h>
 #include <math.h>
 
-// devrons etre dans une struct?
 #define COEF_DIFFUSE 0.5
 #define COEF_SPECULAR 0.5
 #define COEF_EXPOS_SPECULAR 5
@@ -83,13 +82,13 @@ void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
 	t_vec3d			color_light;
 	t_light			*light;
 
-
 	ambiance_color = (t_vec3d){0, 0, 0};
 	while (objs->type == AMBIANCE_LIGHT)
 	{
 		light = objs->obj;
 		color_light = objs->get_colors(*ray, objs);
-		ambiance_color = v3d_addmult(&ambiance_color, &color_light, light->intensity);
+		ambiance_color = v3d_addmult(&ambiance_color,
+				&color_light, light->intensity);
 		objs = objs->next;
 	}
 	color = shading(objs, ray, obj_hit->get_normal(*ray, obj_hit->obj));

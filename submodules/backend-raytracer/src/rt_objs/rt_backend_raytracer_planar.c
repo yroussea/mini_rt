@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:51:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/07 00:19:09 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:25:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_vec3d	rt_backend_raytracer_planar_color(
 	if (type == COLOR)
 		return (*all_colors);
 	solution = m3d_solv(vectors, relative_hit);
-	return (all_colors[rt_backend_raytracer_checkerboard(solution.x, solution.y)]);
+	return (all_colors[rt_backend_raytracer_checkerboard(
+				solution.x, solution.y)]);
 }

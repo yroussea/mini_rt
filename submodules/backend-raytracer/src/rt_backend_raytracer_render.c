@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/07 00:30:28 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:32:35 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 
 	raytracer = (t_rt_backend_raytracer *)backend->data;
 	// ray.center = first cam
-	rays = rt_backend_raytracer_rays(backend, (t_vec3d){0, 0, -100}, false);
+	rays = rt_backend_raytracer_rays(backend, v3d(0, 0, -100), false);
 	if (!rays)
 		return (NULL);
 	y = 0;
@@ -105,8 +105,6 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 	rt_trace(backend->rt, "go banger %d\n", (int)raytracer->ticker);
 	while (objs->type == CAMERA)
 		objs = objs->next;
-	// t_plane *plane = ((t_plane *)(objs->next->next->obj));
-	// plane->normal.x += raytracer->ticker;
 	while (y < backend->height)
 	{
 		x = 0;
@@ -119,6 +117,5 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 		y++;
 	}
 	rt_trace(backend->rt, "banger FINI %d\n", (int)raytracer->ticker);
-
 	return (raytracer->buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 23:36:30 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:28:59 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs,
 				distance_min = distance;
 				if (hit)
 					*hit = objs;
-				ray->hit_point = v3d_addmult(&ray->point, &ray->direction, distance);
+				ray->hit_point = v3d_addmult(&ray->point, \
+								&ray->direction, distance);
 			}
 		}
 		objs = objs->next;

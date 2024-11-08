@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 23:23:11 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:36:20 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_cone
 	t_vec3d		vec_vdir;
 	double		height;
 	double		theta;
-	double		max_dist;
 	double		cos;
+	double		tan;
+	double		max_dist;
 	t_surface_hit_type	surface_type;
 }				t_cone;
 
@@ -134,6 +135,8 @@ t_vec3d	rt_backend_raytracer_planar_color(
 double	rt_backend_raytracer_planar_intersect(t_ray *ray, t_vec3d n, t_vec3d a);
 
 double	rt_backend_raytracer_cylinder_intersection(
+	t_ray *ray, void *obj);
+double	rt_backend_raytracer_cone_intersection(
 	t_ray *ray, void *obj);
 
 

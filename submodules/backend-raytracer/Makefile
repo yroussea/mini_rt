@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/07 00:33:22 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/08 13:36:40 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  rt_objs/rt_backend_raytracer_checkerboard.c \
 	  rt_objs/rt_backend_raytracer_planar.c \
 	  rt_objs/rt_backend_raytracer_cylinder_intersection.c \
+	  rt_objs/rt_backend_raytracer_cone_intersection.c \
 	  rt_objs/rt_backend_raytracer_cylinder.c \
 	  rt_objs/add_obj.c
 

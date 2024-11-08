@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/07 00:30:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:45:25 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,77 +26,80 @@ t_vec3d	rt_backend_raytracer_cylinder_normal(
 	double				m;
 
 	if (cy->surface_type != RONDED)
-		return (v3d_mult(&cy->axis, -ft_fsign(v3d_dot(&ray.direction, &cy->axis))));
+		return (v3d_mult(&cy->axis,
+				-ft_fsign(v3d_dot(&ray.direction, &cy->axis))));
 	new_point = v3d_sub(&ray.hit_point, &cy->center);
 	m = v3d_dot(&new_point, &cy->axis);
 	a = v3d_addmult(&cy->center, &cy->axis, m);
 	return (v3d_normsub(&ray.hit_point, &a));
 }
 
+static void	rt_backend_raytracer_cylinder_twod_relative_point(
+	t_vec3d *relativ_coo, const t_ray ray, const t_cylinder *c_cy)
+{
+	const t_vec3d	hit = v3d_sub(&ray.hit_point, &c_cy->center);
+	const double	b = v3d_dot(&hit, &c_cy->axis);
+	const t_vec3d	a = v3d_addmult(&c_cy->center, &c_cy->axis, b);
+	const t_vec3d	sol = m3d_solv(m3d(c_cy->vec_udir, c_cy->vec_vdir,
+				c_cy->axis), v3d_sub(&ray.hit_point, &a));
+
+	relative_coo->x = b;
+	relative_coo->y = ft_fsign(sol.y) * \
+		acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
+	relative_coo->z = v3d_lensub(&a, ray_point) - c_cy->diameter / 2;
+}
+
 #define RT_RONDED_CYLINDER_LINK_CHECKERBOARD 1
 #if RT_RONDED_CYLINDER_LINK_CHECKERBOARD
+
 t_vec3d	rt_backend_raytracer_colors_cylinder(
 	const t_ray ray, void *obj)
 {
 	const t_objs		*cy = (t_objs *)obj;
 	const t_cylinder	*c_cy = (t_cylinder *)cy->obj;
-	const t_vec3d		all_colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
-	double				u;
-	t_vec3d				sol;
+	const t_vec3d		colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
+	t_vec3d				tmp;
 
 	if (cy->material.type == COLOR)
-		return (*all_colors);
-	sol = v3d_sub(&ray.hit_point, &c_cy->center);
-	u = v3d_dot(&sol, &c_cy->axis);
-
-	const t_vec3d	a = v3d_addmult(&c_cy->center, &c_cy->axis, u);
-	sol = m3d_solv(m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(&ray.hit_point, &a));
-	const double	phy = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
-
-	const double	len_v = v3d_lensub(&a, &ray.hit_point);
-
-	return (all_colors[rt_backend_raytracer_checkerboard(u - len_v + c_cy->diameter / 2, phy / M_PI * 100)]);
+		return (*colors);
+	rt_backend_raytracer_cylinder_twod_relative_point(&tmp, ray, c_cy);
+	return (colors[rt_backend_raytracer_checkerboard(
+				tmp.x - tmp.z, tmp.y / M_PI * 100)]);
 }
+
 #else
+
 t_vec3d	rt_backend_raytracer_colors_cylinder(t_ray ray, void *obj)
 {
 	const t_objs		*cy = (t_objs *)obj;
 	const t_cylinder	*c_cy = (t_cylinder *)cy->obj;
-	const t_vec3d		all_colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
-	t_vec3d				hit;
+	const t_vec3d		colors[2] = {cy->material.colors, (t_vec3d){0, 0, 0}};
+	t_vec3d				tmp;
 
 	if (cy->material.type == COLOR)
-		return (*all_colors);
+		return (*colors);
 	if (c_cy->surface_type != RONDED)
 	{
 		if (c_cy->surface_type == PLANE)
-			hit = v3d_sub(&ray.hit_point, &c_cy->center);
+			tmp = v3d_sub(&ray.hit_point, &c_cy->center);
 		else
-			hit = v3d_sub(&ray.hit_point, &c_cy->top_center);
+			tmp = v3d_sub(&ray.hit_point, &c_cy->top_center);
 		return (rt_backend_raytracer_planar_color(
-			hit, m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis),
-			cy->material.colors, cy->material.type
-		));
+				tmp, m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis),
+				cy->material.colors, cy->material.type));
 	}
-
-	hit = v3d_sub(&ray.hit_point, &c_cy->center);
-	const double u = v3d_dot(&hit, &c_cy->axis);
-	const t_vec3d a = v3d_addmult(&c_cy->center, &c_cy->axis, u);
-
-	const t_vec3d sol = m3d_solv(
-		m3d(c_cy->vec_udir, c_cy->vec_vdir, c_cy->axis), v3d_sub(&ray.hit_point, &a));
-	const double phi = ft_fsign(sol.y) * acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
-
-	return (all_colors[rt_backend_raytracer_checkerboard(u, phi / M_PI * 100)]);
+	rt_backend_raytracer_cylinder_twod_relative_point(&tmp, ray, c_cy);
+	return (colors[rt_backend_raytracer_checkerboard(
+				tmp.x, tmp.y / M_PI * 100)]);
 }
-#endif
 
+#endif
 
 void	rt_backend_raytracer_cylinder(t_objs *obj)
 {
 	t_cylinder	*cy;
-	t_vec3d	udir;
-	t_vec3d	vdir;
+	t_vec3d		udir;
+	t_vec3d		vdir;
 
 	cy = obj->obj;
 	udir = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
@@ -114,7 +117,6 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3
 {
 	t_objs		*new;
 	t_cylinder	*cy;
-
 
 	cy = malloc(sizeof(t_cylinder));
 	cy->diameter = diam;

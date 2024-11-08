@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 22:49:35 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:35:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 
 #include <stdio.h>
 //a normre + ajouter camera dependent var + renomer fonction
-#if FOV == 90
+//fov n est pas une var env, mais fais partie de la cam
+#define RT_FLAT_VIEW_TYPE 0
+#if RT_FLAT_VIEW_TYPE == 1
+
 void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation et pos)*/)
 {
 	const	double k = u * fov / 2;
@@ -26,7 +29,9 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
 }
+
 #else
+
 void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation et pos)*/)
 {
 	(void)fov;
@@ -35,6 +40,7 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
 }
+
 #endif
 
 double	get_width(t_rt_backend *backend, double x)

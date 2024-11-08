@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:47:27 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/07 00:23:07 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:58:40 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static bool	rt_be_rt_limit_cyl_inter(
 }
 
 static bool	rt_be_rt_limite_plane_inter(
-	const t_ray *ray, const t_cylinder *cy, const double t, const t_vec3d center)
+	const t_ray *ray, const t_cylinder *cy,
+	const double t, const t_vec3d center)
 {
 	t_vec3d		hit;
 
