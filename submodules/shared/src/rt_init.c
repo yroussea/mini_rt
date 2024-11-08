@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:03:45 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/26 17:22:53 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 20:41:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	rt_flags_init(t_rt *rt, const char **envp)
 
 	if (env)
 		rt->flags.verbosity = ft_max(0, ft_atoi(env));
+	rt_trace(rt, "verbosity: %d\n", (int)rt->flags.verbosity);
 	rt->flags.mode = RT_MODE_RENDER_LOOP;
 	rt->flags.frontend = rt_frontend_providers()[0].name;
 	if (!rt->flags.frontend)

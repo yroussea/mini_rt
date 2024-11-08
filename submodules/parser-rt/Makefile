@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/03 20:29:30 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/09 00:22:37 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,14 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  error/rt_parse_ok.c \
 	  error/rt_parse_okd.c \
 	  line/rt_parser_line_process.c \
-	  primitive/strtod/rt_strtod.c \
-	  primitive/strtod/rt_strtod_final.c \
-	  primitive/strtod/rt_strtod_frac.c \
-	  primitive/strtod/rt_strtod_midcheck.c \
-	  primitive/strtod/rt_strtod_num.c \
+	  object/rt_parser_object_register.c \
+	  primitive/strtox/rt_strtod.c \
+	  primitive/strtox/rt_strtod_final.c \
+	  primitive/strtox/rt_strtod_frac.c \
+	  primitive/strtox/rt_strtod_midcheck.c \
+	  primitive/strtox/rt_strtod_num.c \
 	  primitive/rt_parser_prim_coords.c \
+	  primitive/rt_parser_prim_register.c \
 	  primitive/rt_parser_strprim.c \
 	  rt_parser_destroy.c \
 	  rt_parser_init.c \

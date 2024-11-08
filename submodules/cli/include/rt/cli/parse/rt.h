@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_destroy.c                                :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:51:08 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/09 00:15:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/08 23:43:48 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/08 23:45:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define __RT_PARSER_INTERNAL__
-#include <rt/parser.h>
-#include <stdlib.h>
+#ifndef PARSER_RT_H
+# define PARSER_RT_H
+# undef PARSER_RT_H
+# ifndef __RT_PARSE_PARSER_RT_H__
+#  define __RT_PARSE_PARSER_RT_H__
 
-void	rt_parser_destroy(t_rt_parser *parser)
-{
-	if (parser == NULL)
-		return ;
-	if (parser->buffer)
-		free(parser->buffer);
-	parser->buffer = NULL;
-	if (parser->read_buffer)
-		free(parser->read_buffer);
-	parser->read_buffer = NULL;
-}
+#  include <rt/parser.h>
+
+RESULT	rt_cli_parser_rt_init(t_rt_parser *parser);
+
+# endif // __RT_PARSE_PARSER_RT_H__
+#endif // PARSER_RT_H

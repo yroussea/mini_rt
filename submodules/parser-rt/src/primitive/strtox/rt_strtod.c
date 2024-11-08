@@ -6,10 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:18:28 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/06 15:07:49 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 20:27:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include <rt/parser/primitive/strtod.h>
 
 t_rt_parser_file_context	rt_strtod_ctx_char(size_t i, const char *err,
@@ -29,8 +30,16 @@ t_rt_parser_file_context	rt_strtod_ctx_char(size_t i, const char *err,
 static RESULT	rt_strtod_expand(RESULT res, size_t len, double *result,
 					double parts[2])
 {
+	double	total;
+
 	if (RES_OK(res))
+	{
+		total = parts[0];
+		if (parts[1] != 0)
+			total += parts[1] / pow(10, ft_lllen((long long)parts[1]));
+		*result = total;
 		return (res);
+	}
 	else if (res.type == PARSE_ERR_FILE)
 		res.file_context.column += len;
 	return (res);
@@ -43,11 +52,11 @@ static RESULT	rt_strtod_expand(RESULT res, size_t len, double *result,
 // expand: error expansion + result handling
 RESULT	rt_strtod(const char **str, double *result, const char *end)
 {
-	double	parts[2];
-	bool	filled[2];
-	bool	neg;
-	RESULT	res;
-	char	*orig;
+	double		parts[2];
+	bool		filled[2];
+	bool		neg;
+	RESULT		res;
+	const char	*orig;
 
 	ft_memset(parts, 0, sizeof(parts));
 	ft_memset(filled, 0, sizeof(filled));
@@ -56,11 +65,11 @@ RESULT	rt_strtod(const char **str, double *result, const char *end)
 	neg = (**str == '-');
 	if (neg || **str == '+')
 		(*str)++;
-	res = rt_strtoc_num(str, &parts[0], &filled[0]);
+	res = rt_strtod_num(str, &parts[0], &filled[0]);
 	if (RES_OK(res))
 		res = rt_strtod_midcheck(*str, end);
 	if (RES_OK(res) && **str == '.')
-		res = rt_strtod_frac(str, &parts[1], &filled[1], end);
+		res = rt_strtod_frac(str, &parts[1], &filled[1]);
 	if (RES_OK(res))
 		res = rt_strtod_final(str, filled, end);
 	res = rt_strtod_expand(res, *str - orig, result, parts);

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_destroy.c                                :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 01:51:08 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/09 00:15:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/08 23:20:23 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/08 23:23:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define __RT_PARSER_INTERNAL__
-#include <rt/parser.h>
-#include <stdlib.h>
+#ifndef BUILTINS_H
+# define BUILTINS_H
+# undef BUILTINS_H
+# ifndef __RT_PARSER_PRIMITIVE_BUILTINS_H__
+#  define __RT_PARSER_PRIMITIVE_BUILTINS_H__
 
-void	rt_parser_destroy(t_rt_parser *parser)
-{
-	if (parser == NULL)
-		return ;
-	if (parser->buffer)
-		free(parser->buffer);
-	parser->buffer = NULL;
-	if (parser->read_buffer)
-		free(parser->read_buffer);
-	parser->read_buffer = NULL;
-}
+#  include <rt/parser.h>
+#  include <rt/parser/primitive.h>
+
+RESULT	rt_parser_prim_position(t_rt_parser *parser, const char *slice,
+			void *memory, size_t *size);
+
+# endif // __RT_PARSER_PRIMITIVE_BUILTINS_H__
+#endif // BUILTINS_H

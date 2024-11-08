@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_strtod_frac.c                                   :+:      :+:    :+:   */
+/*   rt_cli_parser_rt_init.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:05:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/06 14:05:40 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/08 23:25:48 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/09 00:48:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/parser/primitive/strtod.h>
+#include <rt/cli/parse/rt.h>
+#include <rt/parser.h>
 
-RESULT	rt_strtod_frac(const char **strptr, double *result, bool *filled)
+#define REG rt_parser_object_register
+
+RESULT	rt_cli_parser_rt_init(t_rt_parser *parser)
 {
 	RESULT	res;
-	double	num;
-	char	*str;
 
 	res = OK();
-	str = *strptr;
-	if (!ft_isdigit(str[0]))
-		return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_DIGIT, NULL)));
-	*filled = true;
-	num = 0;
-	while (ft_isdigit(str[i]))
-		num = num * 10 + (str[i++] - '0');
-	*result = num / ft_pow(10, i);
-	*strptr = str + i;
+	(void) parser;
 	return (res);
 }
+
+// t_rt_object_parser	rt_dummy_object(void)
+// {
+// 	t_rt_object_parser	obj;
+//
+// 	obj.id = "dummy";
+// 	obj.is_unique = true;
+// 	obj.size = 16;
+// 	obj.sequence_size = 0;
+// 	obj.required = 0;
+// 	return (obj);
+// }

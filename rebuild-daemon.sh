@@ -56,6 +56,8 @@ cleanup
 
 touch $ALIVE_FILE
 
+sleep 1
+
 trap cleanup EXIT INT TERM QUIT
 
 while true; do
@@ -63,11 +65,14 @@ while true; do
 		echo "! Daemon not alive, exiting"
 		exit 0
 	fi
+	echo "[*] Watching for changes..."
 	# wait for inotify events (any file changes)
-	FILE=$(inotifywait Makefile ./submodules -r -e modify,move,create,delete,attrib,close_write,moved_to,moved_from 2>/dev/null)
+	FILE=$(inotifywait Makefile ./submodules/submodule.mk ./submodules/*/Makefile ./submodules/**/*.{c,h} -r -e modify,move,create,delete,attrib,close_write,moved_to,moved_from 2>/dev/null)
 	if [ $? -ne 0 ]; then
 		break
 	fi
+
+	clear
 
 	# get the first before " "
 	FILE=${FILE%% *}
@@ -79,7 +84,7 @@ while true; do
 		$MAKE remake || true
 	else
 		echo "> Source file changed, running \`make\`"
-		$MAKE || true
+		$MAKE MAKE_MULTITHREAD=0 || true
 	fi
 
 	# is rt/miniRT running?

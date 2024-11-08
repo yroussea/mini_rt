@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/07 00:55:07 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/08 19:40:06 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ NASM = nasm
 NASMFLAGS = -f elf64
 
 MAKE = make --debug=none --no-print-directory
+MAKE_MULTITHREAD ?= 1
+ifeq ($(MAKE_MULTITHREAD), 1)
 MAKE += -j$(shell nproc)
+endif
+
 CACHE_DIR ?= .cache
 
 DEVELOPMENT_MODE ?= 1

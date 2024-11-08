@@ -6,11 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/31 08:19:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:40:04 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/string.h>
+#include <rt/log.h>
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 
@@ -22,18 +23,52 @@ static RESULT	rt_err_expand(RESULT res, const char *filepath)
 	return (res);
 }
 
+static void	rt_parser_buffer_dump(t_rt_parser *parser)
+{
+	size_t	i;
+	size_t	max;
+
+	max = ft_ulllen(parser->nlines);
+	i = 0;
+	while (i < parser->nlines)
+	{
+		if (parser->buffer[i])
+			rt_debug(parser->rt, "(%*d) '%s'\n",
+				(int)max, (int)i + 1, parser->buffer[i]);
+		i++;
+	}
+}
+
+static RESULT	rt_parser_process(t_rt_parser *parser)
+{
+	RESULT	res;
+	size_t	i;
+
+	res = OK();
+	rt_parser_buffer_dump(parser);
+	i = 0;
+	while (i < parser->nlines && RES_OK(res))
+	{
+		if (parser->buffer[i])
+			res = rt_parser_line_process(parser, parser->buffer[i]);
+		i++;
+	}
+	return (res);
+}
+
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 {
 	RESULT	res;
 
-	__attribute__((cleanup(ft_strdel))) char *buffer = NULL;
 	if (parser == NULL)
 		return (ERR(PARSE_ERR_NULL));
-	res = rt_parser_buffer_fill(filepath, &buffer, &parser->nlines);
+	res = rt_parser_buffer_fill(parser, filepath);
 	if (RES_OK(res))
-		res = rt_parser_buffer_preproc(parser, buffer);
+		res = rt_parser_buffer_preproc(parser, parser->read_buffer);
 	if (RES_OK(res))
 		res = rt_parser_buffer_sanitize(parser);
+	if (RES_OK(res))
+		res = rt_parser_process(parser);
 	if (!RES_OK(res))
 		return (rt_err_expand(res, filepath));
 	return (res);

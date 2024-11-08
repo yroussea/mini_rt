@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/03 04:18:27 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:55:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ enum	e_rt_parser_file_error
 	FILE_ERR_MISSING_PART,
 	FILE_ERR_NON_EMPTY_LINE,
 	FILE_ERR_WRONG_ORDER,
+	_FILE_ERR_SIZE,
 };
 
 /**
@@ -56,6 +57,12 @@ typedef struct s_rt_parser_file_context
 	size_t						column;
 	size_t						length;
 	const char					*error_message;
+	struct s_note
+	{
+		size_t					line;
+		size_t					column;
+		const char				*message;
+	}	note;
 	const char					*possible_fix;
 }	t_rt_parser_file_context;
 

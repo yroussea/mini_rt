@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:05:51 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/06 14:37:56 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 20:28:41 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 // (4.1. We have a digit. what???)
 RESULT	rt_strtod_midcheck(const char *str, const char *end)
 {
-	RESULT	res;
-
 	if (str[0] == 0 || (end && ft_strchr(end, str[0])))
 		return (OK());
 	if (str[0] == '.')

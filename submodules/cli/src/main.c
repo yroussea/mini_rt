@@ -6,13 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 11:55:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:45:45 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/app.h>
 #include <rt/cli.h>
+#include <rt/cli/parse/rt.h>
 #include <rt/log.h>
 #include <rt/parser.h>
 #include <rt/render/backend.h>
@@ -29,7 +30,9 @@ static int	rt_parse_wrap(const t_rt *rt)
 	__attribute__((cleanup(rt_parser_destroy))) t_rt_parser parser;
 	if (rt->flags.mode == RT_MODE_APP)
 		return (0);
-	res = rt_parser_init(&parser, rt);
+	res = rt_parser_init(&parser, rt, true);
+	if (RES_OK(res))
+		res = rt_cli_parser_rt_init(&parser);
 	if (RES_OK(res))
 		res = rt_parser_parse(&parser, rt->flags.filepath);
 	if (!RES_OK(res))

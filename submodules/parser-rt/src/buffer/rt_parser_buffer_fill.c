@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 14:54:09 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 10:53:02 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:27:21 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include <fcntl.h>
 #include <ft/io.h>
 #include <ft/mem.h>
-#include <rt/parser/error.h>
 #include <ft/string.h>
+#define __RT_PARSER_INTERNAL__
+#include <rt/parser.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -111,13 +112,12 @@ static RESULT	rt_parser_buffer_alloc_fd(const char *filepath, int fd,
 	return (rt_parser_buffer_fill_fd(filepath, *buffer, len, nlines));
 }
 
-RESULT	rt_parser_buffer_fill(const char *filepath, char **buffer,
-			size_t *nlines)
+RESULT	rt_parser_buffer_fill(t_rt_parser *parser, const char *filepath)
 {
 	RESULT	res;
 	int		fd;
 
-	if (filepath == NULL || buffer == NULL)
+	if (filepath == NULL || parser == NULL)
 		return (ERR(PARSE_ERR_NULL));
 	res = rt_parser_check_filename(filepath);
 	if (!RES_OK(res))
@@ -132,5 +132,6 @@ RESULT	rt_parser_buffer_fill(const char *filepath, char **buffer,
 	if (fd == -1)
 		return (ERRS(PARSE_ERR_FILE_READ, "'%s' cannot be opened: %s",
 				filepath, strerror(errno)));
-	return (rt_parser_buffer_alloc_fd(filepath, fd, buffer, nlines));
+	return (rt_parser_buffer_alloc_fd(filepath, fd, &parser->read_buffer,
+			&parser->nlines));
 }
