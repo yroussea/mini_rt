@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:22:31 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:11:26 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ t_objs	*sphere(t_vec3d center, double diameter, t_material material)
 	t_objs		*new;
 	t_sphere	*sph;
 
-	sph = malloc(sizeof(t_sphere));
+	sph = rt_malloc_aligned(sizeof(t_sphere), 32);
 	sph->rayon = diameter / 2;
 	sph->center = center;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
 	new->type = OBJS;
 	new->obj = sph;
 	new->material = material;

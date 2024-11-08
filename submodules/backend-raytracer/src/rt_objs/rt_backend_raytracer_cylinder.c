@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:19:33 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:10:58 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ t_vec3d	rt_backend_raytracer_colors_cylinder(t_ray ray, void *obj)
 
 #endif
 
+#include <stdio.h>
 void	rt_backend_raytracer_cylinder(t_objs *obj)
 {
 	t_cylinder	*cy;
@@ -107,6 +108,9 @@ void	rt_backend_raytracer_cylinder(t_objs *obj)
 	cy->vec_udir = v3d_norm(&udir);
 	cy->vec_vdir = v3d_norm(&vdir);
 	cy->sq_radius = cy->diameter * cy->diameter / 4;
+	printf("cy: %p (aligned? %s)\n", cy, (uintptr_t)cy % 32 == 0 ? "yes" : "no");
+	printf("cy->center: %p (aligned? %s)\n", &cy->center, (uintptr_t)&cy->center % 32 == 0 ? "yes" : "no");
+	printf("cy->axis: %p (aligned? %s)\n", &cy->axis, (uintptr_t)&cy->axis % 32 == 0 ? "yes" : "no");
 	cy->top_center = v3d_addmult(&cy->center, &cy->axis, cy->height);
 	obj->get_normal = rt_backend_raytracer_cylinder_normal;
 	obj->intersection = rt_backend_raytracer_cylinder_intersection;
@@ -118,12 +122,12 @@ t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3
 	t_objs		*new;
 	t_cylinder	*cy;
 
-	cy = malloc(sizeof(t_cylinder));
+	cy = rt_malloc_aligned(sizeof(t_cylinder), 32);
 	cy->diameter = diam;
 	cy->axis = v3d_norm(&vector);
 	cy->height = height;
 	cy->center = coo;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
 	new->type = OBJS;
 	new->obj = cy;
 	new->material = (t_material){COLOR, colors};

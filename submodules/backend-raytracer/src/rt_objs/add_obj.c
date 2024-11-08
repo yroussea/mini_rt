@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 14:28:19 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:57:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 t_vec3d	get_colors_light(t_ray ray, void *obj)
 {
@@ -28,11 +29,17 @@ t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color)
 	t_objs	*new;
 	t_light	*light;
 
-	light = malloc(sizeof(t_light));
+	light = rt_malloc_aligned(sizeof(t_light), 32);
+	if (!light)
+		return (NULL);
 	if (type == POINT_LIGHT)
 		light->point = coo;
 	light->intensity = intensity;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
+	if (!new)
+		rt_free_aligned(light);
+	if (!new)
+		return (NULL);
 	new->obj = light;
 	new->material = (t_material){COLOR, color};
 	new->get_colors = get_colors_light;
@@ -45,11 +52,11 @@ t_objs	*camera(t_vec3d coo, t_vec3d view_vector, double fov)
 	t_objs		*new;
 	t_camera	*cam;
 
-	cam = malloc(sizeof(t_camera));
+	cam = rt_malloc_aligned(sizeof(t_camera), 32);
 	cam->fov = fov;
 	cam->view_vector = view_vector;
 	cam->point = coo;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
 	new->obj = cam;
 	new->type = CAMERA;
 	return (new);

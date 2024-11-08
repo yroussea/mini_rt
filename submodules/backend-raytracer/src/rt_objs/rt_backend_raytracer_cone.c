@@ -6,17 +6,15 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:06:38 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:01:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/objs.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
 
 t_vec3d	rt_backend_raytracer_cone_normal(
 	const t_ray ray, void *obj)
@@ -118,13 +116,19 @@ t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d c
 	t_objs			*new;
 	t_cone			*cone;
 
-	cone = malloc(sizeof(t_cone));
+	cone = rt_malloc_aligned(sizeof(t_cone), 32);
+	if (!cone)
+		return (NULL);
 	cone->axis = v3d_norm(&vector);
 	cone->height = height;
 	//limiter theta a 90degree
 	cone->theta = theta / 180 * M_PI;
 	cone->center = coo;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
+	if (!new)
+		rt_free_aligned(cone);
+	if (!new)
+		return (NULL);
 	new->type = OBJS;
 	new->obj = cone;
 	new->material = (t_material){CHECKERBOARD, colors};

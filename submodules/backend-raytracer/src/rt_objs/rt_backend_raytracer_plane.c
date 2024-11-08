@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:18:45 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:04:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
 	t_objs			*new;
 	t_plane			*plane;
 
-	plane = malloc(sizeof(t_plane));
+	plane = rt_malloc_aligned(sizeof(t_plane), 32);
 	plane->normal = v3d_norm(&normal);
 	plane->point = point;
-	new = malloc(sizeof(t_objs));
+	new = rt_malloc_aligned(sizeof(t_objs), 32);
 	new->type = OBJS;
 	new->obj = plane;
 	new->material = m;

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:18:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:57:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,54 +35,60 @@ typedef struct s_plane
 	t_vec3d	normal;
 	t_vec3d	vec_udir;
 	t_vec3d	vec_vdir;
-}				t_plane;
+}				t_plane
+__attribute__((aligned(1)));
 
 typedef struct s_cylinder
 {
-	t_vec3d		center;
-	t_vec3d		axis;
-	t_vec3d		vec_udir;
-	t_vec3d		vec_vdir;
-	double		diameter;
-	double		height;
-	t_vec3d		top_center;
-	double		sq_radius;
+	t_vec3d				center;
+	t_vec3d				axis;
+	t_vec3d				vec_udir;
+	t_vec3d				vec_vdir;
+	t_vec3d				top_center;
+	double				sq_radius;
+	double				diameter;
+	double				height;
 	t_surface_hit_type	surface_type;
-}				t_cylinder;
+}				t_cylinder
+__attribute__((aligned(1)));
 
 typedef struct s_cone
 {
-	t_vec3d		center;
-	t_vec3d		axis;
-	t_vec3d		vec_udir;
-	t_vec3d		vec_vdir;
-	double		height;
-	double		theta;
-	double		cos;
-	double		tan;
-	double		max_dist;
+	t_vec3d				center;
+	t_vec3d				axis;
+	t_vec3d				vec_udir;
+	t_vec3d				vec_vdir;
+	double				height;
+	double				theta;
+	double				cos;
+	double				tan;
+	double				max_dist;
 	t_surface_hit_type	surface_type;
-}				t_cone;
+}				t_cone
+__attribute__((aligned(1)));
 
 typedef struct s_light
 {
 	t_vec3d			point;
 	double			intensity;
-}				t_light;
+}				t_light
+__attribute__((aligned(1)));
 
 typedef struct s_sphere
 {
 	t_vec3d		center;
 	double		rayon; //verif rayon ou diametre
 	double		dot_production_rayon;
-}				t_sphere;
+}				t_sphere
+__attribute__((aligned(1)));
 
 typedef struct s_camera
 {
 	t_vec3d	point;
 	t_vec3d	view_vector;
 	double	fov;
-}				t_camera;
+}				t_camera
+__attribute__((aligned(1)));
 
 typedef enum e_objs_type
 {
@@ -103,9 +109,8 @@ typedef struct s_material
 {
 	t_material_type	type;
 	t_vec3d			colors;
-}			t_material;
-
-
+}			t_material
+__attribute__((aligned(1)));
 
 typedef struct s_objs
 {
@@ -121,26 +126,25 @@ typedef struct s_objs
 //les objs seront pas a faire spown dans le backend !! temporaire uniquement
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m);
 double	plane_intersect(t_ray *ray, t_vec3d normal, t_vec3d point);
-t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors);
+t_objs	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam,
+			t_vec3d colors);
 t_objs	*sphere(t_vec3d center, double diameter, t_material m);
 t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color);
 t_objs	*camera(t_vec3d coo, t_vec3d view_vector, double fov);
-t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors);
+t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta,
+			t_vec3d colors);
 t_objs	*add_objects(t_objs *new);
 
-
 bool	rt_backend_raytracer_checkerboard(double a, double b);
-t_vec3d	rt_backend_raytracer_planar_color(
-	t_vec3d relative_hit, t_mat3d vectors, t_vec3d color, t_material_type type);
-double	rt_backend_raytracer_planar_intersect(
-		const t_ray *ray, t_vec3d n, t_vec3d a);
+t_vec3d	rt_backend_raytracer_planar_color(t_vec3d relative_hit, t_mat3d vectors,
+			t_vec3d color, t_material_type type);
+double	rt_backend_raytracer_planar_intersect(const t_ray *ray, t_vec3d n,
+			t_vec3d a);
 
 double	rt_backend_raytracer_cylinder_intersection(
-	t_ray *ray, void *obj);
+			t_ray *ray, void *obj);
 double	rt_backend_raytracer_cone_intersection(
-	t_ray *ray, void *obj);
-
-
+			t_ray *ray, void *obj);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_OBJS_H__
 #endif // OBJS_H
