@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 13:57:25 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:09:58 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static double	rt_be_rt_limite_plan_inter(
 	if (plane < 0)
 		return (INFINITY);
 	hit = v3d_addmult(&ray->point, &ray->direction, plane);
-	if (v3d_lensub(&bottom, &hit) > cone->height * cone->than)
+	if (v3d_lensub(&bottom, &hit) > cone->height * cone->tan)
 		return (INFINITY);
 	return (plane);
 }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 13:45:25 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:19:33 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vec3d	rt_backend_raytracer_cylinder_normal(
 }
 
 static void	rt_backend_raytracer_cylinder_twod_relative_point(
-	t_vec3d *relativ_coo, const t_ray ray, const t_cylinder *c_cy)
+	t_vec3d *relative_coo, const t_ray ray, const t_cylinder *c_cy)
 {
 	const t_vec3d	hit = v3d_sub(&ray.hit_point, &c_cy->center);
 	const double	b = v3d_dot(&hit, &c_cy->axis);
@@ -46,7 +46,7 @@ static void	rt_backend_raytracer_cylinder_twod_relative_point(
 	relative_coo->x = b;
 	relative_coo->y = ft_fsign(sol.y) * \
 		acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
-	relative_coo->z = v3d_lensub(&a, ray_point) - c_cy->diameter / 2;
+	relative_coo->z = v3d_lensub(&a, &ray.hit_point) - c_cy->diameter / 2;
 }
 
 #define RT_RONDED_CYLINDER_LINK_CHECKERBOARD 1

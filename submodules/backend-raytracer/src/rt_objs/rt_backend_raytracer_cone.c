@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 14:06:06 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:06:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_vec3d	rt_backend_raytracer_cone_normal(
 }
 
 static void	rt_backend_raytracer_cone_twod_relative_point(
-	t_vec3d *relativ_coo, const t_ray *ray, const t_cone *cone)
+	t_vec3d *relative_coo, const t_ray ray, const t_cone *cone)
 {
 	const double	u = v3d_lensub(&ray.hit_point, &cone->center) / cone->cos;
 	const t_vec3d	a = v3d_addmult(&cone->center, &cone->axis, u);
@@ -121,7 +121,7 @@ t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d c
 	cone = malloc(sizeof(t_cone));
 	cone->axis = v3d_norm(&vector);
 	cone->height = height;
-	assert theta < 90; //limiter theta a 90degree
+	//limiter theta a 90degree
 	cone->theta = theta / 180 * M_PI;
 	cone->center = coo;
 	new = malloc(sizeof(t_objs));

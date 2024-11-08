@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 14:18:14 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:22:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <math.h>
 
 double	rt_backend_raytracer_sphere_intersection(
-	const t_ray *ray, void *obj)
+	t_ray *ray, void *obj)
 {
 	const t_vec3d	v = v3d_sub(&ray->point, &(((t_sphere *)obj)->center));
 	t_vec3d			param;
@@ -28,11 +28,11 @@ double	rt_backend_raytracer_sphere_intersection(
 	param.x = v3d_dot(&ray->direction, &ray->direction);
 	param.y = v3d_dot(&v, &ray->direction);
 	param.z = ((v3d_len(&v) - (*(t_sphere *)obj).dot_production_rayon));
-	delta = (param.y * param.y) - parma.x * param.z;
+	delta = (param.y * param.y) - param.x * param.z;
 	if (delta >= 0)
 	{
-		t1 = (-b + sqrtf(delta)) / a;
-		t2 = (-b - sqrtf(delta)) / a);
+		t1 = (-param.y + sqrtf(delta)) / param.x;
+		t2 = (-param.y - sqrtf(delta)) / param.x;
 		if (t2 < EPSILON || (t2 > t1 && t1 > EPSILON))
 			return (t1);
 		return (t2);
@@ -40,14 +40,8 @@ double	rt_backend_raytracer_sphere_intersection(
 	return (-1);
 }
 
-t_vec3d	rt_backend_raytracer_sphere_normal(
-	const t_ray ray, void *obj)
-{
-	return (v3d_normsub(&ray.hit_point, &(((t_sphere *)obj)->center)));
-}
-
 static void	rt_backend_raytracer_sphere_twod_relative_point(
-	t_vec3d *relativ_coo, const t_ray *ray, const t_sphere *sph)
+	t_vec3d *relative_coo, const t_ray ray, const t_sphere *sph)
 {
 	const t_vec3d	x = v3d_sub(&ray.hit_point, &(sph->center));
 
@@ -55,7 +49,25 @@ static void	rt_backend_raytracer_sphere_twod_relative_point(
 	relative_coo->y = acos(x.y / sph->rayon);
 }
 
-t_vec3d	rt_backend_raytracer_colors_sphere(t_ray ray, void *obj)
+t_vec3d	rt_backend_raytracer_sphere_normal(
+	const t_ray ray, void *obj)
+{
+	const t_sphere	*sph = (t_sphere *)obj;
+	// t_vec3d			relative_coo;
+
+	// if (sph->material.type == BUMP_MAP)
+	// {
+	// 	rt_backend_raytracer_sphere_twod_relative_point(&relative_coo, ray, sph);
+	// 	//bump map
+	// 	//get_pixel hex -> rgb
+	// 	//bump = (r * 2 - 1, g * 2 - 1 g * 2 -1)
+	// 	//normal *= bump 
+	// }
+	return (v3d_normsub(&ray.hit_point, &sph->center));
+}
+
+t_vec3d	rt_backend_raytracer_colors_sphere(
+	const t_ray ray, void *obj)
 {
 	const t_objs	*sphere = (t_objs *)obj;
 	const t_sphere	*s_sphere = (t_sphere *)sphere->obj;
@@ -72,7 +84,7 @@ void	rt_backend_raytracer_sphere(t_objs *obj)
 {
 	t_sphere	*sph;
 
-	sph = obj;
+	sph = obj->obj;
 	sph->dot_production_rayon = sph->rayon * sph->rayon;
 	obj->get_colors = rt_backend_raytracer_colors_sphere;
 	obj->get_normal = rt_backend_raytracer_sphere_normal;

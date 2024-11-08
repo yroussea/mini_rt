@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 14:27:20 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:18:45 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,8 @@ t_vec3d	rt_backend_raytracer_plane_normal(
 	return (v3d_mult(&plane->normal, -ft_fsign(dot)));
 }
 
-double	plane_intersect(
-	const t_ray *ray, const t_vec3d normal, const t_vec3d point)
-{
-	const t_vec3d	relative_point = v3d_sub(&point, &ray->point);
-
-	return (v3d_dot(&normal, &relative_point) / \
-			v3d_dot(&normal, &ray->direction));
-}
-
 double	rt_backend_raytracer_plane_intersection(
-	const t_ray *ray, void *obj)
+	t_ray *ray, void *obj)
 {
 	const t_plane	*p = (t_plane *)obj;
 
@@ -62,15 +53,15 @@ void	rt_backend_raytracer_plane(t_objs *obj)
 	t_vec3d	udir;
 	t_vec3d	vdir;
 
+	plane = obj->obj;
 	udir = v3d(plane->normal.y + plane->normal.z,
 			-plane->normal.x, -plane->normal.x);
 	vdir = v3d_cross(&plane->normal, &udir);
-	plane = obj->obj;
 	plane->vec_udir = v3d_norm(&udir);
 	plane->vec_vdir = v3d_norm(&vdir);
-	new->get_normal = rt_backend_raytracer_plane_normal;
-	new->intersection = rt_backend_raytracer_plane_intersection;
-	new->get_colors = rt_backend_raytracer_plane_color;
+	obj->get_normal = rt_backend_raytracer_plane_normal;
+	obj->intersection = rt_backend_raytracer_plane_intersection;
+	obj->get_colors = rt_backend_raytracer_plane_color;
 }
 
 t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
