@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 18:11:26 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:30:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ double	rt_backend_raytracer_sphere_intersection(
 
 	param.x = v3d_dot(&ray->direction, &ray->direction);
 	param.y = v3d_dot(&v, &ray->direction);
-	param.z = ((v3d_len(&v) - (*(t_sphere *)obj).dot_production_rayon));
+	param.z = ((v3d_dot(&v, &v) - (*(t_sphere *)obj).dot_production_rayon));
 	delta = (param.y * param.y) - param.x * param.z;
 	if (delta >= 0)
 	{
