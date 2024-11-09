@@ -1,3 +1,9 @@
-[submodule "macrolibx"]
-	path = macrolibx
-	url = https://github.com/seekrs/MacroLibX.git
+[submodule "third-party/MacroLibX"]
+	path = third-party/MacroLibX
+	url = https://github.com/seekrs/MacroLibX
+[submodule "third-party/libft"]
+	path = third-party/libft
+	url = https://codeberg.org/27/libft
+[submodule "third-party/tocard-ui"]
+	path = third-party/tocard-ui
+	url = https://codeberg.org/27/tocard-ui

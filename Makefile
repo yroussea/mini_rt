@@ -6,118 +6,184 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/10/10 13:20:11 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/07 00:59:12 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+### Project variables ###
 
-SILENT = @
+include config/config.mk
 
-COMPIL = $(CLANG)
-ALL_FLAG = -Wall -Werror -Wextra -O3
-CC = $(COMPIL) $(ALL_FLAG)
+NAME = $(PROJECT_NAME)
+PWD := $(shell pwd)
+EXTRA_CFLAGS += -DRT_VERSION='"\"$(PROJECT_VERSION)\""'
+EXTRA_CFLAGS += -DRT_URL='"\"$(PROJECT_URL)\""'
 
-CFLAGS = -g3
-CLANG = $(SILENT)clang $(CFLAGS)
-GCC = $(SILENT)gcc $(CFLAGS)
 
-DEAD_CODE = -g -ffunction-sections -Wl,--gc-sections -Wl,--print-gc-sections
 
-DEBUGCFLAG = -g -gdwarf-3
+### Features header ###
 
-SRCS_DIR = src
-OBJS_DIR = obj
+FEATURES_H = $(PWD)/config/features.h
+_ := $(shell ln -fs $(PWD)/config/features_$(COMP_MODE).h $(FEATURES_H))
 
-include sources.mk
 
-SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
-OBJS = 	$(addprefix $(OBJS_DIR)/, $(subst .c,.o, $(SRCS_FILES)))
 
-INCLUDE = -I include -I macrolibx/includes
+### Submodules ###
 
-PROJECT = rt
-NAME = rt
+SUBMODULES_DIR = $(PWD)/submodules
 
-LIBMLX_DIR = macrolibx
-LIBMLX = $(LIBMLX_DIR)/libmlx.so
+# available submodules
+SUBMODULES = backend-dummy backend-raytracer frontend-mlx parser-rt shared ui
+ifeq ($(DEVELOPMENT_MODE), 1)
+SUBMODULES := devreload $(SUBMODULES)
+EXTRA_CFLAGS += '-DRT_DEBUG(fmt, ...) = ft_printf(\"%s[%s:%d] \" fmt, RT_DEBUG_PREFIX, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)'
+EXTRA_CFLAGS += '-DRT_DEVMODE=1'
+endif
 
-DELET_LINE = $(SILENT) echo -n "\033[2K";
-RM = $(SILENT) rm -rf
+# Collect the output files (submodules/<proj>/lib<proj>.rt.so)
+SUBMODULES_OUTPUT =
+_ := $(foreach sub,$(SUBMODULES),$(eval SUBMODULES_OUTPUT += $(SUBMODULES_DIR)/$(sub)/lib$(sub)$(LIB_SUFFIX)))
+NO_BACKEND_OUTPUT := $(shell echo $(SUBMODULES_OUTPUT) | sed 's/ /\n/g' | grep -v libbackend- | grep -v libfrontend- | sed 's/\n/ /g')
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_RED=\033[0;31m
-COLOUR_BLUE=\033[0;34m
-COLOUR_YELLOW=\033[0;33m
-NO_COLOR    = \033[m
+ifeq ($(DEVELOPMENT_MODE), 1)
+EXTRA_LDFLAGS := $(NO_BACKEND_OUTPUT)
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_SUBMODULES_PATH="\"$(SUBMODULES_DIR)\""'
+BACKENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep backend- | tac | sed 's/\n/ /g')
+FRONTENDS := $(shell echo $(SUBMODULES) | sed 's/ /\n/g' | grep frontend- | tac | sed 's/\n/ /g')
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_BACKENDS=\"$(BACKENDS)\"'
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_FRONTENDS=\"$(FRONTENDS)\"'
+else
+EXTRA_LDFLAGS := $(SUBMODULES_OUTPUT)
+endif
 
-bold := $(shell tput bold)
-notbold := $(shell tput sgr0)
+MAIN_SUBMODULE = cli
+SUBMODULES += $(MAIN_SUBMODULE)
+MAIN_SUBMODULE_OUTPUT := $(SUBMODULES_DIR)/$(MAIN_SUBMODULE)/$(MAIN_SUBMODULE)$(EXEC_SUFFIX)
 
-PRINT = $(SILENT) printf "\r%b"
+MKDEPS :=
+_ := $(foreach sub,$(SUBMODULES),$(eval MKDEPS += $(shell $(MAKE) CACHE_DIR="$(PWD)/$(CACHE_DIR)" -C $(SUBMODULES_DIR)/$(sub) print_MKDEPS)))
 
-MSG_CLEANING = "$(COLOUR_RED)$(bold)🧹cleaning $(notbold)$(COLOUR_YELLOW)$(PROJECT)$(NO_COLOR)";
-MSG_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOUR_YELLOW)cleaned $(NO_COLOR)\n";
-MSG_COMPILING = "$(COLOUR_YELLOW)$(bold)[💧 Compiling 💧]$(notbold)$(COLOUR_YELLOW) $(^)$(NO_COLOR)";
-MSG_READY = "🌱 $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(NO_COLOR)\n";
+# expose every header file to other submodules
+EXTRA_CFLAGS += $(SUBMODULES:%=-I$(SUBMODULES_DIR)/%/include)
+
+
+
+### Library dependencies (`third-party` directory) ###
+
+DEPS_DIR = $(PWD)/third-party
+DEPS := $(shell $(MAKE) -C $(DEPS_DIR) print_DEPS)
+DEPS_TARGETS :=
+_ := $(foreach dep,$(DEPS),$(eval DEPS_TARGETS += $(DEPS_DIR)/$(shell $(MAKE) -C $(DEPS_DIR) print_$(dep)_TARGET)))
+DEPS_DIRS :=
+_ := $(foreach dep,$(DEPS),$(eval DEPS_DIRS += $(DEPS_DIR)/$(shell $(MAKE) -C $(DEPS_DIR) print_$(dep)_DIR)))
+
+# expose every header file to submodules
+EXTRA_CFLAGS += $(DEPS_DIRS:%=-I%/include) $(DEPS_DIRS:%=-I%/includes)
+EXTRA_LDFLAGS += $(DEPS_TARGETS)
+
+
+
+### Build daemon config ###
+
+DAEMON_NAME = rebuild-daemon
+DAEMON_SCRIPT = $(DAEMON_NAME).sh
+DAEMON_TARGET_FILE := $(PWD)/.$(DAEMON_NAME).done
+DAEMON_ALIVE_FILE := $(PWD)/.$(DAEMON_NAME).alive
+EXTRA_CFLAGS += '-DRT_DEVRELOAD_DAEMON_WATCH_FILE="\"$(DAEMON_TARGET_FILE)\""'
+
+
+
+### Make Rules ###
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(OBJS_DIR) $(LIBMLX)
-	$(CC) $(OBJS) -o $(NAME) -L -lft $(LIBMLX) -lSDL2 -lm 
-	$(DELET_LINE)
-	$(PRINT) $(MSG_READY)
+# include the .d files from submodules to check if they should be remade
+-include $(MKDEPS)
 
-$(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@mkdir -p $(@D)
-	$(DELET_LINE)
-	$(PRINT) $(MSG_COMPILING)
-	$(CC) $(INCLUDE)  -c $^ -o $@
+# invalidation mechanism, delete a .o file if its corresponding .c file has been modified
+$(PWD)/$(CACHE_DIR)/%:
+	@#echo "[*] Invalidating $@"
+	@if [ $(findstring .c, $<) ] || [ $(findstring .s, $<) ]; then \
+		rm -rf $@; \
+	fi
 
-$(OBJS_DIR):
-	$(SILENT)mkdir -p $@
+$(NAME): $(FEATURES_H) $(MAIN_SUBMODULE_OUTPUT)
+	@echo "[*] Copying $(MAIN_SUBMODULE_OUTPUT) to $(NAME)"
+	@ln -fs $(MAIN_SUBMODULE_OUTPUT) $(NAME)
 
-clean:
-	$(PRINT) $(MSG_CLEANING)
-	$(RM) $(OBJS_DIR)
-	$(DELET_LINE)
-	$(PRINT) $(MSG_CLEANED)
+$(SUBMODULES_OUTPUT): | $(DEPS_DIR)
+	@$(MAKE) -C $(dir $@) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
 
-fclean: clean
-	$(RM) $(NAME)
+$(MAIN_SUBMODULE_OUTPUT): $(SUBMODULES_OUTPUT)
+	@$(MAKE) -C $(SUBMODULES_DIR)/$(MAIN_SUBMODULE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" EXTRA_LDFLAGS="$(EXTRA_LDFLAGS)" CACHE_DIR="$(PWD)/$(CACHE_DIR)"
+	@touch $(MAIN_SUBMODULE_OUTPUT)
+
+$(DEPS_TARGETS):
+
+$(DEPS_DIR): $(DEPS_TARGETS)
+	@echo "[*] Making dependencies..." && sleep 1
+	@$(MAKE) -C $(DEPS_DIR) all
+	@touch $(DEPS_DIR)
+
+oclean:
+	@echo "[!] Removing $(CACHE_DIR)"
+	@rm -rf $(CACHE_DIR)
+
+clean: oclean
+	@$(MAKE) -C $(DEPS_DIR) clean
+
+fclean: oclean
+	@for i in $(SUBMODULES); do \
+		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" fclean; \
+	done
+	@echo "[!] Removing $(NAME)"
+	@rm -rf $(NAME)
+	$(MAKE) -C $(DEPS_DIR) fclean
 
 re: fclean all
 
---cc:
-	$(eval COMPIL = $(CLANG))
-	$(eval ALL_FLAG += $(DEBUGCFLAG))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
+remake: oclean
+	@$(MAKE) all -j
 
---gcc:
-	$(eval COMPIL = $(GCC))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
+daemon-stop:
+	@echo "[*] Killing daemon..."
+	@rm -rf $(DAEMON_ALIVE_FILE)
+	@sleep 1
 
---dead_code:
-	$(eval ALL_FLAG += $(DEAD_CODE))
-	$(eval COMPIL = $(GCC))
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
+daemon: daemon-stop 
+	@echo "[*] Starting daemon..."
+	@bash ./$(DAEMON_SCRIPT) $(DAEMON_TARGET_FILE) $(DAEMON_ALIVE_FILE)
 
-threading:
-	$(eval ALL_FLAG += "-D THREAD")
-	$(eval CC = $(COMPIL) $(ALL_FLAG))
+valgrind:
+ifeq ($(USE_VALGRIND_LOGFILE), 1)
+	valgrind $(VALGRIND_FLAGS) --log-file=valgrind.log ./$(NAME) $(VG_ARGS) || true
+	@echo "[*] Valgrind log available in valgrind.log"
+else
+	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(VG_ARGS) || true
+endif
 
-$(LIBMLX_DIR):
-	@git submodule init
-	@git submodule update
+callgrind:
+	valgrind --tool=callgrind ./$(NAME) $(VG_ARGS) || true
+	@echo "[*] Callgrind log available in callgrind.log"
 
-$(LIBMLX): $(LIBMLX_DIR)
-	@make -s -C $(LIBMLX_DIR) -j 
+help:
+	@printf "Usage: make [target] [VG_ARGS=\"...\"]\n"
+	@printf "\n"
+	@printf "Targets:\n"
+	@printf "    all:\t\tBuild the project (default)\n"
+	@printf "    clean:\t\tClean the project\n"
+	@printf "    fclean:\t\tClean the project, its submodules, and its dependencies\n"
+	@printf "    re:\t\t\tfclean + all\n"
+	@printf "    remake:\t\tClean the project and its submodules, then build it (not including dependencies)\n"
+	@printf "    daemon:\t\tStart the rebuild daemon\n"
+	@printf "    daemon-stop:\tStop the rebuild daemon\n"
+	@printf "    valgrind:\t\tRun the project with valgrind\n"
+	@printf "      VG_ARGS: \t\t- arguments to pass to valgrind\n\n"
+	@printf "      > Example:\n"
+	@printf "      make valgrind VG_ARGS=\"-b dummy ./scenes/valid/minimal.rt\"\n\n"
+	@printf "    help:\t\tDisplay this help message\n"
 
+print_%:
+	@echo $($*)
 
-cc: fclean --cc $(NAME)
-gcc: fclean --gcc $(NAME)
-dead_code: fclean --dead_code $(NAME)
-
-.PHONY: all clean fclean re cc gcc dead_code threading
-.SILENT:
-
-
+.PHONY: all deps _clean oclean clean fclean re remake daemon-stop daemon valgrind help print_% 
