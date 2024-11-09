@@ -6,14 +6,14 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:47:27 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 12:58:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:39:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/objs.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
+#include <rt/render/backend/raytracer/objects.h>
 #include <math.h>
 
 static bool	rt_be_rt_inf_cyl_inter(
@@ -40,8 +40,10 @@ static bool	rt_be_rt_inf_cyl_inter(
 }
 
 static bool	rt_be_rt_limit_cyl_inter(
-	const double t, const t_ray *ray, const t_cylinder *cy)
-{
+	const double t,
+	const t_ray *ray,
+	const t_cylinder *cy
+) {
 	const t_vec3d	hit = v3d_addmult(&ray->point, &ray->direction, t);
 	const t_vec3d	new_point = v3d_sub(&hit, &cy->center);
 	const double	m = v3d_dot(&new_point, &cy->axis);
@@ -54,15 +56,17 @@ static bool	rt_be_rt_limit_cyl_inter(
 }
 
 static bool	rt_be_rt_limite_plane_inter(
-	const t_ray *ray, const t_cylinder *cy,
-	const double t, const t_vec3d center)
-{
+	const t_ray *ray,
+	const t_cylinder *cy,
+	const double t,
+	const t_vec3d *center
+) {
 	t_vec3d		hit;
 
 	if (t < 0 || t == INFINITY)
 		return (0);
 	hit = v3d_addmult(&ray->point, &ray->direction, t);
-	if (v3d_lensub(&hit, &center) > cy->diameter / 2)
+	if (v3d_lensub(&hit, center) > cy->diameter / 2)
 		return (0);
 	return (1);
 }
@@ -85,17 +89,16 @@ static double	rt_be_rt_open_cyl_inter(
 }
 
 double	rt_backend_raytracer_cylinder_intersection(
-	t_ray *ray, void *obj)
-{
+	t_ray *ray,
+	t_cylinder *cy
+) {
 	static double	tmp = INFINITY;
 	double			closer;
-	t_cylinder		*cy;
 
-	cy = obj;
 	cy->surface_type = RONDED;
 	closer = rt_be_rt_open_cyl_inter(cy, ray);
 	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->center);
-	if (rt_be_rt_limite_plane_inter(ray, cy, tmp, cy->center))
+	if (rt_be_rt_limite_plane_inter(ray, cy, tmp, &cy->center))
 	{
 		if (tmp < closer)
 			cy->surface_type = PLANE;
@@ -103,7 +106,7 @@ double	rt_backend_raytracer_cylinder_intersection(
 			closer = tmp;
 	}
 	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->top_center);
-	if (rt_be_rt_limite_plane_inter(ray, cy, tmp, cy->top_center))
+	if (rt_be_rt_limite_plane_inter(ray, cy, tmp, &cy->top_center))
 	{
 		if (tmp < closer)
 			cy->surface_type = SECOND_PLANE;

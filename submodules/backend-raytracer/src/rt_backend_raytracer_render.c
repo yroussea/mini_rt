@@ -6,16 +6,16 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 18:31:26 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 02:13:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/log.h>
 #include <rt/render/backend/raytracer.h>
 
-t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_objs *all_objs)
+t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_obj *all_objs)
 {
-	t_objs	*obj_hit;
+	t_obj	*obj_hit;
 
 	obj_hit = NULL;
 	if (rt_backend_raytracer_find_obj_hit(ray, all_objs, &obj_hit) != INFINITY
@@ -25,13 +25,13 @@ t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_objs *all_objs)
 }
 
 //parsing
-t_objs	*tmp(void)
+t_obj	*tmp(void)
 {
-	add_objects(plane((t_vec3d){1, 0, 1}, (t_vec3d){-20, 0, 500}, (t_material){CHECKERBOARD,(t_vec3d){1,1,1}}));
-	add_objects(sphere((t_vec3d){70*2, 20, 0}, 30, (t_material){CHECKERBOARD,(t_vec3d){1,1,0}}));
-	add_objects(sphere((t_vec3d){60*2, -20, 0}, 30, (t_material){CHECKERBOARD,(t_vec3d){1,1,0}}));
+	add_objects(plane((t_vec3d){1, 0, 1}, (t_vec3d){-20, 0, 500}, (t_rt_material){CHECKERBOARD,{(t_vec3d){1,1,1}}}));
+	add_objects(sphere((t_vec3d){70*2, 20, 0}, 30, (t_rt_material){CHECKERBOARD,{(t_vec3d){1,1,0}}}));
+	add_objects(sphere((t_vec3d){60*2, -20, 0}, 30, (t_rt_material){CHECKERBOARD,{(t_vec3d){1,1,0}}}));
 	add_objects(camera((t_vec3d){0, 0, -300}, (t_vec3d){0, 0, 1}, 179));
-	add_objects(light((t_vec3d){0}, .1, AMBIANCE_LIGHT,(t_vec3d){1, 1, 1}));
+	add_objects(light((t_vec3d){0}, .95, AMBIANCE_LIGHT,(t_vec3d){1, 1, 1}));
 	add_objects(light((t_vec3d){0, 0, -100}, 1, POINT_LIGHT, (t_vec3d){1, 1, 1}));
 
 	add_objects(cylinder(
@@ -48,7 +48,6 @@ t_objs	*tmp(void)
 		30,
 		(t_vec3d){1,0,1}
 	));
-	//
 	return (add_objects(NULL));
 }
 
@@ -59,7 +58,7 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 	t_rt_backend_raytracer	*raytracer;
 	size_t					y;
 	size_t					x;
-	static t_objs			*objs;
+	static t_obj			*objs;
 
 	raytracer = (t_rt_backend_raytracer *)backend->data;
 	y = 0;

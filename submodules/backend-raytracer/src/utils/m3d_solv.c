@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solv_m3d.c                                         :+:      :+:    :+:   */
+/*   m3d_solv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:31:51 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/06 20:17:11 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:28:30 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ double	m3d_det(t_mat3d x)
 
 t_mat3d	m3d_inv(t_mat3d x)
 {
-	t_mat3d			res;
 	const double	det = m3d_det(x);
+	t_mat3d			res;
 
 	res.m[0][0] = (x.m[1][1] * x.m[2][2] - x.m[1][2] * x.m[2][1]) / det;
 	res.m[0][1] = (x.m[0][2] * x.m[2][1] - x.m[0][1] * x.m[2][2]) / det;
@@ -44,7 +44,7 @@ t_mat3d	m3d_inv(t_mat3d x)
 	return (res);
 }
 
-t_vec3d	m3d_v3d_mult(t_mat3d a, t_vec3d b)
+static t_vec3d	m3d_v3d_mult(t_mat3d a, t_vec3d b)
 {
 	t_vec3d	res;
 
@@ -72,7 +72,7 @@ t_mat3d	m3d(t_vec3d col1, t_vec3d col2, t_vec3d col3)
 
 t_vec3d	m3d_solv(t_mat3d a, t_vec3d b)
 {
-	const t_mat3d inv = m3d_inv(a);
+	const t_mat3d	inv = m3d_inv(a);
 
 	return (m3d_v3d_mult(inv, b));
 }

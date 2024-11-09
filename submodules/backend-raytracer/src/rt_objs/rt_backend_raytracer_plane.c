@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 18:04:18 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 02:00:11 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,63 +18,59 @@
 #include <stdlib.h>
 
 t_vec3d	rt_backend_raytracer_plane_normal(
-	const t_ray ray, void *obj)
-{
-	const t_plane	*plane = (t_plane *)obj;
+	const t_ray ray,
+	t_plane *plane
+) {
 	const double	dot = v3d_dot(&ray.direction, &plane->normal);
 
 	return (v3d_mult(&plane->normal, -ft_fsign(dot)));
 }
 
 double	rt_backend_raytracer_plane_intersection(
-	t_ray *ray, void *obj)
-{
-	const t_plane	*p = (t_plane *)obj;
-
-	return (rt_backend_raytracer_planar_intersect(ray, p->normal, p->point));
+	t_ray *ray,
+	t_plane *plane
+) {
+	return (rt_backend_raytracer_planar_intersect(ray, plane->normal,
+			plane->point));
 }
 
 t_vec3d	rt_backend_raytracer_plane_color(
-	const t_ray ray, void *obj)
-{
-	const t_objs	*plane = (t_objs *)obj;
-	const t_plane	*p_plane = (t_plane *)plane->obj;
-
+	const t_ray *ray,
+	t_plane *plane
+) {
 	return (rt_backend_raytracer_planar_color(
-			v3d_sub(&ray.hit_point, &p_plane->point),
-			m3d(p_plane->vec_vdir, p_plane->vec_udir, p_plane->normal),
-			plane->material.colors,
-			plane->material.type));
+			v3d_sub(&ray->hit_point, &plane->point),
+			m3d(plane->vec_vdir, plane->vec_udir, plane->normal),
+			plane->base.material.colors, plane->base.material.type));
 }
 
-void	rt_backend_raytracer_plane(t_objs *obj)
+void	rt_backend_raytracer_plane(t_obj *obj)
 {
 	t_plane	*plane;
 	t_vec3d	udir;
 	t_vec3d	vdir;
 
-	plane = obj->obj;
+	plane = (t_plane *)obj;
 	udir = v3d(plane->normal.y + plane->normal.z,
 			-plane->normal.x, -plane->normal.x);
 	vdir = v3d_cross(&plane->normal, &udir);
 	plane->vec_udir = v3d_norm(&udir);
 	plane->vec_vdir = v3d_norm(&vdir);
-	obj->get_normal = rt_backend_raytracer_plane_normal;
-	obj->intersection = rt_backend_raytracer_plane_intersection;
-	obj->get_colors = rt_backend_raytracer_plane_color;
+	obj->intersect = rt_backend_raytracer_plane_intersection;
+	obj->calc_normal = rt_backend_raytracer_plane_normal;
+	obj->calc_color = rt_backend_raytracer_plane_color;
 }
 
-t_objs	*plane(t_vec3d normal, t_vec3d point, t_material m)
+t_obj	*plane(t_vec3d normal, t_vec3d point, t_rt_material m)
 {
-	t_objs			*new;
-	t_plane			*plane;
+	t_obj	*new;
+	t_plane	*plane;
 
 	plane = rt_malloc_aligned(sizeof(t_plane), 32);
 	plane->normal = v3d_norm(&normal);
 	plane->point = point;
-	new = rt_malloc_aligned(sizeof(t_objs), 32);
+	new = (t_obj *) plane;
 	new->type = OBJS;
-	new->obj = plane;
 	new->material = m;
 	rt_backend_raytracer_plane(new);
 	return (new);

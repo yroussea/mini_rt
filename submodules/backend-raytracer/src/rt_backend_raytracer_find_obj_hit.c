@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 14:28:59 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:54:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <ft/math/vector.h>
 #include <math.h>
 
-double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs,
-			t_objs **hit)
+double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_obj *objs,
+			t_obj **hit)
 {
 	double	distance_min;
 	double	distance;
@@ -25,7 +25,7 @@ double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_objs *objs,
 	{
 		if (objs->type == OBJS)
 		{
-			distance = objs->intersection(ray, objs->obj);
+			distance = objs->intersect(ray, objs);
 			if (distance > 0 && distance < distance_min)
 			{
 				distance_min = distance;

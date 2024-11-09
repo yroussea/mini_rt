@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fmod.c                                             :+:      :+:    :+:   */
+/*   rt_fmod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:45:52 by yroussea          #+#    #+#             */
-/*   Updated: 2024/10/25 21:30:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:22:12 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 
-double	ft_fmod(double x, double y)
+__always_inline
+double	rt_fmod(double x, double y)
 {
 	const double	a = fmod(x, y);
 

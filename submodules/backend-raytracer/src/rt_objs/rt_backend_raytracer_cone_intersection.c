@@ -6,19 +6,22 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:09:58 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:34:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/objs.h"
+#include <rt/render/backend/raytracer/objects.h>
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 #include <math.h>
 
 static bool	rt_be_rt_inf_cone_inter(
-	const t_ray *ray, const t_cone *cone, double *t1, double *t2)
-{
+	const t_ray *ray,
+	const t_cone *cone,
+	double *t1,
+	double *t2
+) {
 	double			var[5];
 	const double	sq_cos = cone->cos * cone->cos;
 	const t_vec3d	x = v3d_sub(&ray->point, &cone->center);
@@ -41,8 +44,10 @@ static bool	rt_be_rt_inf_cone_inter(
 }
 
 static bool	rt_be_rt_limite_cone_inter(
-	const double t, const t_ray *ray, const t_cone *cone)
-{
+	const double t,
+	const t_ray *ray,
+	const t_cone *cone
+) {
 	const t_vec3d	hit = v3d_addmult(&ray->point, &ray->direction, t);
 	const t_vec3d	x = v3d_normsub(&hit, &cone->center);
 	const double	dot = v3d_dot(&x, &cone->axis);
@@ -55,8 +60,9 @@ static bool	rt_be_rt_limite_cone_inter(
 }
 
 static double	rt_be_rt_limite_plan_inter(
-	const t_ray *ray, const t_cone *cone)
-{
+	const t_ray *ray,
+	const t_cone *cone
+) {
 	t_vec3d			hit;
 	const t_vec3d	bottom = v3d_addmult(
 			&cone->center, &cone->axis, cone->height);
@@ -72,15 +78,13 @@ static double	rt_be_rt_limite_plan_inter(
 }
 
 double	rt_backend_raytracer_cone_intersection(
-	t_ray *ray, void *obj)
+	t_ray *ray, t_cone *cone)
 {
-	t_cone	*cone;
 	double	t1;
 	double	t2;
 	double	closer;
 
 	closer = INFINITY;
-	cone = obj;
 	cone->surface_type = RONDED;
 	if (rt_be_rt_inf_cone_inter(ray, cone, &t1, &t2))
 	{

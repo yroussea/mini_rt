@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 17:57:54 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 02:02:41 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 
 t_vec3d	get_colors_light(t_ray ray, void *obj)
 {
-	const t_objs	*light = (t_objs *)obj;
+	const t_obj	*light = (t_obj *)obj;
 
 	(void)ray;
 	return (light->material.colors);
 }
 
-t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color)
+t_obj	*light(t_vec3d coo, double intensity, t_rt_obj_type type, t_vec3d color)
 {
-	t_objs	*new;
+	t_obj	*new;
 	t_light	*light;
 
 	light = rt_malloc_aligned(sizeof(t_light), 32);
@@ -35,37 +35,31 @@ t_objs	*light(t_vec3d coo, double intensity, t_objs_type type, t_vec3d color)
 	if (type == POINT_LIGHT)
 		light->point = coo;
 	light->intensity = intensity;
-	new = rt_malloc_aligned(sizeof(t_objs), 32);
-	if (!new)
-		rt_free_aligned(light);
-	if (!new)
-		return (NULL);
-	new->obj = light;
-	new->material = (t_material){COLOR, color};
-	new->get_colors = get_colors_light;
+	new = (t_obj *) light;
+	new->material = (t_rt_material){COLOR, {color}};
+	new->calc_color = get_colors_light;
 	new->type = type;
 	return (new);
 }
 
-t_objs	*camera(t_vec3d coo, t_vec3d view_vector, double fov)
+t_obj	*camera(t_vec3d coo, t_vec3d view_vector, double fov)
 {
-	t_objs		*new;
+	t_obj		*new;
 	t_camera	*cam;
 
 	cam = rt_malloc_aligned(sizeof(t_camera), 32);
 	cam->fov = fov;
 	cam->view_vector = view_vector;
 	cam->point = coo;
-	new = rt_malloc_aligned(sizeof(t_objs), 32);
-	new->obj = cam;
+	new = (t_obj *) cam;
 	new->type = CAMERA;
 	return (new);
 }
 
-t_objs	*add_objects(t_objs *new)
+t_obj	*add_objects(t_obj *new)
 {
-	static t_objs	*obj = NULL;
-	t_objs			*tmp;
+	static t_obj	*obj = NULL;
+	t_obj			*tmp;
 
 	if (new)
 	{

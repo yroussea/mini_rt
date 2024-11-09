@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 18:03:18 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 01:58:32 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 #  include <math.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/backend/raytracer/ray.h>
-#  include <rt/render/backend/raytracer/objs.h>
+#  include <rt/render/backend/raytracer/objects.h>
 #  include <stddef.h>
 
+// Youenn moment.
 #  define EPSILON 1e-2
 
 typedef struct s_rt_backend_raytracer
@@ -41,12 +42,12 @@ t_color			*rt_backend_raytracer_render(t_rt_backend *self);
 t_rt_backend	*rt_backend_raytracer_provider(t_rt *rt, const char *name,
 					size_t width, size_t height);
 
-void			rt_backend_raytracer_get_shading(t_objs *objs,
-					t_objs *obj_hit, t_ray *ray);
+void			rt_backend_raytracer_get_shading(t_obj *objs,
+					t_obj *obj_hit, t_ray *ray);
 double			rt_backend_raytracer_find_obj_hit(t_ray *ray,
-					t_objs *objs, t_objs **hit);
+					t_obj *objs, t_obj **hit);
 //utils
-double			ft_fmod(double x, double y);
+double			rt_fmod(double x, double y);
 t_mat3d			m3d(t_vec3d col1, t_vec3d col2, t_vec3d col3);
 t_vec3d			m3d_solv(t_mat3d a, t_vec3d b);
 
