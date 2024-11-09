@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 16:09:58 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:13:23 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ double	rt_backend_raytracer_cone_intersection(
 
 	closer = INFINITY;
 	cone = obj;
+	if (!rt_backend_raytracer_bonding_box_intersection(ray, cone->bb))
+		return (-1);
 	cone->surface_type = RONDED;
 	if (rt_be_rt_inf_cone_inter(ray, cone, &t1, &t2))
 	{

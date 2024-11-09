@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:51:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 15:52:02 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:50:41 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_ray
 	t_vec3d				direction;
 	t_vec3d				hit_point;
 	t_color				color;
+	t_vec3d				inv_direction;
 }	t_ray
 __attribute__((aligned(32)));
 

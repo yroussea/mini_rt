@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 18:01:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:08:53 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,27 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 void	rt_backend_raytracer_cone(t_objs *obj)
 {
 	t_cone		*cone;
-	t_vec3d		udir;
-	t_vec3d		vdir;
+	t_vec3d		tmp;
+	double		diam;
 
 	cone = obj->obj;
-	udir = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
-	vdir = v3d_cross(&cone->axis, &udir);
-	cone->vec_udir = v3d_norm(&udir);
-	cone->vec_vdir = v3d_norm(&vdir);
+	tmp = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
+	cone->vec_udir = v3d_norm(&tmp);
+	tmp = v3d_cross(&cone->axis, &tmp);
+	cone->vec_vdir = v3d_norm(&tmp);
 	cone->cos = cos(cone->theta);
 	cone->tan = tan(cone->theta);
 	cone->max_dist = cone->height / cone->cos;
+	tmp = v3d_addmult(&cone->center, &cone->axis, cone->height / 2);
+
+	diam = cone->height * cone->tan;
+	diam = sqrt(diam * diam + cone->height * cone->height);
+	//fail malloc..
+	rt_backend_raytracer_creat_bonding_box(&cone->bb, tmp,
+		m3d(cone->vec_vdir, cone->vec_udir, cone->axis),
+		v3d(diam * sqrt(2) / 4, diam * sqrt(2) / 4, cone->height / 2));
+	//pas encore opti
+
 	obj->get_normal = rt_backend_raytracer_cone_normal;
 	obj->get_colors = rt_backend_raytracer_colors_cone;
 	obj->intersection = rt_backend_raytracer_cone_intersection;
@@ -131,7 +141,7 @@ t_objs	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d c
 		return (NULL);
 	new->type = OBJS;
 	new->obj = cone;
-	new->material = (t_material){CHECKERBOARD, colors};
+	new->material = (t_material){COLOR, colors};
 	rt_backend_raytracer_cone(new);
 	return (new);
 }

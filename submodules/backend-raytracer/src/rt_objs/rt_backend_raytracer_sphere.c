@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 18:30:19 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:14:10 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@
 double	rt_backend_raytracer_sphere_intersection(
 	t_ray *ray, void *obj)
 {
-	const t_vec3d	v = v3d_sub(&ray->point, &(((t_sphere *)obj)->center));
+	t_vec3d			v;
 	t_vec3d			param;
 	double			delta;
 	double			t1;
 	double			t2;
 
+	if (!rt_backend_raytracer_bonding_box_intersection(ray, (((t_sphere *)obj)->bb)))
+		return (-1);
+	v = v3d_sub(&ray->point, &(((t_sphere *)obj)->center));
 	param.x = v3d_dot(&ray->direction, &ray->direction);
 	param.y = v3d_dot(&v, &ray->direction);
 	param.z = ((v3d_dot(&v, &v) - (*(t_sphere *)obj).dot_production_rayon));
@@ -83,9 +86,14 @@ t_vec3d	rt_backend_raytracer_colors_sphere(
 void	rt_backend_raytracer_sphere(t_objs *obj)
 {
 	t_sphere	*sph;
+	t_vec3d		diff;
 
 	sph = obj->obj;
 	sph->dot_production_rayon = sph->rayon * sph->rayon;
+	diff = v3d(sph->rayon, sph->rayon, sph->rayon);
+	sph->bb = rt_malloc_aligned(sizeof(t_bondingbox), 32);
+	sph->bb->mins = v3d_sub(&sph->center, &diff);
+	sph->bb->maxs = v3d_add(&sph->center, &diff);
 	obj->get_colors = rt_backend_raytracer_colors_sphere;
 	obj->get_normal = rt_backend_raytracer_sphere_normal;
 	obj->intersection = rt_backend_raytracer_sphere_intersection;

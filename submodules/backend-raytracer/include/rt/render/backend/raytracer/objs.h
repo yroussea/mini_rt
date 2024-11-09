@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 17:57:28 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:23:25 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 #  include <ft/math/matrix.h>
 #  include <rt/color.h>
 #  include <rt/render/backend/raytracer/ray.h>
+
+typedef struct s_bondingbox
+{
+	t_vec3d	mins;
+	t_vec3d	maxs;
+}			t_bondingbox
+__attribute__((aligned(1)));
 
 typedef enum e_surface_hit_type
 {
@@ -48,6 +55,7 @@ typedef struct s_cylinder
 	double				sq_radius;
 	double				diameter;
 	double				height;
+	t_bondingbox		*bb;
 	t_surface_hit_type	surface_type;
 }				t_cylinder
 __attribute__((aligned(1)));
@@ -63,6 +71,7 @@ typedef struct s_cone
 	double				cos;
 	double				tan;
 	double				max_dist;
+	t_bondingbox		*bb;
 	t_surface_hit_type	surface_type;
 }				t_cone
 __attribute__((aligned(1)));
@@ -76,9 +85,10 @@ __attribute__((aligned(1)));
 
 typedef struct s_sphere
 {
-	t_vec3d		center;
-	double		rayon; //verif rayon ou diametre
-	double		dot_production_rayon;
+	t_vec3d			center;
+	double			rayon; //rayon mais diametre dans parsing!!
+	double			dot_production_rayon;
+	t_bondingbox	*bb;
 }				t_sphere
 __attribute__((aligned(1)));
 
@@ -145,6 +155,11 @@ double	rt_backend_raytracer_cylinder_intersection(
 			t_ray *ray, void *obj);
 double	rt_backend_raytracer_cone_intersection(
 			t_ray *ray, void *obj);
+
+bool	rt_backend_raytracer_bonding_box_intersection(
+	const t_ray *ray, const t_bondingbox *bb);
+bool	rt_backend_raytracer_creat_bonding_box(
+	t_bondingbox **bb, t_vec3d center, t_mat3d vectors, t_vec3d sizes);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_OBJS_H__
 #endif // OBJS_H

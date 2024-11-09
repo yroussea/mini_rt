@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 17:58:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:53:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 #include <rt/render/backend/raytracer.h>
 #include <math.h>
 
-#include <stdio.h>
+__attribute__((always_inline))
+t_vec3d	v3d_inv(const t_vec3d *v)
+{
+	return ((t_vec3d){.v = 1 / v->v});
+}
+
 //a normre + ajouter camera dependent var + renomer fonction
 //fov n est pas une var env, mais fais partie de la cam
 #define RT_FLAT_VIEW_TYPE 0
@@ -28,6 +33,7 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
+	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
 #else
@@ -39,6 +45,7 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
+	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
 #endif

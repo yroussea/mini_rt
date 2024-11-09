@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 18:10:58 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:44:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,21 @@ t_vec3d	rt_backend_raytracer_colors_cylinder(t_ray ray, void *obj)
 void	rt_backend_raytracer_cylinder(t_objs *obj)
 {
 	t_cylinder	*cy;
-	t_vec3d		udir;
-	t_vec3d		vdir;
+	t_vec3d		tmp;
 
 	cy = obj->obj;
-	udir = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
-	vdir = v3d_cross(&cy->axis, &udir);
-	cy->vec_udir = v3d_norm(&udir);
-	cy->vec_vdir = v3d_norm(&vdir);
+	tmp = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
+	cy->vec_udir = v3d_norm(&tmp);
+	tmp = v3d_cross(&cy->axis, &tmp);
+	cy->vec_vdir = v3d_norm(&tmp);
 	cy->sq_radius = cy->diameter * cy->diameter / 4;
-	printf("cy: %p (aligned? %s)\n", cy, (uintptr_t)cy % 32 == 0 ? "yes" : "no");
-	printf("cy->center: %p (aligned? %s)\n", &cy->center, (uintptr_t)&cy->center % 32 == 0 ? "yes" : "no");
-	printf("cy->axis: %p (aligned? %s)\n", &cy->axis, (uintptr_t)&cy->axis % 32 == 0 ? "yes" : "no");
 	cy->top_center = v3d_addmult(&cy->center, &cy->axis, cy->height);
+	tmp = v3d_addmult(&cy->center, &cy->axis, cy->height / 2);
+	//fail malloc..
+	rt_backend_raytracer_creat_bonding_box(&cy->bb, tmp,
+		m3d(cy->vec_vdir, cy->vec_udir, cy->axis),
+		v3d(cy->diameter * sqrt(2) / 4,
+		cy->diameter * sqrt(2) / 4, cy->height / 2));
 	obj->get_normal = rt_backend_raytracer_cylinder_normal;
 	obj->intersection = rt_backend_raytracer_cylinder_intersection;
 	obj->get_colors = rt_backend_raytracer_colors_cylinder;

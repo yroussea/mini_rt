@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 15:30:10 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:05:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	rt_backend_raytracer_get_shading(t_objs *objs, t_objs *obj_hit,
 			t_ray *ray)
 {
 	const t_vec3d	color_obj = obj_hit->get_colors(*ray, obj_hit);
+
 	t_vec3d			ambiance_color;
 	t_vec3d			color;
 	t_vec3d			color_light;

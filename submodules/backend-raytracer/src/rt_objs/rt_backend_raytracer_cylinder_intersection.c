@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:47:27 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 12:58:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:42:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ double	rt_backend_raytracer_cylinder_intersection(
 	t_cylinder		*cy;
 
 	cy = obj;
+	if (!rt_backend_raytracer_bonding_box_intersection(ray, cy->bb))
+		return (-1);
 	cy->surface_type = RONDED;
 	closer = rt_be_rt_open_cyl_inter(cy, ray);
 	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->center);
@@ -99,16 +101,14 @@ double	rt_backend_raytracer_cylinder_intersection(
 	{
 		if (tmp < closer)
 			cy->surface_type = PLANE;
-		if (tmp < closer)
-			closer = tmp;
+		closer = ft_fmin(closer, tmp);
 	}
 	tmp = rt_backend_raytracer_planar_intersect(ray, cy->axis, cy->top_center);
 	if (rt_be_rt_limite_plane_inter(ray, cy, tmp, cy->top_center))
 	{
 		if (tmp < closer)
 			cy->surface_type = SECOND_PLANE;
-		if (tmp < closer)
-			closer = tmp;
+		closer = ft_fmin(closer, tmp);
 	}
 	return (closer);
 }
