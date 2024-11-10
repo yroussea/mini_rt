@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 02:00:11 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 11:56:07 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <stdlib.h>
 
 t_vec3d	rt_backend_raytracer_plane_normal(
-	const t_ray ray,
+	const t_ray *ray,
 	t_plane *plane
 ) {
-	const double	dot = v3d_dot(&ray.direction, &plane->normal);
+	const double	dot = v3d_dot(&ray->direction, &plane->normal);
 
 	return (v3d_mult(&plane->normal, -ft_fsign(dot)));
 }

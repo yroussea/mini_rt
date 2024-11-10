@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:52:35 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 02:02:41 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 11:56:42 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_vec3d	get_colors_light(t_ray ray, void *obj)
+t_vec3d	get_colors_light(t_ray *ray, void *obj)
 {
 	const t_obj	*light = (t_obj *)obj;
 
