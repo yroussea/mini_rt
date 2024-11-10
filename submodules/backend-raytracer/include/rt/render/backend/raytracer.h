@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/09 01:58:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:07:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 
 #  include <ft/math/vector.h>
 #  include <ft/math/matrix.h>
-#  include <math.h>
 #  include <rt/render/backend.h>
 #  include <rt/render/backend/raytracer/ray.h>
 #  include <rt/render/backend/raytracer/objects.h>
+#  include <rt/render/backend/raytracer/utils.h>
+#  include <rt/render/backend/raytracer/aa_bounding_box.h>
 #  include <stddef.h>
 
 // Youenn moment.
@@ -46,13 +47,6 @@ void			rt_backend_raytracer_get_shading(t_obj *objs,
 					t_obj *obj_hit, t_ray *ray);
 double			rt_backend_raytracer_find_obj_hit(t_ray *ray,
 					t_obj *objs, t_obj **hit);
-//utils
-double			rt_fmod(double x, double y);
-t_mat3d			m3d(t_vec3d col1, t_vec3d col2, t_vec3d col3);
-t_vec3d			m3d_solv(t_mat3d a, t_vec3d b);
-
-void			*rt_malloc_aligned(size_t size, size_t alignment);
-void			rt_free_aligned(void *ptr);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_H__
 #endif // RAYTRACER_H

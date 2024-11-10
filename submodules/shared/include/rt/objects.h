@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/09 01:54:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:06:34 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef struct s_obj
 	struct s_obj		*next;
 }	t_obj;
 
+typedef struct s_bondingbox
+{
+	t_vec3d	mins;
+	t_vec3d	maxs;
+}			t_boundingbox
+__attribute__((aligned(1)));
+
 typedef enum e_surface_hit_type
 {
 	RONDED,
@@ -94,6 +101,7 @@ typedef struct s_cylinder
 	double				sq_radius;
 	double				diameter;
 	double				height;
+	t_boundingbox		*aabbx;
 	t_surface_hit_type	surface_type;
 }	t_cylinder
 __attribute__((aligned(1)));
@@ -110,6 +118,7 @@ typedef struct s_cone
 	double				cos;
 	double				tan;
 	double				max_dist;
+	t_boundingbox		*aabbx;
 	t_surface_hit_type	surface_type;
 }	t_cone
 __attribute__((aligned(1)));

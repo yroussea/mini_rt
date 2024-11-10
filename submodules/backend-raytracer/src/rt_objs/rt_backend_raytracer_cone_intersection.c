@@ -6,10 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:34:54 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:54:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/render/backend/raytracer/aa_bounding_box.h"
 #include <rt/render/backend/raytracer/objects.h>
 #include <ft/math.h>
 #include <ft/math/vector.h>
@@ -84,6 +85,8 @@ double	rt_backend_raytracer_cone_intersection(
 	double	t2;
 	double	closer;
 
+	if (!rt_backend_raytracer_aabbx_inter(ray, cone->aabbx))
+		return (-1);
 	closer = INFINITY;
 	cone->surface_type = RONDED;
 	if (rt_be_rt_inf_cone_inter(ray, cone, &t1, &t2))

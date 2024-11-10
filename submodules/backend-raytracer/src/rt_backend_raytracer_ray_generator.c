@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 17:58:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:29:44 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
+	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
 #else
@@ -39,6 +40,7 @@ void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation e
 	ray->point = v3d_add(&ray->center, &ray->direction);
 	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
 	ray->direction = v3d_norm(&ray->direction);
+	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
 #endif

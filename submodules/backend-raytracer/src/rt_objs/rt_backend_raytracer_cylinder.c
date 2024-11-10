@@ -6,15 +6,15 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 02:01:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:39:23 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/render/backend/raytracer/aa_bounding_box.h"
+#include "rt/render/backend/raytracer/utils.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
-#include <rt/render/backend/raytracer/objects.h>
-#include <stdlib.h>
 #include <math.h>
 
 t_vec3d	rt_backend_raytracer_cylinder_normal(
@@ -100,16 +100,32 @@ t_vec3d	rt_backend_raytracer_colors_cylinder(
 void	rt_backend_raytracer_cylinder(t_obj *obj)
 {
 	t_cylinder	*cy;
-	t_vec3d		udir;
-	t_vec3d		vdir;
+	t_vec3d		tmp;
+	t_vec3d		tmp2;
+	t_vec3d		highest;
+	t_vec3d		lowest;
 
 	cy = (t_cylinder *)obj;
-	udir = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
-	vdir = v3d_cross(&cy->axis, &udir);
-	cy->vec_udir = v3d_norm(&udir);
-	cy->vec_vdir = v3d_norm(&vdir);
+	tmp = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
+	cy->vec_udir = v3d_norm(&tmp);
+	tmp = v3d_cross(&cy->axis, &cy->vec_udir);
+	cy->vec_vdir = v3d_norm(&tmp);
 	cy->sq_radius = cy->diameter * cy->diameter / 4;
 	cy->top_center = v3d_addmult(&cy->center, &cy->axis, cy->height);
+
+	tmp = rt_backend_raytracer_highest_point_circle(cy->vec_udir,
+		cy->vec_vdir, cy->center, cy->diameter / 2);
+	tmp2 = rt_backend_raytracer_highest_point_circle(cy->vec_udir,
+		cy->vec_vdir, cy->top_center, cy->diameter / 2);
+	highest = v3d_max(&tmp, &tmp2);
+
+	tmp = rt_backend_raytracer_lowest_point_circle(cy->vec_udir,
+		cy->vec_vdir, cy->center, cy->diameter / 2);
+	tmp2 = rt_backend_raytracer_lowest_point_circle(cy->vec_udir,
+		cy->vec_vdir, cy->top_center, cy->diameter / 2);
+	lowest = v3d_min(&tmp, &tmp2);
+	rt_backend_raytracer_creating_aabbx(&cy->aabbx, highest, lowest);
+
 	obj->intersect = rt_backend_raytracer_cylinder_intersection;
 	obj->calc_normal = rt_backend_raytracer_cylinder_normal;
 	obj->calc_color = rt_backend_raytracer_colors_cylinder;

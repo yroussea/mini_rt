@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 02:00:58 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:40:53 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,31 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 void	rt_backend_raytracer_cone(t_obj *obj)
 {
 	t_cone		*cone;
-	t_vec3d		udir;
-	t_vec3d		vdir;
+	t_vec3d		tmp;
+	t_vec3d		top_center;
+	t_vec3d		highest;
+	t_vec3d		lowest;
 
 	cone = (t_cone *)obj;
-	udir = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
-	vdir = v3d_cross(&cone->axis, &udir);
-	cone->vec_udir = v3d_norm(&udir);
-	cone->vec_vdir = v3d_norm(&vdir);
+	tmp = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
+	cone->vec_udir = v3d_norm(&tmp);
+	tmp = v3d_cross(&cone->axis, &cone->vec_udir);
+	cone->vec_vdir = v3d_norm(&tmp);
 	cone->cos = cos(cone->theta);
 	cone->tan = tan(cone->theta);
 	cone->max_dist = cone->height / cone->cos;
+
+	top_center = v3d_addmult(&cone->center, &cone->axis, cone->height);
+	tmp = rt_backend_raytracer_highest_point_circle(cone->vec_udir,
+		cone->vec_vdir, top_center, cone->height * cone->tan);
+	highest = v3d_max(&tmp, &top_center);
+
+	tmp = rt_backend_raytracer_lowest_point_circle(cone->vec_udir,
+		cone->vec_vdir, top_center, cone->height * cone->tan);
+	lowest = v3d_min(&tmp, &top_center);
+	rt_backend_raytracer_creating_aabbx(&cone->aabbx, highest, lowest);
+
+
 	obj->intersect = rt_backend_raytracer_cone_intersection;
 	obj->calc_normal = rt_backend_raytracer_cone_normal;
 	obj->calc_color = rt_backend_raytracer_colors_cone;
