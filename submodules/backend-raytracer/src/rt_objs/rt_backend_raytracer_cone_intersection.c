@@ -6,16 +6,16 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:54:57 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:19:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/aa_bounding_box.h"
-#include <rt/render/backend/raytracer/objects.h>
 #include <ft/math.h>
 #include <ft/math/vector.h>
-#include <rt/render/backend/raytracer.h>
 #include <math.h>
+#include <rt/render/backend/raytracer.h>
+#include <rt/render/backend/raytracer/aabb.h>
+#include <rt/render/backend/raytracer/objects.h>
 
 static bool	rt_be_rt_inf_cone_inter(
 	const t_ray *ray,

@@ -6,14 +6,14 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:39:23 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:19:01 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/aa_bounding_box.h"
-#include "rt/render/backend/raytracer/utils.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
+#include <rt/render/backend/raytracer/aabb.h>
+#include <rt/render/backend/raytracer/utils.h>
 #include <rt/render/backend/raytracer.h>
 #include <math.h>
 

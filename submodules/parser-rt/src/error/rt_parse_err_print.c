@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 23:14:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:22:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	rt_parse_err_file_print_column(const t_rt_parser *parser,
 {
 	(void)parser;
 	(void)context;
+	printf("todo: col display\n");
 }
 
 static void	rt_parse_err_file_print_extras(const t_rt_parser *parser,
@@ -41,7 +42,6 @@ static const char	*rt_err_file_strtype(enum e_rt_parser_file_error type)
 {
 	static const char	*err_file_strtype[] = {
 	[FILE_ERR_UNKNOWN_ID] = "unknown object identifier",
-	[FILE_ERR_MISSING_ID] = "missing object identifier",
 	[FILE_ERR_INVALID_CHAR] = "invalid character",
 	[FILE_ERR_INVALID_NUMBER] = "invalid digit, or number too large",
 	[FILE_ERR_MISSING_PART] = "missing part of the object",

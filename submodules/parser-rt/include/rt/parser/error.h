@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 21:55:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:16:55 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_rt_parser				t_rt_parser;
 enum	e_rt_parser_file_error
 {
 	FILE_ERR_UNKNOWN_ID = 0,
-	FILE_ERR_MISSING_ID,
 	FILE_ERR_INVALID_CHAR,
 	FILE_ERR_INVALID_NUMBER,
 	FILE_ERR_MISSING_PART,

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/10 13:07:57 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:17:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 #  include <ft/math/vector.h>
 #  include <ft/math/matrix.h>
 #  include <rt/render/backend.h>
-#  include <rt/render/backend/raytracer/ray.h>
+#  include <rt/render/backend/raytracer/aabb.h>
 #  include <rt/render/backend/raytracer/objects.h>
+#  include <rt/render/backend/raytracer/ray.h>
 #  include <rt/render/backend/raytracer/utils.h>
-#  include <rt/render/backend/raytracer/aa_bounding_box.h>
+#  include <math.h>
 #  include <stddef.h>
 
 // Youenn moment.
