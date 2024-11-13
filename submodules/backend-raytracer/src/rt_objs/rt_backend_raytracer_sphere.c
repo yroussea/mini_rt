@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/13 13:40:36 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:46:05 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ t_vec3d	rt_backend_raytracer_sphere_normal(
 ) {
 	t_vec3d			coo;
 
-	if (sphere->material.type == BUMP_MAP)
+	if (sphere->base.material.type == BUMP_MAP)
 	{
-		rt_backend_raytracer_sphereere_twod_relative_point(&coo, ray, sphere);
+		rt_backend_raytracer_sphere_twod_relative_point(&coo, ray, sphere);
 		/*bump map
 		get_pixel hex -> rgb
 		bump = (r * 2 - 1, g * 2 - 1 g * 2 -1)
