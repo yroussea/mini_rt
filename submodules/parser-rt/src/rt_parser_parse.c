@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 21:40:04 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 05:44:47 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ static void	rt_parser_buffer_dump(t_rt_parser *parser)
 	}
 }
 
+static RESULT	rt_parser_sanity_check(t_rt_parser *parser)
+{
+	if (!parser->primitive_parsers[0].fn)
+		return (ERRS(PARSE_ERR_NULL, "no primitive parsers registered. what?"));
+	// if (!parser->object_parsers[0].id)
+	// 	return (ERRS(PARSE_ERR_NULL, "no object parsers registered. what?"));
+	return (OK());
+}
+
 static RESULT	rt_parser_process(t_rt_parser *parser)
 {
 	RESULT	res;
@@ -50,7 +59,7 @@ static RESULT	rt_parser_process(t_rt_parser *parser)
 	while (i < parser->nlines && RES_OK(res))
 	{
 		if (parser->buffer[i])
-			res = rt_parser_line_process(parser, parser->buffer[i]);
+			res = rt_parser_line_process(parser, i);
 		i++;
 	}
 	return (res);
@@ -62,7 +71,9 @@ RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 
 	if (parser == NULL)
 		return (ERR(PARSE_ERR_NULL));
-	res = rt_parser_buffer_fill(parser, filepath);
+	res = rt_parser_sanity_check(parser);
+	if (RES_OK(res))
+		res = rt_parser_buffer_fill(parser, filepath);
 	if (RES_OK(res))
 		res = rt_parser_buffer_preproc(parser, parser->read_buffer);
 	if (RES_OK(res))
@@ -72,5 +83,4 @@ RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 	if (!RES_OK(res))
 		return (rt_err_expand(res, filepath));
 	return (res);
-	// return (rt_parser_buffer_loop(parser, buffer, lines));
 }

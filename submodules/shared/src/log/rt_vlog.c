@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:19:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 03:50:40 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 05:24:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	rt_vlog(const t_rt *rt, enum e_rt_log_level level, const char *fmt,
 {
 	char	*msg;
 
-	if (RT_LOG_DEFAULT - (int)rt->flags.verbosity > (int)level)
+	if (rt && RT_LOG_DEFAULT - (int)rt->flags.verbosity > (int)level)
 		return ;
 	msg = ft_vformat(fmt, args);
 	if (!msg)
@@ -48,7 +48,10 @@ void	rt_vlog(const t_rt *rt, enum e_rt_log_level level, const char *fmt,
 		return ;
 	}
 	ft_putstr_fd(rt_log_colors(level), TARGET_FD);
-	ft_putstr_fd(rt->name, TARGET_FD);
+	if (rt)
+		ft_putstr_fd(rt->name, TARGET_FD);
+	else
+		ft_putstr_fd("rt", TARGET_FD);
 	ft_putstr_fd(": ", TARGET_FD);
 	ft_putstr_fd(msg, TARGET_FD);
 	ft_putstr_fd(RESET, TARGET_FD);

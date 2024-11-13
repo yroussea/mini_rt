@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/11 23:16:55 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 05:28:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_rt_parser_file_context
 		size_t					column;
 		const char				*message;
 	}	note;
-	const char					*possible_fix;
+	char						*possible_fix;
 }	t_rt_parser_file_context;
 
 /**

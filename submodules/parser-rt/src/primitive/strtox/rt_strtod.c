@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:18:28 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 20:27:54 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 05:28:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_rt_parser_file_context	rt_strtod_ctx_char(size_t i, const char *err,
 	ctx.column = i;
 	ctx.length = 1;
 	ctx.error_message = err;
-	ctx.possible_fix = fix;
+	ctx.possible_fix = (char *) fix;
 	return (ctx);
 }
 

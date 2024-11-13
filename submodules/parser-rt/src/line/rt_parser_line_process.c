@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/11 23:23:00 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:00:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include <rt/log.h>
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
+
+static RESULT	rt_parser_line_result_expand(RESULT res, size_t index)
+{
+	if (res.type == PARSE_ERR_FILE)
+		res.file_context.line = index + 1;
+	return (res);
+}
 
 static size_t	rt_parser_line_tokenize(const char *line, char **tokens)
 {
@@ -41,49 +48,47 @@ static size_t	rt_parser_line_tokenize(const char *line, char **tokens)
 	return (ntok);
 }
 
-static RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, size_t ntok,
-					char **tokens, size_t size_total)
+static RESULT	rt_parser_line_validate_ntok(t_rt_parser *parser, size_t ntok,
+					t_rt_object_parser *objp, char **tokens)
 {
-	RESULT	res;
-	char	*err_str;
-
-	err_str = ft_calloc(size_total + ntok, sizeof(char));
-	if (err_str == NULL)
-		res = ERR_FILE(FILE_ERR_UNKNOWN_ID);
-	else
-	{
-		res = ERR_FILE(FILE_ERR_UNKNOWN_ID);
-	}
-	ft_strdel(&err_str);
-	return (res);
+	(void)parser;
+	(void)tokens;
+	if (ntok >= objp->required && ntok <= objp->sequence_size)
+		return (OK());
+	rt_debug(parser->rt, "invalid number of tokens for '%s' - "
+		"got %d, req %d, max %d\n", objp->id, (int)ntok, (int)objp->required,
+		(int)objp->sequence_size);
+	return (OK());
 }
 
 static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
-					char **tokens)
+					char **tokens, const char *line)
 {
 	size_t				i;
 	size_t				size;
-	bool				found;
-	t_rt_object_parser	objp;
-	char				*err_str;
+	t_rt_object_parser	*objp;
+	t_rt_object_parser	*tmp;
 
 	i = 0;
 	size = 0;
-	found = false;
+	objp = NULL;
+	tmp = NULL;
+	rt_trace(parser->rt, "looking for object parser for '%s'\n", tokens[0]);
 	while (parser->object_parsers[i].id)
 	{
-		if (!found)
+		tmp = &parser->object_parsers[i];
+		if (!objp)
 		{
-			objp = parser->object_parsers[i];
-			if (!ft_strcmp(objp.id, "AA")) // tokens[0]))
-				found = true;
+			if (!ft_strcmp(tmp->id, tokens[0]))
+				objp = tmp;
 		}
-		size += ft_strlen(parser->object_parsers[i].id);
+		size += ft_strlen(tmp->id);
 		i++;
 	}
-	if (found)
-		return (OK());
-	return (rt_parser_line_unknown_type(parser, ntok, tokens, size));
+	if (objp)
+		return (rt_parser_line_validate_ntok(parser, ntok, objp, tokens));
+	rt_debug(parser->rt, "unknown object identifier: '%s'\n", tokens[0]);
+	return (rt_parser_line_unknown_type(parser, tokens, line));
 }
 
 /**
@@ -98,28 +103,30 @@ static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
  *
  * @return A result.
  */
-RESULT	rt_parser_line_process(t_rt_parser *parser, char *line)
+RESULT	rt_parser_line_process(t_rt_parser *parser, size_t index)
 {
-	RESULT	res;
-	char	**tokens;
-	size_t	ntok;
+	const char	*line = parser->buffer[index];
+	RESULT		res;
+	char		**tokens;
+	size_t		ntok;
+	size_t		i;
 
-	res = OK();
 	if (!line || !*line || ft_strlen(line) == 0)
-		return (res);
+		return (OK());
 	ntok = rt_parser_line_tokenize(line, NULL);
 	if (ntok == 0)
-		return (res);
-	tokens = ft_calloc(ntok, sizeof(char *));
+		return (OK());
+	tokens = ft_calloc(ntok + 1, sizeof(char *));
 	if (tokens == NULL)
 		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate tokens"));
 	ntok = rt_parser_line_tokenize(line, tokens);
 	if ((int)ntok > 0)
-		res = rt_parser_line_process_type(parser, ntok, tokens);
-	if ((int)ntok > 0 && RES_OK(res))
-		res = rt_parser_object_parse(parser, ntok - 1, tokens);
-	while (ntok--)
-		ft_strdel(&tokens[ntok]);
+		res = rt_parser_line_process_type(parser, ntok, tokens, line);
+	i = 0;
+	while (tokens[i])
+		ft_strdel(&tokens[i++]);
 	free(tokens);
-	return (res);
+	if ((int)ntok <= 0)
+		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate token strings"));
+	return (rt_parser_line_result_expand(res, index));
 }

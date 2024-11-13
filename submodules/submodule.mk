@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:53:08 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/09 02:13:36 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/13 04:48:36 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,13 @@ else
 CFLAGS += $(shell $(MAKE) -C ../../ print_EXTRA_CFLAGS) 
 endif
 
-ARCH			=	native
-ifeq ($(HOST),42angouleme)
-ARCH			=	skylake
-endif
-ifeq ($(HOST),komet)
-ARCH			=	znver2
-endif
+# ARCH			=	native
+# ifeq ($(HOST),42angouleme)
+# ARCH			=	skylake
+# endif
+# ifeq ($(HOST),komet)
+# ARCH			=	znver2
+# endif
 # CFLAGS			+= 	-march=$(ARCH) -O3 -msse3 -mavx2 -ftree-vectorize -ffast-math -fno-math-errno -fno-semantic-interposition -funroll-loops -funsafe-math-optimizations -funwind-tables -fstrict-enums -fsplit-lto-unit -fvectorize -pipe
 
 ifdef EXTRA_LDFLAGS

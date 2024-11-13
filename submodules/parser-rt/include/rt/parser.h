@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/09 00:15:11 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:00:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ RESULT	rt_parser_buffer_fill(t_rt_parser *parser, const char *filepath);
 RESULT	rt_parser_buffer_preproc(t_rt_parser *parser, char *buffer);
 RESULT	rt_parser_buffer_sanitize(t_rt_parser *parser);
 
-RESULT	rt_parser_line_process(t_rt_parser *parser, char *line);
+RESULT	rt_parser_line_process(t_rt_parser *parser, size_t index);
+size_t	rt_parser_line_token_pos(const char *line, char **tokens, size_t index);
+RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, char **tokens,
+			const char *line);
 
 #  endif // __RT_PARSER_INTERNAL__
 
 RESULT	rt_parser_prim_register(t_rt_parser *parser, enum e_rt_primitive type,
 			t_rt_primitive_parser_func *fn);
-// RESULT	rt_parser_object_register(t_rt_parser *parser,
-// 			t_rt_object_parser *obj);
+RESULT	rt_parser_object_register(t_rt_parser *parser,
+			t_rt_object_parser objp);
 
 # endif // __RT_PARSER_H_
 #endif // PARSER_H
