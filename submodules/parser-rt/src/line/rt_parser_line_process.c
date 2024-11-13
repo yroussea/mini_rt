@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:00:37 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:47:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,45 +48,53 @@ static size_t	rt_parser_line_tokenize(const char *line, char **tokens)
 	return (ntok);
 }
 
-static RESULT	rt_parser_line_validate_ntok(t_rt_parser *parser, size_t ntok,
-					t_rt_object_parser *objp, char **tokens)
+// Note: This only validates if the number is too high.
+// Missing parameters are handled later, after individual parameter parsing.
+static RESULT	rt_parser_line_validate_ntok(char **tokens, size_t ntok,
+					t_rt_object_parser *objp, const char *line)
 {
-	(void)parser;
-	(void)tokens;
-	if (ntok >= objp->required && ntok <= objp->sequence_size)
+	t_rt_parser_file_context	context;
+
+	if (ntok - 1 <= objp->sequence_size)
 		return (OK());
-	rt_debug(parser->rt, "invalid number of tokens for '%s' - "
-		"got %d, req %d, max %d\n", objp->id, (int)ntok, (int)objp->required,
-		(int)objp->sequence_size);
-	return (OK());
+	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
+	context.type = FILE_ERR_TOO_MANY_PARTS;
+	context.length = ft_strlen(tokens[ntok - 1]);
+	context.column = rt_parser_line_token_pos(line, ntok - 1);
+	context.error_message = "this parameter is unnecessary";
+	if (objp->sequence_size == 0)
+		context.possible_fix = ft_format("object '%s' doesn't take parameters",
+				objp->name);
+	else if (objp->sequence_size == 1)
+		context.possible_fix = ft_format("object '%s' only accepts a "
+				"single parameter", objp->name);
+	else
+		context.possible_fix = ft_format("object '%s' only accepts from %d "
+				"to %d parameters", objp->name, objp->required,
+				objp->sequence_size);
+	return (ERR_FILE(context));
 }
 
 static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
 					char **tokens, const char *line)
 {
 	size_t				i;
-	size_t				size;
 	t_rt_object_parser	*objp;
 	t_rt_object_parser	*tmp;
 
 	i = 0;
-	size = 0;
 	objp = NULL;
 	tmp = NULL;
 	rt_trace(parser->rt, "looking for object parser for '%s'\n", tokens[0]);
-	while (parser->object_parsers[i].id)
+	while (parser->object_parsers[i].id && !objp)
 	{
 		tmp = &parser->object_parsers[i];
-		if (!objp)
-		{
-			if (!ft_strcmp(tmp->id, tokens[0]))
-				objp = tmp;
-		}
-		size += ft_strlen(tmp->id);
+		if (!ft_strcmp(tmp->id, tokens[0]))
+			objp = tmp;
 		i++;
 	}
 	if (objp)
-		return (rt_parser_line_validate_ntok(parser, ntok, objp, tokens));
+		return (rt_parser_line_validate_ntok(tokens, ntok, objp, line));
 	rt_debug(parser->rt, "unknown object identifier: '%s'\n", tokens[0]);
 	return (rt_parser_line_unknown_type(parser, tokens, line));
 }

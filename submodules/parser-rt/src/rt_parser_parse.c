@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 05:44:47 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:52:23 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static RESULT	rt_parser_sanity_check(t_rt_parser *parser)
 {
 	if (!parser->primitive_parsers[0].fn)
 		return (ERRS(PARSE_ERR_NULL, "no primitive parsers registered. what?"));
-	// if (!parser->object_parsers[0].id)
-	// 	return (ERRS(PARSE_ERR_NULL, "no object parsers registered. what?"));
+	if (!parser->object_parsers[0].id)
+		return (ERRS(PARSE_ERR_NULL, "no object parsers registered. what?"));
 	return (OK());
 }
 

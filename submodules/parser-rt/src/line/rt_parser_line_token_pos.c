@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:25:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:10:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:34:20 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,30 @@
  * @brief Finds the position of a token in a line.
  *
  * @param line The line to search in.
- * @param tokens An array of tokens to search for.
  * @param itoken The token index to search for.
  *
  * @return The position of the token in the line.
  */
-size_t	rt_parser_line_token_pos(const char *line, char **tokens, size_t itoken)
+size_t	rt_parser_line_token_pos(const char *line, size_t itoken)
 {
-	const char	*tmp;
-	size_t		n;
+	char	*tmp;
+	size_t	i;
 
-	n = itoken + 1;
-	tmp = line;
-	while (tmp && n > 0)
+	tmp = (char *)line;
+	i = 0;
+	while (tmp[i])
 	{
-		tmp = ft_strstr(tmp, tokens[itoken]);
-		n--;
-		if (n != 0)
-			tmp += ft_strlen(tokens[itoken]);
+		while (tmp[i] && tmp[i] == ' ')
+			i++;
+		if (tmp[i] && tmp[i] != ' ')
+		{
+			if (itoken > 0)
+				itoken--;
+			else
+				return (i);
+		}
+		while (tmp[i] && tmp[i] != ' ')
+			i++;
 	}
-	return (tmp - line);
+	return (i);
 }

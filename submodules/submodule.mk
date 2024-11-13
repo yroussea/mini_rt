@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:53:08 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/13 04:48:36 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/13 06:55:42 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)	
 	@mkdir -p $(dir $(MKDEPS_DIR)/$*)
 	@echo "<$(NAME)> Compiling $<"
-	@$(CC) $(CFLAGS) $(DFLAGS) -c $(PWD)/$< -o $@
+	@$(CC) $(CFLAGS) -Wno-deprecated-non-prototype -Wno-unknown-warning-option $(DFLAGS) -c $(PWD)/$< -o $@
 	@echo "$(PWD)/$<:" >> $(MKDEPS_DIR)/$*.tmp.d
 	@# dumb fixes, see https://make.mad-scientist.net/papers/advanced-auto-dependency-generation/
 	@mv -f $(MKDEPS_DIR)/$*.tmp.d $(MKDEPS_DIR)/$*.d

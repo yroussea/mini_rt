@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 05:28:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:24:14 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_rt_parser				t_rt_parser;
 /**
  * @brief Sub error types for `PARSER_ERR_FILE`.
  * @see `struct s_rt_parser_file_context`
+ * @see `rt_parse_err_print.c#rt_err_file_strtype`
  */
 enum	e_rt_parser_file_error
 {
@@ -39,6 +40,7 @@ enum	e_rt_parser_file_error
 	FILE_ERR_INVALID_CHAR,
 	FILE_ERR_INVALID_NUMBER,
 	FILE_ERR_MISSING_PART,
+	FILE_ERR_TOO_MANY_PARTS,
 	FILE_ERR_NON_EMPTY_LINE,
 	FILE_ERR_WRONG_ORDER,
 	_FILE_ERR_SIZE,

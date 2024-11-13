@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 05:39:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:13:46 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:33:57 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, char **tokens,
 	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
 	context.type = FILE_ERR_UNKNOWN_ID;
 	context.error_message = "this object type is unrecognized";
-	context.column = rt_parser_line_token_pos(line, tokens, 0);
+	context.column = rt_parser_line_token_pos(line, 0);
 	context.length = ft_strlen(tokens[0]);
 	context.possible_fix = ft_strjoins(2, "", 0b01, "known object ids: ",
 			rt_parser_line_known(parser));

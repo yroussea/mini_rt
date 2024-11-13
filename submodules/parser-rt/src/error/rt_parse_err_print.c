@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:12:43 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 06:39:21 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ static void	rt_parse_err_file_print_extras(const t_rt_parser *parser,
 			context->possible_fix);
 }
 
-static const char	*rt_err_file_strtype(enum e_rt_parser_file_error type)
+const char	*rt_err_file_strtype(enum e_rt_parser_file_error type)
 {
 	static const char	*err_file_strtype[] = {
 	[FILE_ERR_UNKNOWN_ID] = "unknown object identifier",
 	[FILE_ERR_INVALID_CHAR] = "invalid character",
 	[FILE_ERR_INVALID_NUMBER] = "invalid digit, or number too large",
 	[FILE_ERR_MISSING_PART] = "missing part of the object",
+	[FILE_ERR_TOO_MANY_PARTS] = "too many parameters provided",
 	[FILE_ERR_NON_EMPTY_LINE] = "empty lines should not contain spaces",
 	[FILE_ERR_WRONG_ORDER] = "object properties specified in the wrong order",
 	};
@@ -116,6 +117,7 @@ void	rt_parse_err_print(t_rt_parser *parser, t_rt_parse_error err)
 	if (err.data && err.type != PARSE_ERR_FILE)
 		ft_strdel((char **) &err.data);
 	else if (err.type == PARSE_ERR_FILE
-		&& err.file_context.type == FILE_ERR_UNKNOWN_ID)
+		&& (err.file_context.type == FILE_ERR_UNKNOWN_ID
+			|| err.file_context.type == FILE_ERR_TOO_MANY_PARTS))
 		ft_strdel((char **) &err.file_context.possible_fix);
 }
