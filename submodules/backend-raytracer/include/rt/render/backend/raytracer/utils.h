@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:16:24 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 12:53:16 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:34:33 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_vec3d	v3d_max(const t_vec3d *v1, const t_vec3d *v2);
 t_vec3d	v3d_min(const t_vec3d *v1, const t_vec3d *v2);
 t_vec3d	v3d_mult_v3d(const t_vec3d *v1, const t_vec3d *v2);
 t_vec3d	v3d_abs(const t_vec3d *v);
-
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_UTILS_H__
 #endif // UTILS_H

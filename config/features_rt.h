@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   features_rt.h                                      :+:      :+:    :+:   */
+/*   features.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:12:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 12:22:31 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:32:25 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FEATURES_RT_H
-# define FEATURES_RT_H
-# undef FEATURES_RT_H
+#ifndef FEATURES_H
+# define FEATURES_H
+# undef FEATURES_H
 # ifndef __RT_FEATURES_H__
 #  define __RT_FEATURES_H__
 
@@ -33,4 +33,4 @@
 #  define FEAT_PARSER_COMMENTS 1
 
 # endif // __RT_FEATURES_H__
-#endif // FEATURES_RT_H
+#endif // FEATURES_H

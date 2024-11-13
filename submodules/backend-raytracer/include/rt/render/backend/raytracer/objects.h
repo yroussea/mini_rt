@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:35:19 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:34:12 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 //TODO: remove, swap into parser object provider
 t_obj	*plane(t_vec3d normal, t_vec3d point, t_rt_material m);
 t_obj	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam,
-	   	t_vec3d colors);
+			t_vec3d colors);
 t_obj	*sphere(t_vec3d center, double diameter, t_rt_material m);
 t_obj	*light(t_vec3d coo, double intensity, t_rt_obj_type type, t_vec3d color);
 t_obj	*camera(t_vec3d coo, t_vec3d view_vector, double fov);

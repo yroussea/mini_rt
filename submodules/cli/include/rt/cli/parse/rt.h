@@ -6,13 +6,13 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:43:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 23:45:43 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:35:14 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_RT_H
-# define PARSER_RT_H
-# undef PARSER_RT_H
+#ifndef RT_H
+# define RT_H
+# undef RT_H
 # ifndef __RT_PARSE_PARSER_RT_H__
 #  define __RT_PARSE_PARSER_RT_H__
 
@@ -21,4 +21,4 @@
 RESULT	rt_cli_parser_rt_init(t_rt_parser *parser);
 
 # endif // __RT_PARSE_PARSER_RT_H__
-#endif // PARSER_RT_H
+#endif // RT_H
