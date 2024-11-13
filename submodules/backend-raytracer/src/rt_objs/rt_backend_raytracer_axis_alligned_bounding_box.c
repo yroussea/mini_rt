@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:20:30 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:49:17 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:35:11 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 
-#include <stdio.h>
 bool	rt_backend_raytracer_aabbx_inter(
 	const t_ray *ray, const t_boundingbox *aabbx)
 {

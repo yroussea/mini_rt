@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/11 21:19:01 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:41:15 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void	rt_backend_raytracer_cylinder(t_obj *obj)
 	t_cylinder	*cy;
 	t_vec3d		tmp;
 	t_vec3d		tmp2;
-	t_vec3d		highest;
-	t_vec3d		lowest;
+	t_vec3d		high;
 
 	cy = (t_cylinder *)obj;
 	tmp = v3d(cy->axis.y + cy->axis.z, -cy->axis.x, -cy->axis.x);
@@ -112,20 +111,16 @@ void	rt_backend_raytracer_cylinder(t_obj *obj)
 	cy->vec_vdir = v3d_norm(&tmp);
 	cy->sq_radius = cy->diameter * cy->diameter / 4;
 	cy->top_center = v3d_addmult(&cy->center, &cy->axis, cy->height);
-
 	tmp = rt_backend_raytracer_highest_point_circle(cy->vec_udir,
-		cy->vec_vdir, cy->center, cy->diameter / 2);
+			cy->vec_vdir, cy->center, cy->diameter / 2);
 	tmp2 = rt_backend_raytracer_highest_point_circle(cy->vec_udir,
-		cy->vec_vdir, cy->top_center, cy->diameter / 2);
-	highest = v3d_max(&tmp, &tmp2);
-
+			cy->vec_vdir, cy->top_center, cy->diameter / 2);
+	high = v3d_max(&tmp, &tmp2);
 	tmp = rt_backend_raytracer_lowest_point_circle(cy->vec_udir,
-		cy->vec_vdir, cy->center, cy->diameter / 2);
+			cy->vec_vdir, cy->center, cy->diameter / 2);
 	tmp2 = rt_backend_raytracer_lowest_point_circle(cy->vec_udir,
-		cy->vec_vdir, cy->top_center, cy->diameter / 2);
-	lowest = v3d_min(&tmp, &tmp2);
-	rt_backend_raytracer_creating_aabbx(&cy->aabbx, highest, lowest);
-
+			cy->vec_vdir, cy->top_center, cy->diameter / 2);
+	rt_backend_raytracer_creating_aabbx(&cy->aabbx, high, v3d_min(&tmp, &tmp2));
 	obj->intersect = rt_backend_raytracer_cylinder_intersection;
 	obj->calc_normal = rt_backend_raytracer_cylinder_normal;
 	obj->calc_color = rt_backend_raytracer_colors_cylinder;

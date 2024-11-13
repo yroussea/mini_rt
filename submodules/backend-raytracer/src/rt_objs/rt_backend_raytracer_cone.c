@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:40:53 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:40:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 ) {
 	const t_vec3d	all_colors[2] = {cone->base.material.colors,
 		(t_vec3d){0, 0, 0}};
-	t_vec3d			tmp;
+	t_vec3d			t;
 
 	if (cone->base.material.type == COLOR)
 		return (*all_colors);
-	rt_backend_raytracer_cone_twod_relative_point(&tmp, ray, cone);
+	rt_backend_raytracer_cone_twod_relative_point(&t, ray, cone);
 	return (all_colors[rt_backend_raytracer_checkerboard(
-				tmp.x - tmp.z, tmp.y / M_PI * 100)]);
+				t.x - t.z, t.y / M_PI * 100)]);
 }
 
 #else
@@ -81,15 +81,15 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 		return (*all_colors);
 	if (c_cone->surface_type != RONDED)
 	{
-		tmp = v3d_addmult(&c_cone->center, c_cone->axis, c_cone->height);
-		tmp = v3d_sub(&ray.hit_point, &tmp));
+		t = v3d_addmult(&c_cone->center, c_cone->axis, c_cone->height);
+		t = v3d_sub(&ray.hit_point, &t));
 		return (rt_backend_raytracer_planar_color(
-				tmp, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
+				t, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
 				cone->material.colors, cone->material.type));
 	}
-	rt_backend_raytracer_cone_twod_relative_point(&tmp, ray, c_cone);
+	rt_backend_raytracer_cone_twod_relative_point(&t, ray, c_cone);
 	return (all_colors[rt_backend_raytracer_checkerboard(
-				tmp.x, tmp.y / M_PI * 100)]);
+				t.x, t.y / M_PI * 100)]);
 }
 
 #endif
@@ -97,31 +97,25 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 void	rt_backend_raytracer_cone(t_obj *obj)
 {
 	t_cone		*cone;
-	t_vec3d		tmp;
-	t_vec3d		top_center;
-	t_vec3d		highest;
-	t_vec3d		lowest;
+	t_vec3d		t;
+	t_vec3d		top;
+	t_vec3d		high;
 
 	cone = (t_cone *)obj;
-	tmp = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
-	cone->vec_udir = v3d_norm(&tmp);
-	tmp = v3d_cross(&cone->axis, &cone->vec_udir);
-	cone->vec_vdir = v3d_norm(&tmp);
+	t = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
+	cone->vec_udir = v3d_norm(&t);
+	t = v3d_cross(&cone->axis, &cone->vec_udir);
+	cone->vec_vdir = v3d_norm(&t);
 	cone->cos = cos(cone->theta);
 	cone->tan = tan(cone->theta);
 	cone->max_dist = cone->height / cone->cos;
-
-	top_center = v3d_addmult(&cone->center, &cone->axis, cone->height);
-	tmp = rt_backend_raytracer_highest_point_circle(cone->vec_udir,
-		cone->vec_vdir, top_center, cone->height * cone->tan);
-	highest = v3d_max(&tmp, &top_center);
-
-	tmp = rt_backend_raytracer_lowest_point_circle(cone->vec_udir,
-		cone->vec_vdir, top_center, cone->height * cone->tan);
-	lowest = v3d_min(&tmp, &top_center);
-	rt_backend_raytracer_creating_aabbx(&cone->aabbx, highest, lowest);
-
-
+	top = v3d_addmult(&cone->center, &cone->axis, cone->height);
+	t = rt_backend_raytracer_highest_point_circle(cone->vec_udir,
+			cone->vec_vdir, top, cone->height * cone->tan);
+	high = v3d_max(&t, &top);
+	t = rt_backend_raytracer_lowest_point_circle(cone->vec_udir,
+			cone->vec_vdir, top, cone->height * cone->tan);
+	rt_backend_raytracer_creating_aabbx(&cone->aabbx, high, v3d_min(&t, &top));
 	obj->intersect = rt_backend_raytracer_cone_intersection;
 	obj->calc_normal = rt_backend_raytracer_cone_normal;
 	obj->calc_color = rt_backend_raytracer_colors_cone;

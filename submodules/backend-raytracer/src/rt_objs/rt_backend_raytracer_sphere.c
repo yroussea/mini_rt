@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:58:31 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:43:03 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,29 @@ t_vec3d	rt_backend_raytracer_sphere_normal(
 	t_ray *ray,
 	t_sphere *sphere
 ) {
-	// t_vec3d			relative_coo;
+	t_vec3d			coo;
 
-	// if (sphere->material.type == BUMP_MAP)
-	// {
-	// 	rt_backend_raytracer_sphereere_twod_relative_point(&relative_coo, ray, sphere);
-	// 	//bump map
-	// 	//get_pixel hex -> rgb
-	// 	//bump = (r * 2 - 1, g * 2 - 1 g * 2 -1)
-	// 	//normal *= bump 
-	// }
+	if (sphere->material.type == BUMP_MAP)
+	{
+		rt_backend_raytracer_sphereere_twod_relative_point(&coo, ray, sphere);
+		/*bump map
+		get_pixel hex -> rgb
+		bump = (r * 2 - 1, g * 2 - 1 g * 2 -1)
+		normal *= bump */
+	}
 	return (v3d_normsub(&ray->hit_point, &sphere->center));
 }
 
 t_vec3d	rt_backend_raytracer_colors_sphere(
 	t_ray *ray,
-	t_sphere *sphere
+	t_sphere *sph
 ) {
-	const t_vec3d	colors[2] = {sphere->base.material.colors, (t_vec3d){0, 0, 0}};
+	const t_vec3d	colors[2] = {sph->base.material.colors, (t_vec3d){0, 0, 0}};
 	t_vec3d			tmp;
 
-	if (sphere->base.material.type == COLOR)
+	if (sph->base.material.type == COLOR)
 		return (*colors);
-	rt_backend_raytracer_sphere_twod_relative_point(&tmp, ray, sphere);
+	rt_backend_raytracer_sphere_twod_relative_point(&tmp, ray, sph);
 	return (colors[rt_backend_raytracer_checkerboard(tmp.x * 50, tmp.y * 50)]);
 }
 
