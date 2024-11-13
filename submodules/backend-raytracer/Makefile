@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/10 13:17:23 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/13 13:38:49 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = provider/rt_backend_raytracer_provider.c \
 	  utils/rt_free_aligned.c	\
 	  utils/rt_malloc_aligned.c	\
 	  utils/v3d_additionnal_rules.c	\
+	  utils/v3d_additionnal_rules_mult.c	\
 	  rt_objs/rt_backend_raytracer_checkerboard.c \
 	  rt_objs/rt_backend_raytracer_axis_alligned_bounding_box.c \
 	  rt_objs/rt_backend_raytracer_sphere.c \

@@ -6,13 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:37:29 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/10 13:23:13 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:36:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <stdint.h>
-# include <stdio.h>
 
 /**
  * To allocate aligned memory, we setup:
@@ -36,9 +35,5 @@ void	*rt_malloc_aligned(size_t size, size_t alignment)
 	ptr -= sizeof(size_t);
 	*(size_t *)ptr = offset;
 	ptr += sizeof(size_t);
-	// printf("ptr: %p (aligned? %s)\n", ptr, (uintptr_t)ptr % 32 == 0 ? "yes" : "no");
-	// printf("offset: %zu\n", offset);
-	// printf("size: %zu\n", size);
-	// printf("alignment: %zu\n", alignment);
 	return (ptr);
 }
