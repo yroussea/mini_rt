@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_init.c                                   :+:      :+:    :+:   */
+/*   rt_parser_object_init.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 13:39:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:28:51 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/13 07:11:40 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/13 07:12:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
+#include <ft/string.h>
+#include <stdbool.h>
 #include <rt/parser.h>
-#include <rt/parser/primitive/builtins.h>
 
-static void	rt_parser_init_defaults(t_rt_parser *parser)
+void	rt_parser_object_init(t_rt_object_parser *objp, const char *id,
+			const char *name, size_t size)
 {
-	rt_parser_prim_register(parser, RT_PRIM_COORDS, rt_parser_prim_position);
-}
+	size_t	i;
 
-RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt, bool add_default)
-{
-	ft_memset(parser, 0, sizeof(t_rt_parser));
-	parser->rt = rt;
-	if (add_default)
-		rt_parser_init_defaults(parser);
-	return (OK());
+	ft_memset(objp, 0, sizeof(t_rt_object_parser));
+	objp->id = id;
+	objp->name = name;
+	objp->size = size;
+	i = 0;
+	while (name && name[i])
+	{
+		if (!ft_isupper(name[i]))
+			return ;
+		i++;
+	}
+	objp->is_unique = true;
 }

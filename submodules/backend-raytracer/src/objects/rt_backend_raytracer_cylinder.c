@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/13 09:41:15 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/14 21:57:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,19 +126,19 @@ void	rt_backend_raytracer_cylinder(t_obj *obj)
 	obj->calc_color = rt_backend_raytracer_colors_cylinder;
 }
 
-t_obj	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors)
-{
-	t_obj		*new;
-	t_cylinder	*cy;
-
-	cy = rt_malloc_aligned(sizeof(t_cylinder), 32);
-	cy->diameter = diam;
-	cy->axis = v3d_norm(&vector);
-	cy->height = height;
-	cy->center = coo;
-	new = (t_obj *) cy;
-	new->type = OBJS;
-	new->material = (t_rt_material){COLOR, {colors}};
-	rt_backend_raytracer_cylinder(new);
-	return (new);
-}
+// t_obj	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors)
+// {
+// 	t_obj		*new;
+// 	t_cylinder	*cy;
+//
+// 	cy = rt_malloc_aligned(sizeof(t_cylinder), 32);
+// 	cy->diameter = diam;
+// 	cy->axis = v3d_norm(&vector);
+// 	cy->height = height;
+// 	cy->center = coo;
+// 	new = (t_obj *) cy;
+// 	new->type = OBJS;
+// 	new->material = (t_rt_material){COLOR, {colors}};
+// 	rt_backend_raytracer_cylinder(new);
+// 	return (new);
+// }

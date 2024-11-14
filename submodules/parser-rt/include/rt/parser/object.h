@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:11:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:40:28 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:18:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 
 #  define RT_PARSER_OBJECT_MAX_STEPS 16
 
+typedef struct s_rt_object_parser	t_rt_object_parser;
+
+typedef RESULT						t_object_parser_provider_fn(
+										t_rt_object_parser *ptr);
+
 typedef struct s_rt_object_parser_step
 {
 	enum e_rt_primitive	type;
@@ -31,6 +36,7 @@ typedef struct s_rt_object_parser
 {
 	const char				*id;
 	const char				*name;
+	size_t					enum_id;
 	bool					is_unique;
 	size_t					size;
 	t_rt_object_parser_step	sequence[RT_PARSER_OBJECT_MAX_STEPS];
@@ -38,7 +44,15 @@ typedef struct s_rt_object_parser
 	size_t					required;
 }	t_rt_object_parser;
 
+RESULT	rt_parser_object_register(t_rt_parser *parser,
+			t_object_parser_provider_fn *fn);
+
+void	rt_parser_object_init(t_rt_object_parser *objp, const char *id,
+			const char *name, size_t size);
+
 RESULT	rt_parser_object_step(t_rt_object_parser *parser, size_t offset,
+			enum e_rt_primitive type);
+RESULT	rt_parser_object_step_opt(t_rt_object_parser *parser, size_t offset,
 			enum e_rt_primitive type);
 
 # endif // __RT_PARSER_OBJECT_H__

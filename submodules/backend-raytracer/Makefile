@@ -6,33 +6,30 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/13 13:38:49 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/14 21:53:03 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = provider/rt_backend_raytracer_provider.c \
+SRC = objects/rt_backend_raytracer_checkerboard.c \
+	  objects/rt_backend_raytracer_axis_alligned_bounding_box.c \
+	  objects/rt_backend_raytracer_sphere.c \
+	  objects/rt_backend_raytracer_planar.c \
+	  objects/rt_backend_raytracer_plane.c \
+	  objects/rt_backend_raytracer_cone_intersection.c \
+	  objects/rt_backend_raytracer_cone.c \
+	  objects/rt_backend_raytracer_cylinder_intersection.c \
+	  objects/rt_backend_raytracer_cylinder.c \
+      provider/rt_backend_raytracer_provider.c \
 	  provider/rt_backend_raytracer_ctor.c \
-	  rt_backend_raytracer_destroy.c \
-	  rt_backend_raytracer_init.c \
-	  rt_backend_raytracer_render.c	\
-	  rt_backend_raytracer_ray_generator.c \
-	  rt_backend_raytracer_find_obj_hit.c \
-	  rt_backend_raytracer_shading.c \
-	  utils/m3d_solv.c	\
-	  utils/rt_fmod.c	\
-	  utils/rt_free_aligned.c	\
-	  utils/rt_malloc_aligned.c	\
+	  utils/m3d_solv.c \
+	  utils/rt_fmod.c \
 	  utils/v3d_additionnal_rules.c	\
-	  utils/v3d_additionnal_rules_mult.c	\
-	  rt_objs/rt_backend_raytracer_checkerboard.c \
-	  rt_objs/rt_backend_raytracer_axis_alligned_bounding_box.c \
-	  rt_objs/rt_backend_raytracer_sphere.c \
-	  rt_objs/rt_backend_raytracer_planar.c \
-	  rt_objs/rt_backend_raytracer_plane.c \
-	  rt_objs/rt_backend_raytracer_cone_intersection.c \
-	  rt_objs/rt_backend_raytracer_cone.c \
-	  rt_objs/rt_backend_raytracer_cylinder_intersection.c \
-	  rt_objs/rt_backend_raytracer_cylinder.c \
-	  rt_objs/add_obj.c
+	  utils/v3d_additionnal_rules_mult.c \
+	  rt_backend_raytracer_destroy.c \
+	  rt_backend_raytracer_find_obj_hit.c \
+	  rt_backend_raytracer_init.c \
+	  rt_backend_raytracer_ray_generator.c \
+	  rt_backend_raytracer_render.c	\
+	  rt_backend_raytracer_shading.c
 
 include ../submodule.mk

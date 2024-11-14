@@ -6,7 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/13 13:41:44 by yroussea         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/13 07:44:26 by kiroussa         ###   ########.fr       */
+>>>>>>> 3bc17b2 (♻️ refactor: renamed raytracer subfolders, more work on the parser)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +45,16 @@ typedef enum e_rt_material
 typedef struct s_rt_material
 {
 	t_rt_material_type	type;
+<<<<<<< HEAD
 	union
 	{
 		t_vec3d			colors;
 		t_vec3d			**hex_maps;
 	};
+=======
+	t_vec3d				colors;
+	t_vec3d				check_colors;
+>>>>>>> 3bc17b2 (♻️ refactor: renamed raytracer subfolders, more work on the parser)
 }	t_rt_material;
 
 // Note: all these functions take a `t_ray *` as their first param,
@@ -66,7 +75,7 @@ typedef struct s_obj
 	struct s_obj		*next;
 }	t_obj;
 
-typedef struct s_bondingbox
+typedef struct s_boundingbox
 {
 	t_vec3d	mins;
 	t_vec3d	maxs;
@@ -83,7 +92,6 @@ typedef enum e_surface_hit_type
 typedef struct s_plane
 {
 	t_obj	base;
-	t_vec3d	obj;
 	t_vec3d	point;
 	t_vec3d	normal;
 	t_vec3d	vec_udir;

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/13 09:40:49 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/14 21:57:32 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 	t_cone *cone
 ) {
 	const t_vec3d	all_colors[2] = {cone->base.material.colors,
-		(t_vec3d){0, 0, 0}};
+		cone->base.material.check_colors};
 	t_vec3d			t;
 
 	if (cone->base.material.type == COLOR)
@@ -70,19 +70,19 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 #else
 
 t_vec3d	rt_backend_raytracer_colors_cone(
-	const t_ray ray, void *obj)
-{
-	const t_objs	*cone = (t_objs *)obj;
-	const t_cone	*c_cone = (t_cone *)cone->obj;
-	const t_vec3d	all_colors[2] = {cone->material.colors, (t_vec3d){0, 0, 0}};
-	t_vec3d			hit;
+	const t_ray *ray,
+	const t_cone *cone
+) {
+	const t_vec3d	all_colors[2] = {cone->base.material.colors,
+		cone->base.material.check_colors};
+	t_vec3d			t;
 
-	if (cone->material.type == COLOR)
-		return (*all_colors);
-	if (c_cone->surface_type != RONDED)
+	if (cone->base.material.type == COLOR)
+		return (cone->base.material.colors);
+	if (cone->surface_type != RONDED)
 	{
 		t = v3d_addmult(&c_cone->center, c_cone->axis, c_cone->height);
-		t = v3d_sub(&ray.hit_point, &t));
+		t = v3d_sub(&ray.hit_point, &t);
 		return (rt_backend_raytracer_planar_color(
 				t, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
 				cone->material.colors, cone->material.type));
@@ -121,22 +121,22 @@ void	rt_backend_raytracer_cone(t_obj *obj)
 	obj->calc_color = rt_backend_raytracer_colors_cone;
 }
 
-t_obj	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors)
-{
-	t_obj			*new;
-	t_cone			*cone;
-
-	cone = rt_malloc_aligned(sizeof(t_cone), 32);
-	if (!cone)
-		return (NULL);
-	cone->axis = v3d_norm(&vector);
-	cone->height = height;
-	//limiter theta a 90degree
-	cone->theta = theta / 180 * M_PI;
-	cone->center = coo;
-	new = (t_obj *) cone;
-	new->type = OBJS;
-	new->material = (t_rt_material){CHECKERBOARD, {colors}};
-	rt_backend_raytracer_cone(new);
-	return (new);
-}
+// t_obj	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors)
+// {
+// 	t_obj			*new;
+// 	t_cone			*cone;
+//
+// 	cone = rt_malloc_aligned(sizeof(t_cone), 32);
+// 	if (!cone)
+// 		return (NULL);
+// 	cone->axis = v3d_norm(&vector);
+// 	cone->height = height;
+// 	//limiter theta a 90degree
+// 	cone->theta = theta / 180 * M_PI;
+// 	cone->center = coo;
+// 	new = (t_obj *) cone;
+// 	new->type = OBJS;
+// 	new->material = (t_rt_material){CHECKERBOARD, colors, };
+// 	rt_backend_raytracer_cone(new);
+// 	return (new);
+// }

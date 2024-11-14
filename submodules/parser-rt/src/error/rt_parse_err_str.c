@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:39:38 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 22:52:22 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:04:35 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ const char	*rt_parse_err_str(enum e_rt_parse_error err)
 	[PARSE_ERR_SYSCALL] = "a system error occured",
 	[PARSE_ERR_FILE] = "generic file format error",
 	[PARSE_ERR_FILE_READ] = "an error occured while reading a file",
+	[PARSE_ERR_BAD_USAGE] = "bad parser library usage noob",
 	[PARSE_ERR_NULL] = "a null pointer was passed",
 	[PARSE_ERR_UNKNOWN] = "an unknown error occured",
 	};

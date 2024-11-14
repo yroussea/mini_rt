@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:33:33 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:43:46 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, char **tokens,
 
 #  endif // __RT_PARSER_INTERNAL__
 
-RESULT	rt_parser_prim_register(t_rt_parser *parser, enum e_rt_primitive type,
-			t_rt_primitive_parser_func *fn);
-RESULT	rt_parser_object_register(t_rt_parser *parser,
-			t_rt_object_parser objp);
+#  define OBJ rt_parser_object_register
+#  define OBJ_STEP rt_parser_object_step
+#  define OBJ_STEP_OPT rt_parser_object_step_opt
+#  define PRIM rt_parser_prim_register
 
 # endif // __RT_PARSER_H_
 #endif // PARSER_H

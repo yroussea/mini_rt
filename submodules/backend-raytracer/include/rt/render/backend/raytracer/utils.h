@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:16:24 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/13 13:34:33 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/14 21:53:35 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 #  include <ft/math/vector.h>
 #  include <ft/math/matrix.h>
 #  include <stddef.h>
+#  include <rt/util.h>
 
 double	rt_fmod(double x, double y);
 
 t_mat3d	m3d(t_vec3d col1, t_vec3d col2, t_vec3d col3);
 t_vec3d	m3d_solv(t_mat3d a, t_vec3d b);
-
-void	*rt_malloc_aligned(size_t size, size_t alignment);
-void	rt_free_aligned(void *ptr);
 
 t_vec3d	v3d_inv(const t_vec3d *v);
 t_vec3d	v3d_opp(const t_vec3d *v1);

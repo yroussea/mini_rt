@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:52:23 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 08:07:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,52 @@ static void	rt_parser_buffer_dump(t_rt_parser *parser)
 	}
 }
 
+#define NO_PRIM_PARSERS "no primitive parsers registered. what?"
+#define NO_OBJ_PARSERS "no object parsers registered. what?"
+#define MISSING_REQ_PRIM "some required primitive parsers don't exist"
+
+static size_t	rt_parser_sanity_check_seq(t_rt_parser *parser,
+					size_t index, size_t j)
+{
+	const t_rt_object_parser	*objp = &parser->object_parsers[index];
+	size_t						i;
+
+	i = 0;
+	while (parser->primitive_parsers[i].fn)
+	{
+		if (parser->primitive_parsers[i].type == objp->sequence[j].type)
+			return (1);
+		i++;
+	}
+	rt_warn(parser->rt, "missing primitive parser '%s' for object '%s'\n",
+		rt_parser_strprim(objp->sequence[j].type), objp->name);
+	return (0);
+}
+
 static RESULT	rt_parser_sanity_check(t_rt_parser *parser)
 {
+	size_t	i;
+	size_t	j;
+	size_t	found;
+
 	if (!parser->primitive_parsers[0].fn)
-		return (ERRS(PARSE_ERR_NULL, "no primitive parsers registered. what?"));
+		return (ERRS(PARSE_ERR_NULL, NO_PRIM_PARSERS));
 	if (!parser->object_parsers[0].id)
-		return (ERRS(PARSE_ERR_NULL, "no object parsers registered. what?"));
+		return (ERRS(PARSE_ERR_NULL, NO_OBJ_PARSERS));
+	i = 0;
+	while (parser->object_parsers[i].id)
+	{
+		found = 0;
+		j = 0;
+		while (j < parser->object_parsers[i].sequence_size)
+		{
+			found += rt_parser_sanity_check_seq(parser, i, j);
+			j++;
+		}
+		if (found != j)
+			return (ERRS(PARSE_ERR_BAD_USAGE, MISSING_REQ_PRIM));
+		i++;
+	}
 	return (OK());
 }
 

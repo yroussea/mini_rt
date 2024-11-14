@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:39:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:02:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static void	rt_parse_err_file_print(const t_rt_parser *parser,
 	size_t		spacing;
 
 	spacing = ft_ulllen(context->line);
+	ft_putchar_fd(OUT, '\n');
 	rt_error(rt, B_RED"error"RESET":"BOLD" %s\n"RESET,
 		rt_err_file_strtype(context->type));
 	ft_dprintf(OUT, "%*s"BLUE"-->"RESET" %s\n"RESET, spacing, "",
@@ -97,6 +98,7 @@ static void	rt_parse_err_file_print(const t_rt_parser *parser,
 				context->error_message);
 	}
 	rt_parse_err_file_print_extras(parser, context);
+	ft_putchar_fd(OUT, '\n');
 }
 
 void	rt_parse_err_print(t_rt_parser *parser, t_rt_parse_error err)
