@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 02:05:12 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 06:37:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@
 
 typedef enum e_rt_obj_type
 {
-	CAMERA = 0,
-	AMBIANCE_LIGHT,
-	POINT_LIGHT,
-	OBJS, // TODO: change to individual types
+	OBJ_CAMERA = 0,
+	OBJ_AMBIANT_LIGHT,
+	OBJ_LIGHT,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	OBJ_CONE,
+	_OBJ_SIZE,
 }	t_rt_obj_type;
 
 typedef enum e_rt_material

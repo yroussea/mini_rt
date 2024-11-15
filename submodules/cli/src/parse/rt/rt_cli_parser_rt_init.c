@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:25:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:43:27 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:15:45 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RESULT	rt_object_plane(t_rt_object_parser *objp)
 {
 	RESULT	res;
 
-	rt_parser_object_init(objp, "pl", "plane", sizeof(t_plane));
+	rt_parser_object_init(objp, "pl", OBJ_PLANE, sizeof(t_plane));
 	res = OBJ_STEP(objp, offsetof(t_plane, point), RT_PRIM_COORDS);
 	if (RES_OK(res))
 		res = OBJ_STEP(objp, offsetof(t_plane, normal), RT_PRIM_NORMAL);
@@ -43,7 +43,7 @@ RESULT	rt_object_cylinder(t_rt_object_parser *objp)
 {
 	RESULT	res;
 
-	rt_parser_object_init(objp, "cy", "cylinder", sizeof(t_cylinder));
+	rt_parser_object_init(objp, "cy", OBJ_CYLINDER, sizeof(t_cylinder));
 	res = OBJ_STEP(objp, offsetof(t_cylinder, center), RT_PRIM_COORDS);
 	if (RES_OK(res))
 		res = OBJ_STEP(objp, offsetof(t_cylinder, axis), RT_PRIM_NORMAL);
@@ -54,12 +54,22 @@ RESULT	rt_object_cylinder(t_rt_object_parser *objp)
 	return (rt_object_define_colors(objp, res));
 }
 
+RESULT	rt_object_test(t_rt_object_parser *objp)
+{
+	RESULT	res;
+
+	rt_parser_object_init(objp, "d", 0, sizeof(double));
+	res = OBJ_STEP(objp, 0, RT_PRIM_DOUBLE);
+	return (res);
+}
+
 RESULT	rt_cli_parser_rt_init(t_rt_parser *parser)
 {
 	RESULT	res;
 
-	res = OBJ(parser, rt_object_plane);
-	if (RES_OK(res))
-		res = OBJ(parser, rt_object_cylinder);
+	res = OBJ(parser, rt_object_test);
+	// res = OBJ(parser, rt_object_plane);
+	// if (RES_OK(res))
+	// 	res = OBJ(parser, rt_object_cylinder);
 	return (res);
 }

@@ -12,7 +12,7 @@ void    parse_file(const char* path)
     t_rt_parser parser;
 
     // pass `true` to enable the default primitive parsers
-    rt_parser_init(&parser, true);
+    rt_parser_init(&parser, true, NULL);
     add_type_parsers(&parser);
 
     // parse the file

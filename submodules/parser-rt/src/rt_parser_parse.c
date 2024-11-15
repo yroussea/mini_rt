@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 08:07:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:14:49 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static size_t	rt_parser_sanity_check_seq(t_rt_parser *parser,
 {
 	const t_rt_object_parser	*objp = &parser->object_parsers[index];
 	size_t						i;
+	const char					*name;
 
 	i = 0;
 	while (parser->primitive_parsers[i].fn)
@@ -56,8 +57,11 @@ static size_t	rt_parser_sanity_check_seq(t_rt_parser *parser,
 			return (1);
 		i++;
 	}
+	name = objp->id;
+	if (parser->name_fn)
+		name = objp->parser->name_fn(objp->enum_id);
 	rt_warn(parser->rt, "missing primitive parser '%s' for object '%s'\n",
-		rt_parser_strprim(objp->sequence[j].type), objp->name);
+		rt_parser_strprim(objp->sequence[j].type), name);
 	return (0);
 }
 

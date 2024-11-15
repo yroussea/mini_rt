@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:11:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:18:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:06:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_rt_object_parser_step
 
 typedef struct s_rt_object_parser
 {
+	t_rt_parser				*parser;
 	const char				*id;
-	const char				*name;
 	size_t					enum_id;
 	bool					is_unique;
 	size_t					size;
@@ -46,14 +46,16 @@ typedef struct s_rt_object_parser
 
 RESULT	rt_parser_object_register(t_rt_parser *parser,
 			t_object_parser_provider_fn *fn);
-
 void	rt_parser_object_init(t_rt_object_parser *objp, const char *id,
-			const char *name, size_t size);
+			int enum_id, size_t size);
 
 RESULT	rt_parser_object_step(t_rt_object_parser *parser, size_t offset,
 			enum e_rt_primitive type);
 RESULT	rt_parser_object_step_opt(t_rt_object_parser *parser, size_t offset,
 			enum e_rt_primitive type);
+
+RESULT	rt_parser_object_parse(t_rt_parser *parser, const char **tokens,
+			void *memory, size_t *size);
 
 # endif // __RT_PARSER_OBJECT_H__
 #endif // OBJECT_H

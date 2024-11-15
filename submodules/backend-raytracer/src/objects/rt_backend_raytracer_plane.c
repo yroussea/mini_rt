@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 11:56:07 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/15 05:33:44 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_obj	*plane(t_vec3d normal, t_vec3d point, t_rt_material m)
 	plane->normal = v3d_norm(&normal);
 	plane->point = point;
 	new = (t_obj *) plane;
-	new->type = OBJS;
+	new->type = OBJ_PLANE;
 	new->material = m;
 	rt_backend_raytracer_plane(new);
 	return (new);

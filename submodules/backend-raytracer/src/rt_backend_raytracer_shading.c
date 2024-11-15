@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:55:48 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 06:28:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 }
 
 __always_inline
-static t_vec3d	shading(t_obj *objs, t_ray *ray, t_vec3d normal)
+static t_vec3d	shading(t_obj *obj, t_ray *ray, t_vec3d normal)
 {
 	t_ray			tmp;
 	t_light			*light;
@@ -56,19 +56,19 @@ static t_vec3d	shading(t_obj *objs, t_ray *ray, t_vec3d normal)
 
 	tmp.center = ray->hit_point;
 	color = (t_vec3d){0, 0, 0};
-	while (objs->type != OBJS)
+	while (obj->type == OBJ_LIGHT)
 	{
-		light = (t_light *) objs;
+		light = (t_light *) obj;
 		tmp.direction = v3d_normsub(&light->point, &tmp.center);
 		tmp.point = v3d_addmult(&tmp.center, &tmp.direction, EPSILON);
-		if (rt_backend_raytracer_find_obj_hit(&tmp, objs, NULL) > \
+		if (rt_backend_raytracer_find_obj_hit(&tmp, obj, NULL) > \
 			v3d_lensub(&tmp.point, &light->point))
 		{
-			color_light = objs->calc_color(&tmp, light);
+			color_light = obj->calc_color(&tmp, light);
 			color = v3d_addmult(&color, &color_light, \
 						phong_shading(ray, light, tmp, normal));
 		}
-		objs = objs->next;
+		obj = obj->next;
 	}
 	return (color);
 }
@@ -83,7 +83,7 @@ void	rt_backend_raytracer_get_shading(t_obj *objs, t_obj *obj_hit,
 	t_light			*light;
 
 	ambiance_color = (t_vec3d){0, 0, 0};
-	while (objs->type == AMBIANCE_LIGHT)
+	while (objs->type == OBJ_AMBIANT_LIGHT)
 	{
 		light = (t_light *) objs;
 		color_light = objs->calc_color(ray, light);

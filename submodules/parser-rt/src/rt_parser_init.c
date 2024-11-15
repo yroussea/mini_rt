@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:28:51 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:08:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@
 static void	rt_parser_init_defaults(t_rt_parser *parser)
 {
 	rt_parser_prim_register(parser, RT_PRIM_COORDS, rt_parser_prim_position);
+	rt_parser_prim_register(parser, RT_PRIM_DOUBLE, rt_parser_prim_double);
 }
 
-RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt, bool add_default)
+RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt,
+			t_parser_name_fn *name_fn, bool add_default)
 {
+	if (!parser || !rt)
+		return (ERRS(PARSE_ERR_NULL, "cannot initialize parser with null"
+				"arguments"));
+	if (!name_fn)
+		return (ERRS(PARSE_ERR_NULL, "cannot initialize parser with null"
+				"name function"));
 	ft_memset(parser, 0, sizeof(t_rt_parser));
 	parser->rt = rt;
+	parser->name_fn = name_fn;
 	if (add_default)
 		rt_parser_init_defaults(parser);
 	return (OK());

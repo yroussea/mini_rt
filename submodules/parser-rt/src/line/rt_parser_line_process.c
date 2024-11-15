@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:47:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:12:14 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static RESULT	rt_parser_line_validate_ntok(char **tokens, size_t ntok,
 					t_rt_object_parser *objp, const char *line)
 {
 	t_rt_parser_file_context	context;
+	const char					*name;
 
 	if (ntok - 1 <= objp->sequence_size)
 		return (OK());
@@ -62,16 +63,18 @@ static RESULT	rt_parser_line_validate_ntok(char **tokens, size_t ntok,
 	context.length = ft_strlen(tokens[ntok - 1]);
 	context.column = rt_parser_line_token_pos(line, ntok - 1);
 	context.error_message = "this parameter is unnecessary";
+	name = objp->id;
+	if (objp->parser->name_fn)
+		name = objp->parser->name_fn(objp->enum_id);
 	if (objp->sequence_size == 0)
 		context.possible_fix = ft_format("object '%s' doesn't take parameters",
-				objp->name);
+				name);
 	else if (objp->sequence_size == 1)
 		context.possible_fix = ft_format("object '%s' only accepts a "
-				"single parameter", objp->name);
+				"single parameter", name);
 	else
 		context.possible_fix = ft_format("object '%s' only accepts from %d "
-				"to %d parameters", objp->name, objp->required,
-				objp->sequence_size);
+				"to %d parameters", name, objp->required, objp->sequence_size);
 	return (ERR_FILE(context));
 }
 

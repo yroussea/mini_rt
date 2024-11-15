@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:53:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 18:26:55 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 06:30:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	rt_frontend_mlx_init(t_rt_frontend *self)
 	if (!data)
 		return (1);
 	self->data = data;
+	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
+	if (!data->buffer)
+		return (1);
 	data->engine = toc_engine_create();
 	if (!data->engine)
 		return (1);

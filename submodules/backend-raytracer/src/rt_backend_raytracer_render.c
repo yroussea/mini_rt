@@ -6,13 +6,15 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:46:01 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:18:17 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/log.h>
 #include <rt/render/backend/raytracer.h>
 
+// Note: The seemingly redundant check L+7 is to avoid a bug in clang 19.0.1
+// which would cause a segfault/invalid reads
 t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_obj *all_objs)
 {
 	t_obj	*obj_hit;
@@ -37,10 +39,10 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 	raytracer = (t_rt_backend_raytracer *)backend->data;
 	y = 0;
 	raytracer->ticker++;
-	rt_trace(backend->rt, "go banger %d\n", (int)raytracer->ticker);
-	while (objs->type == CAMERA)
+	rt_trace(backend->rt, "frame render %d\n", (int)raytracer->ticker);
+	while (objs && objs->type == OBJ_CAMERA)
 		objs = objs->next;
-	while (y < backend->height)
+	while (objs && y < backend->height)
 	{
 		x = 0;
 		while (x < backend->width)
@@ -52,6 +54,5 @@ t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 		}
 		y++;
 	}
-	rt_trace(backend->rt, "banger FINI %d\n", (int)raytracer->ticker);
 	return (raytracer->buffer);
 }

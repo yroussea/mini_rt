@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:43:46 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:11:12 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 #  define RT_PARSER_MAX_PRIMITIVES 24
 #  define RT_PARSER_MAX_OBJECTS 24
 
+typedef const char	*(t_parser_name_fn)(size_t type);
+
 typedef struct s_rt_parser
 {
 	const t_rt				*rt;
+	t_parser_name_fn		*name_fn;
 	t_list					*result;
 	char					*read_buffer;
 	char					**buffer;
@@ -36,7 +39,8 @@ typedef struct s_rt_parser
 	t_rt_object_parser		object_parsers[RT_PARSER_MAX_OBJECTS];
 }	t_rt_parser;
 
-RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt, bool add_default);
+RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt,
+			t_parser_name_fn *name_fn, bool add_default);
 void	rt_parser_destroy(t_rt_parser *parser);
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath);
 

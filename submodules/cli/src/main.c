@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 23:45:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:16:59 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 #include <rt/cli.h>
 #include <rt/cli/parse/rt.h>
 #include <rt/log.h>
+#include <rt/objects.h>
 #include <rt/parser.h>
 #include <rt/render/backend.h>
 #include <rt/render/frontend.h>
 #include <unistd.h>
 
-int	rt_backend_init(const t_rt *rt);
-int	rt_frontend_init(const t_rt *rt);
+const char	*rt_object_strtype(const t_rt_obj_type type);
+void		rt_parser_dump_state(const t_rt *rt, t_rt_parser *parser);
+int			rt_backend_init(const t_rt *rt);
+int			rt_frontend_init(const t_rt *rt);
 
 static int	rt_parse_wrap(const t_rt *rt)
 {
@@ -30,7 +33,8 @@ static int	rt_parse_wrap(const t_rt *rt)
 	__attribute__((cleanup(rt_parser_destroy))) t_rt_parser parser;
 	if (rt->flags.mode == RT_MODE_APP)
 		return (0);
-	res = rt_parser_init(&parser, rt, true);
+	res = rt_parser_init(&parser, rt, (t_parser_name_fn *)(void *)
+			rt_object_strtype, true);
 	if (RES_OK(res))
 		res = rt_cli_parser_rt_init(&parser);
 	if (RES_OK(res))
@@ -40,6 +44,7 @@ static int	rt_parse_wrap(const t_rt *rt)
 		ERROR_PRINT(&parser, res);
 		return (res.type);
 	}
+	rt_parser_dump_state(rt, &parser);
 	return (0);
 }
 

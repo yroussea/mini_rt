@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/13 13:46:05 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/15 05:33:35 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_obj	*sphere(t_vec3d center, double diameter, t_rt_material material)
 	sph->rayon = diameter / 2;
 	sph->center = center;
 	new = (t_obj *) sph;
-	new->type = OBJS;
+	new->type = OBJ_SPHERE;
 	new->material = material;
 	rt_backend_raytracer_sphere(new);
 	return (new);

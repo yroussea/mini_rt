@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 18:15:20 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 06:49:57 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RT_DEVMODE 0
 #endif // RT_DEVMODE
 
+#include <ft/math/vector.h>
 #include <ft/mem.h>
 #if RT_DEVMODE
 # include <rt/devreload.h>
@@ -37,29 +38,56 @@ static void	rt_screen_main_init(t_toc_screen *self)
 	ft_memset(self->window->keymap, 0, sizeof(self->window->keymap));
 }
 
+static void	rt_pixelate(t_rt_frontend *frontend, t_rt_backend *backend,
+				t_color *source, t_color *target)
+{
+	const t_vec2i			target_size = v2i(frontend->width,
+			frontend->height);
+	const t_vec2i			source_size = v2i(backend->width, backend->height);
+	const t_vec2i			scales = v2i(target_size.x / source_size.x,
+			target_size.y / source_size.y);
+	t_vec2i					source_pos;
+	t_vec2i					pos;
+
+	pos = v2i(0, 0);
+	while (pos.y < target_size.y)
+	{
+		pos.x = 0;
+		while (pos.x < target_size.x)
+		{
+			source_pos = v2i(pos.x / scales.x, pos.y / scales.y);
+			target[pos.y * target_size.x + pos.x] = \
+				source[source_pos.y * source_size.x + source_pos.x];
+			pos.x++;
+		}
+		pos.y++;
+	}
+}
+
 static bool	rt_screen_main_render(t_toc_screen *self,
 				__attribute__((unused)) t_toc_vec2i mouse)
 {
 	t_rt_frontend		*frontend;
-	t_color				*buffer;
-	size_t				x;
-	size_t				y;
+	t_rt_frontend_mlx	*front;
+	t_rt_backend		*backend;
+	t_toc_vec2i			pos;
 
 	frontend = (t_rt_frontend *)self->data;
+	front = (t_rt_frontend_mlx *)frontend->data;
 	if (RT_DEVMODE)
 		rt_devrl_check_reload(frontend->rt);
-	buffer = frontend->rt->backend->render(frontend->rt->backend);
-	y = 0;
-	while (y < frontend->height)
+	toc_draw_rect(self, toc_vec2i(0, 0), toc_vec2i(self->width, self->height),
+		(t_toc_color){.value = 0xFF000000});
+	backend = frontend->rt->backend;
+	rt_pixelate(frontend, backend, backend->render(backend), front->buffer);
+	pos = toc_vec2i(0, 0);
+	while (pos.y < (int)frontend->height)
 	{
-		x = 0;
-		while (x < frontend->width)
-		{
-			toc_draw_pixel(self, (t_toc_vec2i){x, y},
-				(t_toc_color){.value = buffer[y * frontend->width + x].rgba});
-			x++;
-		}
-		y++;
+		pos.x = -1;
+		while (++pos.x < (int)frontend->width)
+			toc_draw_pixel(self, pos, (t_toc_color){.value
+				= front->buffer[pos.y * frontend->width + pos.x].rgba});
+		pos.y++;
 	}
 	return (true);
 }

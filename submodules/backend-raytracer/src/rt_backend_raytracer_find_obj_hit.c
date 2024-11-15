@@ -6,13 +6,24 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:54:40 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 05:35:36 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend/raytracer.h>
 #include <ft/math/vector.h>
 #include <math.h>
+
+bool	rt_object_can_intersect(t_obj *obj)
+{
+	const t_rt_obj_type	type = obj->type;
+
+	if (type == OBJ_CAMERA)
+		return (false);
+	if (type == OBJ_AMBIANT_LIGHT || type == OBJ_LIGHT)
+		return (false);
+	return (obj->intersect != NULL);
+}
 
 double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_obj *objs,
 			t_obj **hit)
@@ -21,9 +32,10 @@ double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_obj *objs,
 	double	distance;
 
 	distance_min = INFINITY;
+	*hit = NULL;
 	while (objs)
 	{
-		if (objs->type == OBJS)
+		if (rt_object_can_intersect(objs))
 		{
 			distance = objs->intersect(ray, objs);
 			if (distance > 0 && distance < distance_min)
