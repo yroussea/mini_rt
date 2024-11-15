@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:11:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:06:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:42:02 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ RESULT	rt_parser_object_step(t_rt_object_parser *parser, size_t offset,
 RESULT	rt_parser_object_step_opt(t_rt_object_parser *parser, size_t offset,
 			enum e_rt_primitive type);
 
-RESULT	rt_parser_object_parse(t_rt_parser *parser, const char **tokens,
-			void *memory, size_t *size);
+RESULT	rt_parser_object_parse(t_rt_object_parser *objp, char **tokens,
+			const char *line);
 
 # endif // __RT_PARSER_OBJECT_H__
 #endif // OBJECT_H

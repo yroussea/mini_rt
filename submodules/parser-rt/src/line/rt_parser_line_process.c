@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:12:14 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 07:42:52 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static RESULT	rt_parser_line_validate_ntok(char **tokens, size_t ntok,
 	const char					*name;
 
 	if (ntok - 1 <= objp->sequence_size)
-		return (OK());
+		return (rt_parser_object_parse(objp, tokens + 1, line));
 	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
 	context.type = FILE_ERR_TOO_MANY_PARTS;
 	context.length = ft_strlen(tokens[ntok - 1]);
