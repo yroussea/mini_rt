@@ -6,10 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/14 21:57:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:21:22 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/objects.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
@@ -60,7 +61,7 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 		cone->base.material.check_colors};
 	t_vec3d			t;
 
-	if (cone->base.material.type == COLOR)
+	if (!(cone->base.material.type & CHECKERBOARD))
 		return (*all_colors);
 	rt_backend_raytracer_cone_twod_relative_point(&t, ray, cone);
 	return (all_colors[rt_backend_raytracer_checkerboard(
@@ -77,7 +78,7 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 		cone->base.material.check_colors};
 	t_vec3d			t;
 
-	if (cone->base.material.type == COLOR)
+	if (!(cone->base.material.type & CHECKERBOARD))
 		return (cone->base.material.colors);
 	if (cone->surface_type != RONDED)
 	{
@@ -85,7 +86,7 @@ t_vec3d	rt_backend_raytracer_colors_cone(
 		t = v3d_sub(&ray.hit_point, &t);
 		return (rt_backend_raytracer_planar_color(
 				t, m3d(c_cone->vec_udir, c_cone->vec_vdir, c_cone->axis),
-				cone->material.colors, cone->material.type));
+				cone->material));
 	}
 	rt_backend_raytracer_cone_twod_relative_point(&t, ray, c_cone);
 	return (all_colors[rt_backend_raytracer_checkerboard(

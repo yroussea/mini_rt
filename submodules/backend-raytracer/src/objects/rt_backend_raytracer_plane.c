@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 05:33:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:20:16 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec3d	rt_backend_raytracer_plane_color(
 	return (rt_backend_raytracer_planar_color(
 			v3d_sub(&ray->hit_point, &plane->point),
 			m3d(plane->vec_vdir, plane->vec_udir, plane->normal),
-			plane->base.material.colors, plane->base.material.type));
+			plane->base.material));
 }
 
 void	rt_backend_raytracer_plane(t_obj *obj)

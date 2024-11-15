@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 06:37:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:14:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ typedef enum e_rt_obj_type
 
 typedef enum e_rt_material
 {
-	COLOR = 0,
-	CHECKERBOARD,
-	BUMP_MAP,
+	CHECKERBOARD = 1,
+	BUMP_MAP = 2,
 }	t_rt_material_type;
 
 typedef struct s_rt_material
 {
-	t_rt_material_type	type;
-	t_vec3d				colors;
-	t_vec3d				check_colors;
-	t_vec3d				**hex_maps;
+	int		type;
+	t_vec3d	colors;
+	t_vec3d	check_colors;
+	t_vec3d	*bumpmap;
+	t_vec2i	map_size;
 }	t_rt_material;
 
 // Note: all these functions take a `t_ray *` as their first param,

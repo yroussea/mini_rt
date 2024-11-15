@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/14 21:57:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:21:24 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_obj	*add_objects(t_obj *new);
 
 bool	rt_backend_raytracer_checkerboard(double a, double b);
 t_vec3d	rt_backend_raytracer_planar_color(t_vec3d relative_hit, t_mat3d vectors,
-			t_vec3d color, t_rt_material_type type);
+			t_rt_material material);
 double	rt_backend_raytracer_planar_intersect(const t_ray *ray, t_vec3d n,
 			t_vec3d a);
 

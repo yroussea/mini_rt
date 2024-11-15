@@ -6,10 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 05:33:35 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:16:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/objects.h"
+#include "rt/render/backend/raytracer/objects.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
@@ -50,31 +52,54 @@ static void	rt_backend_raytracer_sphere_twod_relative_point(
 	relative_coo->y = acos(x.y / sph->rayon);
 }
 
+#define RT_SCALE_BUMPMAP 1
+int	rt_backend_raytracer_bumpmap_coo(
+	const float u,
+	const float v,
+	const t_vec2i size)
+{ 
+	return ((int)(v * RT_SCALE_BUMPMAP) % size.x + \
+		 ((int)(u * RT_SCALE_BUMPMAP) % size.y) * size.x);
+}
+
+t_vec3d	rt_backend_raytracer_bumpmap(
+	const t_vec3d *vec,
+	const t_vec3d *bump_color,
+	const int coo)
+{
+	static const t_vec3d	diff = (t_vec3d){-1, -1, -1};
+	const t_vec3d			rgb = bump_color[coo];
+	const t_vec3d			bump = v3d_addmult(&diff, &rgb, 2);
+
+	return (v3d_mult_v3d(vec, &bump));
+}
+
 t_vec3d	rt_backend_raytracer_sphere_normal(
 	t_ray *ray,
 	t_sphere *sphere
 ) {
-	t_vec3d			coo;
+	t_vec3d				coo;
+	const t_rt_material	mat = sphere->base.material;
+	const t_vec3d		normal = v3d_normsub(&ray->hit_point, &sphere->center);
 
-	if (sphere->base.material.type == BUMP_MAP)
+	if (mat.type & BUMP_MAP)
 	{
 		rt_backend_raytracer_sphere_twod_relative_point(&coo, ray, sphere);
-		/*bump map
-		get_pixel hex -> rgb
-		bump = (r * 2 - 1, g * 2 - 1 g * 2 -1)
-		normal *= bump */
+		return (rt_backend_raytracer_bumpmap(&normal, mat.bumpmap,
+				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.map_size)));
 	}
-	return (v3d_normsub(&ray->hit_point, &sphere->center));
+	return (normal);
 }
 
 t_vec3d	rt_backend_raytracer_colors_sphere(
 	t_ray *ray,
 	t_sphere *sph
 ) {
-	const t_vec3d	colors[2] = {sph->base.material.colors, (t_vec3d){0, 0, 0}};
+	const t_vec3d	colors[2] = {sph->base.material.colors,
+		sph->base.material.check_colors};
 	t_vec3d			tmp;
 
-	if (sph->base.material.type == COLOR)
+	if (!(sph->base.material.type & CHECKERBOARD))
 		return (*colors);
 	rt_backend_raytracer_sphere_twod_relative_point(&tmp, ray, sph);
 	return (colors[rt_backend_raytracer_checkerboard(tmp.x * 50, tmp.y * 50)]);

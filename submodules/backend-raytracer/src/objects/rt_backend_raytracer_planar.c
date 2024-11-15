@@ -6,12 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:51:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/09 01:30:43 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 23:20:06 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/objects.h"
 #include <ft/math.h>
-#include <math.h>
 #include <ft/math/vector.h>
 #include <ft/math/matrix.h>
 #include <rt/render/backend/raytracer.h>
@@ -30,13 +30,12 @@ double	rt_backend_raytracer_planar_intersect(
 t_vec3d	rt_backend_raytracer_planar_color(
 	t_vec3d relative_hit,
 	t_mat3d vectors,
-	t_vec3d color,
-	t_rt_material_type type
+	t_rt_material material
 ) {
-	const t_vec3d	all_colors[2] = {color, (t_vec3d){0, 0, 0}};
+	const t_vec3d	all_colors[2] = {material.colors, material.check_colors};
 	t_vec3d			solution;
 
-	if (type == COLOR)
+	if (!(material.type & CHECKERBOARD))
 		return (*all_colors);
 	solution = m3d_solv(vectors, relative_hit);
 	return (all_colors[rt_backend_raytracer_checkerboard(
