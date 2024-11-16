@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 03:45:46 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:31:51 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 	iseq = 0;
 	while (RES_OK(res) && tokens[itkn] && iseq < objp->required)
 	{
-		res = rt_parser_object_parse_step(objp, tokens[itkn], iseq, &memory);
+		res = rt_parser_object_parse_step(objp, tokens[itkn], iseq, memory);
 		res = rt_parser_object_expand_step(res, itkn, line);
 		itkn++;
 		iseq++;

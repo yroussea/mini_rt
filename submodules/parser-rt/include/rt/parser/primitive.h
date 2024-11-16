@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:22:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:26:14 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:57:32 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ enum e_rt_primitive
 	RT_PRIM_UINT,		// unsigned int
 	RT_PRIM_DOUBLE,		// double
 	RT_PRIM_UDOUBLE,	// positive ("unsigned") double
+	RT_PRIM_URATIO,		// positive ("unsigned") double (0 - 1)
 	RT_PRIM_ANGLE,		// int, 0 - 180
-	// EXTENSIONS
-	RT_PRIM_CHECKERED,	// "checkered" string, indicating optional color next
-	RT_PRIM_BUMP,		// "bump" string, indicating bump map string next
-	RT_PRIM_FILE,		// a file path, must exist and be readable
-	//
+	// EXTENSIONS,      //
+	RT_PRIM_BUMPFILE,	// a file path, must exist and be readable
+						// as an mlx texture
+	RT_PRIM_CHECKERED,	// "checkered" word
 	_RT_PRIM_SIZE,		// (last entry, for the enum's size)
 };
 

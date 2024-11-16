@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 06:59:39 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:31:40 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:15:22 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static enum e_rt_primitive	rt_parser_line_strtoprim(const char *str)
 	[RT_PRIM_DOUBLE] = "double",
 	[RT_PRIM_UDOUBLE] = "udouble",
 	[RT_PRIM_ANGLE] = "angle",
-	[RT_PRIM_CHECKERED] = "checkered",
-	[RT_PRIM_BUMP] = "bump",
-	[RT_PRIM_FILE] = "file",
+	[RT_PRIM_BUMPFILE] = "bumpmap",
 	};
 	size_t				i;
 

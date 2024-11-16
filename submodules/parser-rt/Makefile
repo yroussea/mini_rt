@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/16 11:10:12 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/16 20:07:45 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,16 +39,16 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  primitive/impl/strtox/rt_strtod_num.c \
 	  primitive/impl/strtox/rt_strtoi.c \
 	  primitive/impl/rt_parser_prim_angle.c \
-	  primitive/impl/rt_parser_prim_bump.c \
+	  primitive/impl/rt_parser_prim_bumpmap.c \
 	  primitive/impl/rt_parser_prim_checkered.c \
 	  primitive/impl/rt_parser_prim_color.c \
 	  primitive/impl/rt_parser_prim_coords.c \
 	  primitive/impl/rt_parser_prim_double.c \
-	  primitive/impl/rt_parser_prim_file.c \
 	  primitive/impl/rt_parser_prim_int.c \
 	  primitive/impl/rt_parser_prim_normal.c \
 	  primitive/impl/rt_parser_prim_udouble.c \
 	  primitive/impl/rt_parser_prim_uint.c \
+	  primitive/impl/rt_parser_prim_uratio.c \
 	  primitive/rt_parser_prim_register.c \
 	  primitive/rt_parser_strprim.c \
 	  rt_parser_destroy.c \

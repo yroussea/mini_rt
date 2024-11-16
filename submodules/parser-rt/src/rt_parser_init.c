@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 13:17:01 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:07:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 
 static void	rt_parser_init_defaults(t_rt_parser *parser)
 {
+	rt_parser_prim_register(parser, RT_PRIM_ANGLE, rt_parser_prim_angle);
+	rt_parser_prim_register(parser, RT_PRIM_BUMPFILE, rt_parser_prim_bumpmap);
+	rt_parser_prim_register(parser, RT_PRIM_CHECKERED,
+		rt_parser_prim_checkered);
 	rt_parser_prim_register(parser, RT_PRIM_COLOR, rt_parser_prim_color);
 	rt_parser_prim_register(parser, RT_PRIM_COORDS, rt_parser_prim_coords);
 	rt_parser_prim_register(parser, RT_PRIM_DOUBLE, rt_parser_prim_double);
@@ -23,6 +27,7 @@ static void	rt_parser_init_defaults(t_rt_parser *parser)
 	rt_parser_prim_register(parser, RT_PRIM_NORMAL, rt_parser_prim_normal);
 	rt_parser_prim_register(parser, RT_PRIM_UDOUBLE, rt_parser_prim_udouble);
 	rt_parser_prim_register(parser, RT_PRIM_UINT, rt_parser_prim_uint);
+	rt_parser_prim_register(parser, RT_PRIM_URATIO, rt_parser_prim_uratio);
 }
 
 RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt,

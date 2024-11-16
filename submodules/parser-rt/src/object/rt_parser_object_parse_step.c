@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:37:03 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:31:07 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:32:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_rt_primitive_parser	*rt_parser_prim_get(
 }
 
 RESULT	rt_parser_object_parse_step(t_rt_object_parser *objp,
-			char *token, size_t index, void **memory)
+			char *token, size_t index, void *memory)
 {
 	const t_rt_parser				*parser = objp->parser;
 	const t_rt_object_parser_step	step = objp->sequence[index];
@@ -49,10 +49,8 @@ RESULT	rt_parser_object_parse_step(t_rt_object_parser *objp,
 	rt_trace(parser->rt, "running parse step '%s' on token '%s'\n",
 		rt_parser_strprim(step.type), token);
 	size = 0;
-	res = primp->fn(parser, token, memory, &size);
-	if (RES_OK(res))
-		*memory = *memory + size;
-	else
+	res = primp->fn(parser, token, memory + step.offset, &size);
+	if (RES_ERR(res))
 		rt_trace(parser->rt, "failed to parse '%s'\n", token);
 	return (res);
 }
