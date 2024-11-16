@@ -6,11 +6,12 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/16 05:19:06 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/16 05:29:45 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = objects/rt_backend_raytracer_checkerboard.c \
+      objects/rt_backend_raytracer_bumpmap.c \
 	  objects/rt_backend_raytracer_axis_alligned_bounding_box.c \
 	  objects/rt_backend_raytracer_sphere.c \
 	  objects/rt_backend_raytracer_planar.c \
