@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 23:21:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 04:45:04 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,46 @@ t_obj	*camera(t_vec3d coo, t_vec3d view_vector, double fov);
 t_obj	*cone(t_vec3d coo, t_vec3d vector, double height, double theta,
 			t_vec3d colors);
 
+
+void	rt_backend_raytracer_cone_twod_relative_point(
+	t_vec3d *relative_coo,
+	const t_ray *ray,
+	const t_cone *cone
+);
+t_vec3d	rt_backend_raytracer_colors_cone(
+	const t_ray *ray,
+	t_cone *cone
+);
+t_vec3d	rt_backend_raytracer_cone_normal(
+	t_ray *ray,
+	t_cone *cone
+);
+void	rt_backend_raytracer_cylinder_twod_relative_point(
+	t_vec3d *relative_coo,
+	const t_ray *ray,
+	const t_cylinder *c_cy
+);
+t_vec3d	rt_backend_raytracer_colors_cylinder(
+	const t_ray *ray,
+	t_cylinder *cy
+);
+t_vec3d	rt_backend_raytracer_cylinder_normal(
+	const t_ray *ray,
+	t_cylinder *cy
+);
+
 double	plane_intersect(t_ray *ray, t_vec3d normal, t_vec3d point);
 t_obj	*add_objects(t_obj *new);
+
+t_vec3d	rt_backend_raytracer_bumpmap(
+	const t_vec3d *vec,
+	const t_vec3d *bump_color,
+	const int coo);
+int	rt_backend_raytracer_bumpmap_coo(
+	const float u,
+	const float v,
+	const t_vec2i size);
+
 
 bool	rt_backend_raytracer_checkerboard(double a, double b);
 t_vec3d	rt_backend_raytracer_planar_color(t_vec3d relative_hit, t_mat3d vectors,

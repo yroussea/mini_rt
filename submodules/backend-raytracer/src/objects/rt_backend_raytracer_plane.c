@@ -6,10 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 23:20:16 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 00:57:39 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/objects.h"
+#include "rt/render/backend/raytracer/objects.h"
 #include <ft/math.h>
 #include <math.h>
 #include <ft/math/vector.h>
@@ -21,9 +23,19 @@ t_vec3d	rt_backend_raytracer_plane_normal(
 	const t_ray *ray,
 	t_plane *plane
 ) {
-	const double	dot = v3d_dot(&ray->direction, &plane->normal);
+	const double		dot = v3d_dot(&ray->direction, &plane->normal);
+	const t_vec3d		normal = v3d_mult(&plane->normal, -ft_fsign(dot));
+	const t_rt_material	mat = plane->base.material;
+	t_vec3d				coo;
 
-	return (v3d_mult(&plane->normal, -ft_fsign(dot)));
+	if (mat.type & BUMP_MAP)
+	{
+		coo = m3d_solv(m3d(plane->vec_vdir, plane->vec_udir, plane->normal),
+			v3d_sub(&ray->hit_point, &plane->point));
+		return (rt_backend_raytracer_bumpmap(&normal, mat.bumpmap,
+				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.map_size)));
+	}
+	return (normal);
 }
 
 double	rt_backend_raytracer_plane_intersection(

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 23:20:54 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:19:09 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,7 @@
 #include <rt/render/backend/raytracer.h>
 #include <math.h>
 
-t_vec3d	rt_backend_raytracer_cylinder_normal(
-	const t_ray *ray,
-	t_cylinder *cy
-) {
-	t_vec3d				a;
-	t_vec3d				new_point;
-	double				m;
 
-	if (cy->surface_type != RONDED)
-		return (v3d_mult(&cy->axis,
-				-ft_fsign(v3d_dot(&ray->direction, &cy->axis))));
-	new_point = v3d_sub(&ray->hit_point, &cy->center);
-	m = v3d_dot(&new_point, &cy->axis);
-	a = v3d_addmult(&cy->center, &cy->axis, m);
-	return (v3d_normsub(&ray->hit_point, &a));
-}
 
 static void	rt_backend_raytracer_cylinder_twod_relative_point(
 	t_vec3d *relative_coo,
@@ -51,53 +36,6 @@ static void	rt_backend_raytracer_cylinder_twod_relative_point(
 		acos(sol.x / sqrt(sol.x * sol.x + sol.y * sol.y));
 	relative_coo->z = v3d_lensub(&a, &ray->hit_point) - c_cy->diameter / 2;
 }
-
-#define RT_RONDED_CYLINDER_LINK_CHECKERBOARD 1
-#if RT_RONDED_CYLINDER_LINK_CHECKERBOARD
-
-t_vec3d	rt_backend_raytracer_colors_cylinder(
-	const t_ray *ray,
-	t_cylinder *cy
-) {
-	const t_vec3d		colors[2] = {cy->base.material.colors,
-		cy->base.material.check_colors};
-	t_vec3d				tmp;
-
-	if (!(cy->base.material.type & CHECKERBOARD))
-		return (*colors);
-	rt_backend_raytracer_cylinder_twod_relative_point(&tmp, ray, cy);
-	return (colors[rt_backend_raytracer_checkerboard(
-				tmp.x - tmp.z, tmp.y / M_PI * 100)]);
-}
-
-#else
-
-t_vec3d	rt_backend_raytracer_colors_cylinder(
-	t_ray *ray,
-	t_cylinder *cy
-) {
-	const t_vec3d		colors[2] = {cy->base.material.colors,
-		cy->base.material.check_colors};
-	t_vec3d				tmp;
-
-	if (!(cy->base.material.type & CHECKERBOARD))
-		return (*colors);
-	if (cy->surface_type != RONDED)
-	{
-		if (cy->surface_type == PLANE)
-			tmp = v3d_sub(&ray->hit_point, &cy->center);
-		else
-			tmp = v3d_sub(&ray->hit_point, &cy->top_center);
-		return (rt_backend_raytracer_planar_color(
-				tmp, m3d(cy->vec_udir, cy->vec_vdir, cy->axis),
-				cy->base.material));
-	}
-	rt_backend_raytracer_cylinder_twod_relative_point(&tmp, ray, cy);
-	return (colors[rt_backend_raytracer_checkerboard(
-				tmp.x, tmp.y / M_PI * 100)]);
-}
-
-#endif
 
 void	rt_backend_raytracer_cylinder(t_obj *obj)
 {
