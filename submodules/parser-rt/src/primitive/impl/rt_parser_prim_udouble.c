@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_prim_double.c                            :+:      :+:    :+:   */
+/*   rt_parser_prim_udouble.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 06:56:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 10:47:10 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/16 09:47:45 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/16 13:31:50 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,29 @@
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 
-RESULT	rt_parser_prim_double(
+#define INVALID_SIGN_ERROR "unsigned double value must be positive"
+
+RESULT	rt_parser_prim_udouble(
 	__attribute__((unused)) t_rt_parser *parser,
 	const char *slice,
 	void *memory,
 	size_t *size
 ) {
-	RESULT	res;
+	RESULT		res;
 
 	res = rt_strtod(&slice, (double *)memory, " ");
 	if (RES_OK(res))
-		*size = sizeof(double);
+	{
+		if (*(double *)memory < 0)
+		{
+			res = ERR_FILE(rt_strtod_ctx_char(0, INVALID_SIGN_ERROR, NULL));
+			res.file_context.length = 1;
+			res.file_context.column = 1;
+			res.file_context.type = FILE_ERR_INVALID_NUMBER;
+			res.file_context.possible_fix = "remove the minus sign";
+		}
+		else
+			*size = sizeof(double);
+	}
 	return (res);
 }

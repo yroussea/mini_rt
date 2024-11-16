@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/16 07:52:41 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/16 13:06:18 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,6 +147,9 @@ remake: oclean
 
 test: all
 	@make --no-print-directory -C scenes test
+
+vtest: all
+	@make --no-print-directory -C scenes vtest
 
 daemon-stop:
 	@echo "[*] Killing daemon..."

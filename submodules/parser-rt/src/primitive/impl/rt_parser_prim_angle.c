@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_prim_double.c                            :+:      :+:    :+:   */
+/*   rt_parser_prim_angle.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 06:56:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 10:47:10 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/16 13:30:53 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/16 14:06:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,27 @@
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 
-RESULT	rt_parser_prim_double(
+#define INVALID_ANGLE_ERROR "angle value must be between 0 and 180"
+
+RESULT	rt_parser_prim_angle(
 	__attribute__((unused)) t_rt_parser *parser,
 	const char *slice,
 	void *memory,
 	size_t *size
 ) {
-	RESULT	res;
+	RESULT		res;
+	const char	*orig = slice;
 
 	res = rt_strtod(&slice, (double *)memory, " ");
 	if (RES_OK(res))
-		*size = sizeof(double);
+	{
+		if (*(double *)memory < 0.0 || *(double *)memory > 180.0)
+		{
+			res = ERR_FILE(rt_strtod_ctx_char(0, INVALID_ANGLE_ERROR, 0));
+			res.file_context.length = ft_strlen(orig);
+		}
+		else
+			*size = sizeof(double);
+	}
 	return (res);
 }

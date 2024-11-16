@@ -1,0 +1,9 @@
+@udouble   1.0
+@udouble   1.0f
+@udouble   1.
+@udouble   .0
+@udouble   1.f
+@udouble   +1
+@udouble   +.0f
+@udouble   +.0
+@udouble   +111111111111111111111.00000000000000000000f

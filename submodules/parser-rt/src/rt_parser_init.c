@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 06:25:13 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:17:01 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 
 static void	rt_parser_init_defaults(t_rt_parser *parser)
 {
+	rt_parser_prim_register(parser, RT_PRIM_COLOR, rt_parser_prim_color);
 	rt_parser_prim_register(parser, RT_PRIM_COORDS, rt_parser_prim_coords);
 	rt_parser_prim_register(parser, RT_PRIM_DOUBLE, rt_parser_prim_double);
+	rt_parser_prim_register(parser, RT_PRIM_INT, rt_parser_prim_int);
 	rt_parser_prim_register(parser, RT_PRIM_NORMAL, rt_parser_prim_normal);
+	rt_parser_prim_register(parser, RT_PRIM_UDOUBLE, rt_parser_prim_udouble);
+	rt_parser_prim_register(parser, RT_PRIM_UINT, rt_parser_prim_uint);
 }
 
 RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt,

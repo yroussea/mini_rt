@@ -1,0 +1,6 @@
+# Coordinates, formatted as %f,%f,%f forming a 3D vector (x,y,z)
+@coords   1.0,1.0,1.0
+@coords   -.0,-.0,-.0
+@coords   0.0,0.0,0.0
+@coords   420,6.9f,.1337F
+@coords   -420,-6.9f,-.1337F
