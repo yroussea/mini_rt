@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:25:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:15:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:30:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ RESULT	rt_object_test(t_rt_object_parser *objp)
 {
 	RESULT	res;
 
-	rt_parser_object_init(objp, "d", 0, sizeof(double));
-	res = OBJ_STEP(objp, 0, RT_PRIM_DOUBLE);
+	rt_parser_object_init(objp, "d", 0, sizeof(t_vec3d));
+	res = OBJ_STEP(objp, 0, RT_PRIM_COORDS);
 	return (res);
 }
 

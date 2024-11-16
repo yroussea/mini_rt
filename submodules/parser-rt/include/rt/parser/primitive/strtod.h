@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:52:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 05:19:51 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:31:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ decimal point"
 #  define FIX_MISSING_PARTS "maybe try '0.0' instead"
 
 #  define INVALID_CHAR_SEP "expected a separator"
-#  define FIX_SEP "put a comma"
+#  define FIX_SEP "put a comma here"
 
 #  define INVALID_CHAR_END "expected end of number"
 
