@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:18:28 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 00:56:01 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:09:06 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static RESULT	rt_strtod_expand(RESULT res, size_t len, double *result,
 		res.file_context.column += len;
 	return (res);
 }
+# include <stdio.h>
 
 // num: read the number
 // midcheck: check if we're at the middle '.' or at the end
@@ -69,9 +70,9 @@ RESULT	rt_strtod(const char **str, double *result, const char *end)
 	if (RES_OK(res))
 		res = rt_strtod_midcheck(*str, end);
 	if (RES_OK(res) && **str == '.')
-		res = rt_strtod_frac(str, &parts[1], &filled[1]);
+		res = rt_strtod_frac(str, &parts[1], &filled[1], end);
 	if (RES_OK(res))
-		res = rt_strtod_final(str, filled, end);
+		res = rt_strtod_final(str, filled, end, orig);
 	res = rt_strtod_expand(res, *str - orig, result, parts);
 	if (neg && RES_OK(res))
 		*result = -(*result);

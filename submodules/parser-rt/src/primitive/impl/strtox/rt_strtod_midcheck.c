@@ -6,11 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:05:51 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:02:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:19:43 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/parser/primitive/strtod.h>
+#define FIX_DOT "did you mean to add a dot instead?"
 
 // We're at the end of the first number part, this means
 // we should have a few different cases:
@@ -31,5 +32,7 @@ RESULT	rt_strtod_midcheck(const char *str, const char *end)
 		return (OK());
 	else if (str[0] == 'e' || str[0] == 'E')
 		return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_E, FIX_E)));
-	return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_DIGIT, NULL)));
+	if (ft_strchr(str, '.'))
+		return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_DIGIT, NULL)));
+	return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_DIGIDOT, FIX_DOT)));
 }

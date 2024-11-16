@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:22:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:40:05 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 03:24:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ const char	*rt_parser_strprim(enum e_rt_primitive prim);
  *
  * @return A result.
  */
-typedef RESULT				t_rt_primitive_parser_func(t_rt_parser *parser,
+typedef RESULT				t_rt_primitive_parser_func(
+								const t_rt_parser *parser,
 								const char *slice, void *memory, size_t *size);
 
 /**

@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/15 07:36:19 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/16 03:37:21 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  line/rt_parser_line_unknown_type.c \
 	  object/rt_parser_object_init.c \
 	  object/rt_parser_object_parse.c \
+	  object/rt_parser_object_parse_step.c \
 	  object/rt_parser_object_register.c \
 	  object/rt_parser_object_step.c \
 	  primitive/impl/strtox/rt_strtod.c \

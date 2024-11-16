@@ -6,26 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 01:58:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 03:45:46 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/log.h>
+#define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
-
-static RESULT	rt_parser_object_parse_step(t_rt_object_parser *objp,
-					char *token, size_t index, void **memory)
-{
-	const t_rt_parser				*parser = objp->parser;
-	const t_rt_object_parser_step	step = objp->sequence[index];
-
-	rt_trace(parser->rt, "running parse step '%s' on token '%s'\n",
-		rt_parser_strprim(step.type), token);
-	(void)token;
-	(void)memory;
-	return (OK());
-}
 
 static RESULT	rt_parser_object_check_complete(t_rt_object_parser *objp,
 					const char *line, RESULT res)
@@ -38,12 +26,22 @@ static RESULT	rt_parser_object_check_complete(t_rt_object_parser *objp,
 	return (res);
 }
 
-static RESULT	rt_parser_object_reset_optional_failure(
-					t_rt_object_parser *objp, RESULT res, RESULT err)
+static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
+					char **tokens, void *memory)
 {
-	(void)objp;
-	(void)res;
-	(void)err;
+	(void)objp, (void)tokens, (void)memory;
+	return (OK());
+}
+
+static RESULT	rt_parser_object_expand_step(RESULT res, size_t itkn,
+					const char *line)
+{
+	if (RES_OK(res))
+		return (res);
+	if (res.type == PARSE_ERR_FILE)
+	{
+		res.file_context.column += rt_parser_line_token_pos(line, itkn);
+	}
 	return (res);
 }
 
@@ -69,31 +67,56 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 					char **tokens, const char *line, void *memory)
 {
 	RESULT	res;
-	RESULT	tmp;
-	RESULT	err;
-	size_t	i;
-	size_t	j;
+	size_t	itkn;
+	size_t	iseq;
 
-	j = 0;
-	i = 0;
 	res = OK();
-	err = OK();
-	while (RES_OK(res) && tokens[i] && j < objp->sequence_size)
+	itkn = 1;
+	iseq = 0;
+	while (RES_OK(res) && tokens[itkn] && iseq < objp->required)
 	{
-		tmp = rt_parser_object_parse_step(objp, tokens[i], j, &memory);
-		if (RES_OK(tmp))
-			err = rt_parser_object_reset_optional_failure(objp, tmp, err);
-		else if (j < objp->required)
-			res = tmp;
-		else if (RES_OK(err))
-			err = tmp;
-		j++;
-		i += RES_OK(err);
+		res = rt_parser_object_parse_step(objp, tokens[itkn], iseq, &memory);
+		res = rt_parser_object_expand_step(res, itkn, line);
+		itkn++;
+		iseq++;
 	}
-	if (RES_OK(err))
-		return (rt_parser_object_check_complete(objp, line, err));
-	return (err);
+	res = rt_parser_object_check_complete(objp, line, res);
+	if (RES_OK(res) && objp->required < objp->sequence_size)
+		return (rt_parser_object_parse_optional(objp, tokens + itkn, memory));
+	return (res);
 }
+
+// static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
+// 					char **tokens, const char *line, void *memory)
+// {
+// 	RESULT	res;
+// 	RESULT	tmp;
+// 	RESULT	err;
+// 	size_t	i;
+// 	size_t	j;
+//
+// 	j = 0;
+// 	i = 0;
+// 	res = OK();
+// 	err = OK();
+// 	while (RES_OK(res) && tokens[i] && j < objp->sequence_size)
+// 	{
+// 		rt_debug(objp->parser->rt, "pall: parsing tkn[%d] with seq[%d]\n",
+// 			(int) i, (int) j);
+// 		tmp = rt_parser_object_parse_step(objp, tokens[i], j, &memory);
+// 		if (RES_OK(tmp))
+// 			err = rt_parser_object_reset_optional_failure(objp, tmp, err);
+// 		else if (j < objp->required)
+// 			res = tmp;
+// 		else if (RES_OK(err))
+// 			err = tmp;
+// 		j++;
+// 		i += RES_OK(err);
+// 	}
+// 	if (RES_OK(err))
+// 		return (rt_parser_object_check_complete(objp, line, res));
+// 	return (err);
+// }
 
 # include <stdio.h>
 
