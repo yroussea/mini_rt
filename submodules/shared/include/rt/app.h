@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:36:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/26 23:24:39 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 00:15:24 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define __RT_APP_H__
 
 #  include <rt/flags.h>
+#  include <rt/objects.h>
 
 // Shadow declaration, see <rt/render/backend.h>
 typedef struct s_rt_backend		t_rt_backend;
@@ -36,6 +37,8 @@ typedef struct s_rt_app
 	const char		*queued_frontend;
 
 	t_rt_backend	*backend;
+
+	t_obj			*objects;
 }	t_rt;
 
 int		rt_init(t_rt *rt, int argc, const char **argv, const char **envp);

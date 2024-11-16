@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 23:14:49 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 02:02:20 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 #  include <ft/math/vector.h>
 #  include <ft/math/matrix.h>
 #  include <rt/color.h>
-#   include <rt/render/backend/raytracer/ray.h> //FIXME: remove this
 
 /** Default object definition **/
 
 typedef enum e_rt_obj_type
 {
-	OBJ_CAMERA = 0,
+	OBJ_UNKNOWN = 0,
+	OBJ_CAMERA,
 	OBJ_AMBIANT_LIGHT,
 	OBJ_LIGHT,
 	OBJ_SPHERE,

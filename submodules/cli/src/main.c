@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:16:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 01:59:00 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ static int	rt_parse_wrap(const t_rt *rt)
 	if (!RES_OK(res))
 	{
 		ERROR_PRINT(&parser, res);
+		ft_lst_free(&parser.result, free);
 		return (res.type);
 	}
 	rt_parser_dump_state(rt, &parser);
+		ft_lst_free(&parser.result, free);
 	return (0);
 }
 

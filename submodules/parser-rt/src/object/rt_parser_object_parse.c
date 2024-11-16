@@ -6,17 +6,22 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 18:38:25 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 01:58:38 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
+#include <rt/log.h>
 #include <rt/parser.h>
 
 static RESULT	rt_parser_object_parse_step(t_rt_object_parser *objp,
-					char *token, void **memory)
+					char *token, size_t index, void **memory)
 {
-	(void)objp;
+	const t_rt_parser				*parser = objp->parser;
+	const t_rt_object_parser_step	step = objp->sequence[index];
+
+	rt_trace(parser->rt, "running parse step '%s' on token '%s'\n",
+		rt_parser_strprim(step.type), token);
 	(void)token;
 	(void)memory;
 	return (OK());
@@ -33,11 +38,12 @@ static RESULT	rt_parser_object_check_complete(t_rt_object_parser *objp,
 	return (res);
 }
 
-static RESULT	rt_parser_object_reset_optional_failure(t_rt_object_parser *objp,
-					RESULT res)
+static RESULT	rt_parser_object_reset_optional_failure(
+					t_rt_object_parser *objp, RESULT res, RESULT err)
 {
-	if (RES_OK(res))
-		res = OK();
+	(void)objp;
+	(void)res;
+	(void)err;
 	return (res);
 }
 
@@ -74,7 +80,7 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 	err = OK();
 	while (RES_OK(res) && tokens[i] && j < objp->sequence_size)
 	{
-		tmp = rt_parser_object_parse_step(objp, tokens[i], &memory);
+		tmp = rt_parser_object_parse_step(objp, tokens[i], j, &memory);
 		if (RES_OK(tmp))
 			err = rt_parser_object_reset_optional_failure(objp, tmp, err);
 		else if (j < objp->required)
@@ -89,17 +95,32 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 	return (err);
 }
 
+# include <stdio.h>
+
 RESULT	rt_parser_object_parse(t_rt_object_parser *objp, char **tokens,
 			const char *line)
 {
-	RESULT	res;
-	void	*memory;
+	const t_rt_parser	*parser = objp->parser;
+	RESULT				res;
+	void				*memory;
+	const char			*name;
 
+	name = objp->id;
+	if (parser->name_fn)
+		name = parser->name_fn(objp->enum_id);
+	rt_trace(parser->rt, "allocating %d bytes for object '%s'\n",
+		(int) objp->size, name);
 	memory = ft_calloc(objp->size, sizeof(char));
 	if (!memory)
 		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate memory for object"));
 	res = rt_parser_object_parse_all(objp, tokens, line, memory);
-	if (RES_OK(res))
-		ft_lst_tadd(&objp->parser->result, memory);
+	if (RES_OK(res) && ft_lst_tadd(&objp->parser->result, memory))
+		rt_debug(parser->rt, "successfully parsed object '%s'\n", name);
+	else
+	{
+		free(memory);
+		if (RES_OK(res))
+			res = ERRS(PARSE_ERR_ALLOC, "cannot allocate memory for obj node");
+	}
 	return (res);
 }

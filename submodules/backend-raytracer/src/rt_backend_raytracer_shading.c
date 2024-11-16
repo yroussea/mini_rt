@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 06:28:16 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/15 22:37:48 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,30 @@ static t_color	vec_to_color(t_vec3d light, t_vec3d obj_color)
 }
 
 __always_inline
-static t_vec3d	shading(t_obj *obj, t_ray *ray, t_vec3d normal)
+static t_vec3d	rt_backend_raytracer_shade_ambiant(t_obj **objs, t_ray *ray)
+{
+	t_obj	*obj;
+	t_light	*light;
+	t_vec3d	ambiance_color;
+	t_vec3d	color_light;
+
+	ambiance_color = (t_vec3d){0, 0, 0};
+	obj = *objs;
+	while (obj->type == OBJ_AMBIANT_LIGHT)
+	{
+		light = (t_light *) obj;
+		color_light = obj->calc_color(ray, light);
+		ambiance_color = v3d_addmult(&ambiance_color,
+				&color_light, light->intensity);
+		obj = obj->next;
+	}
+	*objs = obj;
+	return (ambiance_color);
+}
+
+__always_inline
+static t_vec3d	rt_backend_raytracer_shade_light(t_obj *obj, t_ray *ray,
+					t_vec3d normal)
 {
 	t_ray			tmp;
 	t_light			*light;
@@ -77,21 +100,11 @@ void	rt_backend_raytracer_get_shading(t_obj *objs, t_obj *obj_hit,
 			t_ray *ray)
 {
 	const t_vec3d	color_obj = obj_hit->calc_color(ray, obj_hit);
-	t_vec3d			ambiance_color;
-	t_vec3d			color;
-	t_vec3d			color_light;
-	t_light			*light;
+	const t_vec3d	ambiant_color
+		= rt_backend_raytracer_shade_ambiant(&objs, ray);
+	const t_vec3d	light_color
+		= rt_backend_raytracer_shade_light(obj_hit, ray, color_obj);
+	const t_vec3d	tmp_color = v3d_add(&ambiant_color, &light_color);
 
-	ambiance_color = (t_vec3d){0, 0, 0};
-	while (objs->type == OBJ_AMBIANT_LIGHT)
-	{
-		light = (t_light *) objs;
-		color_light = objs->calc_color(ray, light);
-		ambiance_color = v3d_addmult(&ambiance_color,
-				&color_light, light->intensity);
-		objs = objs->next;
-	}
-	color = shading(objs, ray, obj_hit->calc_normal(ray, obj_hit));
-	ambiance_color = v3d_add(&ambiance_color, &color);
-	ray->color = vec_to_color(ambiance_color, color_obj);
+	ray->color = vec_to_color(tmp_color, color_obj);
 }

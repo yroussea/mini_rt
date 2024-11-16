@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 05:26:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:08:42 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 01:59:32 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 const char	*rt_object_strtype(const t_rt_obj_type type)
 {
 	static const char	*types[] = {
+	[OBJ_UNKNOWN] = "unknown",
 	[OBJ_CAMERA] = "camera",
 	[OBJ_AMBIANT_LIGHT] = "ambiant light",
 	[OBJ_LIGHT] = "point light",
@@ -28,7 +29,7 @@ const char	*rt_object_strtype(const t_rt_obj_type type)
 	};
 
 	if (type >= _OBJ_SIZE || type < 0)
-		return ("unknown");
+		return (types[OBJ_UNKNOWN]);
 	return (types[type]);
 }
 
