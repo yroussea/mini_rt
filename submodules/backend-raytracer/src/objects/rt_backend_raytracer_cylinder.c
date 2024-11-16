@@ -6,21 +6,14 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 05:19:09 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:25:10 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/objects.h"
 #include <ft/math.h>
-#include <ft/math/vector.h>
-#include <rt/render/backend/raytracer/aabb.h>
-#include <rt/render/backend/raytracer/utils.h>
 #include <rt/render/backend/raytracer.h>
-#include <math.h>
 
-
-
-static void	rt_backend_raytracer_cylinder_twod_relative_point(
+void	rt_backend_raytracer_cylinder_twod_relative_point(
 	t_vec3d *relative_coo,
 	const t_ray *ray,
 	const t_cylinder *c_cy
