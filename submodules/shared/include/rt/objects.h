@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 02:02:20 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 05:56:53 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,10 @@ __attribute__((aligned(1)));
 typedef struct s_camera
 {
 	t_obj	base;
-	t_vec3d	point;
 	t_vec3d	view_vector;
+	t_vec3d	point;
+	double	theta;
+	double	phi;
 	double	fov;
 }	t_camera
 __attribute__((aligned(1)));

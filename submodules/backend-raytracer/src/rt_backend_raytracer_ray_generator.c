@@ -6,53 +6,29 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:29:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:11:55 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft/math/vector.h"
 #include <rt/render/backend/raytracer.h>
-#include <math.h>
 
-#include <stdio.h>
-//a normre + ajouter camera dependent var + renomer fonction
-//fov n est pas une var env, mais fais partie de la cam
-#define RT_FLAT_VIEW_TYPE 0
-#if RT_FLAT_VIEW_TYPE == 1
-
-void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation et pos)*/)
+void	rt_backend_raytracer_init_ray(t_ray *ray, t_vec3d coo, const t_mat3d *rot)
 {
+	ray->direction = v3d_mult_m3d(coo, *rot);
+	ray->point = v3d_add(&ray->center, &ray->direction);
+	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
+	ray->direction = v3d_norm(&ray->direction);
+	ray->inv_direction = v3d_inv(&ray->direction);
+}
+
+t_vec3d	rt_backend_raytracer_get_rays_relative_coo(
+	t_rt_backend *backend, double x, double y, double fov
+)
+{
+	const double	res = (float)backend->width / backend->height;
+	const double	u = -res + (2 * res * (x) / backend->width);
+	const double	v = -1 + 2 * (backend->height - 1 - y) / backend->height;
 	const double	k = u * fov / 2;
 
-	ray->direction = /* get_rotation */(t_vec3d){sin(k), v, cos(k)};
-	ray->point = v3d_add(&ray->center, &ray->direction);
-	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
-	ray->direction = v3d_norm(&ray->direction);
-	ray->inv_direction = v3d_inv(&ray->direction);
-}
-
-#else
-
-void	eye_rays(t_ray *ray, double u, double v, double fov/*, t_camera (rotation et pos)*/)
-{
-	(void)fov;
-	ray->direction = (t_vec3d){u, v, 1};
-	ray->point = v3d_add(&ray->center, &ray->direction);
-	ray->color = (t_color){.r = 0, .g = 0, .b = 0, .a = 255};
-	ray->direction = v3d_norm(&ray->direction);
-	ray->inv_direction = v3d_inv(&ray->direction);
-}
-
-#endif
-
-double	get_width(t_rt_backend *backend, double x)
-{
-	const double	resolution = (float)backend->width / backend->height;
-
-	return (-resolution + (2 * resolution * (x) / backend->width));
-}
-
-double	get_height(t_rt_backend *backend, double y)
-{
-	return (-1 + 2 * (backend->height - 1 - y) / backend->height);
+	return (v3d(sin(k), v, cos(k)));
 }

@@ -6,20 +6,33 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 18:30:53 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:19:45 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft/math/vector.h"
+#include "ft/math.h"
+#include "rt/objects.h"
 #include <ft/mem.h>
+#include <math.h>
 #include <rt/log.h>
 #include <rt/render/backend/raytracer.h>
 
-static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
-				t_vec3d center, t_rt_backend_raytracer *raytracer)
+static void	rt_backend_raytracer_update_camera_angle(t_camera *cam)
 {
-	const int	width = self->width;
-	const int	height = self->height;
-	int			i;
+	const t_vec3d	vec = v3d_norm(&cam->view_vector);
+
+	cam->theta = acos(vec.y);
+	cam->phi = ft_fsign(vec.z) * acos(vec.x / sqrt(vec.x * vec.x + vec.z * vec.z));
+}
+
+static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
+				t_camera *cam, t_rt_backend_raytracer *raytracer)
+{
+	const int		width = self->width;
+	const int		height = self->height;
+	const t_mat3d	rotation = m3d_rot(cam->theta, cam->phi, 0);
+	int				i;
 
 	raytracer->rays = ft_calloc(width * height + 64, sizeof(t_ray));
 	while (raytracer->rays && ((uintptr_t)raytracer->rays) % 32 != 0)
@@ -32,9 +45,10 @@ static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
 	i = 0;
 	while (i < width * height)
 	{
-		raytracer->rays[i].center = center;
-		eye_rays(&raytracer->rays[i], get_width(self, i % width),
-			get_height(self, i / width), 90); //FIXME: fov
+		raytracer->rays[i].center = cam->point;
+		rt_backend_raytracer_init_ray(&raytracer->rays[i], \
+			rt_backend_raytracer_get_rays_relative_coo(self, i % width, \
+			(float)i / width, cam->fov), &rotation);
 		i++;
 	}
 	return (true);
@@ -52,8 +66,8 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
-	// ray.center = first cam
-	if (!rt_backend_raytracer_init_rays(self, (t_vec3d){0, 0, -100}, data))
+	rt_backend_raytracer_update_camera_angle((t_camera *)data->objs);
+	if (!rt_backend_raytracer_init_rays(self, (t_camera *)data->objs, data))
 		return (1);
 	return (0);
 }

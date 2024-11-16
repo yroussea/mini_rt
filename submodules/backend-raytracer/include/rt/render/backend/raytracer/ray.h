@@ -6,12 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:51:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/10 12:23:20 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:11:29 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
+#include "ft/math/matrix.h"
+#include "rt/objects.h"
 # undef RAY_H
 # ifndef __RT_RENDER_BACKEND_RAYTRACER_RAY_H__
 #  define __RT_RENDER_BACKEND_RAYTRACER_RAY_H__
@@ -31,9 +33,10 @@ typedef struct s_ray
 }	t_ray
 __attribute__((aligned(32)));
 
-void	eye_rays(t_ray *ray, double u, double v, double fov);
-double	get_width(t_rt_backend *backend, double x);
-double	get_height(t_rt_backend *backend, double y);
+void	rt_backend_raytracer_init_ray(t_ray *ray,
+		t_vec3d coo, const t_mat3d *rot);
+t_vec3d	rt_backend_raytracer_get_rays_relative_coo(
+	t_rt_backend *backend, double x, double y, double fov);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_RAY_H__
 #endif // RAY_H

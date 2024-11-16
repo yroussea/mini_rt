@@ -6,12 +6,13 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:43:05 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/11 21:17:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 06:37:45 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYTRACER_H
 # define RAYTRACER_H
+#include "rt/objects.h"
 # undef RAYTRACER_H
 # ifndef __RT_RENDER_BACKEND_RAYTRACER_H__
 #  define __RT_RENDER_BACKEND_RAYTRACER_H__
@@ -35,6 +36,7 @@ typedef struct s_rt_backend_raytracer
 	t_ray		*rays;
 	size_t		rays_alignment_offset;
 	uint64_t	ticker;
+	t_obj		*objs;
 }	t_rt_backend_raytracer;
 
 int				rt_backend_raytracer_init(t_rt_backend *self);
