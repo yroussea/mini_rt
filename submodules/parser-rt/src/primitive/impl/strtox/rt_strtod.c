@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:18:28 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 05:09:06 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:37:31 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static RESULT	rt_strtod_expand(RESULT res, size_t len, double *result,
 		res.file_context.column += len;
 	return (res);
 }
-# include <stdio.h>
 
 // num: read the number
 // midcheck: check if we're at the middle '.' or at the end

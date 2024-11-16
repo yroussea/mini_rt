@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:11:12 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:06:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ RESULT	rt_parser_buffer_sanitize(t_rt_parser *parser);
 RESULT	rt_parser_line_process(t_rt_parser *parser, size_t index);
 size_t	rt_parser_line_token_pos(const char *line, size_t index);
 RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, char **tokens,
+			const char *line);
+RESULT	rt_parser_line_test_process(t_rt_parser *parser, char **tokens,
 			const char *line);
 
 #  endif // __RT_PARSER_INTERNAL__

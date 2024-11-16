@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:04:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:10:24 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum	e_rt_parser_file_error
 {
 	FILE_ERR_UNKNOWN_ID = 0,
 	FILE_ERR_INVALID_CHAR,
+	FILE_ERR_INVALID_TOKEN,
 	FILE_ERR_INVALID_NUMBER,
 	FILE_ERR_MISSING_PART,
 	FILE_ERR_TOO_MANY_PARTS,

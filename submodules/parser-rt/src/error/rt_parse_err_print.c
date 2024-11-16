@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 17:02:16 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:10:21 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ const char	*rt_err_file_strtype(enum e_rt_parser_file_error type)
 {
 	static const char	*err_file_strtype[] = {
 	[FILE_ERR_UNKNOWN_ID] = "unknown object identifier",
-	[FILE_ERR_INVALID_CHAR] = "invalid character",
-	[FILE_ERR_INVALID_NUMBER] = "invalid digit, or number too large",
+	[FILE_ERR_INVALID_CHAR] = "encountered an invalid character",
+	[FILE_ERR_INVALID_TOKEN] = "an invalid token was provided",
+	[FILE_ERR_INVALID_NUMBER] = "number provided is invalid",
 	[FILE_ERR_MISSING_PART] = "missing part of the object",
 	[FILE_ERR_TOO_MANY_PARTS] = "too many parameters provided",
 	[FILE_ERR_NON_EMPTY_LINE] = "empty lines should not contain spaces",

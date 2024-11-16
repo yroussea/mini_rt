@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/16 03:37:21 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/16 07:07:37 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  error/rt_parse_is_ok.c \
 	  error/rt_parse_ok.c \
 	  error/rt_parse_okd.c \
+	  line/test/rt_parser_line_test_process.c \
 	  line/rt_parser_line_process.c \
 	  line/rt_parser_line_token_pos.c \
 	  line/rt_parser_line_unknown_type.c \
@@ -38,6 +39,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  primitive/impl/strtox/rt_strtod_num.c \
 	  primitive/impl/rt_parser_prim_coords.c \
 	  primitive/impl/rt_parser_prim_double.c \
+	  primitive/impl/rt_parser_prim_normal.c \
 	  primitive/rt_parser_prim_register.c \
 	  primitive/rt_parser_strprim.c \
 	  rt_parser_destroy.c \

@@ -1,30 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parser_prim_double.c                            :+:      :+:    :+:   */
+/*   rt_parser_prim_color.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 06:56:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:28:23 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/16 06:38:07 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/16 06:40:07 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/log.h>
-#include <rt/parser/primitive/strtod.h>
-#define __RT_PARSER_INTERNAL__
-#include <rt/parser.h>
-
-RESULT	rt_parser_prim_double(
-	__attribute__((unused)) t_rt_parser *parser,
-	const char *slice,
-	void *memory,
-	size_t *size
-) {
-	RESULT	res;
-
-	res = rt_strtod(&slice, (double *)memory, " ");
-	if (RES_OK(res))
-		*size = sizeof(double);
-	return (res);
-}
+#include <rt/parser/primitive/strtoi.h>

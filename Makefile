@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/07 00:59:12 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/16 07:52:41 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,6 +145,9 @@ re: fclean all
 remake: oclean
 	@$(MAKE) all -j
 
+test: all
+	@make --no-print-directory -C scenes test
+
 daemon-stop:
 	@echo "[*] Killing daemon..."
 	@rm -rf $(DAEMON_ALIVE_FILE)
@@ -175,6 +178,7 @@ help:
 	@printf "    fclean:\t\tClean the project, its submodules, and its dependencies\n"
 	@printf "    re:\t\t\tfclean + all\n"
 	@printf "    remake:\t\tClean the project and its submodules, then build it (not including dependencies)\n"
+	@printf "    test:\t\tRun the parser unit tests (see ./scenes/tester.sh)\n"
 	@printf "    daemon:\t\tStart the rebuild daemon\n"
 	@printf "    daemon-stop:\tStop the rebuild daemon\n"
 	@printf "    valgrind:\t\tRun the project with valgrind\n"

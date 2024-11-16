@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 05:11:00 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:38:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ RESULT	rt_strtod_final(const char **strptr, bool *filled, const char *end,
 		return (OK());
 	if (str[0] == 'f' || str[0] == 'F')
 	{
-		*strptr = str + 1;
-		return (OK());
+		str++;
+		*strptr = str;
+		if (!str[0] || (end && ft_strchr(end, str[0])))
+			return (OK());
 	}
 	return (ERR_FILE(rt_strtod_ctx_char(0, INVALID_CHAR_END, NULL)));
 }

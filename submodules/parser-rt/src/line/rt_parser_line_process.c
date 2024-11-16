@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 03:31:55 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:07:23 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
 	objp = NULL;
 	tmp = NULL;
 	rt_trace(parser->rt, "looking for object parser for '%s'\n", tokens[0]);
+	if (tokens[0][0] == '@')
+		return (rt_parser_line_test_process(parser, tokens, line));
 	while (parser->object_parsers[i].id && !objp)
 	{
 		tmp = &parser->object_parsers[i];

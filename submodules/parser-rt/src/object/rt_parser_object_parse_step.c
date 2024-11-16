@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:37:03 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 03:37:08 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:31:07 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <rt/log.h>
 #include <rt/parser.h>
 
-static const t_rt_primitive_parser	*rt_parser_prim_get(
+t_rt_primitive_parser	*rt_parser_prim_get(
 	const t_rt_parser *parser,
 	const enum e_rt_primitive type
 ) {
@@ -26,7 +26,7 @@ static const t_rt_primitive_parser	*rt_parser_prim_get(
 	while (primp->fn)
 	{
 		if (primp->type == type)
-			return (primp);
+			return ((t_rt_primitive_parser *) primp);
 		i++;
 		primp = &parser->primitive_parsers[i];
 	}

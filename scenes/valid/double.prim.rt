@@ -1,0 +1,13 @@
+# Test of double values, with +, -, ., and f suffixes
+@double   1.0
+@double   1.0f
+@double   1.
+@double   .0
+@double   1.f
+@double   +1
+@double   +.0f
+@double   +.0
+@double   -1
+@double   -.0f
+@double   +111111111111111111111.00000000000000000000f
+@double   -1F

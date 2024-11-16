@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:08:23 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 00:14:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 06:58:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ RESULT	rt_parser_object_register(t_rt_parser *parser,
 	objp.parser = parser;
 	res = fn(&objp);
 	if (!RES_OK(res))
-		rt_debug(parser->rt, "got error while registering object '%s'\n",
-			objp.id);
-	if (!RES_OK(res))
 		return (res);
+	if (!objp.id || !objp.id[0] || objp.id[0] == '@')
+		return (ERRS(PARSE_ERR_ALLOC, "invalid object parser id '%s'",
+				objp.id));
 	rt_trace(parser->rt, "registering object parser '%s'\n", objp.id);
 	if (rt_parser_object_check_duplicate(parser, objp.id))
 		return (ERRS(PARSE_ERR_ALLOC, ERR_OBJECT_DUPLICATE, objp.id));
