@@ -6,17 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 00:51:54 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:25:39 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/objects.h"
-#include "rt/render/backend/raytracer/objects.h"
 #include <ft/math.h>
-#include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
-#include <stdlib.h>
-#include <math.h>
 
 static double	rt_backend_raytracer_sphere_intersect(
 	t_ray *ray,
@@ -51,7 +46,6 @@ static void	rt_backend_raytracer_sphere_twod_relative_point(
 	relative_coo->x = ft_fsign(x.z) * acos(x.x / sqrt(x.x * x.x + x.z * x.z));
 	relative_coo->y = acos(x.y / sph->rayon);
 }
-
 
 t_vec3d	rt_backend_raytracer_sphere_normal(
 	t_ray *ray,
@@ -95,17 +89,17 @@ void	rt_backend_raytracer_sphere(t_obj *obj)
 	obj->intersect = rt_backend_raytracer_sphere_intersect;
 }
 
-t_obj	*sphere(t_vec3d center, double diameter, t_rt_material material)
-{
-	t_obj		*new;
-	t_sphere	*sph;
-
-	sph = rt_malloc_aligned(sizeof(t_sphere), 32);
-	sph->rayon = diameter / 2;
-	sph->center = center;
-	new = (t_obj *) sph;
-	new->type = OBJ_SPHERE;
-	new->material = material;
-	rt_backend_raytracer_sphere(new);
-	return (new);
-}
+// t_obj	*sphere(t_vec3d center, double diameter, t_rt_material material)
+// {
+// 	t_obj		*new;
+// 	t_sphere	*sph;
+//
+// 	sph = rt_malloc_aligned(sizeof(t_sphere), 32);
+// 	sph->rayon = diameter / 2;
+// 	sph->center = center;
+// 	new = (t_obj *) sph;
+// 	new->type = OBJ_SPHERE;
+// 	new->material = material;
+// 	rt_backend_raytracer_sphere(new);
+// 	return (new);
+// }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 05:21:34 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:27:40 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	rt_backend_raytracer_cone(t_obj *obj)
 	obj->calc_color = rt_backend_raytracer_colors_cone;
 }
 
-// t_obj	*cone(t_vec3d coo, t_vec3d vector, double height, double theta, t_vec3d colors)
+// t_obj	*cone(t_vec3d coo, t_vec3d vector, 
+// double height, double theta, t_vec3d colors)
 // {
 // 	t_obj			*new;
 // 	t_cone			*cone;

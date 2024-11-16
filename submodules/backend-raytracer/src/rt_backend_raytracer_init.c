@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:19:45 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:24:24 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 static void	rt_backend_raytracer_update_camera_angle(t_camera *cam)
 {
-	const t_vec3d	vec = v3d_norm(&cam->view_vector);
+	const t_vec3d	v = v3d_norm(&cam->view_vector);
 
-	cam->theta = acos(vec.y);
-	cam->phi = ft_fsign(vec.z) * acos(vec.x / sqrt(vec.x * vec.x + vec.z * vec.z));
+	cam->theta = acos(v.y);
+	cam->phi = ft_fsign(v.z) * acos(v.x / sqrt(v.x * v.x + v.z * v.z));
 }
 
 static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,

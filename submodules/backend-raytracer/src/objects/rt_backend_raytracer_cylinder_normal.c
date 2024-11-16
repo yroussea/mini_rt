@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 04:37:56 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 05:06:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:27:20 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vec3d	rt_backend_raytracer_colors_cylinder(
 		return (*colors);
 	rt_backend_raytracer_cylinder_twod_relative_point(&tmp, ray, cy);
 	return (colors[rt_backend_raytracer_checkerboard(
-				tmp.x - tmp.z, tmp.y )]);
+				tmp.x - tmp.z, tmp.y)]);
 }
 
 t_vec3d	rt_backend_raytracer_cylinder_normal(
@@ -139,4 +139,3 @@ t_vec3d	rt_backend_raytracer_cylinder_normal(
 }
 
 #endif
-

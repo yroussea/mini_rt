@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:15:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 05:25:10 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:25:00 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	rt_backend_raytracer_cylinder(t_obj *obj)
 	obj->calc_color = rt_backend_raytracer_colors_cylinder;
 }
 
-// t_obj	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam, t_vec3d colors)
+// t_obj	*cylinder(t_vec3d coo, t_vec3d vector,
+// double height, double diam, t_vec3d colors)
 // {
 // 	t_obj		*new;
 // 	t_cylinder	*cy;

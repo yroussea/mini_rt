@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:18:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:23:50 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_obj *all_objs)
 		rt_backend_raytracer_get_shading(all_objs, obj_hit, ray);
 	return (ray->color);
 }
-
-#define FOV M_PI / 2
 
 t_color	*rt_backend_raytracer_render(t_rt_backend *backend)
 {

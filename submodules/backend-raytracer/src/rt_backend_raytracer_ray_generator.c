@@ -6,13 +6,15 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:11:55 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:24:42 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend/raytracer.h>
 
-void	rt_backend_raytracer_init_ray(t_ray *ray, t_vec3d coo, const t_mat3d *rot)
+void	rt_backend_raytracer_init_ray(
+	t_ray *ray, t_vec3d coo, const t_mat3d *rot
+)
 {
 	ray->direction = v3d_mult_m3d(coo, *rot);
 	ray->point = v3d_add(&ray->center, &ray->direction);

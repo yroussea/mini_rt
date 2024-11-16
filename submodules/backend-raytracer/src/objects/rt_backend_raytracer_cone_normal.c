@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:00:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 05:14:36 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:25:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,3 @@ t_vec3d	rt_backend_raytracer_cone_normal(
 }
 
 #endif
-
