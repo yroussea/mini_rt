@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:05:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 04:02:27 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:07:30 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ RESULT	rt_strtod_frac(const char **strptr, double *result, bool *filled,
 	i = 0;
 	while (ft_isdigit(str[i]))
 		num = num * 10 + (str[i++] - '0');
-	*result = num / ft_pow(10, i);
+	*result = num;
 	*strptr = str + i;
 	return (res);
 }
