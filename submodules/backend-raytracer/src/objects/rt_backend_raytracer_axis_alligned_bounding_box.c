@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:20:30 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 17:54:43 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:57:12 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 #include <rt/render/backend/raytracer.h>
 
 bool	rt_backend_raytracer_aabbx_inter(
-	const t_ray *ray, const t_boundingbox *aabbx)
-{
+	const t_ray *ray,
+	const t_boundingbox *aabbx
+) {
 	t_vec3d	tmin;
 	t_vec3d	tmax;
 	t_vec3d	t1;
 	t_vec3d	t2;
 	double	nearest_t;
 
+	if (!aabbx)
+		return (true);
 	tmin = v3d_sub(&aabbx->mins, &ray->point);
 	tmax = v3d_sub(&aabbx->maxs, &ray->point);
 	tmin = v3d_mult_v3d(&tmin, &ray->inv_direction);
@@ -41,7 +44,8 @@ void	rt_backend_raytracer_creating_aabbx(
 	static const t_vec3d	error_margin = (t_vec3d){3, 3, 3};
 
 	*aabbx = rt_malloc_aligned(sizeof(t_boundingbox), 32);
-	//oopsi
+	if (!*aabbx)
+		return ;
 	(*aabbx)->maxs = v3d_max(&p1, &p2);
 	(*aabbx)->maxs = v3d_add(&(*aabbx)->maxs, &error_margin);
 	(*aabbx)->mins = v3d_min(&p1, &p2);
@@ -52,8 +56,8 @@ t_vec3d	rt_backend_raytracer_highest_point_circle(
 	const t_vec3d udir,
 	const t_vec3d vdir,
 	const t_vec3d center,
-	const double diam)
-{
+	const double diam
+) {
 	t_vec3d	highest;
 	t_vec3d	abs;
 
