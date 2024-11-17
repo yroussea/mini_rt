@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:47:13 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 11:49:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:36:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RESULT	rt_parser_prim_uint(
 		{
 			res = ERR_FILE(rt_strtod_ctx_char(0, INVALID_SIGN_ERROR, NULL));
 			res.file_context.length = 1;
-			res.file_context.column = 1;
+			res.file_context.column = 0;
 			res.file_context.type = FILE_ERR_INVALID_NUMBER;
 			res.file_context.possible_fix = "remove the minus sign";
 		}
