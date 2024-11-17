@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 17:44:49 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:45:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <ft/math/matrix.h>
 #include <rt/render/backend/raytracer.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 t_vec3d	rt_backend_raytracer_plane_normal(
 	const t_ray *ray,

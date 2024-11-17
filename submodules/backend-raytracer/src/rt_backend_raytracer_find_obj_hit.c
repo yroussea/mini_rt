@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 05:35:36 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:16:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ double	rt_backend_raytracer_find_obj_hit(t_ray *ray, t_obj *objs,
 	double	distance;
 
 	distance_min = INFINITY;
-	*hit = NULL;
+	if (hit)
+		*hit = NULL;
 	while (objs)
 	{
 		if (rt_object_can_intersect(objs))

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 18:38:45 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:08:43 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ void	rt_backend_raytracer_init_ray(
 	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
+#define RT_NO_FISH_EYE 1
+#if RT_NO_FISH_EYE
+
+t_vec3d	rt_backend_raytracer_get_rays_relative_coo(
+	t_rt_backend *backend, double x, double y, double fov
+)
+{
+	const double	res = (float)backend->width / backend->height;
+	const double	u = -res + (2 * res * (x) / backend->width);
+	const double	v = -1 + 2 * (backend->height - 1 - y) / backend->height;
+
+	(void)fov;
+	return (v3d(u, v, 1));
+}
+
+#else
+
 t_vec3d	rt_backend_raytracer_get_rays_relative_coo(
 	t_rt_backend *backend, double x, double y, double fov
 )
@@ -34,3 +51,5 @@ t_vec3d	rt_backend_raytracer_get_rays_relative_coo(
 
 	return (v3d(sin(k), v, cos(k)));
 }
+
+#endif

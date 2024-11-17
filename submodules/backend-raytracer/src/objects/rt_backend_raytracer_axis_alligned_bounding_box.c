@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:20:30 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 18:57:12 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:46:47 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	rt_backend_raytracer_aabbx_inter(
 	t1 = v3d_min(&tmin, &tmax);
 	t2 = v3d_max(&tmin, &tmax);
 	nearest_t = ft_fmax(t1.x, ft_fmax(t1.y, t1.z));
-	if (nearest_t < ft_fmin(t2.x, ft_fmin(t2.y, t2.z)) && nearest_t > 0)
+	if (nearest_t < ft_fmin(t2.x, ft_fmin(t2.y, t2.z)))
 		return (true);
 	return (false);
 }
@@ -41,7 +41,7 @@ bool	rt_backend_raytracer_aabbx_inter(
 void	rt_backend_raytracer_creating_aabbx(
 	t_boundingbox **aabbx, const t_vec3d p1, const t_vec3d p2)
 {
-	static const t_vec3d	error_margin = (t_vec3d){3, 3, 3};
+	static const t_vec3d	error_margin = (t_vec3d){8, 8, 8};
 
 	*aabbx = rt_malloc_aligned(sizeof(t_boundingbox), 32);
 	if (!*aabbx)

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 18:25:57 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:03:44 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@
 void	rt_devrl_check_reload(void *a);
 
 #endif // !RT_DEVMODE
-
-//FIXME: uninitialized value in tocard-ui `t_toc_window#keymap`
-static void	rt_screen_main_init(t_toc_screen *self)
-{
-	ft_memset(self->window->keymap, 0, sizeof(self->window->keymap));
-}
 
 static void	rt_pixelate(t_rt_frontend *frontend, t_rt_backend *backend,
 				t_color *source, t_color *target)
@@ -79,9 +73,7 @@ static bool	rt_screen_main_render(t_toc_screen *self,
 	toc_draw_rect(self, toc_vec2i(0, 0), toc_vec2i(self->width, self->height),
 		(t_toc_color){.value = 0xFF000000});
 	backend = frontend->rt->backend;
-	ft_memcpy(front->buffer, backend->render(backend), self->width * self->height
-		   * sizeof(t_color));
-	//rt_pixelate(frontend, backend, backend->render(backend), front->buffer);
+	rt_pixelate(frontend, backend, backend->render(backend), front->buffer);
 	pos = toc_vec2i(0, 0);
 	while (pos.y < (int)frontend->height)
 	{
@@ -106,9 +98,13 @@ static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 	ctrl = screen->window->keymap[SDL_SCANCODE_LCTRL];
 	if (ctrl && key == SDL_SCANCODE_I)
 		rt_resize(frontend->rt, screen->width - 80, screen->height - 80);
-	if (ctrl && key == SDL_SCANCODE_O)
+	else if (ctrl && key == SDL_SCANCODE_O)
 		rt_resize(frontend->rt, screen->width + 80, screen->height + 80);
-	return (true);
+	else if (key == SDL_SCANCODE_ESCAPE)
+		toc_engine_exit(screen->window->engine);
+	else
+		return (true);
+	return (false);
 }
 
 t_toc_screen_def	rt_screen_main(void)
@@ -117,7 +113,6 @@ t_toc_screen_def	rt_screen_main(void)
 
 	ft_memset(&screen, 0, sizeof(t_toc_screen_def));
 	screen.id = "rt:main";
-	screen.init = rt_screen_main_init;
 	screen.render = rt_screen_main_render;
 	screen.key = rt_screen_main_key;
 	return (screen);

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:29:54 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:27:15 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ RESULT	rt_parser_object_parse(t_rt_object_parser *objp, char **tokens,
 		rt_debug(parser->rt, "successfully parsed object '%s'\n", name);
 	else
 	{
-		free(memory);
+		rt_free_aligned(memory);
 		if (RES_OK(res))
 			res = ERRS(PARSE_ERR_ALLOC, "cannot allocate memory for obj node");
 	}
