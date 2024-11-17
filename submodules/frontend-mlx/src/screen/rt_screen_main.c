@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 06:49:57 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:25:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ static bool	rt_screen_main_render(t_toc_screen *self,
 	toc_draw_rect(self, toc_vec2i(0, 0), toc_vec2i(self->width, self->height),
 		(t_toc_color){.value = 0xFF000000});
 	backend = frontend->rt->backend;
-	rt_pixelate(frontend, backend, backend->render(backend), front->buffer);
+	ft_memcpy(front->buffer, backend->render(backend), self->width * self->height
+		   * sizeof(t_color));
+	//rt_pixelate(frontend, backend, backend->render(backend), front->buffer);
 	pos = toc_vec2i(0, 0);
 	while (pos.y < (int)frontend->height)
 	{

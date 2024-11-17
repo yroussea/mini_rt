@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:27:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:51:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,3 @@ void	rt_backend_raytracer_cone(t_obj *obj)
 	obj->calc_normal = rt_backend_raytracer_cone_normal;
 	obj->calc_color = rt_backend_raytracer_colors_cone;
 }
-
-// t_obj	*cone(t_vec3d coo, t_vec3d vector, 
-// double height, double theta, t_vec3d colors)
-// {
-// 	t_obj			*new;
-// 	t_cone			*cone;
-//
-// 	cone = rt_malloc_aligned(sizeof(t_cone), 32);
-// 	if (!cone)
-// 		return (NULL);
-// 	cone->axis = v3d_norm(&vector);
-// 	cone->height = height;
-// 	//limiter theta a 90degree
-// 	cone->theta = theta / 180 * M_PI;
-// 	cone->center = coo;
-// 	new = (t_obj *) cone;
-// 	new->type = OBJS;
-// 	new->material = (t_rt_material){CHECKERBOARD, colors, };
-// 	rt_backend_raytracer_cone(new);
-// 	return (new);
-// }

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:25:39 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:39:32 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,3 @@ void	rt_backend_raytracer_sphere(t_obj *obj)
 	obj->calc_normal = rt_backend_raytracer_sphere_normal;
 	obj->intersect = rt_backend_raytracer_sphere_intersect;
 }
-
-// t_obj	*sphere(t_vec3d center, double diameter, t_rt_material material)
-// {
-// 	t_obj		*new;
-// 	t_sphere	*sph;
-//
-// 	sph = rt_malloc_aligned(sizeof(t_sphere), 32);
-// 	sph->rayon = diameter / 2;
-// 	sph->center = center;
-// 	new = (t_obj *) sph;
-// 	new->type = OBJ_SPHERE;
-// 	new->material = material;
-// 	rt_backend_raytracer_sphere(new);
-// 	return (new);
-// }

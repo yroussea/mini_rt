@@ -6,10 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/15 22:37:48 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:55:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/objects.h"
 #include <rt/render/backend/raytracer.h>
 #include <ft/math/vector.h>
 #include <ft/math.h>
@@ -107,4 +108,5 @@ void	rt_backend_raytracer_get_shading(t_obj *objs, t_obj *obj_hit,
 	const t_vec3d	tmp_color = v3d_add(&ambiant_color, &light_color);
 
 	ray->color = vec_to_color(tmp_color, color_obj);
+	ray->color = vec_to_color((t_vec3d){1,1,1}, color_obj);
 }

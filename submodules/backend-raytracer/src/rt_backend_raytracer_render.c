@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:56:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:34:23 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:19:55 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_color	rt_backend_raytracer_one_ray(t_ray *ray, t_obj *all_objs)
 {
 	t_obj	*obj_hit;
 
-	printf("ray: %p\n", ray);
 	obj_hit = NULL;
 	if (rt_backend_raytracer_find_obj_hit(ray, all_objs, &obj_hit) != INFINITY
 		&& obj_hit)

@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:37:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 04:45:04 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:40:03 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@
 #  include <rt/color.h>
 #  include <rt/objects.h>
 #  include <rt/render/backend/raytracer/ray.h>
-
-//TODO: remove, swap into parser object provider
-t_obj	*plane(t_vec3d normal, t_vec3d point, t_rt_material m);
-t_obj	*cylinder(t_vec3d coo, t_vec3d vector, double height, double diam,
-			t_vec3d colors);
-t_obj	*sphere(t_vec3d center, double diameter, t_rt_material m);
-t_obj	*light(t_vec3d coo, double intensity, t_rt_obj_type type, t_vec3d color);
-t_obj	*camera(t_vec3d coo, t_vec3d view_vector, double fov);
-t_obj	*cone(t_vec3d coo, t_vec3d vector, double height, double theta,
-			t_vec3d colors);
-
 
 void	rt_backend_raytracer_cone_twod_relative_point(
 	t_vec3d *relative_coo,
@@ -83,6 +72,11 @@ double	rt_backend_raytracer_cylinder_intersection(
 			t_ray *ray, t_cylinder *cylinder);
 double	rt_backend_raytracer_cone_intersection(
 			t_ray *ray, t_cone *cone);
+
+void	rt_backend_raytracer_cone(t_obj *obj);
+void	rt_backend_raytracer_cylinder(t_obj *obj);
+void	rt_backend_raytracer_plane(t_obj *obj);
+void	rt_backend_raytracer_sphere(t_obj *obj);
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_OBJECTS_H__
 #endif // OBJECTS_H

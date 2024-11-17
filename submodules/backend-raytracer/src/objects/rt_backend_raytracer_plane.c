@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:26:34 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:44:49 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,4 @@ void	rt_backend_raytracer_plane(t_obj *obj)
 	obj->intersect = rt_backend_raytracer_plane_intersection;
 	obj->calc_normal = rt_backend_raytracer_plane_normal;
 	obj->calc_color = rt_backend_raytracer_plane_color;
-}
-
-t_obj	*plane(t_vec3d normal, t_vec3d point, t_rt_material m)
-{
-	t_obj	*new;
-	t_plane	*plane;
-
-	plane = rt_malloc_aligned(sizeof(t_plane), 32);
-	plane->normal = v3d_norm(&normal);
-	plane->point = point;
-	new = (t_obj *) plane;
-	new->type = OBJ_PLANE;
-	new->material = m;
-	rt_backend_raytracer_plane(new);
-	return (new);
 }

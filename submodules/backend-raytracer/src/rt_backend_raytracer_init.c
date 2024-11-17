@@ -6,10 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:37:01 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:40:18 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt/render/backend/raytracer/objects.h"
 #include <ft/math/vector.h>
 #include <ft/math.h>
 #include <ft/mem.h>
@@ -18,12 +19,22 @@
 #include <rt/objects.h>
 #include <rt/render/backend/raytracer.h>
 
-static void	rt_backend_raytracer_update_camera_angle(t_camera *cam)
+t_vec3d	rt_backend_raytracing_lights_colors(
+	__attribute__((unused))const t_ray *ray, t_light *obj)
 {
-	const t_vec3d	v = v3d_norm(&cam->view_vector);
+	return (obj->base.material.colors);
+}
 
-	cam->theta = acos(v.y);
+static void	rt_backend_raytracer_update_camera_angle(t_obj *obj)
+{
+	t_camera	*cam;
+	t_vec3d		v;
+
+	cam = (t_camera *)obj;
+	v = v3d_norm(&cam->view_vector);
+	cam->theta = acos(v.y) - M_PI / 2;
 	cam->phi = ft_fsign(v.z) * acos(v.x / sqrt(v.x * v.x + v.z * v.z));
+	cam->phi -= M_PI / 2;
 }
 
 static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
@@ -48,7 +59,7 @@ static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
 		raytracer->rays[i].center = cam->point;
 		rt_backend_raytracer_init_ray(&raytracer->rays[i], \
 			rt_backend_raytracer_get_rays_relative_coo(self, i % width, \
-			(float)i / width, cam->fov), &rotation);
+			(float)i / width, cam->fov * M_PI / 180), &rotation);
 		i++;
 	}
 	return (true);
@@ -56,6 +67,21 @@ static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
 
 static void	rt_backend_raytracer_init_objects(t_rt_backend *self)
 {
+	t_obj		*objs;
+	static void	(*init_obj[_OBJ_SIZE])(t_obj *obj) = {
+		NULL, rt_backend_raytracer_update_camera_angle, NULL, NULL,
+		rt_backend_raytracer_sphere, rt_backend_raytracer_plane,
+		rt_backend_raytracer_cylinder, rt_backend_raytracer_cone};
+
+	objs = self->objects;
+	while (objs)
+	{
+		if (init_obj[objs->type])
+			init_obj[objs->type](objs);
+		else if (objs->type != OBJ_UNKNOWN)
+			objs->calc_color = rt_backend_raytracing_lights_colors;
+		objs = objs->next;
+	}
 }
 
 int	rt_backend_raytracer_init(t_rt_backend *self)
@@ -70,8 +96,8 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
+	rt_backend_raytracer_init_objects(self);
 	data->camera = (t_camera *)self->objects;
-	rt_backend_raytracer_update_camera_angle(data->camera);
 	if (!rt_backend_raytracer_init_rays(self, data->camera, data))
 		return (1);
 	return (0);

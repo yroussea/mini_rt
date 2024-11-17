@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:20:30 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/14 21:54:04 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:54:43 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	rt_backend_raytracer_creating_aabbx(
 	static const t_vec3d	error_margin = (t_vec3d){3, 3, 3};
 
 	*aabbx = rt_malloc_aligned(sizeof(t_boundingbox), 32);
+	//oopsi
 	(*aabbx)->maxs = v3d_max(&p1, &p2);
 	(*aabbx)->maxs = v3d_add(&(*aabbx)->maxs, &error_margin);
 	(*aabbx)->mins = v3d_min(&p1, &p2);
