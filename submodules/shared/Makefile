@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/13 07:22:34 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/17 22:13:10 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC =	log/rt_debug.c \
 		render/registry/rt_frontend_provider_register.c \
 		render/registry/rt_frontend_providers.c \
 		render/rt_backend_reload.c \
+		render/rt_backend_handoff.c \
 		render/rt_backend_switch.c \
 		render/rt_frontend_reload.c \
 		render/rt_frontend_switch.c \

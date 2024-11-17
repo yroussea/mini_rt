@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:40:37 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 04:00:23 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:50:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	rt_devrl_destroy(t_rt_backend *backend)
 	if (header->handle)
 		RT_DLCLOSE(header->handle);
 	free(header);
-	rt->backend = NULL;
 	rt_trace(rt, "devrl: backend destroyed\n");
 }
 

@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/16 20:07:45 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/17 22:33:15 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  error/rt_parse_ok.c \
 	  error/rt_parse_okd.c \
 	  line/test/rt_parser_line_test_process.c \
+	  line/rt_parser_line_check_unique.c \
 	  line/rt_parser_line_process.c \
 	  line/rt_parser_line_token_pos.c \
 	  line/rt_parser_line_unknown_type.c \

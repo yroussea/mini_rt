@@ -6,13 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 05:39:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 06:33:57 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:23:24 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <ft/print.h>
 #include <ft/string.h>
+#include <rt/log.h>
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 
@@ -47,6 +48,7 @@ RESULT	rt_parser_line_unknown_type(t_rt_parser *parser, char **tokens,
 {
 	t_rt_parser_file_context	context;
 
+	rt_debug(parser->rt, "unknown object identifier: '%s'\n", tokens[0]);
 	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
 	context.type = FILE_ERR_UNKNOWN_ID;
 	context.error_message = "this object type is unrecognized";

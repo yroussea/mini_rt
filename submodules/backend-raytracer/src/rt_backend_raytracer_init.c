@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:08:21 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:56:15 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 {
 	t_rt_backend_raytracer	*data;
 
-	rt_trace(self->rt, "initializing raytracer backend\n");
+	rt_trace(self->rt, "initializing raytracer backend (%p)\n", self);
 	data = ft_calloc(1, sizeof(t_rt_backend_raytracer));
 	if (!data)
 		return (1);
 	self->data = data;
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
+		return (1);
+	if (!self->objects)
 		return (1);
 	rt_backend_raytracer_init_objects(self);
 	self->main_camera = (t_camera *)self->objects;

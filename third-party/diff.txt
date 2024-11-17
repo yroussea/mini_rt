@@ -1,0 +1,42 @@
+diff --git a/src/engine/toc_engine_await.c b/src/engine/toc_engine_await.c
+index 8127645..e9b255b 100644
+--- a/src/engine/toc_engine_await.c
++++ b/src/engine/toc_engine_await.c
+@@ -6,7 +6,7 @@
+ /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/04/21 01:23:19 by kiroussa          #+#    #+#             */
+-/*   Updated: 2024/05/14 08:34:05 by kiroussa         ###   ########.fr       */
++/*   Updated: 2024/11/17 23:02:12 by kiroussa         ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -29,6 +29,8 @@ static int	toc_update_windows(t_toc_engine *engine)
+ 			toc_window_init(win);
+ 		if (win->active)
+ 			toc_window_update(win);
++		else
++			toc_screen_destroy(&win->screen);
+ 		active += win->active;
+ 		node = node->next;
+ 	}
+diff --git a/src/window/toc_window_close.c b/src/window/toc_window_close.c
+index e43dc22..dec7a0a 100644
+--- a/src/window/toc_window_close.c
++++ b/src/window/toc_window_close.c
+@@ -6,7 +6,7 @@
+ /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/04/21 16:54:02 by kiroussa          #+#    #+#             */
+-/*   Updated: 2024/05/14 08:27:25 by kiroussa         ###   ########.fr       */
++/*   Updated: 2024/11/17 23:01:45 by kiroussa         ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -17,6 +17,5 @@ void	toc_window_close(t_toc_window *window)
+ 	if (!window || !window->active)
+ 		return ;
+ 	window->active = false;
+-	toc_screen_destroy(&window->screen);
+ 	mlx_destroy_window(window->engine->mlx, window->handle);
+ }

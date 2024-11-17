@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:10:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:32:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ const char	*rt_err_file_strtype(enum e_rt_parser_file_error type)
 	[FILE_ERR_TOO_MANY_PARTS] = "too many parameters provided",
 	[FILE_ERR_NON_EMPTY_LINE] = "empty lines should not contain spaces",
 	[FILE_ERR_WRONG_ORDER] = "object properties specified in the wrong order",
+	[FILE_ERR_DUPLICATE] = "unique object is already defined in the scene",
 	};
 
 	if (type >= _FILE_ERR_SIZE || type < 0)

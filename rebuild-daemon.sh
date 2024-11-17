@@ -44,6 +44,7 @@ if ! command -v inotifywait &> /dev/null; then
 	exit 1
 fi
 
+clear
 echo
 echo "> Hi, I'm the rebuild daemon."
 echo
@@ -93,7 +94,7 @@ while true; do
 		touch $COMMUNICATE_PIPE
 		# wait for the program to acknowledge the change
 		echo "> Waiting for acknowledge..."
-		inotifywait $COMMUNICATE_PIPE
+		inotifywait $COMMUNICATE_PIPE -t 5
 		rm -rf $COMMUNICATE_PIPE
 		echo "> ACK'd"
 	fi

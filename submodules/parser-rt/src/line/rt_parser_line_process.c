@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:07:23 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:32:53 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
 	size_t				i;
 	t_rt_object_parser	*objp;
 	t_rt_object_parser	*tmp;
+	RESULT				res;
 
 	i = 0;
 	objp = NULL;
@@ -98,10 +99,12 @@ static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
 			objp = tmp;
 		i++;
 	}
-	if (objp)
-		return (rt_parser_line_validate_ntok(tokens, ntok, objp, line));
-	rt_debug(parser->rt, "unknown object identifier: '%s'\n", tokens[0]);
-	return (rt_parser_line_unknown_type(parser, tokens, line));
+	if (!objp)
+		return (rt_parser_line_unknown_type(parser, tokens, line));
+	res = rt_parser_line_check_unique(parser, objp, line, tokens);
+	if (RES_OK(res))
+		res = rt_parser_line_validate_ntok(tokens, ntok, objp, line);
+	return (res);
 }
 
 /**

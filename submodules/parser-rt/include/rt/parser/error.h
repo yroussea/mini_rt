@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:10:24 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:32:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ enum	e_rt_parser_file_error
 	FILE_ERR_TOO_MANY_PARTS,
 	FILE_ERR_NON_EMPTY_LINE,
 	FILE_ERR_WRONG_ORDER,
+	FILE_ERR_DUPLICATE,
 	_FILE_ERR_SIZE,
 };
 
