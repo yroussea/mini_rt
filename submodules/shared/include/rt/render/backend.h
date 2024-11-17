@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:57:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:12:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:08:20 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void					rt_backend_provider_register(
 							t_rt_backend_provider provider);
 t_rt_backend_provider	*rt_backend_provider_find(const char *name);
 
+void					rt_switch_camera_left(t_rt *rt, t_rt_backend *self);
+void					rt_switch_camera_right(t_rt *rt, t_rt_backend *self);
 void					rt_backend_reload(t_rt *rt);
 void					rt_backend_switch(t_rt *rt, const char *name);
 void					rt_backend_handoff(t_rt_backend *from,
