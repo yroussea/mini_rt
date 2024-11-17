@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 21:52:55 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:08:21 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	if (!data->buffer)
 		return (1);
 	rt_backend_raytracer_init_objects(self);
-	data->camera = (t_camera *)self->objects;
-	if (!rt_backend_raytracer_init_rays(self, data->camera, data))
+	self->main_camera = (t_camera *)self->objects;
+	if (!rt_backend_raytracer_init_rays(self, self->main_camera, data))
 		return (1);
 	return (0);
 }
