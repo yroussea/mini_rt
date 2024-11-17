@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 03:38:54 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:15:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:23:50 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,34 @@
 #define ERROR_NO_INIT "backend provider '%s' does not have an init function\n"
 #define ERROR_INIT_FAILED "failed to initialize backend\n"
 
+static void	rt_add_object_order(t_obj **objs, t_obj *new)
+{
+	t_obj	*tmp;
+
+	tmp = *objs;
+	while (tmp && tmp->next && tmp->next->type < new->type)
+		tmp = tmp->next;
+	if (tmp && tmp->type < new->type)
+	{
+		new->next = tmp->next;
+		tmp->next = new;
+	}
+	else
+	{
+		new->next = tmp;
+		*objs = new;
+	}
+}
+
 static t_obj	*rt_object_list(t_list *objects)
 {
 	t_obj	*obj;
-	t_obj	*tmp;
 
-	if (!objects)
-		return (NULL);
-	obj = (t_obj *)objects->content;
-	tmp = obj;
-	while (objects->next)
+	obj = NULL;
+	while (objects)
 	{
+		rt_add_object_order(&obj, objects->content);
 		objects = objects->next;
-		tmp->next = (t_obj *)objects->content;
-		tmp = tmp->next;
 	}
 	return (obj);
 }
