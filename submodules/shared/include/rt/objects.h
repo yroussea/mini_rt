@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 19:49:14 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:02:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct s_camera
 	double	fov;
 }	t_camera
 __attribute__((aligned(1)));
+
+const char	*rt_object_strtype(const t_rt_obj_type type);
 
 # endif // __RT_OBJECTS_H__
 #endif // OBJECTS_H

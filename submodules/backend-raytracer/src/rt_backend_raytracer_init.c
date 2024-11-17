@@ -6,16 +6,16 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:24:24 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:37:01 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft/math/vector.h"
-#include "ft/math.h"
-#include "rt/objects.h"
+#include <ft/math/vector.h>
+#include <ft/math.h>
 #include <ft/mem.h>
 #include <math.h>
 #include <rt/log.h>
+#include <rt/objects.h>
 #include <rt/render/backend/raytracer.h>
 
 static void	rt_backend_raytracer_update_camera_angle(t_camera *cam)
@@ -54,6 +54,10 @@ static bool	rt_backend_raytracer_init_rays(t_rt_backend *self,
 	return (true);
 }
 
+static void	rt_backend_raytracer_init_objects(t_rt_backend *self)
+{
+}
+
 int	rt_backend_raytracer_init(t_rt_backend *self)
 {
 	t_rt_backend_raytracer	*data;
@@ -66,8 +70,9 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	data->buffer = ft_calloc(self->width * self->height, sizeof(t_color));
 	if (!data->buffer)
 		return (1);
-	rt_backend_raytracer_update_camera_angle((t_camera *)data->objs);
-	if (!rt_backend_raytracer_init_rays(self, (t_camera *)data->objs, data))
+	data->camera = (t_camera *)self->objects;
+	rt_backend_raytracer_update_camera_angle(data->camera);
+	if (!rt_backend_raytracer_init_rays(self, data->camera, data))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 19:31:51 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:29:54 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <rt/log.h>
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
+#include <rt/util.h>
 
 static RESULT	rt_parser_object_check_complete(t_rt_object_parser *objp,
 					const char *line, RESULT res)
@@ -73,6 +74,7 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 	res = OK();
 	itkn = 1;
 	iseq = 0;
+	*((uint32_t *)memory) = objp->enum_id;
 	while (RES_OK(res) && tokens[itkn] && iseq < objp->required)
 	{
 		res = rt_parser_object_parse_step(objp, tokens[itkn], iseq, memory);
@@ -118,8 +120,6 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 // 	return (err);
 // }
 
-# include <stdio.h>
-
 RESULT	rt_parser_object_parse(t_rt_object_parser *objp, char **tokens,
 			const char *line)
 {
@@ -133,7 +133,7 @@ RESULT	rt_parser_object_parse(t_rt_object_parser *objp, char **tokens,
 		name = parser->name_fn(objp->enum_id);
 	rt_trace(parser->rt, "allocating %d bytes for object '%s'\n",
 		(int) objp->size, name);
-	memory = ft_calloc(objp->size, sizeof(char));
+	memory = rt_malloc_aligned(objp->size, 32);
 	if (!memory)
 		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate memory for object"));
 	res = rt_parser_object_parse_all(objp, tokens, line, memory);

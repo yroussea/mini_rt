@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:57:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 01:51:24 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:12:12 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_rt_backend
 	t_color		*(*render)(struct s_rt_backend *self);
 
 	void		*data;
+	t_obj		*objects;
 }	t_rt_backend;
 
 typedef struct s_rt_backend_provider

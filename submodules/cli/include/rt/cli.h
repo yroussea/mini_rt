@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:52:39 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:27:10 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:03:33 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # ifndef __RT_CLI_H__
 #  define __RT_CLI_H__
 
+#  include <ft/data/list.h>
 #  include <rt/app.h>
 #  include <rt/features.h>
 #  include <stdbool.h>
@@ -35,6 +36,8 @@
 int		rt_cli_parse(t_rt *rt, int argc, const char **argv);
 void	rt_cli_opt_help(t_rt *rt);
 void	rt_cli_opt_version(t_rt *rt);
+int		rt_backend_init(t_rt *rt, t_list *objects);
+int		rt_frontend_init(t_rt *rt);
 
 # endif // __RT_CLI_H__
 #endif // CLI_H
