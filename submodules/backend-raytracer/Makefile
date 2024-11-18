@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:18:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/16 05:29:45 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/18 01:23:50 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,7 @@ SRC = objects/rt_backend_raytracer_checkerboard.c \
 	  objects/rt_backend_raytracer_cylinder.c \
       provider/rt_backend_raytracer_provider.c \
 	  provider/rt_backend_raytracer_ctor.c \
-	  utils/m3d_solv.c \
 	  utils/rt_fmod.c \
-	  utils/v3d_additionnal_rules.c	\
-	  utils/v3d_additionnal_rules_mult.c \
 	  rt_backend_raytracer_destroy.c \
 	  rt_backend_raytracer_find_obj_hit.c \
 	  rt_backend_raytracer_init.c \

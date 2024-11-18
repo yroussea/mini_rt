@@ -27,17 +27,14 @@ SESSION_NAME="minirt-deps"
 
 tmux new-session -d -s $SESSION_NAME
 tmux rename-window -t $SESSION_NAME "minirt-deps"
+tmux select-layout even-vertical -t $SESSION_NAME
 
 COUNT=0
 for dep in "${DEPS[@]}"; do
 	# if count is not 0
 	if [ $COUNT -ne 0 ]; then
-		if (( COUNT % 2 )); then
-			tmux split-window -h -t $SESSION_NAME
-		else
-			tmux split-window -v -t $SESSION_NAME
-		fi
-  fi
+		tmux split-window -t $SESSION_NAME
+	fi
 	COUNT=$((COUNT+1))
 
 	tmux send-keys "clear; echo \">>> $dep\"; $MAKE --no-print-directory -C $dep $RULE; sleep 1; exit" 'C-m'
