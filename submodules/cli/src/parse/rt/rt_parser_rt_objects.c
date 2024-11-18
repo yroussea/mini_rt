@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:14:16 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:15:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:50:04 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ RESULT	rt_object_sphere(t_rt_object_parser *objp)
 	rt_parser_object_init(objp, "sp", OBJ_SPHERE, sizeof(t_sphere));
 	res = OBJ_STEP(objp, offsetof(t_sphere, center), RT_PRIM_COORDS);
 	if (RES_OK(res))
-		res = OBJ_STEP(objp, offsetof(t_sphere, rayon), RT_PRIM_UDOUBLE);
+		res = OBJ_STEP(objp, offsetof(t_sphere, radius), RT_PRIM_UDOUBLE);
 	return (rt_object_define_colors(objp, res, true, true));
 }
 

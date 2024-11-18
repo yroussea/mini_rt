@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 18:47:56 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:49:26 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ typedef struct s_sphere
 {
 	t_obj		base;
 	t_vec3d		center;
-	double		rayon; //TODO: verif rayon ou diametre
-	double		dot_production_rayon;
+	double		radius;
+	double		dot_production_radius;
 }	t_sphere
 __attribute__((aligned(1)));
 

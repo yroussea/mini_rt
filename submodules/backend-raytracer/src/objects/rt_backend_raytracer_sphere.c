@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 19:14:11 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:49:48 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static double	rt_backend_raytracer_sphere_intersect(
 	const t_vec3d	param = {
 		.x = v3d_dot(&ray->direction, &ray->direction),
 		.y = v3d_dot(&v, &ray->direction),
-		.z = v3d_dot(&v, &v) - sphere->dot_production_rayon
+		.z = v3d_dot(&v, &v) - sphere->dot_production_radius
 	};
 	const double	delta = (param.y * param.y) - param.x * param.z;
 	double			t1;
@@ -45,7 +45,7 @@ static void	rt_backend_raytracer_sphere_twod_relative_point(
 	const t_vec3d	x = v3d_sub(&ray->hit_point, &(sph->center));
 
 	relative_coo->x = ft_fsign(x.z) * acos(x.x / sqrt(x.x * x.x + x.z * x.z));
-	relative_coo->y = acos(x.y / sph->rayon);
+	relative_coo->y = acos(x.y / sph->radius);
 }
 
 t_vec3d	rt_backend_raytracer_sphere_normal(
@@ -57,7 +57,7 @@ t_vec3d	rt_backend_raytracer_sphere_normal(
 	const t_rt_material	mat = sphere->base.material;
 
 	normal = v3d_normsub(&ray->hit_point, &sphere->center);
-	if (v3d_lensub(&ray->point, &sphere->center) < sphere->rayon)
+	if (v3d_lensub(&ray->point, &sphere->center) < sphere->radius)
 		normal = v3d_opp(&normal);
 	if (mat.type & BUMP_MAP)
 	{
@@ -87,7 +87,7 @@ void	rt_backend_raytracer_sphere(t_obj *obj)
 	t_sphere	*sph;
 
 	sph = (t_sphere *)obj;
-	sph->dot_production_rayon = sph->rayon * sph->rayon;
+	sph->dot_production_radius = sph->radius * sph->radius;
 	obj->calc_color = rt_backend_raytracer_colors_sphere;
 	obj->calc_normal = rt_backend_raytracer_sphere_normal;
 	obj->intersect = rt_backend_raytracer_sphere_intersect;
