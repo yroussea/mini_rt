@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 01:14:57 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:51:19 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,28 @@ static void	rt_screen_main_update(t_toc_screen *self)
 {
 	const char			*keymap = (char *)self->window->keymap;
 	const t_rt_frontend	*frontend = (t_rt_frontend *)self->data;
+	const double		speed = 0.1 + keymap[SDL_SCANCODE_LCTRL] * 2;
 
 	if (keymap[SDL_SCANCODE_Q])
-		rt_rotate_camera(frontend->rt, 0.1, 0);
+		rt_rotate_camera(frontend->rt, speed, 0);
 	if (keymap[SDL_SCANCODE_E])
-		rt_rotate_camera(frontend->rt, -0.1, 0);
+		rt_rotate_camera(frontend->rt, -speed, 0);
 	if (keymap[SDL_SCANCODE_R])
-		rt_rotate_camera(frontend->rt, 0, 0.1);
+		rt_rotate_camera(frontend->rt, 0, speed);
 	if (keymap[SDL_SCANCODE_F])
-		rt_rotate_camera(frontend->rt, 0, -0.1);
+		rt_rotate_camera(frontend->rt, 0, -speed);
 	if (keymap[SDL_SCANCODE_W])
-		rt_move_camera(frontend->rt, (t_vec3d){0, 0, 1});
+		rt_move_camera(frontend->rt, v3d(0, 0, 1 + speed));
 	if (keymap[SDL_SCANCODE_S])
-		rt_move_camera(frontend->rt, (t_vec3d){0, 0, -1});
+		rt_move_camera(frontend->rt, v3d(0, 0, -(1 + speed)));
 	if (keymap[SDL_SCANCODE_A])
-		rt_move_camera(frontend->rt, (t_vec3d){-1, 0, 0});
+		rt_move_camera(frontend->rt, v3d(-(1 + speed), 0, 0));
 	if (keymap[SDL_SCANCODE_D])
-		rt_move_camera(frontend->rt, (t_vec3d){1, 0, 0});
+		rt_move_camera(frontend->rt, v3d(1 + speed, 0, 0));
 	if (keymap[SDL_SCANCODE_SPACE])
-		rt_move_camera(frontend->rt, (t_vec3d){0, 1, 0});
+		rt_move_camera(frontend->rt, v3d(0, 1 + speed, 0));
 	if (keymap[SDL_SCANCODE_LSHIFT])
-		rt_move_camera(frontend->rt, (t_vec3d){0, -1, 0});
+		rt_move_camera(frontend->rt, v3d(0, -(1 + speed), 0));
 }
 
 static bool	rt_screen_main_render(t_toc_screen *self,
