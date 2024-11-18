@@ -6,10 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:36:52 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:14:11 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft/math/vector.h"
 #include <ft/math.h>
 #include <rt/render/backend/raytracer.h>
 
@@ -52,9 +53,12 @@ t_vec3d	rt_backend_raytracer_sphere_normal(
 	t_sphere *sphere
 ) {
 	t_vec3d				coo;
+	t_vec3d				normal;
 	const t_rt_material	mat = sphere->base.material;
-	const t_vec3d		normal = v3d_normsub(&ray->hit_point, &sphere->center);
 
+	normal = v3d_normsub(&ray->hit_point, &sphere->center);
+	if (v3d_lensub(&ray->point, &sphere->center) < sphere->rayon)
+		normal = v3d_opp(&normal);
 	if (mat.type & BUMP_MAP)
 	{
 		rt_backend_raytracer_sphere_twod_relative_point(&coo, ray, sphere);

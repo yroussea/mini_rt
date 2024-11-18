@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:59:40 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:39:55 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:56:33 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@
 #  ifndef RT_RONDED_CONE_LINKED_SURFACE
 #   define RT_RONDED_CONE_LINKED_SURFACE 1 
 #  endif
-#  ifndef RT_BOUNDING_BOX
-#   define RT_BOUNDING_BOX 0
-#  endif
+#  define RT_BOUNDING_BOX 0
 
 #  ifndef RT_CHECKER_SIZE
 #   define RT_CHECKER_SIZE 10
