@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 18:10:55 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:47:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_rt_material
 	t_vec3d	check_colors;
 	t_vec3d	*bumpmap;
 	t_vec2i	map_size;
+	double	specular_reflection;
 }	t_rt_material;
 
 // Note: all these functions take a `t_ray *` as their first param,
