@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:32:53 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:41:00 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ static RESULT	rt_parser_line_process_type(t_rt_parser *parser, size_t ntok,
 	}
 	if (!objp)
 		return (rt_parser_line_unknown_type(parser, tokens, line));
-	res = rt_parser_line_check_unique(parser, objp, line, tokens);
+	res = rt_parser_line_check_unique(parser, objp, line,
+			(const char **)tokens);
 	if (RES_OK(res))
 		res = rt_parser_line_validate_ntok(tokens, ntok, objp, line);
 	return (res);

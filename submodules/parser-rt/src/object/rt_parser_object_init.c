@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 07:11:40 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 19:07:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:38:21 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	rt_parser_object_init(t_rt_object_parser *objp, const char *id,
 			int enum_id, size_t size)
 {
 	size_t		i;
-	const char	*name;
 
 	objp->id = id;
 	objp->enum_id = enum_id;

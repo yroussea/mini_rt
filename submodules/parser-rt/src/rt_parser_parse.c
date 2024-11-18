@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/15 07:14:49 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:48:26 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static RESULT	rt_err_expand(RESULT res, const char *filepath)
 	return (res);
 }
 
-static void	rt_parser_buffer_dump(t_rt_parser *parser)
+static RESULT	rt_parser_process(t_rt_parser *parser)
 {
+	RESULT	res;
 	size_t	i;
 	size_t	max;
 
+	res = OK();
 	max = ft_ulllen(parser->nlines);
 	i = 0;
 	while (i < parser->nlines)
@@ -37,6 +39,14 @@ static void	rt_parser_buffer_dump(t_rt_parser *parser)
 				(int)max, (int)i + 1, parser->buffer[i]);
 		i++;
 	}
+	i = 0;
+	while (i < parser->nlines && RES_OK(res))
+	{
+		if (parser->buffer[i])
+			res = rt_parser_line_process(parser, i);
+		i++;
+	}
+	return (res);
 }
 
 #define NO_PRIM_PARSERS "no primitive parsers registered. what?"
@@ -90,23 +100,6 @@ static RESULT	rt_parser_sanity_check(t_rt_parser *parser)
 		i++;
 	}
 	return (OK());
-}
-
-static RESULT	rt_parser_process(t_rt_parser *parser)
-{
-	RESULT	res;
-	size_t	i;
-
-	res = OK();
-	rt_parser_buffer_dump(parser);
-	i = 0;
-	while (i < parser->nlines && RES_OK(res))
-	{
-		if (parser->buffer[i])
-			res = rt_parser_line_process(parser, i);
-		i++;
-	}
-	return (res);
 }
 
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
