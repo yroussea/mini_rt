@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 17:51:19 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:34:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,11 @@ static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 				int last)
 {
 	t_rt_frontend	*frontend;
-	bool			ctrl;
 
 	if (!action || last)
 		return (true);
 	frontend = (t_rt_frontend *)screen->data;
-	ctrl = screen->window->keymap[SDL_SCANCODE_LCTRL];
-	if (ctrl && key == SDL_SCANCODE_I)
-		rt_resize(frontend->rt, screen->width - 80, screen->height - 80);
-	else if (ctrl && key == SDL_SCANCODE_O)
-		rt_resize(frontend->rt, screen->width + 80, screen->height + 80);
-	else if (key == SDL_SCANCODE_ESCAPE)
+	if (key == SDL_SCANCODE_ESCAPE)
 		toc_engine_exit(screen->window->engine);
 	else if (key == SDL_SCANCODE_LEFT)
 		rt_switch_camera_left(frontend->rt, frontend->rt->backend);

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:38:24 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:32:53 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:14:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,30 @@
 #define OUT STDERR_FILENO
 #define ITALIC "\033[3m"
 
-static void	rt_parse_err_file_print_column(const t_rt_parser *parser,
-				const t_rt_parser_file_context *context, size_t spacing)
-{
+static void	rt_parse_err_file_print_column(
+	size_t col,
+	size_t len,
+	size_t spacing,
+	const char *msg
+) {
 	char	*under;
 	size_t	i;
 
-	(void)parser;
-	under = ft_calloc(context->length + 1, sizeof(char));
+	under = ft_calloc(len + 1, sizeof(char));
 	if (!under)
 	{
 		ft_dprintf(OUT, BLUE"%*s | %*s"RESET""B_RED, spacing, "",
-			context->column, "");
+			col, "");
 		i = 0;
-		while (i++ < context->length)
+		while (i++ < len)
 			ft_putchar_fd(OUT, '^');
-		ft_dprintf(OUT, RESET" "RED"%s\n"RESET, context->error_message);
+		ft_dprintf(OUT, RESET" "RED"%s\n"RESET, msg);
 	}
 	else
 	{
-		ft_memset(under, '^', context->length);
+		ft_memset(under, '^', len);
 		ft_dprintf(OUT, BLUE"%*s | %*s"RESET""B_RED"%s "RESET""RED"%s\n"RESET,
-			spacing, "", context->column, "", under, context->error_message);
+			spacing, "", col, "", under, msg);
 		free(under);
 	}
 }
@@ -50,7 +52,18 @@ static void	rt_parse_err_file_print_column(const t_rt_parser *parser,
 static void	rt_parse_err_file_print_extras(const t_rt_parser *parser,
 				const t_rt_parser_file_context *context)
 {
-	(void)parser;
+	size_t		spacing;
+
+	if (context->note.message && (int)context->note.line != -1)
+	{
+		ft_dprintf(OUT, B_BLUE"note"RESET""BLUE":"RESET"\n");
+		spacing = ft_ulllen(context->note.line);
+		ft_dprintf(OUT, BLUE "%*s | \n" RESET, spacing, "");
+		ft_dprintf(OUT, BLUE "%*d | "RESET"%s\n", spacing,
+			(int)context->note.line, parser->buffer[context->note.line - 1]);
+		rt_parse_err_file_print_column(context->note.column,
+			context->note.length, spacing, context->note.message);
+	}
 	if (context->possible_fix)
 		ft_dprintf(OUT, B_GREEN"help"RESET""GREEN": "RESET"%s\n",
 			context->possible_fix);
@@ -93,7 +106,8 @@ static void	rt_parse_err_file_print(const t_rt_parser *parser,
 		ft_dprintf(OUT, BLUE "%*d | "RESET"%s\n", spacing, (int)context->line,
 			parser->buffer[context->line - 1]);
 		if ((int)context->column >= 0)
-			rt_parse_err_file_print_column(parser, context, spacing);
+			rt_parse_err_file_print_column(context->column, context->length,
+				spacing, context->error_message);
 		else
 			ft_dprintf(OUT, BLUE "%*s | "RESET""B_RED"^^^ "RESET""RED
 				ITALIC"(entire line) "RESET""RED"  %s\n" RESET, spacing, "",
@@ -124,4 +138,7 @@ void	rt_parse_err_print(t_rt_parser *parser, t_rt_parse_error err)
 		&& (err.file_context.type == FILE_ERR_UNKNOWN_ID
 			|| err.file_context.type == FILE_ERR_TOO_MANY_PARTS))
 		ft_strdel((char **) &err.file_context.possible_fix);
+	else if (err.type == PARSE_ERR_FILE
+		&& err.file_context.type == FILE_ERR_MISSING_PART)
+		ft_strdel((char **) &err.file_context.error_message);
 }

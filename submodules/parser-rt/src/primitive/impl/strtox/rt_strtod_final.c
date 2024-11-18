@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:01 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 07:38:09 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:31:01 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_rt_parser_file_context	rt_strtod_final_no_filled(const char *str,
 
 	ft_memset(&ctx, 0, sizeof(t_rt_parser_file_context));
 	ctx.type = FILE_ERR_MISSING_PART;
-	ctx.error_message = INVALID_MISSING_PARTS;
+	ctx.error_message = ft_strdup(INVALID_MISSING_PARTS);
 	ctx.possible_fix = FIX_MISSING_PARTS;
 	ctx.length = ft_strlen(orig);
 	ctx.column = (orig - str);

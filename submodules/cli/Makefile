@@ -6,14 +6,16 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:52:36 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/17 22:15:18 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 20:12:44 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = args/rt_cli_opt_help.c \
 	  args/rt_cli_opt_version.c \
 	  args/rt_cli_parse.c \
+	  args/rt_cli_parse_backend.c \
 	  args/rt_cli_parse_file_target.c \
+	  args/rt_cli_parse_frontend.c \
 	  parse/rt/rt_parser_rt_features.c \
 	  parse/rt/rt_parser_rt_init.c \
 	  parse/rt/rt_parser_rt_objects.c \

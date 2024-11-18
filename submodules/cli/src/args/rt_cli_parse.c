@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 23:55:14 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:26:11 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:15:20 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,17 @@
 int		rt_cli_parse_file_target(t_rt *rt, t_opt_globals *globals,
 			t_opt_args *args);
 
-bool	rt_cli_provide_backends(char *string, size_t size, const char *match);
-bool	rt_cli_provide_frontends(char *string, size_t size, const char *match);
+int		rt_cli_parse_frontend(t_rt *rt, char *frontend);
+int		rt_cli_parse_backend(t_rt *rt, char *backend);
 
-static int	rt_cli_parse_frontend(t_rt *rt, char *frontend)
+static int	rt_cli_parse_invalid(t_rt *rt, t_opt_globals *globals)
 {
-	char	frontend_list[2048];
-	bool	found;
-
-	ft_memset(frontend_list, 0, sizeof(frontend_list));
-	found = rt_cli_provide_frontends(frontend_list, sizeof(frontend_list),
-			frontend);
-	if (found)
-	{
-		rt_debug(rt, "cli: setting 'frontend' to %s\n", frontend);
-		rt->flags.frontend = frontend;
-		return (CLI_PASS);
-	}
-	rt_error(rt, "invalid frontend: %s\nvalid frontends are: %s\n",
-		frontend, frontend_list);
-	return (CLI_EXIT_FAILURE);
-}
-
-static int	rt_cli_parse_backend(t_rt *rt, char *backend)
-{
-	char	backend_list[2048];
-	bool	found;
-
-	ft_memset(backend_list, 0, sizeof(backend_list));
-	found = rt_cli_provide_backends(backend_list, sizeof(backend_list),
-			backend);
-	if (found)
-	{
-		rt_debug(rt, "cli: setting 'backend' to %s\n", backend);
-		rt->flags.backend = backend;
-		return (CLI_PASS);
-	}
-	rt_error(rt, "invalid backend: %s\nvalid backends are: %s\n",
-		backend, backend_list);
+	if (ft_strchr(CLI_ARG_OPTS, globals->optopt))
+		rt_error(rt, "-%c: option requires an argument\n",
+			globals->optopt);
+	else
+		rt_error(rt, "-%c: invalid option\n", globals->optopt);
+	rt_cli_opt_help(rt);
 	return (CLI_EXIT_FAILURE);
 }
 
@@ -77,16 +50,10 @@ static int	rt_cli_parse_opt(t_rt *rt, t_opt_globals *globals, int opt)
 		rt->flags.mode = RT_MODE_RENDER_ONCE;
 		rt->flags.output = globals->optarg;
 	}
+	else if (opt == 'n')
+		rt->flags.no_unique = true;
 	else if (opt == '?')
-	{
-		if (ft_strchr(CLI_ARG_OPTS, globals->optopt))
-			rt_error(rt, "-%c: option requires an argument\n",
-				globals->optopt);
-		else
-			rt_error(rt, "-%c: invalid option\n", globals->optopt);
-		rt_cli_opt_help(rt);
-		return (CLI_EXIT_FAILURE);
-	}
+		return (rt_cli_parse_invalid(rt, globals));
 	return (CLI_PASS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:40:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:24:32 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:50:24 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_rt_flags
 
 	const char		*frontend;
 	const char		*backend;
+
+	bool			no_unique;
 }	t_rt_flags;
 
 # endif // __RT_FLAGS_H__

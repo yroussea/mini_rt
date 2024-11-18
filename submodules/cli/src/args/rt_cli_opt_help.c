@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:52:52 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/18 17:25:44 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:25:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 #include <unistd.h>
 
 #if FEAT_CLI_FLAGS
-# define CLI_USAGE "Usage: %s [-hvV] [-p] [-b <backend>] [-f <frontend>] \
-[-o <output_file>] [<input_file.rt>]\n\
+# if 0
+#  define CLI_USAGE "Usage: %s [-hvV] [-pn] [-b <backend>] [-f <frontend>] \
+[-o <output_file>] <input_file.rt>\n\
 \n\
 \t-h                Display this help message.\n\
 \t-v                Display the version of the program.\n\
@@ -28,6 +29,9 @@
 \t                  can be used multiple times (max 3).\n\
 \t-p                Run the program in parser-test mode,\n\
 \t                  this is used for debugging.\n\
+\t-n                Allows usage of multiple unique objects\n\
+\t                  like cameras and lights. (tip: use the arrow\n\
+\t                  keys to cycle through available cameras)\n\
 \t-b <backend>      Set the render backend. Valid modes are:\n\
 \t                  %s\n\
 \t-f <frontend>     Set the frontend. Valid modes are:\n\
@@ -42,6 +46,28 @@ which will bring up the main application menu.\n\
 If an input file is specified, the program will run in direct rendering mode,\n\
 and will render the scene in an editor window.\n\
 "
+# else
+#  define CLI_USAGE "Usage: %s [-hvV] [-pn] [-b <backend>] [-f <frontend>] \
+<input_file.rt>\n\
+\n\
+\t-h                Display this help message.\n\
+\t-v                Display the version of the program.\n\
+\t-V                Increase the verbosity of the program,\n\
+\t                  can be used multiple times (max 3).\n\
+\t-p                Run the program in parser-test mode,\n\
+\t                  this is used for debugging.\n\
+\t-n                Allows usage of multiple unique objects\n\
+\t                  like cameras and lights. (tip: use the arrow\n\
+\t                  keys to cycle through available cameras)\n\
+\t-b <backend>      Set the render backend. Valid modes are:\n\
+\t                  %s\n\
+\t-f <frontend>     Set the frontend. Valid modes are:\n\
+\t                  %s\n\
+\n\
+If an input file is specified, the program will run in direct rendering mode,\n\
+and will render the scene in an editor window.\n\
+"
+# endif
 #else
 # define CLI_USAGE "Usage: %s [-h] [-v] [-V] <input_file.rt>\n\
 \n\

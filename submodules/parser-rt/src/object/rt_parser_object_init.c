@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 07:11:40 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 00:14:28 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:07:38 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@ void	rt_parser_object_init(t_rt_object_parser *objp, const char *id,
 	objp->id = id;
 	objp->enum_id = enum_id;
 	objp->size = size;
-	if (objp->parser && objp->parser->name_fn)
+	i = 0;
+	while (objp->id[i])
 	{
-		name = objp->parser->name_fn(objp->enum_id);
-		i = 0;
-		while (name && name[i])
-		{
-			if (!ft_isupper(name[i]))
-				return ;
-			i++;
-		}
-		objp->is_unique = true;
+		if (!ft_isupper(objp->id[i]))
+			return ;
+		i++;
 	}
+	objp->is_unique = true;
 }

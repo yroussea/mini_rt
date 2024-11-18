@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 20:27:15 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:44:36 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,27 @@
 #include <rt/parser.h>
 #include <rt/util.h>
 
-static RESULT	rt_parser_object_check_complete(t_rt_object_parser *objp,
-					const char *line, RESULT res)
+static RESULT	rt_parser_object_incomplete(t_rt_object_parser_step *step,
+					char **tokens, const char *line, size_t ntok)
 {
-	if (RES_OK(res))
-	{
-		(void)objp;
-		(void)line;
-	}
-	return (res);
+	t_rt_parser_file_context	context;
+
+	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
+	context.type = FILE_ERR_MISSING_PART;
+	context.column = rt_parser_line_token_pos(line, ntok - 1)
+		+ ft_strlen(tokens[ntok - 1]) + 1;
+	context.length = 1;
+	context.error_message = ft_format("you're missing a '%s'",
+			rt_parser_strprim(step->type));
+	if (!context.error_message)
+		context.error_message = ft_strdup("you're missing an object part");
+	return (rt_parse_err_file(context));
 }
 
 static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
 					char **tokens, void *memory)
 {
+	//TODO: implement
 	(void)objp, (void)tokens, (void)memory;
 	return (OK());
 }
@@ -82,7 +89,9 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 		itkn++;
 		iseq++;
 	}
-	res = rt_parser_object_check_complete(objp, line, res);
+	if (RES_OK(res) && iseq < objp->required)
+		res = rt_parser_object_incomplete(&objp->sequence[iseq],
+				tokens, line, itkn);
 	if (RES_OK(res) && objp->required < objp->sequence_size)
 		return (rt_parser_object_parse_optional(objp, tokens + itkn, memory));
 	return (res);
