@@ -6,10 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 05:05:19 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 23:54:14 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:52:22 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft/mem.h>
 #include <rt/log.h>
 #include <rt/render/backend.h>
 #include <rt/render/frontend.h>
@@ -32,6 +33,7 @@ void	rt_backend_switch(t_rt *rt, const char *name)
 	t_rt_backend_provider	*provider;
 	t_rt_backend			fake;
 
+	ft_memset(&fake, 0, sizeof(t_rt_backend));
 	provider = rt_backend_provider_find(name);
 	if (provider == NULL)
 	{

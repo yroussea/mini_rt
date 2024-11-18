@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:30:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 23:35:08 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:58:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	rt_switch_camera_left(t_rt *rt, t_rt_backend *self)
 	}
 	if (camera == prec)
 	{
-		while (prec && prec->type == OBJ_CAMERA)
+		while (prec && prec->next && prec->next->type == OBJ_CAMERA)
 			prec = prec->next;
 	}
 	self->main_camera = (t_camera *)prec;

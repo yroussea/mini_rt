@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 03:38:54 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:23:50 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:31:46 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	rt_add_object_order(t_obj **objs, t_obj *new)
 	}
 }
 
-static t_obj	*rt_object_list(t_list *objects)
+t_obj	*rt_object_list(t_list *objects)
 {
 	t_obj	*obj;
 

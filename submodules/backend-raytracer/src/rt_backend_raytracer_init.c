@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 18:35:45 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:54:48 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	rt_backend_raytracer_init(t_rt_backend *self)
 	if (!data->buffer)
 		return (1);
 	if (!self->objects)
-	{
 		rt_error(self->rt, "no objects\n");
+	if (!self->objects)
 		return (1);
-	}
+	rt_debug(self->rt, "objects %p cam %p\n", self->objects, self->main_camera);
 	rt_backend_raytracer_init_objects(self);
 	if (!self->main_camera)
 		self->main_camera = (t_camera *)self->objects;

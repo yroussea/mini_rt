@@ -6,31 +6,18 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 20:34:34 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:14:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_DEVMODE
-# define RT_DEVMODE 0
-#endif // RT_DEVMODE
-
 #include <ft/math/vector.h>
 #include <ft/mem.h>
-#if RT_DEVMODE
-# include <rt/devreload.h>
-#endif // RT_DEVMODE
 #include <rt/render/backend.h>
 #include <rt/render/frontend/macrolibx.h>
 #include <rt/log.h>
 #include <tocard/screen.h>
 #include <tocard/draw.h>
 #include <SDL2/SDL_scancode.h>
-
-#if !RT_DEVMODE
-
-void	rt_devrl_check_reload(void *a);
-
-#endif // !RT_DEVMODE
 
 static void	rt_pixelate(t_rt_frontend *frontend, t_rt_backend *backend,
 				t_color *source, t_color *target)
@@ -65,13 +52,13 @@ static void	rt_screen_main_update(t_toc_screen *self)
 	const double		speed = 0.1 + keymap[SDL_SCANCODE_LCTRL] * 2;
 
 	if (keymap[SDL_SCANCODE_Q])
-		rt_rotate_camera(frontend->rt, speed, 0);
+		rt_rotate_camera(frontend->rt, 0.15, 0);
 	if (keymap[SDL_SCANCODE_E])
-		rt_rotate_camera(frontend->rt, -speed, 0);
+		rt_rotate_camera(frontend->rt, -0.15, 0);
 	if (keymap[SDL_SCANCODE_R])
-		rt_rotate_camera(frontend->rt, 0, speed);
+		rt_rotate_camera(frontend->rt, 0, 0.15);
 	if (keymap[SDL_SCANCODE_F])
-		rt_rotate_camera(frontend->rt, 0, -speed);
+		rt_rotate_camera(frontend->rt, 0, -0.15);
 	if (keymap[SDL_SCANCODE_W])
 		rt_move_camera(frontend->rt, v3d(0, 0, 1 + speed));
 	if (keymap[SDL_SCANCODE_S])
@@ -94,11 +81,10 @@ static bool	rt_screen_main_render(t_toc_screen *self,
 	t_rt_backend		*backend;
 	t_toc_vec2i			pos;
 
-	rt_screen_main_update(self);
 	frontend = (t_rt_frontend *)self->data;
 	front = (t_rt_frontend_mlx *)frontend->data;
-	if (RT_DEVMODE)
-		rt_devrl_check_reload(frontend->rt);
+	rt_update(frontend->rt);
+	rt_screen_main_update(self);
 	toc_draw_rect(self, toc_vec2i(0, 0), toc_vec2i(self->width, self->height),
 		(t_toc_color){.value = 0xFF000000});
 	backend = frontend->rt->backend;

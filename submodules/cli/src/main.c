@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 21:10:40 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:03:14 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 
 void		rt_parser_dump_state(const t_rt *rt, t_rt_parser *parser);
 void		rt_dump_state(const t_rt *rt);
+
+void	rt_parser_cleanup(t_rt_parser *parser)
+{
+	ft_lst_free(&parser->result, NULL);
+	rt_parser_destroy(parser);
+}
 
 static int	rt_parse_wrap(const t_rt *rt, t_list **result)
 {

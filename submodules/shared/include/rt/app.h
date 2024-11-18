@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:36:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 20:57:55 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:50:42 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	rt_destroy(t_rt *rt);
 void	rt_exit(t_rt *rt, int exit_code);
 
 void	rt_resize(t_rt *rt, size_t width, size_t height);
+void	rt_update(t_rt *rt);
 
 void	rt_noop(void);
 
