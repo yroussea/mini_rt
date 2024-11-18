@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:51:08 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 23:03:14 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:06:30 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	rt_parser_destroy(t_rt_parser *parser)
 		free(parser->read_buffer);
 	parser->read_buffer = NULL;
 	parser->nlines = 0;
+	ft_lst_free(&parser->result, NULL);
 }
