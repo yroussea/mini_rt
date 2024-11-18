@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 23:44:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:43:24 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:35:32 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_rt_frontend
 
 	size_t		width;
 	size_t		height;
+	size_t		scale;
 
 	int			(*init)(struct s_rt_frontend *self);
 	void		(*handoff)(struct s_rt_frontend *self);

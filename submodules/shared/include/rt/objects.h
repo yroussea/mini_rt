@@ -6,12 +6,13 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:02:28 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:02:54 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
+#include <stdbool.h>
 # undef OBJECTS_H
 # ifndef __RT_OBJECTS_H__
 #  define __RT_OBJECTS_H__
@@ -146,6 +147,7 @@ typedef struct s_camera
 {
 	t_obj	base;
 	t_vec3d	view_vector;
+	bool	convet_done;
 	t_vec3d	point;
 	double	theta;
 	double	phi;

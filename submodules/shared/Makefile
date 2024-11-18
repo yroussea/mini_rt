@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/17 23:08:09 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/18 00:58:14 by yroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC =	log/rt_debug.c \
 		rt_destroy.c \
 		rt_exit.c \
 		rt_switch_cameras.c \
+		rt_move_camera.c \
+		rt_pixelisation.c \
 		rt_init.c \
 		rt_resize.c
 

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:08:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:59:25 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:14:57 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,33 @@ static void	rt_pixelate(t_rt_frontend *frontend, t_rt_backend *backend,
 	}
 }
 
+static void	rt_screen_main_update(t_toc_screen *self)
+{
+	const char			*keymap = (char *)self->window->keymap;
+	const t_rt_frontend	*frontend = (t_rt_frontend *)self->data;
+
+	if (keymap[SDL_SCANCODE_Q])
+		rt_rotate_camera(frontend->rt, 0.1, 0);
+	if (keymap[SDL_SCANCODE_E])
+		rt_rotate_camera(frontend->rt, -0.1, 0);
+	if (keymap[SDL_SCANCODE_R])
+		rt_rotate_camera(frontend->rt, 0, 0.1);
+	if (keymap[SDL_SCANCODE_F])
+		rt_rotate_camera(frontend->rt, 0, -0.1);
+	if (keymap[SDL_SCANCODE_W])
+		rt_move_camera(frontend->rt, (t_vec3d){0, 0, 1});
+	if (keymap[SDL_SCANCODE_S])
+		rt_move_camera(frontend->rt, (t_vec3d){0, 0, -1});
+	if (keymap[SDL_SCANCODE_A])
+		rt_move_camera(frontend->rt, (t_vec3d){-1, 0, 0});
+	if (keymap[SDL_SCANCODE_D])
+		rt_move_camera(frontend->rt, (t_vec3d){1, 0, 0});
+	if (keymap[SDL_SCANCODE_SPACE])
+		rt_move_camera(frontend->rt, (t_vec3d){0, 1, 0});
+	if (keymap[SDL_SCANCODE_LSHIFT])
+		rt_move_camera(frontend->rt, (t_vec3d){0, -1, 0});
+}
+
 static bool	rt_screen_main_render(t_toc_screen *self,
 				__attribute__((unused)) t_toc_vec2i mouse)
 {
@@ -66,6 +93,7 @@ static bool	rt_screen_main_render(t_toc_screen *self,
 	t_rt_backend		*backend;
 	t_toc_vec2i			pos;
 
+	rt_screen_main_update(self);
 	frontend = (t_rt_frontend *)self->data;
 	front = (t_rt_frontend_mlx *)frontend->data;
 	if (RT_DEVMODE)
@@ -106,6 +134,10 @@ static bool	rt_screen_main_key(t_toc_screen *screen, int key, int action,
 		rt_switch_camera_left(frontend->rt, frontend->rt->backend);
 	else if (key == SDL_SCANCODE_RIGHT)
 		rt_switch_camera_right(frontend->rt, frontend->rt->backend);
+	else if (key == SDL_SCANCODE_KP_PLUS)
+		rt_pixelisation_upper(frontend->rt);
+	else if (key == SDL_SCANCODE_KP_MINUS)
+		rt_pixelisation_lower(frontend->rt);
 	else
 		return (true);
 	return (false);

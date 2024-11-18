@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 22:36:49 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:26:17 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@
 #include <math.h>
 
 #define COEF_DIFFUSE 0.5
-#define COEF_SPECULAR 0.5
-#define COEF_EXPOS_SPECULAR 5
+#define COEF_SPECULAR 0.1
+#define COEF_EXPOS_SPECULAR 7
 
 __always_inline
 static float	phong_shading(t_ray *ray, t_light *light,
 					t_ray *tmp, t_vec3d normal)
 {
-	t_vec3d	l;
-	t_vec3d	h;
+	const t_vec3d	l = v3d_normsub(&light->point, &tmp->point);
+	const t_vec3d	t = v3d_sub( &tmp->direction, &ray->direction);
+	const t_vec3d	h = v3d_norm(&t);
 
-	l = v3d_normsub(&light->point, &tmp->point);
-	h = v3d_normsub(&tmp->direction, &ray->direction);
 	return (COEF_DIFFUSE * light->intensity * ft_fmax(0,
 			v3d_dot(&normal, &l)) + COEF_SPECULAR * light->intensity
 		* powf(ft_fmax(0, v3d_dot(&normal, &h)), COEF_EXPOS_SPECULAR));
