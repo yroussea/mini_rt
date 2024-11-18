@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:14:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:14:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:47:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ RESULT	rt_object_camera(t_rt_object_parser *objp)
 	RESULT	res;
 
 	rt_parser_object_init(objp, "C", OBJ_CAMERA, sizeof(t_camera));
+	objp->is_required = true;
 	res = OBJ_STEP(objp, offsetof(t_camera, point), RT_PRIM_COORDS);
 	if (RES_OK(res))
 		res = OBJ_STEP(objp, offsetof(t_camera, view_vector), RT_PRIM_NORMAL);

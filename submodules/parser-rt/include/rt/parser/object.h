@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:11:56 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 19:32:45 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:37:39 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_rt_object_parser
 	t_rt_parser				*parser;
 	const char				*id;
 	size_t					enum_id;
+	bool					is_required;
 	bool					is_unique;
 	size_t					size;
 	t_rt_object_parser_step	sequence[RT_PARSER_OBJECT_MAX_STEPS];

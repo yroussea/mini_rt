@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/17 22:33:15 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 20:45:23 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  primitive/rt_parser_prim_register.c \
 	  primitive/rt_parser_strprim.c \
 	  rt_parser_destroy.c \
+	  rt_parser_finalize.c \
 	  rt_parser_init.c \
 	  rt_parser_parse.c
 

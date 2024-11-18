@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:39:38 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/13 07:04:35 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:49:48 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ const char	*rt_parse_err_str(enum e_rt_parse_error err)
 {
 	static const char	*err_strs[] = {
 	[PARSE_ERR_OK] = "no error occured, why are you seeing this?",
+	[PARSE_ERR_MISSING_REQUIRED] = "missing required object",
 	[PARSE_ERR_ALLOC] = "an allocation error occured",
 	[PARSE_ERR_SYSCALL] = "a system error occured",
 	[PARSE_ERR_FILE] = "generic file format error",

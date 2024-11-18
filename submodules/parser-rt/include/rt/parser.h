@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:17:22 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:24:15 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:46:00 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ RESULT	rt_parser_init(t_rt_parser *parser, const t_rt *rt,
 			t_parser_name_fn *name_fn, bool add_default);
 void	rt_parser_destroy(t_rt_parser *parser);
 RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath);
+RESULT	rt_parser_finalize(t_rt_parser *parser);
 
 #  ifdef __RT_PARSER_INTERNAL__
 

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 19:13:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:43:49 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef enum e_rt_parse_error
 	PARSE_ERR_SYSCALL,
 	PARSE_ERR_FILE,
 	PARSE_ERR_FILE_READ,
+	PARSE_ERR_MISSING_REQUIRED,
 	PARSE_ERR_BAD_USAGE,
 	PARSE_ERR_NULL,
 	PARSE_ERR_UNKNOWN,

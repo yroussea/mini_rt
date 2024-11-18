@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:53:31 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 20:48:26 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:55:28 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 
-static RESULT	rt_err_expand(RESULT res, const char *filepath)
-{
-	if (res.type != PARSE_ERR_FILE)
-		return (res);
-	res.file_context.filename = filepath;
-	return (res);
-}
+#define NO_PRIM_PARSERS "no primitive parsers registered. what?"
+#define NO_OBJ_PARSERS "no object parsers registered. what?"
+#define MISSING_REQ_PRIM "some required primitive parsers don't exist"
 
 static RESULT	rt_parser_process(t_rt_parser *parser)
 {
@@ -48,10 +44,6 @@ static RESULT	rt_parser_process(t_rt_parser *parser)
 	}
 	return (res);
 }
-
-#define NO_PRIM_PARSERS "no primitive parsers registered. what?"
-#define NO_OBJ_PARSERS "no object parsers registered. what?"
-#define MISSING_REQ_PRIM "some required primitive parsers don't exist"
 
 static size_t	rt_parser_sanity_check_seq(t_rt_parser *parser,
 					size_t index, size_t j)
@@ -117,7 +109,9 @@ RESULT	rt_parser_parse(t_rt_parser *parser, const char *filepath)
 		res = rt_parser_buffer_sanitize(parser);
 	if (RES_OK(res))
 		res = rt_parser_process(parser);
-	if (!RES_OK(res))
-		return (rt_err_expand(res, filepath));
+	if (RES_OK(res))
+		res = rt_parser_finalize(parser);
+	if (res.type == PARSE_ERR_FILE)
+		res.file_context.filename = filepath;
 	return (res);
 }
