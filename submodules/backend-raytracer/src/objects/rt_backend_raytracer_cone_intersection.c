@@ -6,16 +6,13 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:25:22 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 19:41:46 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:07 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/math.h>
-#include <ft/math/vector.h>
 #include <math.h>
 #include <rt/render/backend/raytracer.h>
-#include <rt/render/backend/raytracer/aabb.h>
-#include <rt/render/backend/raytracer/objects.h>
 
 static bool	rt_be_rt_inf_cone_inter(
 	const t_ray *ray,

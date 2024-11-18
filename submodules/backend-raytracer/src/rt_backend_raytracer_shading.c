@@ -6,16 +6,13 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:30:59 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:33:56 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/objects.h"
 #include <rt/render/backend/raytracer.h>
-#include <ft/math/vector.h>
 #include <ft/math.h>
 #include <math.h>
-#include <stdio.h>
 #include <rt/render/backend/raytracer/option.h>
 
 __always_inline

@@ -6,14 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:51:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 19:28:35 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/objects.h"
 #include <ft/math.h>
-#include <ft/math/vector.h>
-#include <ft/math/matrix.h>
 #include <rt/render/backend/raytracer.h>
 
 double	rt_backend_raytracer_planar_intersect(

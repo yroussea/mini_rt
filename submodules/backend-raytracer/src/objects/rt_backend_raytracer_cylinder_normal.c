@@ -6,15 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 04:37:56 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:03:09 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:41 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/objects.h"
-#include "rt/render/backend/raytracer/objects.h"
 #include "rt/render/backend/raytracer/option.h"
 #include <ft/math.h>
-#include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 
 #if RT_RONDED_CYLINDER_LINK_CHECKERBOARD

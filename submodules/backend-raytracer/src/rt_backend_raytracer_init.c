@@ -6,17 +6,14 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 06:51:46 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 01:03:51 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:35:45 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt/render/backend/raytracer/objects.h"
-#include <ft/math/vector.h>
 #include <ft/math.h>
 #include <ft/mem.h>
 #include <math.h>
 #include <rt/log.h>
-#include <rt/objects.h>
 #include <rt/render/backend/raytracer.h>
 
 t_vec3d	rt_backend_raytracing_lights_colors(

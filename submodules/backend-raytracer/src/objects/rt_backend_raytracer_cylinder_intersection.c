@@ -6,14 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:47:27 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/10 13:54:50 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:32 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/math.h>
-#include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
-#include <rt/render/backend/raytracer/objects.h>
 #include <math.h>
 
 static bool	rt_be_rt_inf_cyl_inter(

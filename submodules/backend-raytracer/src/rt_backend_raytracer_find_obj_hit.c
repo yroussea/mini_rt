@@ -6,12 +6,11 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:33:50 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 22:47:26 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:33:37 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend/raytracer.h>
-#include <ft/math/vector.h>
 #include <math.h>
 
 bool	rt_object_can_intersect(t_obj *obj)

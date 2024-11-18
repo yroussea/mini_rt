@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:20:30 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 19:46:47 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:38:46 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ bool	rt_backend_raytracer_aabbx_inter(
 	return (false);
 }
 
+#if RT_BOUNDING_BOX
+
 void	rt_backend_raytracer_creating_aabbx(
 	t_boundingbox **aabbx, const t_vec3d p1, const t_vec3d p2)
 {
@@ -51,6 +53,18 @@ void	rt_backend_raytracer_creating_aabbx(
 	(*aabbx)->mins = v3d_min(&p1, &p2);
 	(*aabbx)->mins = v3d_sub(&(*aabbx)->mins, &error_margin);
 }
+
+#else
+void	rt_backend_raytracer_creating_aabbx(
+	t_boundingbox **aabbx, const t_vec3d p1, const t_vec3d p2)
+{
+	(void)aabbx;
+	(void)p1;
+	(void)p2;
+	return ;
+}
+#endif
+
 
 t_vec3d	rt_backend_raytracer_highest_point_circle(
 	const t_vec3d udir,
