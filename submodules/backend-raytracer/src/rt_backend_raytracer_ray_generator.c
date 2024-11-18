@@ -6,11 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:14:00 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 20:08:43 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:14:03 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend/raytracer.h>
+#include <rt/render/backend/raytracer/option.h>
 
 void	rt_backend_raytracer_init_ray(
 	t_ray *ray, t_vec3d coo, const t_mat3d *rot
@@ -23,7 +24,6 @@ void	rt_backend_raytracer_init_ray(
 	ray->inv_direction = v3d_inv(&ray->direction);
 }
 
-#define RT_NO_FISH_EYE 1
 #if RT_NO_FISH_EYE
 
 t_vec3d	rt_backend_raytracer_get_rays_relative_coo(

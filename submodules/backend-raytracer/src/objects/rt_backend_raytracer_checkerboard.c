@@ -6,18 +6,18 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:20:44 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/08 13:55:09 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:03:39 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define CHECKER_SIZE 10
+#include <rt/render/backend/raytracer/option.h>
 #include <math.h>
 #include <stdbool.h>
 
 bool	rt_backend_raytracer_checkerboard(double a, double b)
 {
-	const int	x = fabs(floor(a / CHECKER_SIZE));
-	const int	y = fabs(floor(b / CHECKER_SIZE));
+	const int	x = fabs(floor(a / RT_CHECKER_SIZE));
+	const int	y = fabs(floor(b / RT_CHECKER_SIZE));
 
 	return ((x % 2) ^ (y % 2));
 }

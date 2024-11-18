@@ -6,13 +6,12 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 00:50:01 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:26:27 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:02:50 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend/raytracer.h>
-
-#define RT_SCALE_BUMPMAP 1
+#include <rt/render/backend/raytracer/option.h>
 
 int	rt_backend_raytracer_bumpmap_coo(
 	const float u,

@@ -6,13 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 05:49:42 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 23:01:17 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:09:47 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/log.h>
 #include <rt/render/frontend/macrolibx.h>
-# include <stdio.h>
 
 void	rt_frontend_mlx_stop(t_rt_frontend *self)
 {
@@ -23,10 +22,9 @@ void	rt_frontend_mlx_stop(t_rt_frontend *self)
 	while (windows)
 	{
 		window = (t_toc_window *)windows->data;
-		printf("Closing window %s\n", window->name);
+		rt_trace(self->rt, "Closing window %s\n", window->name);
 		toc_window_close(window);
-		printf("window->active = %d\n", window->active);
-		fflush(stdout);
+		rt_trace(self->rt, "Window->active = %d\n", window->active);
 		windows = windows->next;
 	}
 }

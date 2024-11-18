@@ -6,13 +6,12 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 01:02:54 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:10:55 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
-#include <stdbool.h>
 # undef OBJECTS_H
 # ifndef __RT_OBJECTS_H__
 #  define __RT_OBJECTS_H__
@@ -20,6 +19,7 @@
 #  include <ft/math/vector.h>
 #  include <ft/math/matrix.h>
 #  include <rt/color.h>
+#  include <stdbool.h>
 
 /** Default object definition **/
 

@@ -6,32 +6,32 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 01:26:17 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:07:26 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft/print.h"
 #include "rt/objects.h"
 #include <rt/render/backend/raytracer.h>
 #include <ft/math/vector.h>
 #include <ft/math.h>
 #include <math.h>
-
-#define COEF_DIFFUSE 0.5
-#define COEF_SPECULAR 0.1
-#define COEF_EXPOS_SPECULAR 7
+#include <stdio.h>
+#include <rt/render/backend/raytracer/option.h>
 
 __always_inline
-static float	phong_shading(t_ray *ray, t_light *light,
+static double	phong_shading(t_ray *ray, t_light *light,
 					t_ray *tmp, t_vec3d normal)
 {
 	const t_vec3d	l = v3d_normsub(&light->point, &tmp->point);
-	const t_vec3d	t = v3d_sub( &tmp->direction, &ray->direction);
-	const t_vec3d	h = v3d_norm(&t);
+	const t_vec3d	h = v3d_normsub(&tmp->direction, &ray->direction);
+	const double	diffuse = RT_COEF_DIFFUSE * \
+		ft_fmax(0, v3d_dot(&normal, &l));
+	const double	specular = RT_COEF_SPECULAR * \
+		powf(ft_fmax(0, v3d_dot(&h, &normal)), RT_COEF_EXPOS_SPECULAR);
 
-	return (COEF_DIFFUSE * light->intensity * ft_fmax(0,
-			v3d_dot(&normal, &l)) + COEF_SPECULAR * light->intensity
-		* powf(ft_fmax(0, v3d_dot(&normal, &h)), COEF_EXPOS_SPECULAR));
+	if (diffuse < EPSILON)
+		return (0);
+	return (light->intensity * (diffuse + specular));
 }
 
 __always_inline

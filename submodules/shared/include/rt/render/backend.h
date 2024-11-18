@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:57:17 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 00:58:44 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:11:27 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_rt_backend_provider	*rt_backend_provider_find(const char *name);
 
 void					rt_switch_camera_left(t_rt *rt, t_rt_backend *self);
 void					rt_switch_camera_right(t_rt *rt, t_rt_backend *self);
-void					 rt_rotate_camera(t_rt *rt, double phi_rotate, double theta_rotate);
+void					rt_rotate_camera(t_rt *rt, double phi, double theta);
 void					rt_move_camera(t_rt *rt, t_vec3d vector_move);
 void					rt_pixelisation_upper(t_rt *rt);
 void					rt_pixelisation_lower(t_rt *rt);

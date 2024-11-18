@@ -6,17 +6,17 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:00:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:25:56 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:01:51 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt/objects.h"
 #include "rt/render/backend/raytracer/objects.h"
+#include "rt/render/backend/raytracer/option.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 
-#define RT_RONDED_CONE_LINKED_SURFACE 1 
 #if RT_RONDED_CONE_LINKED_SURFACE
 
 t_vec3d	rt_backend_raytracer_colors_cone(

@@ -6,17 +6,17 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 04:37:56 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/16 07:27:20 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:03:09 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt/objects.h"
 #include "rt/render/backend/raytracer/objects.h"
+#include "rt/render/backend/raytracer/option.h"
 #include <ft/math.h>
 #include <ft/math/vector.h>
 #include <rt/render/backend/raytracer.h>
 
-// #define RT_RONDED_CYLINDER_LINK_CHECKERBOARD 1
 #if RT_RONDED_CYLINDER_LINK_CHECKERBOARD
 
 t_vec3d	rt_backend_raytracer_colors_cylinder(
