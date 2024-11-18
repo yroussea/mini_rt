@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:59:40 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:06:19 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:30:23 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 #   define RT_COEF_DIFFUSE 0.5
 #  endif
 #  ifndef RT_COEF_SPECULAR
-#   define RT_COEF_SPECULAR 0.5
+#   define RT_COEF_SPECULAR 0.7
 #  endif
 #  ifndef RT_COEF_EXPOS_SPECULAR
-#   define RT_COEF_EXPOS_SPECULAR 16
+#   define RT_COEF_EXPOS_SPECULAR 32
 #  endif
 
 #  ifndef RT_NO_FISH_EYE

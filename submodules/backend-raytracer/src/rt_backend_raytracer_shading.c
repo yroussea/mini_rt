@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 19:47:02 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:07:26 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:30:59 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static double	phong_shading(t_ray *ray, t_light *light,
 	const t_vec3d	h = v3d_normsub(&tmp->direction, &ray->direction);
 	const double	diffuse = RT_COEF_DIFFUSE * \
 		ft_fmax(0, v3d_dot(&normal, &l));
-	const double	specular = RT_COEF_SPECULAR * \
+	const double	len = v3d_lensub(&tmp->point, &light->point);
+	const double	specular = RT_COEF_SPECULAR * 314 / (len * len) * \
 		powf(ft_fmax(0, v3d_dot(&h, &normal)), RT_COEF_EXPOS_SPECULAR);
 
 	if (diffuse < EPSILON)
