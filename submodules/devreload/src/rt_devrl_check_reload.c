@@ -6,12 +6,13 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:19:58 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 00:47:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:31:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/mem.h>
 #include <rt/devreload.h>
+#include <rt/util.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -19,16 +20,6 @@
 #ifndef RT_DEVRELOAD_DAEMON_WATCH_FILE
 # error "RT_DEVRELOAD_DAEMON_WATCH_FILE not defined"
 #endif
-
-// stat syscall
-#define SYS_STAT 0x4
-
-long	ft_syscall(long number, ...);
-
-static int	rt_stat(const char *path, struct stat *st)
-{
-	return (ft_syscall(SYS_STAT, path, st));
-}
 
 static bool	rt_devrl_check_file(const char *path)
 {

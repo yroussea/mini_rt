@@ -6,12 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 03:00:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/27 02:51:25 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:35:50 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define __RT_DEVRELOAD_DLFCN_INTERNAL__
-#include <rt/devreload/dlfcn.h>
+#include <rt/util.h>
 
 static void	syscall_get_args(va_list args, long number,
 		struct s_syscall_args *sys_args)
@@ -48,7 +47,6 @@ static long	syscall_call(struct s_syscall_args *sys_args)
 	return (ret);
 }
 
-__attribute__((visibility("hidden")))
 long	ft_syscall(long number, ...)
 {
 	struct s_syscall_args	sys_args;

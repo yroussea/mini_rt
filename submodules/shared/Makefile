@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/18 00:58:14 by yroussea         ###   ########.fr        #
+#    Updated: 2024/11/18 22:46:49 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRC =	log/rt_debug.c \
 		log/rt_trace.c \
 		log/rt_vlog.c \
 		log/rt_warn.c \
+		render/backend/rt_move_camera.c \
+		render/backend/rt_pixelisation.c \
+		render/backend/rt_switch_cameras.c \
 		render/registry/rt_backend_provider_find.c \
 		render/registry/rt_backend_provider_register.c \
 		render/registry/rt_backend_providers.c \
@@ -29,14 +32,13 @@ SRC =	log/rt_debug.c \
 		render/rt_backend_switch.c \
 		render/rt_frontend_reload.c \
 		render/rt_frontend_switch.c \
+		util/ft_syscall.c \
 		util/rt_free_aligned.c \
 		util/rt_malloc_aligned.c \
 		util/rt_noop.c \
+		util/rt_stat.c \
 		rt_destroy.c \
 		rt_exit.c \
-		rt_switch_cameras.c \
-		rt_move_camera.c \
-		rt_pixelisation.c \
 		rt_init.c \
 		rt_resize.c
 

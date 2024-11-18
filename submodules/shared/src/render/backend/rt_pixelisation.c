@@ -6,16 +6,17 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 23:20:33 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:10:34 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:46:18 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/render/backend.h>
 #include <rt/render/frontend.h>
 
+#include <stdio.h>
 static int	bigger_common_dividor(int w, int h, int actual)
 {
-	int	n;
+	int n;
 
 	n = actual + 1;
 	while (!((h % n == 0) && (w % n == 0)))
@@ -29,7 +30,7 @@ static int	bigger_common_dividor(int w, int h, int actual)
 
 static int	smaller_common_dividor(int w, int h, int actual)
 {
-	int	n;
+	int n;
 
 	n = actual - 1;
 	while (n > 1 && !((h % n == 0) && (w % n == 0)))
@@ -49,7 +50,7 @@ void	rt_pixelisation_lower(t_rt *rt)
 	if (rt->frontend->scale == 0)
 		rt->frontend->scale = 1;
 	rt->frontend->scale = smaller_common_dividor(
-			rt->frontend->width, rt->frontend->height, rt->frontend->scale);
+		rt->frontend->width, rt->frontend->height, rt->frontend->scale);
 	calcul_pixelisation(
 		rt->frontend->width, rt->frontend->scale, &rt->backend->width);
 	calcul_pixelisation(
@@ -62,7 +63,7 @@ void	rt_pixelisation_upper(t_rt *rt)
 	if (rt->frontend->scale == 0)
 		rt->frontend->scale = 1;
 	rt->frontend->scale = bigger_common_dividor(
-			rt->frontend->width, rt->frontend->height, rt->frontend->scale);
+		rt->frontend->width, rt->frontend->height, rt->frontend->scale);
 	calcul_pixelisation(
 		rt->frontend->width, rt->frontend->scale, &rt->backend->width);
 	calcul_pixelisation(

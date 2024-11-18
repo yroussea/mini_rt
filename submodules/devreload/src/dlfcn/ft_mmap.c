@@ -6,10 +6,11 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:59:16 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 03:32:52 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:35:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <rt/util.h>
 #define __RT_DEVRELOAD_DLFCN_INTERNAL__
 #include <rt/devreload/dlfcn.h>
 

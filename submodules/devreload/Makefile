@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 00:04:32 by kiroussa          #+#    #+#              #
-#    Updated: 2024/10/26 23:45:05 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 21:32:34 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ SRC	=	backend/rt_devrl_backend_setup.c \
 		dlfcn/ft_dlopen.c \
 		dlfcn/ft_mmap.c \
 		dlfcn/ft_munmap.c \
-		dlfcn/ft_syscall.c \
 		frontend/rt_devrl_frontend_setup.c \
 	  	frontend/rt_devrl_load_frontend.c \
 		rt_devrl_check_reload.c \

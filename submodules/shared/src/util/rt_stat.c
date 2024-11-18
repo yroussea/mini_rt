@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_munmap.c                                        :+:      :+:    :+:   */
+/*   rt_stat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 03:09:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 21:35:26 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/18 21:31:25 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/18 21:32:34 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt/util.h>
-#define __RT_DEVRELOAD_DLFCN_INTERNAL__
-#include <rt/devreload/dlfcn.h>
 
-int	ft_munmap(void *addr, size_t len)
+// stat syscall
+#define SYS_STAT 0x4
+
+long	ft_syscall(long number, ...);
+
+int	rt_stat(const char *path, struct stat *st)
 {
-	int	ret;
-
-	ret = ft_syscall(SYS_MUNMAP, addr, len);
-	if (ret == -1)
-		return (-1);
-	return (0);
+	return (ft_syscall(SYS_STAT, path, st));
 }

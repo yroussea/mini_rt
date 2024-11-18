@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:44:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/10/16 03:53:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:28:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,6 @@ int		ft_munmap(void *addr, size_t len);
 
 #   define SYS_MMAP			9
 #   define SYS_MUNMAP		11
-
-struct	s_syscall_args
-{
-	uint64_t	rax;
-	uint64_t	rdi;
-	uint64_t	rsi;
-	uint64_t	rdx;
-	uint64_t	r10;
-	uint64_t	r8;
-	uint64_t	r9;
-};
-
-long	ft_syscall(long number, ...);
 
 #  endif
 
