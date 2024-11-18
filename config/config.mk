@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/13 04:48:22 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 21:15:29 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,4 +37,4 @@ CACHE_DIR ?= .cache
 
 DEVELOPMENT_MODE ?= 1
 USE_VALGRIND_LOGFILE ?= 0
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes -s --track-fds=no --suppressions=third-party/MacroLibX/valgrind.supp -q
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes -s --track-fds=yes --suppressions=third-party/MacroLibX/valgrind.supp -q

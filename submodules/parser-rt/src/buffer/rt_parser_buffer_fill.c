@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 14:54:09 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/08 21:27:21 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:20:59 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
 	ssize_t	nread;
 	size_t	offset;
 
-	__attribute__((cleanup(ft_closep))) int fd;
+	if (buffer == NULL)
+		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate file buffer"));
+	__attribute__((cleanup(ft_closep))) int fd = open(filepath, O_RDONLY);
 	res = OK();
 	offset = 0;
-	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
 		return (ERRS(PARSE_ERR_FILE_READ, "'%s' cannot be opened: %s",
 				filepath, strerror(errno)));
@@ -98,16 +99,15 @@ static RESULT	rt_parser_buffer_alloc_fd(const char *filepath, int fd,
 		nread = read(fd, dummy, sizeof(dummy));
 		if (nread == -1)
 			res = ERRD(PARSE_ERR_FILE_READ, "error while reading file: %m");
-		else
-			len += nread;
+		len += (nread != -1) * nread;
 	}
 	if (!RES_OK(res))
 		return (res);
 	if (len == 0)
+		close(fd);
+	if (len == 0)
 		return (ERRS(PARSE_ERR_FILE_READ, "'%s' is empty", filepath));
 	*buffer = ft_calloc(1, len + 1);
-	if (*buffer == NULL)
-		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate file buffer"));
 	close(fd);
 	return (rt_parser_buffer_fill_fd(filepath, *buffer, len, nlines));
 }

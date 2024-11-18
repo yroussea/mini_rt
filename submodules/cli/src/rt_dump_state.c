@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_exit.c                                          :+:      :+:    :+:   */
+/*   rt_dump_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 05:12:38 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 21:17:30 by kiroussa         ###   ########.fr       */
+/*   Created: 2024/11/18 20:58:46 by kiroussa          #+#    #+#             */
+/*   Updated: 2024/11/18 20:59:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <rt/app.h>
+#include <rt/cli.h>
 #include <rt/log.h>
-#include <rt/parser.h>
-#include <stdlib.h>
 
-void	rt_exit(t_rt *rt, int status)
+void	rt_dump_state(const t_rt *rt)
 {
-	rt_error(rt, "exiting with status %d", status);
-	if (rt->parser)
-		rt_parser_destroy(rt->parser);
-	rt_destroy(rt);
-	exit(status);
+	rt_debug(rt, "launching rt in mode %d\n", rt->flags.mode);
+	rt_debug(rt, "input file is '%s'\n", rt->flags.filepath);
+	if (rt->flags.mode == RT_MODE_RENDER_ONCE)
+		rt_debug(rt, "output file is '%s'\n", rt->flags.output);
+	rt_debug(rt, "frontend is '%s'\n", rt->flags.frontend);
+	rt_debug(rt, "backend is '%s'\n", rt->flags.backend);
 }

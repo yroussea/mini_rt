@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/16 13:06:18 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 21:02:39 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -172,6 +172,9 @@ callgrind:
 	valgrind --tool=callgrind ./$(NAME) $(VG_ARGS) || true
 	@echo "[*] Callgrind log available in callgrind.log"
 
+flex:
+	@nix-shell -p cloc --command "clear; cloc config submodules third-party/libft third-party/tocard-ui ./rebuild-daemon.sh --include-lang=\"C/C++ Header,C,D,make,Nix,Python,Bourne Shell\""
+
 help:
 	@printf "Usage: make [target] [VG_ARGS=\"...\"]\n"
 	@printf "\n"
@@ -184,6 +187,7 @@ help:
 	@printf "    test:\t\tRun the parser unit tests (see ./scenes/tester.sh)\n"
 	@printf "    daemon:\t\tStart the rebuild daemon\n"
 	@printf "    daemon-stop:\tStop the rebuild daemon\n"
+	@printf "    flex:\t\tflex.\n"
 	@printf "    valgrind:\t\tRun the project with valgrind\n"
 	@printf "      VG_ARGS: \t\t- arguments to pass to valgrind\n\n"
 	@printf "      > Example:\n"

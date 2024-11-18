@@ -27,7 +27,7 @@ SESSION_NAME="minirt-deps"
 
 tmux new-session -d -s $SESSION_NAME
 tmux rename-window -t $SESSION_NAME "minirt-deps"
-tmux select-layout even-vertical -t $SESSION_NAME
+tmux select-layout even-vertical
 
 COUNT=0
 for dep in "${DEPS[@]}"; do

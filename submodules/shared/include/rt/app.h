@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 00:36:55 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 23:35:37 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:57:55 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@
 typedef struct s_rt_backend		t_rt_backend;
 // Shadow declaration, see <rt/render/frontend.h>
 typedef struct s_rt_frontend	t_rt_frontend;
+// Shadow declaration, see <rt/parser.h>
+typedef struct s_rt_parser		t_rt_parser;
 
 typedef struct s_rt_app
 {
 	const char		*executable;
 	const char		*name;
 	t_rt_flags		flags;
+	t_rt_parser		*parser;
 
 	size_t			width;
 	size_t			height;

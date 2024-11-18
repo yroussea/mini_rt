@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:52:36 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/18 20:12:44 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 20:58:55 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = args/rt_cli_opt_help.c \
 	  parse/rt/rt_parser_rt_objects.c \
 	  main.c \
 	  rt_backend_init.c \
+	  rt_dump_state.c \
 	  rt_frontend_init.c \
 	  rt_parser_dump_state.c
 

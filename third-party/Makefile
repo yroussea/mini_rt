@@ -6,11 +6,11 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 23:49:35 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/18 01:02:21 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/18 21:04:52 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DEPS = LIBFT MACROLIBX TOCARDUI LIBTERM
+DEPS = LIBFT MACROLIBX TOCARDUI # LIBTERM
 
 LIBFT_DIR = libft
 LIBFT_TARGET = $(LIBFT_DIR)/build/output/libft.so

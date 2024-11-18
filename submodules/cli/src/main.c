@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 02:03:36 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 17:26:38 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:10:40 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,32 @@
 #include <unistd.h>
 
 void		rt_parser_dump_state(const t_rt *rt, t_rt_parser *parser);
+void		rt_dump_state(const t_rt *rt);
 
 static int	rt_parse_wrap(const t_rt *rt, t_list **result)
 {
 	RESULT		res;
+	t_rt_parser	*parser;
 
-	__attribute__((cleanup(rt_parser_destroy)))
-	t_rt_parser parser;
-	if (rt->flags.mode == RT_MODE_APP)
-		return (0);
-	res = rt_parser_init(&parser, rt, (t_parser_name_fn *)(void *)
+	parser = rt->parser;
+	res = rt_parser_init(parser, rt, (t_parser_name_fn *)(void *)
 			rt_object_strtype, true);
 	if (RES_OK(res))
-		res = rt_cli_parser_rt_init(&parser);
+		res = rt_cli_parser_rt_init(parser);
 	if (RES_OK(res))
-		res = rt_parser_parse(&parser, rt->flags.filepath);
+		res = rt_parser_parse(parser, rt->flags.filepath);
 	if (!RES_OK(res))
 	{
-		ERROR_PRINT(&parser, res);
-		ft_lst_free(&parser.result, rt_free_aligned);
+		ERROR_PRINT(parser, res);
+		ft_lst_free(&parser->result, rt_free_aligned);
 		return (res.type);
 	}
-	rt_parser_dump_state(rt, &parser);
+	rt_parser_dump_state(rt, parser);
 	if (rt->flags.mode == RT_MODE_PARSER_TEST)
-		ft_lst_free(&parser.result, rt_free_aligned);
+		ft_lst_free(&parser->result, rt_free_aligned);
 	else
-		*result = parser.result;
+		*result = parser->result;
 	return (0);
-}
-
-static void	rt_dump_state(const t_rt *rt)
-{
-	rt_debug(rt, "launching rt in mode %d\n", rt->flags.mode);
-	rt_debug(rt, "input file is '%s'\n", rt->flags.filepath);
-	if (rt->flags.mode == RT_MODE_RENDER_ONCE)
-		rt_debug(rt, "output file is '%s'\n", rt->flags.output);
-	rt_debug(rt, "frontend is '%s'\n", rt->flags.frontend);
-	rt_debug(rt, "backend is '%s'\n", rt->flags.backend);
 }
 
 static int	rt_frontend_loop(t_rt *rt)
@@ -90,9 +79,11 @@ int	main(int argc, const char **argv, const char **envp)
 
 	__attribute__((cleanup(rt_cleanup_objects))) t_list * result = NULL;
 	__attribute__((cleanup(rt_destroy))) t_rt rt;
+	__attribute__((cleanup(rt_parser_destroy))) t_rt_parser parser;
 	ret = 0;
 	if (!rt_init(&rt, argc, argv, envp))
 	{
+		rt.parser = &parser;
 		ret = rt_cli_parse(&rt, argc, argv);
 		if (ret > 0)
 			ret = (ret - 1);

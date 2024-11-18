@@ -18,7 +18,7 @@ echo ""
 echo "[*] Running invalid scenes..."
 for scene in ./invalid/*.rt; do
 	if [ $VALGRIND -eq 1 ]; then
-		valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes -q $APP $scene -p >/dev/null 2>&1
+		valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes -q $APP $scene -p # >/dev/null 2>&1
 	else
 		$APP $scene -p >/dev/null 2>&1
 	fi
@@ -44,7 +44,7 @@ echo ""
 echo "[*] Running valid scenes..."
 for scene in ./valid/*.rt; do
 	if [ $VALGRIND -eq 1 ]; then
-		valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes -q $APP $scene -p >/dev/null 2>&1
+		valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes -q $APP $scene -p # >/dev/null 2>&1
 	else
 		$APP $scene -p >/dev/null 2>&1
 	fi
