@@ -2,7 +2,7 @@
 
 RULE="${RULE:-all}"
 DEPS=($(make -s print_DEPS | sed 's/ /\n/g' | xargs -I{} make -s print_{}_DIR))
-MAKE="${MAKE:-make -j MLX_DIR=\"../MacroLibX\"}"
+MAKE="${MAKE:-make -j MLX_DIR=\"../MacroLibX\" SO=1}"
 
 NO_TMUX=0
 if ! command -v tmux &> /dev/null; then
