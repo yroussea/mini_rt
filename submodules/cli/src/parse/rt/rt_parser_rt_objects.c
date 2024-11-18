@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:14:16 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 22:50:04 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:21:45 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ RESULT	rt_object_cylinder(t_rt_object_parser *objp)
 		res = OBJ_STEP(objp, offsetof(t_cylinder, diameter), RT_PRIM_UDOUBLE);
 	if (RES_OK(res))
 		res = OBJ_STEP(objp, offsetof(t_cylinder, height), RT_PRIM_UDOUBLE);
-	return (rt_object_define_colors(objp, res, true, false));
+	return (rt_object_define_colors(objp, res, true, true));
 }
 
 RESULT	rt_object_cone(t_rt_object_parser *objp)
@@ -68,5 +68,5 @@ RESULT	rt_object_cone(t_rt_object_parser *objp)
 		res = OBJ_STEP(objp, offsetof(t_cone, theta), RT_PRIM_ANGLE);
 	if (RES_OK(res))
 		res = OBJ_STEP(objp, offsetof(t_cone, height), RT_PRIM_UDOUBLE);
-	return (rt_object_define_colors(objp, res, true, false));
+	return (rt_object_define_colors(objp, res, true, true));
 }

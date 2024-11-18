@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 18:44:36 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:44:05 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #define __RT_PARSER_INTERNAL__
 #include <rt/parser.h>
 #include <rt/util.h>
+
+t_rt_parser_file_context	rt_parser_object_unexpected_optional(
+								const char *token);
 
 static RESULT	rt_parser_object_incomplete(t_rt_object_parser_step *step,
 					char **tokens, const char *line, size_t ntok)
@@ -33,14 +36,6 @@ static RESULT	rt_parser_object_incomplete(t_rt_object_parser_step *step,
 	return (rt_parse_err_file(context));
 }
 
-static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
-					char **tokens, void *memory)
-{
-	//TODO: implement
-	(void)objp, (void)tokens, (void)memory;
-	return (OK());
-}
-
 static RESULT	rt_parser_object_expand_step(RESULT res, size_t itkn,
 					const char *line)
 {
@@ -49,6 +44,49 @@ static RESULT	rt_parser_object_expand_step(RESULT res, size_t itkn,
 	if (res.type == PARSE_ERR_FILE)
 	{
 		res.file_context.column += rt_parser_line_token_pos(line, itkn);
+	}
+	return (res);
+}
+
+t_rt_parser_file_context	rt_parser_object_unexpected_optional(
+	const char *token
+) {
+	t_rt_parser_file_context	context;
+
+	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
+	context.type = FILE_ERR_TOO_MANY_PARTS;
+	context.length = ft_strlen(token);
+	context.error_message = "unexpected token";
+	context.possible_fix = ft_strdup("this is an optional part you can remove;"
+			" is it in the wrong order?");
+	return (context);
+}
+
+static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
+					char **tokens, void *memory, size_t *itkn)
+{
+	RESULT	res;
+	RESULT	last;
+	size_t	iseq;
+
+	iseq = objp->required;
+	res = OK();
+	last = OK();
+	while (tokens[*itkn] && iseq < objp->sequence_size)
+	{
+		res = rt_parser_object_parse_step(objp, tokens[*itkn], iseq, memory);
+		*itkn += RES_OK(res);
+		iseq++;
+		if (RES_OK(last))
+			last = res;
+	}
+	if (tokens[*itkn] != NULL)
+		return (ERR_FILE(rt_parser_object_unexpected_optional(tokens[*itkn])));
+	if (RES_ERR(res))
+	{
+		if (RES_ERR(last))
+			return (last);
+		return (res);
 	}
 	return (res);
 }
@@ -93,7 +131,10 @@ static RESULT	rt_parser_object_parse_all(t_rt_object_parser *objp,
 		res = rt_parser_object_incomplete(&objp->sequence[iseq],
 				tokens, line, itkn);
 	if (RES_OK(res) && objp->required < objp->sequence_size)
-		return (rt_parser_object_parse_optional(objp, tokens + itkn, memory));
+	{
+		res = rt_parser_object_parse_optional(objp, tokens, memory, &itkn);
+		res = rt_parser_object_expand_step(res, itkn, line);
+	}
 	return (res);
 }
 

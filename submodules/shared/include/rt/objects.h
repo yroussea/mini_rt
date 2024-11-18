@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:39:59 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 22:49:26 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:55:09 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ typedef struct s_rt_material
 	int		type;
 	t_vec3d	colors;
 	t_vec3d	check_colors;
-	t_vec3d	*bumpmap;
-	t_vec2i	map_size;
+	struct s_bump_data
+	{
+		t_vec3d	*map;
+		t_vec2i	size;
+	} bump;
 	double	specular_reflection;
 }	t_rt_material;
 
