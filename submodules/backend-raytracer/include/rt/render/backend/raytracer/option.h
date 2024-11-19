@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:59:40 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 20:26:05 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 02:05:25 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #   define RT_CHECKER_SIZE 10
 #  endif
 #  ifndef RT_SCALE_BUMPMAP
-#   define RT_SCALE_BUMPMAP 1
+#   define RT_SCALE_BUMPMAP 10
 #  endif
 
 # endif // __RT_RENDER_BACKEND_RAYTRACER_OPTION_H__

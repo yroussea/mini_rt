@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/19 00:57:39 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 02:06:31 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	rt_backend_raytracer_sphere_twod_relative_point(
 
 	relative_coo->x = ft_fsign(x.z) * acos(x.x / sqrt(x.x * x.x + x.z * x.z));
 	relative_coo->y = acos(x.y / sph->radius);
+	relative_coo->x *= 50;
+	relative_coo->y *= 50;
 }
 
 t_vec3d	rt_backend_raytracer_sphere_normal(
@@ -79,7 +81,7 @@ t_vec3d	rt_backend_raytracer_colors_sphere(
 	if (!(sph->base.material.type & CHECKERBOARD))
 		return (*colors);
 	rt_backend_raytracer_sphere_twod_relative_point(&tmp, ray, sph);
-	return (colors[rt_backend_raytracer_checkerboard(tmp.x * 50, tmp.y * 50)]);
+	return (colors[rt_backend_raytracer_checkerboard(tmp.x, tmp.y)]);
 }
 
 void	rt_backend_raytracer_sphere(t_obj *obj)
