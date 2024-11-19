@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:06:32 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 23:42:10 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:18:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ void	rt_destroy_objects(t_obj *objects)
 	if (objects->next)
 		rt_destroy_objects(objects->next);
 	if (RT_BOUNDING_BOX && objects->type == OBJ_CONE)
-	{
 		rt_free_aligned(((t_cone *)objects)->aabbx);
-	}
 	if (RT_BOUNDING_BOX && objects->type == OBJ_CYLINDER)
-	{
 		rt_free_aligned(((t_cone *)objects)->aabbx);
-	}
+	rt_free_aligned(objects->material.bump.map);
 	rt_free_aligned(objects);
 }
 
