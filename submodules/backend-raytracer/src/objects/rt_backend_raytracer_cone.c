@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/19 16:13:22 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:47:25 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	rt_backend_raytracer_cone(t_obj *obj)
 	t_vec3d		high;
 
 	cone = (t_cone *)obj;
+	cone->axis = v3d_norm(&cone->axis);
 	t = v3d(cone->axis.y + cone->axis.z, -cone->axis.x, -cone->axis.x);
 	cone->vec_udir = v3d_norm(&t);
 	t = v3d_cross(&cone->axis, &cone->vec_udir);
