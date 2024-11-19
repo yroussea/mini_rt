@@ -9,8 +9,8 @@ C  6,5,-30   0,0,1   80
 # sp 0,0,-2   1   0,176,240    checkered   255,0,0                        # marche
 sp 0,0,-4   1   68,194,164   checkered   255,0,0    ./scenes/valid/bump.jpg  #marche
 sp 0,0,-6   1   255,204,0    checkered              ./scenes/valid/bump.jpg  #color marche pas, skip to next, next ok, everything ok
-sp 0,0,-8   1   216,56,136   ./scenes/valid/bump.jpg                         # checkered marche pas, color marche pas, bump marche, OK
-sp 0,0,-10   1   0,176,240   ./scenes/valid/bump.jpg    #255,0,0              # checkered, color non, bump oui, OK, too much, ERR
+sp 0,0,-8   1   216,56,136   ./scenes/valid/bump2.png                         # checkered marche pas, color marche pas, bump marche, OK
+sp 0,0,-10   1   0,176,240   ./scenes/valid/bump2.png    #255,0,0              # checkered, color non, bump oui, OK, too much, ERR
 # sp 0,0,-12   1   68,194,164     checkered
 
 L  6,4,-6   0.5   255,255,255
