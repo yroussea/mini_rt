@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:36:25 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/19 01:48:07 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:53:16 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ RESULT	rt_parser_prim_bumpmap(
 		return (ERRS(PARSE_ERR_ALLOC, "failed to load image"));
 	res = rt_parser_prim_bumpmap_load(mlx, mlx_img, img_size, memory
 			+ offsetof(t_rt_material, bump));
-	*((t_vec2i *)(memory + offsetof(t_rt_material, bump) + sizeof(t_vec3d *)))
-		= (t_vec2i){img_size.x * img_size.y};
+	*((t_vec2i *)(memory + offsetof(t_rt_material, bump.size)))
+		= img_size;
 	*((int *)(memory)) |= BUMP_MAP;
 	*size = 1;
 	mlx_destroy_image(mlx, mlx_img);
