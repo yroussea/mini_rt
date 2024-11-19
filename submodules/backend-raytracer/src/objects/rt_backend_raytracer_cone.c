@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 01:09:10 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/17 17:51:38 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:11:01 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	rt_backend_raytracer_cone(t_obj *obj)
 	cone->vec_udir = v3d_norm(&t);
 	t = v3d_cross(&cone->axis, &cone->vec_udir);
 	cone->vec_vdir = v3d_norm(&t);
+	// from degree to radian
+	cone->theta = cone->theta * M_PI / 180.;
 	cone->cos = cos(cone->theta);
 	cone->tan = tan(cone->theta);
 	cone->max_dist = cone->height / cone->cos;
