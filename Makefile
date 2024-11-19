@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/19 02:25:03 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 17:09:24 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,13 +127,14 @@ oclean:
 clean: oclean
 	@$(MAKE) -C $(DEPS_DIR) clean
 
-fclean: oclean
+fclean:
 	@for i in $(SUBMODULES); do \
 		$(MAKE) -C $(SUBMODULES_DIR)/$$i CACHE_DIR="$(PWD)/$(CACHE_DIR)" fclean; \
 	done
 	@echo "[!] Removing $(NAME)"
 	@rm -rf $(NAME)
-	$(MAKE) -C $(DEPS_DIR) fclean
+	@$(MAKE) -C $(DEPS_DIR) fclean
+	@$(MAKE) oclean
 
 re: fclean all
 

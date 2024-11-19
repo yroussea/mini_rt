@@ -6,12 +6,12 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/19 04:17:41 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 17:08:40 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_NAME = miniRT
-PROJECT_VERSION = 3.0.0-rc.1
+PROJECT_VERSION = 3.0.0-rc.2
 PROJECT_URL = https://codeberg.org/27/rt
 COMP_MODE = $(PROJECT_NAME)
 
