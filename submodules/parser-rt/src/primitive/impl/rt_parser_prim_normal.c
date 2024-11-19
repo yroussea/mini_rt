@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 06:16:27 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/16 06:30:56 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:52:29 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ static RESULT	rt_parser_prim_normal_expand(RESULT res, double result,
 	if (res.type == PARSE_ERR_FILE)
 		res.file_context.column += offset;
 	return (res);
+}
+
+static t_vec3d	*rt_normalize(t_vec3d *vec)
+{
+	t_vec3d	res;
+
+	res = v3d_norm(vec);
+	ft_memcpy(vec, &res, sizeof(t_vec3d));
+	return (vec);
 }
 
 // Format %f,%f,%f
@@ -63,7 +72,7 @@ RESULT	rt_parser_prim_normal(
 	res = rt_strtod(&slice, &results.z, " ");
 	if (RES_ERR(res) || results.z > 1.0f || results.z < -1.0f)
 		return (rt_parser_prim_normal_expand(res, results.z, offset, orig));
-	ft_memcpy(memory, &results, sizeof(t_vec3d));
+	ft_memcpy(memory, rt_normalize(&results), sizeof(t_vec3d));
 	*size = sizeof(t_vec3d);
 	return (res);
 }
