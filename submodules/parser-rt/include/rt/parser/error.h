@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:45:15 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 20:43:49 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:26:08 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ t_rt_parse_error	rt_parse_err_file(t_rt_parser_file_context context);
 
 const char			*rt_parse_err_str(enum e_rt_parse_error err);
 void				rt_parse_err_print(t_rt_parser *parser,
+						t_rt_parse_error err);
+void				rt_parse_err_free(t_rt_parser *parser,
 						t_rt_parse_error err);
 
 #  ifndef __ERROR_SPEC__

@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:45:33 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 20:41:00 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:35:37 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static RESULT	rt_parser_line_result_expand(RESULT res, size_t index)
 		res.file_context.line = index + 1;
 	return (res);
 }
+# include <stdio.h>
 
 static size_t	rt_parser_line_tokenize(const char *line, char **tokens)
 {
@@ -36,8 +37,11 @@ static size_t	rt_parser_line_tokenize(const char *line, char **tokens)
 		{
 			ntok++;
 			if (tokens)
+			{
 				tokens[ntok - 1] = ft_strndup(line + i,
 						ft_strcspn(line + i, " "));
+				printf("token[%d] = '%s'\n", (int)ntok - 1, tokens[ntok - 1]);
+			}
 			if (tokens && !tokens[ntok - 1])
 				return ((size_t) - 1);
 			i += ft_strcspn(line + i, " ");

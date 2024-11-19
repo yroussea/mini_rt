@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 23:25:48 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/17 22:55:11 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:18:02 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ RESULT	rt_object_define_colors(t_rt_object_parser *objp, RESULT res,
 					RT_PRIM_COLOR);
 	}
 	if (bump && RES_OK(res))
-		res = OBJ_STEP_OPT(objp, offsetof(t_obj, material.bumpmap),
+		res = OBJ_STEP_OPT(objp, offsetof(t_obj, material),
 				RT_PRIM_BUMPFILE);
 	return (res);
 }

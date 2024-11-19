@@ -6,7 +6,7 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/10 13:34:17 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/18 20:45:23 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 01:30:02 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  buffer/rt_parser_buffer_sanitize.c \
 	  error/rt_parse_err.c \
 	  error/rt_parse_err_file.c \
+	  error/rt_parse_err_free.c \
 	  error/rt_parse_err_print.c \
 	  error/rt_parse_err_str.c \
 	  error/rt_parse_errd.c \
@@ -28,11 +29,13 @@ SRC = buffer/rt_parser_buffer_fill.c \
 	  line/rt_parser_line_process.c \
 	  line/rt_parser_line_token_pos.c \
 	  line/rt_parser_line_unknown_type.c \
+	  object/rt_parser_object_incomplete.c \
 	  object/rt_parser_object_init.c \
 	  object/rt_parser_object_parse.c \
 	  object/rt_parser_object_parse_step.c \
 	  object/rt_parser_object_register.c \
 	  object/rt_parser_object_step.c \
+	  object/rt_parser_object_unexpected_optional.c \
 	  primitive/impl/strtox/rt_strtod.c \
 	  primitive/impl/strtox/rt_strtod_final.c \
 	  primitive/impl/strtox/rt_strtod_frac.c \

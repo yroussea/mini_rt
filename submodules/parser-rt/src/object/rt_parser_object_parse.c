@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:03:49 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/19 00:44:05 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:32:04 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,12 @@
 #include <rt/parser.h>
 #include <rt/util.h>
 
-t_rt_parser_file_context	rt_parser_object_unexpected_optional(
-								const char *token);
+t_rt_parser_file_context
+rt_parser_object_unexpected_optional(const char *token);
 
-static RESULT	rt_parser_object_incomplete(t_rt_object_parser_step *step,
-					char **tokens, const char *line, size_t ntok)
-{
-	t_rt_parser_file_context	context;
-
-	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
-	context.type = FILE_ERR_MISSING_PART;
-	context.column = rt_parser_line_token_pos(line, ntok - 1)
-		+ ft_strlen(tokens[ntok - 1]) + 1;
-	context.length = 1;
-	context.error_message = ft_format("you're missing a '%s'",
-			rt_parser_strprim(step->type));
-	if (!context.error_message)
-		context.error_message = ft_strdup("you're missing an object part");
-	return (rt_parse_err_file(context));
-}
+RESULT
+rt_parser_object_incomplete(t_rt_object_parser_step *step,
+	char **tokens, const char *line, size_t ntok);
 
 static RESULT	rt_parser_object_expand_step(RESULT res, size_t itkn,
 					const char *line)
@@ -48,18 +35,18 @@ static RESULT	rt_parser_object_expand_step(RESULT res, size_t itkn,
 	return (res);
 }
 
-t_rt_parser_file_context	rt_parser_object_unexpected_optional(
-	const char *token
-) {
-	t_rt_parser_file_context	context;
-
-	ft_memset(&context, 0, sizeof(t_rt_parser_file_context));
-	context.type = FILE_ERR_TOO_MANY_PARTS;
-	context.length = ft_strlen(token);
-	context.error_message = "unexpected token";
-	context.possible_fix = ft_strdup("this is an optional part you can remove;"
-			" is it in the wrong order?");
-	return (context);
+static RESULT	rt_parser_object_optional_errors(t_rt_object_parser *objp,
+					RESULT res, RESULT last)
+{
+	if (RES_ERR(res))
+	{
+		if (RES_ERR(last))
+			rt_parse_err_free(objp->parser, res);
+		else
+			return (res);
+		return (last);
+	}
+	return (res);
 }
 
 static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
@@ -79,16 +66,12 @@ static RESULT	rt_parser_object_parse_optional(t_rt_object_parser *objp,
 		iseq++;
 		if (RES_OK(last))
 			last = res;
+		else if (RES_ERR(res))
+			rt_parse_err_free(objp->parser, res);
 	}
 	if (tokens[*itkn] != NULL)
 		return (ERR_FILE(rt_parser_object_unexpected_optional(tokens[*itkn])));
-	if (RES_ERR(res))
-	{
-		if (RES_ERR(last))
-			return (last);
-		return (res);
-	}
-	return (res);
+	return (rt_parser_object_optional_errors(objp, res, last));
 }
 
 // Let's say we have this object declaration...
