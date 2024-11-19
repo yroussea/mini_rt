@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/18 21:02:39 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 02:24:20 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,6 +124,8 @@ $(DEPS_DIR): $(DEPS_TARGETS)
 	@echo "[*] Making dependencies..." && sleep 1
 	@$(MAKE) -C $(DEPS_DIR) all
 	@touch $(DEPS_DIR)
+
+bonus: all
 
 oclean:
 	@echo "[!] Removing $(CACHE_DIR)"
