@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:50:47 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 22:49:48 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:57:39 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_vec3d	rt_backend_raytracer_sphere_normal(
 	if (mat.type & BUMP_MAP)
 	{
 		rt_backend_raytracer_sphere_twod_relative_point(&coo, ray, sphere);
-		return (rt_backend_raytracer_bumpmap(&normal, mat.bumpmap,
-				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.map_size)));
+		return (rt_backend_raytracer_bumpmap(&normal, mat.bump.map,
+				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.bump.size)));
 	}
 	return (normal);
 }

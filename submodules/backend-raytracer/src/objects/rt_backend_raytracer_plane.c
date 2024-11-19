@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 18:33:22 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:57:19 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_vec3d	rt_backend_raytracer_plane_normal(
 	{
 		coo = m3d_solv(m3d(plane->vec_vdir, plane->vec_udir, plane->normal),
 				v3d_sub(&ray->hit_point, &plane->point));
-		return (rt_backend_raytracer_bumpmap(&normal, mat.bumpmap,
-				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.map_size)));
+		return (rt_backend_raytracer_bumpmap(&normal, mat.bump.map,
+				rt_backend_raytracer_bumpmap_coo(coo.x, coo.y, mat.bump.size)));
 	}
 	return (normal);
 }

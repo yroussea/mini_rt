@@ -6,7 +6,7 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:00:19 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/18 19:16:40 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:59:28 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_vec3d	rt_backend_raytracer_cone_normal(
 	if (mat.type & BUMP_MAP)
 	{
 		rt_backend_raytracer_cone_twod_relative_point(&a, ray, cone);
-		normal = rt_backend_raytracer_bumpmap(&normal, mat.bumpmap,
-				rt_backend_raytracer_bumpmap_coo(a.x - a.z, a.y, mat.map_size));
+		normal = rt_backend_raytracer_bumpmap(&normal, mat.bump.map,
+				rt_backend_raytracer_bumpmap_coo(a.x - a.z, a.y, mat.bump.size));
 	}
 	return (normal);
 }
@@ -102,8 +102,8 @@ static void	rt_backend_raytracer_handle_bumpmap_normal(
 	}
 	else
 		rt_backend_raytracer_cone_twod_relative_point(&a, ray, cone);
-	*normal = rt_backend_raytracer_bumpmap(normal, mat.bumpmap, \
-		rt_backend_raytracer_bumpmap_coo(a.x - a.z, a.y, mat.map_size));
+	*normal = rt_backend_raytracer_bumpmap(normal, mat.bump.map, \
+		rt_backend_raytracer_bumpmap_coo(a.x - a.z, a.y, mat.bump.size));
 }
 
 t_vec3d	rt_backend_raytracer_cone_normal(
