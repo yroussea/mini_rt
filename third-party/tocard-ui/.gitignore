@@ -1,0 +1,13 @@
+.direnv/
+MacroLibX
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.swp
+build/
+dist/
+vgcore*
+
