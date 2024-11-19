@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:36:25 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/19 01:53:16 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 04:09:04 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,5 @@ RESULT	rt_parser_prim_bumpmap(
 	*size = 1;
 	mlx_destroy_image(mlx, mlx_img);
 	mlx_destroy_display(mlx);
-	return (OK());
+	return (res);
 }

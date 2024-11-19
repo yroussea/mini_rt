@@ -6,13 +6,13 @@
 #    By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 01:41:07 by kiroussa          #+#    #+#              #
-#    Updated: 2024/11/18 21:15:29 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 04:17:41 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT_NAME = rt
-PROJECT_VERSION = 2.1.0-dev
-PROJECT_URL = https://github.com/27network/rt
+PROJECT_NAME = miniRT
+PROJECT_VERSION = 3.0.0-rc.1
+PROJECT_URL = https://codeberg.org/27/rt
 COMP_MODE = $(PROJECT_NAME)
 
 LIB_SUFFIX = .rt.so
@@ -20,7 +20,7 @@ EXEC_SUFFIX = .out
 
 CC = clang
 CFLAGS = -Wall -Wextra -g -gdwarf-4 -fPIC -fno-plt
-# CFLAGS += -Werror
+CFLAGS += -Werror
 DFLAGS = -MT $@ -MMD -MP -MF $(MKDEPS_DIR)/$*.tmp.d
 LDFLAGS = -lm -lSDL2 -fPIC -fno-plt
 
@@ -35,6 +35,6 @@ endif
 
 CACHE_DIR ?= .cache
 
-DEVELOPMENT_MODE ?= 1
+DEVELOPMENT_MODE ?= 0
 USE_VALGRIND_LOGFILE ?= 0
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes -s --track-fds=yes --suppressions=third-party/MacroLibX/valgrind.supp -q

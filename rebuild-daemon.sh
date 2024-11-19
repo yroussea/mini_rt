@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-MAKE=make
+MAKE=make DEVELOPMENT_MODE=1
+
 COMMUNICATE_PIPE=$1
 ALIVE_FILE=$2
 
@@ -57,9 +58,12 @@ cleanup
 
 touch $ALIVE_FILE
 
-sleep 1
-
 trap cleanup EXIT INT TERM QUIT
+
+sleep 1
+echo "> Initial setup, running \`remake\`"
+$MAKE remake || true
+echo ""
 
 while true; do
 	if [ ! -f $ALIVE_FILE ]; then
@@ -89,7 +93,7 @@ while true; do
 	fi
 
 	# is rt/miniRT running?
-	ps -aux | grep -v grep | grep -E "\./rt|\./miniRT" > /dev/null
+	ps -aux | grep -v grep | grep -E "\./rt|miniRT" > /dev/null
 	if [ $? -eq 0 ]; then
 		touch $COMMUNICATE_PIPE
 		# wait for the program to acknowledge the change

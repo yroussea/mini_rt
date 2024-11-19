@@ -6,12 +6,13 @@
 /*   By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 20:14:34 by yroussea          #+#    #+#             */
-/*   Updated: 2024/11/19 00:57:19 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/11/19 04:20:56 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft/math.h>
 #include <rt/render/backend/raytracer.h>
+# include <stdio.h>
 
 t_vec3d	rt_backend_raytracer_plane_normal(
 	const t_ray *ray,
@@ -24,6 +25,7 @@ t_vec3d	rt_backend_raytracer_plane_normal(
 
 	if (mat.type & BUMP_MAP)
 	{
+		printf("hi am a bump map plane!\n");
 		coo = m3d_solv(m3d(plane->vec_vdir, plane->vec_udir, plane->normal),
 				v3d_sub(&ray->hit_point, &plane->point));
 		return (rt_backend_raytracer_bumpmap(&normal, mat.bump.map,
@@ -62,6 +64,7 @@ void	rt_backend_raytracer_plane(t_obj *obj)
 	vdir = v3d_cross(&plane->normal, &udir);
 	plane->vec_udir = v3d_norm(&udir);
 	plane->vec_vdir = v3d_norm(&vdir);
+	printf("plane init!\tmat: %d\n", plane->base.material.type);
 	obj->intersect = rt_backend_raytracer_plane_intersection;
 	obj->calc_normal = rt_backend_raytracer_plane_normal;
 	obj->calc_color = rt_backend_raytracer_plane_color;
