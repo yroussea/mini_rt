@@ -6,7 +6,7 @@
 #    By: yroussea <yroussea@student.42angouleme.fr  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 09:39:18 by yroussea          #+#    #+#              #
-#    Updated: 2024/11/19 02:24:20 by kiroussa         ###   ########.fr        #
+#    Updated: 2024/11/19 02:25:03 by kiroussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,6 @@ NAME = $(PROJECT_NAME)
 PWD := $(shell pwd)
 EXTRA_CFLAGS += -DRT_VERSION='"\"$(PROJECT_VERSION)\""'
 EXTRA_CFLAGS += -DRT_URL='"\"$(PROJECT_URL)\""'
-
-
-
-### Features header ###
-
-FEATURES_H = $(PWD)/config/features.h
-_ := $(shell ln -fs $(PWD)/config/features_$(COMP_MODE).h $(FEATURES_H))
 
 
 
@@ -107,7 +100,7 @@ $(PWD)/$(CACHE_DIR)/%:
 		rm -rf $@; \
 	fi
 
-$(NAME): $(FEATURES_H) $(MAIN_SUBMODULE_OUTPUT)
+$(NAME): $(MAIN_SUBMODULE_OUTPUT)
 	@echo "[*] Copying $(MAIN_SUBMODULE_OUTPUT) to $(NAME)"
 	@ln -fs $(MAIN_SUBMODULE_OUTPUT) $(NAME)
 

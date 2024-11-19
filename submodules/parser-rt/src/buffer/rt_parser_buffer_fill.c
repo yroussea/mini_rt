@@ -6,7 +6,7 @@
 /*   By: kiroussa <oss@xtrm.me>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 14:54:09 by kiroussa          #+#    #+#             */
-/*   Updated: 2024/11/18 21:20:59 by kiroussa         ###   ########.fr       */
+/*   Updated: 2024/11/19 02:28:10 by kiroussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 
 #define FILE_EXTENSION ".rt"
 
-static size_t	rt_parser_buffer_count_lines(const char *buffer)
+static RESULT	rt_parser_buffer_count_lines(char *buffer, size_t offset,
+					size_t *nl, RESULT res)
 {
 	size_t	nlines;
 	size_t	i;
 
+	buffer[offset] = '\0';
 	nlines = 0;
 	i = 0;
 	while (buffer[i])
@@ -35,7 +37,8 @@ static size_t	rt_parser_buffer_count_lines(const char *buffer)
 			nlines++;
 		i++;
 	}
-	return (nlines);
+	*nl = nlines;
+	return (res);
 }
 
 static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
@@ -44,10 +47,11 @@ static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
 	RESULT	res;
 	ssize_t	nread;
 	size_t	offset;
+	int		fd;
 
 	if (buffer == NULL)
 		return (ERRS(PARSE_ERR_ALLOC, "cannot allocate file buffer"));
-	__attribute__((cleanup(ft_closep))) int fd = open(filepath, O_RDONLY);
+	fd = open(filepath, O_RDONLY);
 	res = OK();
 	offset = 0;
 	if (fd == -1)
@@ -61,11 +65,10 @@ static RESULT	rt_parser_buffer_fill_fd(const char *filepath, char *buffer,
 		else
 			offset += nread;
 	}
+	close(fd);
 	if (!RES_OK(res))
 		return (res);
-	buffer[offset] = '\0';
-	*nlines = rt_parser_buffer_count_lines(buffer);
-	return (res);
+	return (rt_parser_buffer_count_lines(buffer, offset, nlines, res));
 }
 
 __always_inline __attribute__((nonnull))
